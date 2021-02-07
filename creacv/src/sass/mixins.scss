@@ -1,0 +1,16 @@
+﻿@mixin button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: $color-main;
+    font-size: 14px;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    min-width: 100px;
+    margin-right: 5px;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}

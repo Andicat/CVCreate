@@ -1,0 +1,12 @@
+.image {
+    height: 50px;
+    width: 50px;
+    background-color: #333;
+    position: absolute;
+    left: 50px;
+
+    &:hover {
+        outline: 2px solid lightslategray;
+        cursor: move;
+    }
+}
