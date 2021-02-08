@@ -1,31 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class Image extends React.PureComponent {
+class Figure extends React.PureComponent {
 
     static propTypes = {
         style: PropTypes.object,
-        src: PropTypes.string,
     };
 
     static defaultProps = {
         style: {},
-        src: '',
     };
 
     state = {
         style:{...this.props.style},
-        src: this.props.src,
     }
 
     onClick = (evt) => {
-        console.log('edit image');
+        console.log('edit figure');
         //edit(evt);
     }
 
     render () {
-        return <img className="cv__image" src={this.state.src} style={this.state.style} alt='' onClick={this.onClick}/>;
+        return <div className="cv__figure" style={this.state.style} onClick={this.onClick}></div>;
     }
 }
 
-export default Image;
+export default Figure;

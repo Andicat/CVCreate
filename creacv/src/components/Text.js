@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class Image extends React.PureComponent {
+class Text extends React.PureComponent {
 
     static propTypes = {
         style: PropTypes.object,
-        src: PropTypes.string,
+        text: PropTypes.string,
     };
 
     static defaultProps = {
         style: {},
-        src: '',
+        text: '',
     };
 
     state = {
         style:{...this.props.style},
-        src: this.props.src,
+        text: this.props.text,
     }
 
     onClick = (evt) => {
@@ -24,8 +24,8 @@ class Image extends React.PureComponent {
     }
 
     render () {
-        return <img className="cv__image" src={this.state.src} style={this.state.style} alt='' onClick={this.onClick}/>;
+        return <span className="cv__text" style={this.state.style} onClick={this.onClick}>{this.state.text}</span>;
     }
 }
 
-export default Image;
+export default Text;

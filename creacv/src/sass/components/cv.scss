@@ -1,0 +1,31 @@
+.cv {
+    height: calc(80vw*1.415);
+    width: 80vw;
+    background-color: #fff;
+    margin: 10px auto;
+    position: relative;
+    overflow: hidden;
+
+    &__block {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        padding: 2px;
+        
+        &:hover {
+            outline: 2px solid lightslategray;
+            cursor: move;
+        }
+    }
+
+    &__text {
+        &:hover {
+            outline: 1px solid rgb(96, 160, 160);
+            cursor: pointer;
+        }
+        &:focus {
+            outline: 2px solid rgb(96, 160, 160);
+            //cursor: move;
+        }
+    }
+}
