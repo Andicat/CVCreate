@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import {connect} from 'react-redux';
+import {cvBlock_activate} from '../redux/cvDataAC';
+
 class Text extends React.PureComponent {
 
     static propTypes = {
@@ -14,13 +17,16 @@ class Text extends React.PureComponent {
     };
 
     state = {
+        fontsize: this.props.style.fontsize,
         style:{...this.props.style},
         text: this.props.text,
     }
 
     onClick = (evt) => {
-        console.log('edit image');
+        //console.log('edit text', this, this.state.fontsize);
+        //console.log(this.state.fontsize);
         //edit(evt);
+        this.props.dispatch(cvBlock_activate(this));
     }
 
     render () {
@@ -28,4 +34,4 @@ class Text extends React.PureComponent {
     }
 }
 
-export default Text;
+export default connect()(Text);

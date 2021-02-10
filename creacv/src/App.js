@@ -4,24 +4,23 @@ import { createStore } from 'redux';
 
 import combinedReducer from './redux/reducers.js';
 import Tools from './components/Tools';
-import PanelBlocks from './components/PanelBlocks';
-import CvContainer from './components/CvContainer';
+import Panel from './components/Panel';
+import CV from './components/CV';
 
 let blocksArr = [
-    {type:'image', src:'', style:{width:'100px', height:'100px', backgroundColor:'blue'}},
-    {type:'text', text:'text simple', style:{fontsize:'12px',color:'black'}},
-    {type:'group', elements:[
-            {type:'text', text:'header', style:{fontsize:'18px',color:'red'}},
-            {type:'text', text:'text color', style:{fontsize:'12px',color:'blue'}},
-            {type:'text', text:'text simple', style:{fontsize:'12px',color:'black'}}
+    {name: 'Image', type:'image', style:{width:'100px'}},
+    {name: 'Text', type:'text', text:'Your text here', style:{fontsize:'14px'}},
+    {name: 'Text with header', type:'group', elements:[
+            {type:'text', text:'Your header', style:{fontsize:'24px',fontWeight:'600'}},
+            {type:'text', text:'your text', style:{fontsize:'14px'}}
         ]},
-    {type:'figure', style:{backgroundColor:'orange',width:'200px',height:'150px'}},
-    {type:'group', elements:[
-        {type:'text', text:'skill', style:{fontsize:'18px', fontWeight:'600', color:'black'}},
-        {type:'group', elements:[
-            {type:'figure', style:{backgroundColor:'orange',width:'10px',height:'10px', borderRadius:'50%'}},
-            {type:'figure', style:{backgroundColor:'orange',width:'10px',height:'10px', borderRadius:'50%'}},
-            {type:'figure', style:{backgroundColor:'orange',width:'10px',height:'10px', borderRadius:'50%'}}
+    {name: 'Figure', type:'figure', style:{backgroundColor:'#E05B49',width:'100px',height:'100px'}},
+    {name: 'Skill', type:'group', direction:'row', elements:[
+        {type:'text', text:'your skill', style:{fontsize:'18px', color:'black', marginRight: '15px'}},
+        {type:'group', direction:'row', elements:[
+            {type:'figure', style:{backgroundColor:'#E05B49',width:'10px',height:'10px', borderRadius:'50%', marginRight: '5px'}},
+            {type:'figure', style:{backgroundColor:'#E05B49',width:'10px',height:'10px', borderRadius:'50%', marginRight: '5px'}},
+            {type:'figure', style:{backgroundColor:'#E05B49',width:'10px',height:'10px', borderRadius:'50%', marginRight: '5px'}}
         ]},
     ]},
 ];
@@ -31,11 +30,17 @@ let store=createStore(combinedReducer);
 function App() {
     return (
         <Provider store={store}>
-            <div>
-                <Tools/>
-                <PanelBlocks blocks={blocksArr}/>
-                <CvContainer/>
-            </div>
+            <React.Fragment>
+                <header>Create your CV</header>
+                <main>
+                    <Panel blocks={blocksArr}/>
+                    <CV/>
+
+                </main>
+                
+                
+                
+            </React.Fragment>
         </Provider>
     );
 }

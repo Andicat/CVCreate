@@ -1,13 +1,11 @@
 ﻿import { combineReducers } from 'redux';
 
-//import countersReducer from "./countersReducer";
 import cvDataReducer from "./cvDataReducer";
+import cvEditReducer from "./cvEditReducer";
 
 let combinedReducer=combineReducers({
-    // редьюсер countersReducer отвечает за раздел state под именем counters
-    //counters: countersReducer, 
     cvData: cvDataReducer, 
-    // + другие редьюсеры
+    cvEdit: cvEditReducer, 
 });
 
 export default combinedReducer;

@@ -1,8 +1,8 @@
 .cv {
-    height: calc(80vw*1.415);
-    width: 80vw;
+    height: 877px;
+    width: 620px;
     background-color: #fff;
-    margin: 10px auto;
+    margin: 20px auto;
     position: relative;
     overflow: hidden;
 
@@ -16,16 +16,40 @@
             outline: 2px solid lightslategray;
             cursor: move;
         }
+        &:active {
+            //outline: 2px solid rgb(197, 100, 176);
+            //cursor: move;
+        }
     }
 
     &__text {
+        z-index: 10;
         &:hover {
             outline: 1px solid rgb(96, 160, 160);
             cursor: pointer;
         }
-        &:focus {
-            outline: 2px solid rgb(96, 160, 160);
+        &:active {
+            outline: 2px solid rgb(197, 100, 176);
             //cursor: move;
+        }
+    }
+
+    &__image {
+        z-index: 10;
+    }
+
+    &__group {
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+
+        .cv__figure {
+            
+        }
+
+        &--row {
+            flex-direction: row;
+            align-items: center;
         }
     }
 }

@@ -16,7 +16,7 @@ class Figure extends React.PureComponent {
     }
 
     onClick = (evt) => {
-        console.log('edit figure');
+        //console.log('edit figure');
         //edit(evt);
     }
 

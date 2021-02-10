@@ -40,7 +40,7 @@ function onMouseUp (upEvt) {
     document.removeEventListener('mouseup', onMouseUp);
 }
 
-function createElement (elem, key = 1) {
+function createJSX (elem, key = 0) {
     let elemCode;
     switch (elem.type) {
         case 'image': 
@@ -53,7 +53,7 @@ function createElement (elem, key = 1) {
             elemCode = <Figure key={key} style={elem.style}/>;
             break;
         case 'group': 
-            elemCode = elem.elements.map( (e,i) => createElement(e,i));
+            elemCode = <div key={key} className={'cv__group' + (elem.direction?(' cv__group--' + elem.direction):'')}>{elem.elements.map( (e,i) => createJSX(e,i))}</div>;
             break;
         default:
             elemCode = null;
@@ -61,4 +61,4 @@ function createElement (elem, key = 1) {
     return elemCode;
 };
 
-export { move, createElement };
+export { move, createJSX };

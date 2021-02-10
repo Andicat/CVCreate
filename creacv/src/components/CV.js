@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CvBlock from './CvBlock';
-import { createElement } from './move'
+import { createJSX } from './move'
 //import CVEvents from './events';
 
 import {connect} from 'react-redux';
 import { cvBlock_add } from '../redux/cvDataAC';
 
-class CvContainer extends React.PureComponent {
+class CV extends React.PureComponent {
 
     static propTypes = {
         cvData: PropTypes.object,  //из Redux
@@ -51,14 +51,16 @@ class CvContainer extends React.PureComponent {
     
 
     render () {
-        //console.log('props',createElement);
+        //console.log('props',this.props.cvData.blocks);
         var blocksCode = this.props.cvData.blocks.map( (b,i) => {
-            return <CvBlock key={i}>{createElement(b)}</CvBlock>
+            return <CvBlock id={i} key={i}>{createJSX(b)}</CvBlock>
         });
         
         return (
-            <div className='cv'>
-                {blocksCode}
+            <div className='desk'>
+                <div className='cv'>
+                    {blocksCode}
+                </div>
             </div>
         );
     }
@@ -72,4 +74,4 @@ const mapStateToProps = function (state) {
     };
 };
   
-export default connect(mapStateToProps)(CvContainer);
+export default connect(mapStateToProps)(CV);

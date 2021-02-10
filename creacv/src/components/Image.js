@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import image from './../img/image.svg';
 
 class Image extends React.PureComponent {
 
@@ -10,7 +11,7 @@ class Image extends React.PureComponent {
 
     static defaultProps = {
         style: {},
-        src: '',
+        src: image,
     };
 
     state = {
@@ -19,11 +20,12 @@ class Image extends React.PureComponent {
     }
 
     onClick = (evt) => {
-        console.log('edit image');
+        //console.log('edit image');
         //edit(evt);
     }
 
     render () {
+        //console.log(this.props.src);
         return <img className="cv__image" src={this.state.src} style={this.state.style} alt='' onClick={this.onClick}/>;
     }
 }
