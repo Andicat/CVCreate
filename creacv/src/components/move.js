@@ -40,20 +40,21 @@ function onMouseUp (upEvt) {
     document.removeEventListener('mouseup', onMouseUp);
 }
 
-function createJSX (elem, key = 0) {
+function createJSX (elem, activeId, key = 0) {
     let elemCode;
+    let elemId = '' + elem.id + key;
     switch (elem.type) {
         case 'image': 
-            elemCode = <Image key={key} style={elem.style} src={elem.src}/>;
+            elemCode = <Image key={elemId} id={elemId} style={elem.style} src={elem.src} active={activeId===elemId}/>;
             break;
         case 'text': 
-            elemCode = <Text key={key} style={elem.style} text={elem.text}/>;
+            elemCode = <Text key={elemId} id={elemId} style={elem.style} text={elem.text} active={activeId===elemId}/>;
             break;
         case 'figure': 
-            elemCode = <Figure key={key} style={elem.style}/>;
+            elemCode = <Figure key={elemId} id={elemId} style={elem.style}/>;
             break;
         case 'group': 
-            elemCode = <div key={key} className={'cv__group' + (elem.direction?(' cv__group--' + elem.direction):'')}>{elem.elements.map( (e,i) => createJSX(e,i))}</div>;
+            elemCode = <div key={elemId} className={'cv__group' + (elem.direction?(' cv__group--' + elem.direction):'')}>{elem.elements.map( (e,i) => createJSX({...e, id:elem.id},activeId,i))}</div>;
             break;
         default:
             elemCode = null;
@@ -61,4 +62,26 @@ function createJSX (elem, key = 0) {
     return elemCode;
 };
 
-export { move, createJSX };
+function renderFunc (type,text,style,className,cbOnClick) {
+    let elemCode;
+    //let elemId = '' + elem.id + key;
+    switch (type) {
+        case 'image': 
+            elemCode = <img className={className} src={text} style={style} alt='' onClick={cbOnClick}/>;
+            break;
+        case 'text':
+            elemCode = <span className={className} style={style} onClick={cbOnClick}>{text}</span>;
+            break;
+        case 'figure': 
+            elemCode = <div className={className} style={style} onClick={cbOnClick}/>;
+            break;
+        case 'group': 
+            //elemCode = <div key={elemId} className={'cv__group' + (elem.direction?(' cv__group--' + elem.direction):'')}>{elem.elements.map( (e,i) => createJSX({...e, id:elem.id},active,i))}</div>;
+            break;
+        default:
+            elemCode = null;
+    }
+    return elemCode;
+};
+
+export { move, createJSX, renderFunc };

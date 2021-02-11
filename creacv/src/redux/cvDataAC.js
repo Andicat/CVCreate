@@ -2,6 +2,7 @@
 const CV_BLOCK_DELETE = 'CV_BLOCK_DELETE';
 const CV_BLOCK_MOVE = 'CV_BLOCK_MOVE';
 const CV_BLOCK_ACTIVATE = 'CV_BLOCK_ACTIVATE';
+const CV_ELEMENT_ACTIVATE = 'CV_ELEMENT_ACTIVATE';
 
 const cvBlock_add = function(block) {
   return {
@@ -31,9 +32,17 @@ const cvBlock_activate = function(block) {
   };
 }
 
+const cvElement_activate = function(block) {
+  return {
+    type: CV_ELEMENT_ACTIVATE,
+    block:block,
+  };
+}
+
 export {
   cvBlock_add, CV_BLOCK_ADD,
   cvBlock_delete, CV_BLOCK_DELETE,
   cvBlock_move, CV_BLOCK_MOVE,
   cvBlock_activate, CV_BLOCK_ACTIVATE,
+  cvElement_activate, CV_ELEMENT_ACTIVATE,
 }

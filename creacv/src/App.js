@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 import combinedReducer from './redux/reducers.js';
-import Tools from './components/Tools';
 import Panel from './components/Panel';
 import CV from './components/CV';
 
@@ -35,11 +34,7 @@ function App() {
                 <main>
                     <Panel blocks={blocksArr}/>
                     <CV/>
-
                 </main>
-                
-                
-                
             </React.Fragment>
         </Provider>
     );

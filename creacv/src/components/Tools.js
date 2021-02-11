@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Tools extends React.PureComponent {
 
-  //static propTypes = {
-    //element: PropTypes.object,
-  //};
+  static propTypes = {
+    block: PropTypes.string.isRequired,
+  };
 
   render () {
     return (

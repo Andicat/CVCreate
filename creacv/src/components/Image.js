@@ -2,9 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import image from './../img/image.svg';
 
+import {connect} from 'react-redux';
+import {cvElement_activate} from '../redux/cvDataAC';
+
+
 class Image extends React.PureComponent {
 
     static propTypes = {
+        id: PropTypes.string.isRequired,
+        active: PropTypes.bool,
         style: PropTypes.object,
         src: PropTypes.string,
     };
@@ -15,19 +21,18 @@ class Image extends React.PureComponent {
     };
 
     state = {
-        style:{...this.props.style},
-        src: this.props.src,
+        //style:{...this.props.style},
+        //src: this.props.src,
     }
 
-    onClick = (evt) => {
-        //console.log('edit image');
-        //edit(evt);
+    onClick = () => {
+        this.props.dispatch(cvElement_activate(this));
     }
 
     render () {
-        //console.log(this.props.src);
-        return <img className="cv__image" src={this.state.src} style={this.state.style} alt='' onClick={this.onClick}/>;
+        let className = ' cv__element  cv__element--image' + (this.props.active?' cv__element--active':'');
+        return <img className={className} src={this.props.src} style={this.props.style} alt='' onClick={this.onClick}/>;
     }
 }
 
-export default Image;
+export default connect()(Image);

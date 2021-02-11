@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CvBlock from './CvBlock';
-import { createJSX } from './move'
 //import CVEvents from './events';
 
 import {connect} from 'react-redux';
-import { cvBlock_add } from '../redux/cvDataAC';
+import {cvBlock_add} from '../redux/cvDataAC';
+import Tools from './Tools';
 
 class CV extends React.PureComponent {
 
@@ -51,15 +51,30 @@ class CV extends React.PureComponent {
     
 
     render () {
-        //console.log('props',this.props.cvData.blocks);
-        var blocksCode = this.props.cvData.blocks.map( (b,i) => {
-            return <CvBlock id={i} key={i}>{createJSX(b)}</CvBlock>
+        let toolCode = null;
+        if (this.props.cvData.activeElementId!=null) {
+            toolCode = <Tools block={this.props.cvData.activeElementId}></Tools>;
+        }
+        //console.log('blocks',this.props.cvData.blocks);
+        //console.log('props',this.props.cvData.activeBlock);
+        var cvBlocksCode = this.props.cvData.blocks.map( b => {
+            //let isActive = false;
+            //if (this.props.cvData.activeBlockId!=null && this.props.cvData.activeBlockId===i) {
+            //    isActive = true;
+            //    toolCode = <Tools block={b}></Tools>;
+            //}
+            //console.log(this.props.cvData.activeBlockId===i);
+            //if (this.props.cvData.activeBlock) 
+            //{ console.log(this.props.cvData.activeBlock.props.id); }
+            //console.log("active block", b===this.props.cvData.activeBlock);
+            return <CvBlock key={b.id} id={b.id} data={b} active={(this.props.cvData.activeBlockId===b.id)?true:false} activeElementId={this.props.cvData.activeElementId}></CvBlock>
         });
         
         return (
             <div className='desk'>
+                {toolCode}
                 <div className='cv'>
-                    {blocksCode}
+                    {cvBlocksCode}
                 </div>
             </div>
         );

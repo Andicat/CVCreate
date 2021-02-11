@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {connect} from 'react-redux';
-import {cvBlock_activate} from '../redux/cvDataAC';
+import {cvElement_activate} from '../redux/cvDataAC';
 
 class Text extends React.PureComponent {
 
     static propTypes = {
+        id: PropTypes.string.isRequired,
+        active: PropTypes.bool,
         style: PropTypes.object,
         text: PropTypes.string,
     };
@@ -17,20 +19,18 @@ class Text extends React.PureComponent {
     };
 
     state = {
-        fontsize: this.props.style.fontsize,
-        style:{...this.props.style},
-        text: this.props.text,
+        //fontsize: this.props.style.fontsize,
+        //style:{...this.props.style},
+        //text: this.props.text,
     }
 
-    onClick = (evt) => {
-        //console.log('edit text', this, this.state.fontsize);
-        //console.log(this.state.fontsize);
-        //edit(evt);
-        this.props.dispatch(cvBlock_activate(this));
+    onClick = () => {
+        this.props.dispatch(cvElement_activate(this));
     }
 
     render () {
-        return <span className="cv__text" style={this.state.style} onClick={this.onClick}>{this.state.text}</span>;
+        let className = ' cv__element  cv__element--text' + (this.props.active?' cv__element--active':'');
+        return <span className={className} style={this.props.style} onClick={this.onClick}>{this.props.text}</span>;
     }
 }
 

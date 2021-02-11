@@ -1,9 +1,11 @@
-﻿import { CV_BLOCK_ADD, CV_BLOCK_DELETE, CV_BLOCK_MOVE, CV_BLOCK_ACTIVATE } from './cvDataAC';
+﻿import { CV_BLOCK_ADD, CV_BLOCK_DELETE, CV_BLOCK_MOVE, CV_BLOCK_ACTIVATE, CV_ELEMENT_ACTIVATE } from './cvDataAC';
 
 const initState = {
 
   blocks: [],
-  activeBlock: null,
+  activeBlockId: null,
+  activeElementId: null,
+  //blockToEdit: null,
     /*    {type:'image', style:{width:'100px'}},
         {type:'text', text:'text simple', style:{fontsize:'12px',color:'black'}},
         {type:'group', elements:[
@@ -33,20 +35,21 @@ function cvDataReducer(state = initState, action) {
 
         case CV_BLOCK_ADD: {
             console.log('state до обработки редьюсером:',state);
+            let newId = state.blocks.reduce(function (r, v) { return ( r < v.id ? v.id : r);},0) + 1;
             let newState={...state,
-                blocks:[...state.blocks,action.block]
+                blocks:[...state.blocks,{...action.block, id:newId}]
             };
             console.log('state после обработки редьюсером:',newState);
             return newState;
         }
 
-        case CV_BLOCK_MOVE: {
+        /*case CV_BLOCK_MOVE: {
             console.log('action:',action);
             console.log('state до обработки редьюсером:',state);
             let newState={...state};
             console.log('state после обработки редьюсером:',newState);
             return newState;
-        }
+        }*/
     
         case CV_BLOCK_DELETE: {
             console.log('action:',action);
@@ -59,11 +62,25 @@ function cvDataReducer(state = initState, action) {
         }
 
         case CV_BLOCK_ACTIVATE: {
-            console.log('action:',action);
-            console.log('state до обработки редьюсером:',state);
-            let newState={...state, activeBlock:action.block};
-            console.log('state после обработки редьюсером:',newState);
-            return newState;
+            if (state.activeBlockId !== action.block.props.id) {
+                console.log('action:',action);
+                //console.log('state до обработки редьюсером:',state);
+                let newState = {...state, activeBlockId:action.block.props.id};
+                console.log('state после обработки редьюсером:',newState);
+                return newState;
+            }
+            return state;
+        }
+
+        case CV_ELEMENT_ACTIVATE: {
+            if (state.activeElementId !== action.block.props.id) {
+                console.log('action:',action);
+                //console.log('state до обработки редьюсером:',state);
+                let newState = {...state, activeElementId:action.block.props.id};
+                console.log('state после обработки редьюсером:',newState);
+                return newState;
+            }
+            return state;
         }
 
         default:

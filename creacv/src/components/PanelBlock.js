@@ -20,7 +20,7 @@ class PanelBlock extends React.PureComponent {
     }
 
     onClick = (evt) => {
-        console.log('add block',this.props.blockData);
+        //console.log('add block',this.props.blockData);
         this.props.dispatch(cvBlock_add(this.props.blockData));
         
         //edit(evt);
