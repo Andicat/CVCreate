@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import CvBlock from './CvBlock';
+import CvTransform from './CvTransform';
 import OptionPanel from './OptionPanel';
 
 import {connect} from 'react-redux';
@@ -25,6 +26,7 @@ class CV extends React.PureComponent {
         return (
             <div className='desk'>
                 {toolCode}
+                {this.props.cvData.activeBlockId && <CvTransform></CvTransform>}
                 <div className='cv'>
                     {cvBlocksCode}
                 </div>

@@ -10,24 +10,28 @@
 
     &__elem {
         margin-left: 8px;
+        display: flex;
     }
 
     input[type='color']::-webkit-color-swatch-wrapper {
-        padding: 0;    
+        padding: 0;
+        border-radius: 2px;    
     }
       
     input[type="color"]::-webkit-color-swatch {
         border: none;
+        border-radius: 2px;
     }
     
-    /* firefox */
     input[type=color]::-moz-focus-inner {
         border: none;
         padding: 0;
+        border-radius: 2px;
     }
     
     input[type=color]::-moz-color-swatch {
         border: none;
+        border-radius: 2px;
     }
 }
 
@@ -38,14 +42,50 @@
     text-align: center;
     margin: 0;
     padding: 0;
+    border: none;
 
-    &--button {
+    &__button {
         width: 25px;
         padding: 0;
-       
+        font-size: 16px;
+        line-height: 24px;
     }
-    &--number {
+
+    &__number {
         width: 45px;
         padding: 0;
     }
+
+    &__checkbox {
+        display: none;
+        
+        & ~ label {
+            box-sizing: border-box;
+            background-image: url('./../../img/icon-font-bold.svg');
+            background-size: 80%;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: block;
+            //border: 1px solid gray;
+            border-radius: 2px;
+            width: 25px;
+            height: 25px;
+            padding: 0;
+
+            &:hover {
+                cursor: pointer;
+            }
+           
+        }
+
+        &:checked ~ label {
+            background-color: #efefef;
+        }
+    }
+    
+    &__color {
+        border: none;
+        border-radius: 2px;
+    }
+
 }

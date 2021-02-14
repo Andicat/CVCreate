@@ -31,6 +31,7 @@ class Figure extends React.PureComponent {
 
     render () {
         let style = createStyle(this.props.style); 
+        //debugger
         let className = ' cv__element  cv__element--figure' + (this.props.active?' cv__element--active':'');
         return <div className={className} style={style} onClick={this.onClick}></div>;
     }

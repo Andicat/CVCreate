@@ -109,18 +109,21 @@ function createOption (optionType,optionValue,cbOnChange) {
 
     function codeNumber() {
         return <React.Fragment>
-                    <input type='button' className='option option--button' value='-' onClick= {(evt) => {setValue(evt.target.nextSibling,Number(optionValue)-1)}}/>
-                    <input type='text' className='option option--number' value={optionValue} onChange={setValueInput}></input>
-                    <input type='button' className='option option--button' value='+' onClick= {(evt) => {setValue(evt.target.previousSibling,Number(optionValue)+1)}}/>
+                    <input type='button' className='option option__button' value='&ndash;' onClick= {(evt) => {setValue(evt.target.nextSibling,Number(optionValue)-1)}}/>
+                    <input type='text' className='option option__number' value={optionValue} onChange={setValueInput}></input>
+                    <input type='button' className='option option__button' value='+' onClick= {(evt) => {setValue(evt.target.previousSibling,Number(optionValue)+1)}}/>
                 </React.Fragment>
     };
 
     function codeCheckbox() {
-        return <input type='checkbox' className='option option--checkbox' checked={optionValue} onChange={setValueCheckBox}></input>
+        return <React.Fragment>
+                    <input type='checkbox' id={optionType} className='option option__checkbox' checked={optionValue} onChange={setValueCheckBox}/>
+                    <label htmlFor={optionType}/>
+                </React.Fragment>
     };
 
     function codeColor() {
-        return <input type='color' className='option option--color' value={optionValue} onChange={setValueInput}></input>
+        return <input type='color' className='option option__color' value={optionValue} onChange={setValueInput}></input>
     }
 
     let elemCode;
@@ -144,7 +147,7 @@ function createOption (optionType,optionValue,cbOnChange) {
             elemCode = codeColor();
             break;
         case 'file':
-            elemCode = <input type='file' className='option option--file' value={optionValue} onChange={cbOnChange}></input>;
+            elemCode = <input type='file' className='option option__file' value={optionValue} onChange={cbOnChange}></input>;
             break;
         default:
             elemCode = null;

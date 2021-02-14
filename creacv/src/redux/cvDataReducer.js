@@ -1,6 +1,7 @@
 ﻿import { CV_BLOCK_ADD,
         CV_BLOCK_DELETE,
         CV_BLOCK_MOVE,
+        CV_BLOCK_RESIZE,
         CV_BLOCK_ACTIVATE,
         CV_ELEMENT_ACTIVATE,
         CV_ELEMENT_UPDATE,
@@ -20,7 +21,7 @@ function cvDataReducer(state = initState, action) {
         case CV_BLOCK_ADD: {
             let newId = state.blocks.reduce(function (r, v) { return ( r < v.id ? v.id : r);},0) + 1;
             let newState={...state,
-                blocks:[...state.blocks,{...action.block, id:newId, positionTop:'30%',positionLeft:'30%'}]
+                blocks:[...state.blocks,{...action.block, id:newId, positionTop:'30',positionLeft:'30',width:'100',height:'100'}]
             };
             return newState;
         }
@@ -30,6 +31,18 @@ function cvDataReducer(state = initState, action) {
                 if (b.id===state.activeBlockId) {
                     b.positionTop = action.positionTop;
                     b.positionLeft = action.positionLeft;    
+                    return {...b};
+                }
+                return b});
+            let newState = {...state, blocks:newBlocks};
+            return newState;
+        }
+
+        case CV_BLOCK_RESIZE: {
+            let newBlocks = state.blocks.map(b => {
+                if (b.id===state.activeBlockId) {
+                    b.width = Number(b.width) + action.width;
+                    b.height = Number(b.height) + action.height;    
                     return {...b};
                 }
                 return b});

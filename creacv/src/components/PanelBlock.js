@@ -24,7 +24,7 @@ class PanelBlock extends React.PureComponent {
         //{}
         return (
             <li className='panel__block'>
-                <div className='panel__block-view'>
+                <div className='panel__block-view' style={{width:'100px', height:'70px'}}>
                     {createJSX(this.props.id,this.props.data,false)}
                 </div>
                 <button className='panel__block-add' onClick={this.onClick}></button>

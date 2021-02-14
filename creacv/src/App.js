@@ -25,9 +25,9 @@ let blocksArr = [
 ];
 
 let imagesArr = [
-    {type:'image', style:{file:'', width:100}},
-    {type:'image', style:{file:'', width:100, height:100, borderRadius:'50%'}},
-    {type:'image', style:{file:'', width:100, border:'1px solid red'}},
+    {type:'image', style:{file:''}},
+    {type:'image', style:{file:'', borderRadius:'50%'}},
+    {type:'image', style:{file:'', border:'1px solid red'}},
 ];
 
 let textSimpleArr = [
@@ -48,8 +48,8 @@ let textBlockArr = [
 ];
 
 let figuresArr = [
-    {type:'figure', style:{bgcolor:'#E05B49', width:100, height:100}},
-    {type:'figure', style:{bgcolor:'#E05B49', width:100, height:100, borderRadius:'50%'}},
+    {type:'figure', style:{bgcolor:'#E05B49'}},
+    {type:'figure', style:{bgcolor:'#E05B49', borderRadius:'50%'}},
 ];
 
 let skillsArr = [
