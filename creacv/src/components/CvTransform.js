@@ -101,7 +101,7 @@ class CvTransform extends React.PureComponent {
     getPosition() {
         let deskCoords = this.getElementCoords(document.querySelector('.desk'));
         let cvCoords = this.getElementCoords(document.querySelector('.cv'));
-        this.coordsShift = {top:cvCoords.top-deskCoords.top, left:cvCoords.left-deskCoords.left};
+        this.coordsShift = {top:cvCoords.top-deskCoords.top + Number(this.props.block.positionTop), left:cvCoords.left-deskCoords.left + Number(this.props.block.positionLeft)};
         console.log(this.coordsShift);
         console.log(this.props.block.positionTop);
     }
@@ -110,7 +110,7 @@ class CvTransform extends React.PureComponent {
         console.log(this.props.block);
         //var elementsCode =  createJSX(this.props.id,this.props.data,true,this.props.active?this.props.activeElementId:false);
         this.getPosition();
-        let style = {top:this.props.block.positionTop, left:this.props.block.positionLeft, width:this.props.block.width + "px", height:this.props.block.height + "px"};
+        let style = {top:this.coordsShift.top + 'px', left:this.coordsShift.left + 'px', width:this.props.block.width + "px", height:this.props.block.height + "px"};
         //let style = {top:'10px', left:'10px', width:"100px", height:"100px"};
         let className = 'cv__transform';
         return (
