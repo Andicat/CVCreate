@@ -1,3 +1,4 @@
+import React from 'react';
 import Image from "./Image";
 import Text from "./Text";
 import Figure from "./Figure";
@@ -40,21 +41,25 @@ function onMouseUp (upEvt) {
     document.removeEventListener('mouseup', onMouseUp);
 }
 
-function createJSX (elem, activeId, key = 0) {
+function createJSX (id, elem, cv, activeId, key = 0) {
+    //console.log('elem',elem);
     let elemCode;
-    let elemId = '' + elem.id + key;
+    let elemId = '' + id + key;
+    //console.log('elemId',elemId);
+    //console.log('style to render',elem.style);
     switch (elem.type) {
         case 'image': 
-            elemCode = <Image key={elemId} id={elemId} style={elem.style} src={elem.src} active={activeId===elemId}/>;
+            elemCode = <Image key={elemId} id={elemId} cv={cv} style={elem.style} src={elem.src} active={activeId===elemId}/>;
             break;
-        case 'text': 
-            elemCode = <Text key={elemId} id={elemId} style={elem.style} text={elem.text} active={activeId===elemId}/>;
+        case 'text':
+            //console.log('create text',elem)
+            elemCode = <Text key={elemId} id={elemId} cv={cv} style={elem.style} text={elem.text} active={activeId===elemId}/>;
             break;
         case 'figure': 
-            elemCode = <Figure key={elemId} id={elemId} style={elem.style}/>;
+            elemCode = <Figure key={elemId} id={elemId} cv={cv} style={elem.style}/>;
             break;
         case 'group': 
-            elemCode = <div key={elemId} className={'cv__group' + (elem.direction?(' cv__group--' + elem.direction):'')}>{elem.elements.map( (e,i) => createJSX({...e, id:elem.id},activeId,i))}</div>;
+            elemCode = <div key={elemId} className={'cv__group' + (elem.direction?(' cv__group--' + elem.direction):'')}>{elem.elements.map( (e,i) => createJSX(id,{...e, id:elem.id},cv,activeId,i))}</div>;
             break;
         default:
             elemCode = null;
@@ -62,7 +67,8 @@ function createJSX (elem, activeId, key = 0) {
     return elemCode;
 };
 
-function renderFunc (type,text,style,className,cbOnClick) {
+function optionRenderFunc (type,text,style,className,cbOnClick) {
+    
     let elemCode;
     //let elemId = '' + elem.id + key;
     switch (type) {
@@ -84,4 +90,100 @@ function renderFunc (type,text,style,className,cbOnClick) {
     return elemCode;
 };
 
-export { move, createJSX, renderFunc };
+function createOption (optionType,optionValue,cbOnChange) {
+
+    function setValue(elem,value) {
+        if (elem) {
+            elem.value = value;
+        }
+        cbOnChange(value);
+    }
+
+    function setValueInput(evt) {
+        cbOnChange(evt.target.value);
+    }
+
+    function setValueCheckBox(evt) {
+        cbOnChange(evt.target.checked);
+    }
+
+    function codeNumber() {
+        return <React.Fragment>
+                    <input type='button' className='option option--button' value='-' onClick= {(evt) => {setValue(evt.target.nextSibling,Number(optionValue)-1)}}/>
+                    <input type='text' className='option option--number' value={optionValue} onChange={setValueInput}></input>
+                    <input type='button' className='option option--button' value='+' onClick= {(evt) => {setValue(evt.target.previousSibling,Number(optionValue)+1)}}/>
+                </React.Fragment>
+    };
+
+    function codeCheckbox() {
+        return <input type='checkbox' className='option option--checkbox' checked={optionValue} onChange={setValueCheckBox}></input>
+    };
+
+    function codeColor() {
+        return <input type='color' className='option option--color' value={optionValue} onChange={setValueInput}></input>
+    }
+
+    let elemCode;
+    switch (optionType) {
+        case 'fontsize': 
+            elemCode = codeNumber();
+            break;
+        case 'bold':
+            elemCode = codeCheckbox();
+            break;
+        case 'width':
+            elemCode = codeNumber();
+            break;
+        case 'height':
+            elemCode = codeNumber();
+            break;
+        case 'color':
+            elemCode = codeColor();
+            break;
+        case 'bgcolor':
+            elemCode = codeColor();
+            break;
+        case 'file':
+            elemCode = <input type='file' className='option option--file' value={optionValue} onChange={cbOnChange}></input>;
+            break;
+        default:
+            elemCode = null;
+    }
+    return elemCode;
+};
+
+function createStyle (styles,cd) {
+    let styleAttr = {};
+
+    for (let key in styles) {
+        switch (key) {
+            case 'fontsize': 
+                styleAttr.fontSize = styles[key] + 'px';
+                break;
+            case 'bold':
+                styleAttr.fontWeight = styles[key]?'bold':'normal';
+                break;
+            case 'width': 
+                styleAttr.width = styles[key] + 'px';
+                break;
+            case 'height': 
+                styleAttr.height = styles[key] + 'px';
+                break;
+            case 'bgcolor': 
+                styleAttr.backgroundColor = styles[key];
+                break;
+            case 'file': 
+            //debugger
+                styleAttr.src = styles[key];
+                break;
+            default:
+                styleAttr[key] = styles[key];;
+        }
+    }
+
+    //let elemId = '' + elem.id + key;
+    
+    return styleAttr;
+};
+
+export { move, createJSX, optionRenderFunc, createOption, createStyle};

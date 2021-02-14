@@ -11,51 +11,74 @@
         display: flex;
         flex-direction: column;
         position: absolute;
-        //padding: 10px;
+        padding: 4px;
+        //contenteditable: true;
         
         &:hover {
             outline: 1px solid lightslategray;
             //cursor: move;
-            cursor: pointer;
+            //cursor: pointer;
         }
         
         &--active {
-            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+            outline: 2px solid rgb(54, 90, 126);
+            //box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
             &:hover {
-                outline: none;
+                outline: 2px solid rgb(54, 90, 126);
             }
         }
     }
 
-    &__element--active {
-        outline: 1px solid lightslategray;
-    }
+    &__block-button {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        border: none;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-position: center;
+        z-index: 20;
 
-    &__text {
-        z-index: 10;
+        &--delete {
+            top: 0;
+            right: 0;
+            transform: translate(50%, -50%);
+            background-image: url('./../../img/icon-delete.svg');
+        }
+
+        &--move {
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            background-image: url('./../../img/icon-move.svg');
+        }
+
         &:hover {
-            //outline: 1px solid rgb(96, 160, 160);
-            //cursor: pointer;
-        }
-        &:active {
-            //outline: 2px solid rgb(197, 100, 176);
-            //cursor: move;
+           width: 20px;
+           height: 20px;
+           cursor: pointer;
         }
     }
 
-    &__image {
-        z-index: 10;
+    &__element {
+        &--active {
+            outline: 1px solid lightslategray;
+        }
+
+        &--text {
+            z-index: 10;
+        }
+
+        &--image {
+            z-index: 10;
+        }
     }
 
     &__group {
         z-index: 10;
         display: flex;
         flex-direction: column;
-
-        .cv__figure {
-            
-        }
-
         &--row {
             flex-direction: row;
             align-items: center;

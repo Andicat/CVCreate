@@ -1,35 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PanelBlock from './PanelBlock';
-import { createJSX } from './move';
+import PanelMenu from './PanelMenu';
 
 class Panel extends React.PureComponent {
 
     static propTypes = {
-        blocks: PropTypes.array,
+        groups: PropTypes.array,
     };
 
     static defaultProps = {
-        blocks: [],
+        groups: [],
     };
 
     state = {
         //style:{...this.props.style},
     }
 
-    onClick = (evt) => {
-        //console.log('edit figure');
-        //edit(evt);
-    }
-
     render () {
-        var blocksCode = this.props.blocks.map( (b,i) => {
-            return <PanelBlock key={i} name={b.name} blockData={b}>{createJSX(b)}</PanelBlock>
-        });
+        var groupsCode = this.props.groups.map( (g,i) => {
+            return <PanelMenu key={i} data={g}/>
+            });
 
-        //console.log(blocksCode);
-        return <aside className="panel" onClick={this.onClick}>
-            {blocksCode}
+        return <aside className="panel">
+            <ul className='panel__menu'>
+                {groupsCode}
+            </ul>
         </aside>;
     }
 }

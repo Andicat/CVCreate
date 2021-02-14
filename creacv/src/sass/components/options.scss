@@ -1,0 +1,51 @@
+.options {
+    position: absolute;
+    text-align: center;
+    min-height: 40px;
+    background-color: #a8babe;
+    width: 100%;
+    top: 0;
+    display: flex;
+    align-items: center;
+
+    &__elem {
+        margin-left: 8px;
+    }
+
+    input[type='color']::-webkit-color-swatch-wrapper {
+        padding: 0;    
+    }
+      
+    input[type="color"]::-webkit-color-swatch {
+        border: none;
+    }
+    
+    /* firefox */
+    input[type=color]::-moz-focus-inner {
+        border: none;
+        padding: 0;
+    }
+    
+    input[type=color]::-moz-color-swatch {
+        border: none;
+    }
+}
+
+.option {
+    height: 25px;
+    width: 25px;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+
+    &--button {
+        width: 25px;
+        padding: 0;
+       
+    }
+    &--number {
+        width: 45px;
+        padding: 0;
+    }
+}

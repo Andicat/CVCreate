@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {connect} from 'react-redux';
 import {cvBlock_activate} from '../redux/cvDataAC';
-import {renderFunc} from './move'
+import {optionRenderFunc} from './move'
 
 class Element extends React.PureComponent {
 
@@ -32,7 +32,7 @@ class Element extends React.PureComponent {
 
     render () {
         let className = 'cv__element' + (this.props.active?' cv__element--active':'');
-        return renderFunc(this.props.type, this.props.text, this.props.style, className, this.onClick);
+        return optionRenderFunc(this.props.type, this.props.text, this.props.style, className, this.onClick);
         //return <span className={className} style={this.props.style} onClick={this.onClick}>{this.props.text}</span>;
     }
 }

@@ -1,0 +1,13 @@
+.image {
+  height: 50px;
+  width: 50px;
+  background-color: #333;
+  position: absolute;
+  left: 50px;
+}
+
+.image:hover {
+  outline: 2px solid lightslategray;
+  cursor: move;
+}
+/*# sourceMappingURL=image.min.css.map */

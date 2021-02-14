@@ -1,14 +1,42 @@
 .panel {
-    background-color: #3f4851;
+    background-color: #293039;
+    min-width: 250px;
+
+    &__group {
+        //padding: 10px;
+        &-name {
+            padding: 10px;
+            //transition: all 0.3s;
+            color: rgb(228, 220, 220);
+            font-size: 20px;
+            text-shadow: 0 -1px rgb(46,53,58);
+            outline: none;
+            //border: 1px solid rgba(33,43,52,1);
+            //border-radius: 3px;
+            background-color: #293039;
+            border-bottom: 1px solid #5e5f61;
+            background-image: url('./../../img/icon-open.svg');
+            background-repeat: no-repeat;
+            background-size: 20px;
+            background-position: 95% 10px;
+    
+            &:hover {
+                cursor: pointer;
+            }
+    
+            &--active {
+                
+            }
+        }
+    }
 
     &__block {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         border-radius: 5px;
         padding: 10px;
-        margin: 10px;
+        margin: 5px;
         border: 1px solid rgba(33,43,52,1);
         box-shadow:
             inset 0 1px rgba(101,114,126,1),
@@ -26,16 +54,11 @@
 
     &__block-add {
         transition: all 0.3s;
-        width: 100%;
-        display: inline-block;
-        font-size: 14px;
+        width: 30px;
+        height: 30px;
+        margin-left: 10px;
         color: rgb(205,216,228);
         text-shadow: 0 -1px rgb(46,53,58);
-        text-decoration: none;
-        user-select: none;
-        line-height: 2em;
-        padding: 2px 10px;
-        padding-right: 25px;
         outline: none;
         border: 1px solid rgba(33,43,52,1);
         border-radius: 3px;
@@ -45,11 +68,10 @@
             inset 0 0 1px rgba(140,150,170,.8),
             0 1px rgb(83,94,104),
             0 0 1px rgb(86,96,106);
-        margin-bottom: 10px;
-        background-image: url('./../../img/add.svg');
+        background-image: url('./../../img/icon-add.svg');
         background-repeat: no-repeat;
-        background-size: auto 75%;
-        background-position: right;
+        background-size: 80%;
+        background-position: center;
 
         &:hover {
             box-shadow:
@@ -76,3 +98,52 @@
         flex-direction: column;
     }
 }
+
+.accordion-menu li.open .dropdownlink {
+  color: #CDDC39;
+  .fa-chevron-down {
+    transform: rotate(180deg);
+  }
+}
+.accordion-menu li:last-child .dropdownlink {
+  border-bottom: 0;
+}
+.dropdownlink {
+  cursor: pointer;
+  display: block;
+  padding: 15px 15px 15px 45px;
+  font-size: 18px;
+  border-bottom: 1px solid #ccc;
+  color: #212121;
+  position: relative;
+  transition: all 0.4s ease-out;
+  i {
+    position: absolute;
+    top: 17px;
+    left: 16px;
+  }
+  .fa-chevron-down {
+    right: 12px;
+    left: auto;
+  }
+}
+
+.submenuItems {
+  display: none;
+  background: #C8E6C9;
+  li {
+    border-bottom: 1px solid #B6B6B6;
+  }
+}
+
+.submenuItems a {
+  display: block;
+  color: #727272;
+  padding: 12px 12px 12px 45px;
+  transition: all 0.4s ease-out;
+  &:hover {
+    background-color: #CDDC39;
+    color: #fff;
+  }
+}
+

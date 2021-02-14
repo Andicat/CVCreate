@@ -3,37 +3,33 @@ import PropTypes from 'prop-types';
 
 import {connect} from 'react-redux';
 import { cvBlock_add } from '../redux/cvDataAC';
+import { createJSX } from './move';
 
 class PanelBlock extends React.PureComponent {
 
     static propTypes = {
-        name: PropTypes.string.isRequired,
-        blockData: PropTypes.object.isRequired,
+        id: PropTypes.number.isRequired,
+        data: PropTypes.object.isRequired,
     };
 
-    static defaultProps = {
-        name: 'Add block',
-    };
-
-    state = {
-        //style:{...this.props.style},
-    }
-
-    onClick = (evt) => {
-        //console.log('add block',this.props.blockData);
-        this.props.dispatch(cvBlock_add(this.props.blockData));
+    onClick = () => {
+        //console.log('add block',this.props.data);
+        this.props.dispatch(cvBlock_add(this.props.data));
         
         //edit(evt);
     }
 
     render () {
+        //console.log('render block',this.props.data)
+        //{}
         return (
-            <div className='panel__block'>
-                <button className='panel__block-add' onClick={this.onClick}>{this.props.name}</button>
+            <li className='panel__block'>
                 <div className='panel__block-view'>
-                    {this.props.children}
+                    {createJSX(this.props.id,this.props.data,false)}
                 </div>
-            </div>
+                <button className='panel__block-add' onClick={this.onClick}></button>
+                
+            </li>
         );
     }
 }

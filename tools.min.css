@@ -1,7 +1,12 @@
 .tools {
+  position: absolute;
   text-align: center;
   min-height: 40px;
-  background-color: #61dafb;
+  background-color: #a8babe;
+  width: 100%;
+  top: 0;
+  display: flex;
+  align-items: center;
 }
 
 .App-logo {
@@ -38,3 +43,4 @@
     transform: rotate(360deg);
   }
 }
+/*# sourceMappingURL=tools.min.css.map */

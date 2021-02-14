@@ -1,0 +1,43 @@
+body {
+  /*font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    line-height: 21px;
+    font-style: italic;
+    text-align: center;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    border: 0;*/
+  background-color: lightblue;
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+
+html {
+  min-height: 100%;
+}
+
+#app {
+  min-height: 100%;
+  background-color: gainsboro;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+header {
+  color: white;
+  font-size: 24px;
+  padding: 10px 40px;
+  background-color: darkcyan;
+  background-image: url("./../img/logo.svg");
+  background-repeat: no-repeat;
+  background-position: 5px;
+  background-size: 30px;
+}
+
+main {
+  display: flex;
+}
+/*# sourceMappingURL=global.min.css.map */

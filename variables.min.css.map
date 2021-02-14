@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "creacv/src/sass/variables.scss"
+    ],
+    "names": [],
+    "file": "variables.min.css"
+}

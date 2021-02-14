@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAC;EACF,SAAS,EAAE,CAAC;EACZ,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,MAAM;EACvB,WAAW,EAAE,IAAI;EACjB,QAAQ,EAAE,QAAQ;CACrB",
+    "sources": [
+        "creacv/src/sass/components/desk.scss"
+    ],
+    "names": [],
+    "file": "desk.min.css"
+}
