@@ -65,37 +65,17 @@ function createOption (optionType,optionValue,cbOnChange) {
     }
 
     function setImage(evt) {
-       /* debugger
-        let file = evt.target.files[0];
-        let fileName = file.name.toLowerCase();
-        loadImage(files[i], evt.target);
-        var reader = new FileReader(file);
+        const reader = new FileReader();
+        const file = evt.target.files[0];
 
-    reader.addEventListener('load', function () {
-      if (target === avatarFileChooser) {
-        avatarPreview.src = reader.result;
-      }
-      if (target === photoFileChooser) {
-        var photoPreview = photoPreviewTemplate.cloneNode(true);
+        reader.onloadend = () => {
+            cbOnChange(reader.result);
+        };
 
-        photoPreview.style.backgroundImage = 'url(' + reader.result + ')';
-        photoPreview.style.backgroundRepeat = 'no-repeat';
-        photoPreview.style.backgroundSize = 'cover';
-
-        photoContainer.appendChild(photoPreview);
-      }
-    });
-
-    reader.readAsDataURL(file);
-        /*if (this.props.style['file']) {
-            let img = new Image();
-            img.src = this.props.style['file'];
+        if (file) {
+            reader.readAsDataURL(file);
         }
-        let src = null || (this.props.src);
-        */
-        cbOnChange(evt.target.checked);
     }
-
 
     function codeNumber() {
         return <React.Fragment>
@@ -118,7 +98,7 @@ function createOption (optionType,optionValue,cbOnChange) {
 
     function codeFile() {
         return <React.Fragment>
-                    <input type='file' name="file" id="file" className='option option__file' value={optionValue} onChange={setImage}></input>
+                    <input type='file' name="file" id="file" className='option option__file' accept="image/*" onChange={setImage}></input>
                     <label htmlFor="file">Load file</label>
                 </React.Fragment>
     };
@@ -172,17 +152,12 @@ function createStyle (styles,cd) {
             case 'bgcolor': 
                 styleAttr.backgroundColor = styles[key];
                 break;
-            case 'file': 
-            //debugger
-                styleAttr.src = styles[key];
+            case 'file':
                 break;
             default:
                 styleAttr[key] = styles[key];;
         }
     }
-
-    //let elemId = '' + elem.id + key;
-    
     return styleAttr;
 };
 

@@ -13,7 +13,7 @@ class PanelBlock extends React.PureComponent {
     };
 
     onClick = () => {
-        this.props.dispatch(cvBlock_add(this.props.data));
+        this.props.dispatch(cvBlock_add(JSON.parse(JSON.stringify(this.props.data))));
     }
 
     render () {

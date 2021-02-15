@@ -15,6 +15,7 @@ const initState = {
 }
 
 function cvDataReducer(state = initState, action) {
+    //debugger
 
     switch (action.type) {
 
@@ -67,9 +68,8 @@ function cvDataReducer(state = initState, action) {
 
         //activate block on cv-page
         case CV_BLOCK_ACTIVATE: {
-            console.log('active id block',state.activeBlockId);
             if (state.activeBlockId !== action.blockId) {
-                let newState = {...state, activeBlockId:action.blockId};
+                let newState = {...state, activeBlockId:action.blockId, activeElementId:(action.blockId?state.activeElementId:null)};
                 return newState;
             }
             return state;

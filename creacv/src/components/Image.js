@@ -13,13 +13,11 @@ class Image extends React.PureComponent {
         id: PropTypes.string.isRequired,
         active: PropTypes.bool,
         style: PropTypes.object,
-        src: PropTypes.string,
     };
 
     static defaultProps = {
         cv: false,
         style: {},
-        src: image,
     };
 
     onClick = () => {
@@ -30,11 +28,7 @@ class Image extends React.PureComponent {
 
     render () {
         let style = createStyle(this.props.style);
-        if (this.props.style['file']) {
-            let img = new Image();
-            img.src = this.props.style['file'];
-        }
-        let src = null || (this.props.src);
+        let src = (this.props.style['file']) || image;
         let className = ' cv__element  cv__element--image' + (this.props.active?' cv__element--active':'');
         return <img className={className} src={src} style={style} alt='' onClick={this.onClick}/>;
     }
