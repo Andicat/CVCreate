@@ -4,7 +4,7 @@ import image from './../img/image.svg';
 
 import {connect} from 'react-redux';
 import {cvElement_activate} from '../redux/cvDataAC';
-import {createStyle} from './move';
+import {createStyle} from './utils';
 
 class Image extends React.PureComponent {
 
@@ -21,11 +21,6 @@ class Image extends React.PureComponent {
         style: {},
         src: image,
     };
-
-    state = {
-        //style:{...this.props.style},
-        //src: this.props.src,
-    }
 
     onClick = () => {
         if (this.props.cv) {

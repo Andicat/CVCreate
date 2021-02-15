@@ -88,4 +88,23 @@
         border-radius: 2px;
     }
 
+    &__file {
+        @include visually-hidden;
+
+        & ~ label {
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            width: 65px;
+            height: 25px;
+            border-radius: 2px;
+            padding:0;
+            margin:auto;
+            border:2px solid #555;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
 }

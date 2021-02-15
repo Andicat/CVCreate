@@ -3,56 +3,15 @@ import Image from "./Image";
 import Text from "./Text";
 import Figure from "./Figure";
 
-let mouseStart;
-let mouseShift;
-let elem;
-
-function move (evt) { 
-    evt.preventDefault();
-    //console.log('mouse down', evt.target.parentNode);
-    mouseStart = {
-        x: evt.clientX,
-        y: evt.clientY
-    };
-    elem = evt.currentTarget;
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
-}
-
-function onMouseMove (moveEvt) {
-    moveEvt.preventDefault();
-    //console.log('mouse move',moveEvt.target);
-    mouseShift = {
-        x: moveEvt.clientX - mouseStart.x,
-        y: moveEvt.clientY - mouseStart.y 
-    };
-    mouseStart = {
-        x: moveEvt.clientX,
-        y: moveEvt.clientY
-    };
-    elem.style.top = (elem.offsetTop + mouseShift.y) + "px";
-    elem.style.left = (elem.offsetLeft + mouseShift.x) + "px";
-}
-
-function onMouseUp (upEvt) {
-    upEvt.preventDefault();
-    //console.log('mouse up', upEvt.currentTarget);
-    document.removeEventListener('mousemove', onMouseMove);
-    document.removeEventListener('mouseup', onMouseUp);
-}
-
+//create jsx-code for block
 function createJSX (id, elem, cv, activeId, key = 0) {
-    //console.log('elem',elem);
     let elemCode;
     let elemId = '' + id + key;
-    //console.log('elemId',elemId);
-    //console.log('style to render',elem.style);
     switch (elem.type) {
         case 'image': 
             elemCode = <Image key={elemId} id={elemId} cv={cv} style={elem.style} src={elem.src} active={activeId===elemId}/>;
             break;
         case 'text':
-            //console.log('create text',elem)
             elemCode = <Text key={elemId} id={elemId} cv={cv} style={elem.style} text={elem.text} active={activeId===elemId}/>;
             break;
         case 'figure': 
@@ -68,9 +27,7 @@ function createJSX (id, elem, cv, activeId, key = 0) {
 };
 
 function optionRenderFunc (type,text,style,className,cbOnClick) {
-    
     let elemCode;
-    //let elemId = '' + elem.id + key;
     switch (type) {
         case 'image': 
             elemCode = <img className={className} src={text} style={style} alt='' onClick={cbOnClick}/>;
@@ -107,6 +64,39 @@ function createOption (optionType,optionValue,cbOnChange) {
         cbOnChange(evt.target.checked);
     }
 
+    function setImage(evt) {
+       /* debugger
+        let file = evt.target.files[0];
+        let fileName = file.name.toLowerCase();
+        loadImage(files[i], evt.target);
+        var reader = new FileReader(file);
+
+    reader.addEventListener('load', function () {
+      if (target === avatarFileChooser) {
+        avatarPreview.src = reader.result;
+      }
+      if (target === photoFileChooser) {
+        var photoPreview = photoPreviewTemplate.cloneNode(true);
+
+        photoPreview.style.backgroundImage = 'url(' + reader.result + ')';
+        photoPreview.style.backgroundRepeat = 'no-repeat';
+        photoPreview.style.backgroundSize = 'cover';
+
+        photoContainer.appendChild(photoPreview);
+      }
+    });
+
+    reader.readAsDataURL(file);
+        /*if (this.props.style['file']) {
+            let img = new Image();
+            img.src = this.props.style['file'];
+        }
+        let src = null || (this.props.src);
+        */
+        cbOnChange(evt.target.checked);
+    }
+
+
     function codeNumber() {
         return <React.Fragment>
                     <input type='button' className='option option__button' value='&ndash;' onClick= {(evt) => {setValue(evt.target.nextSibling,Number(optionValue)-1)}}/>
@@ -125,6 +115,13 @@ function createOption (optionType,optionValue,cbOnChange) {
     function codeColor() {
         return <input type='color' className='option option__color' value={optionValue} onChange={setValueInput}></input>
     }
+
+    function codeFile() {
+        return <React.Fragment>
+                    <input type='file' name="file" id="file" className='option option__file' value={optionValue} onChange={setImage}></input>
+                    <label htmlFor="file">Load file</label>
+                </React.Fragment>
+    };
 
     let elemCode;
     switch (optionType) {
@@ -147,7 +144,7 @@ function createOption (optionType,optionValue,cbOnChange) {
             elemCode = codeColor();
             break;
         case 'file':
-            elemCode = <input type='file' className='option option__file' value={optionValue} onChange={cbOnChange}></input>;
+            elemCode = codeFile();
             break;
         default:
             elemCode = null;
@@ -189,4 +186,4 @@ function createStyle (styles,cd) {
     return styleAttr;
 };
 
-export { move, createJSX, optionRenderFunc, createOption, createStyle};
+export {createJSX, optionRenderFunc, createOption, createStyle};

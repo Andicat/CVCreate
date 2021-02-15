@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {move} from './move'
 import {connect} from 'react-redux';
-import {createJSX} from './move'
-import {cvBlock_move, cvBlock_resize, cvBlock_activate, cvBlock_delete} from '../redux/cvDataAC';
+import {cvBlock_move, cvBlock_resize, cvBlock_delete} from '../redux/cvDataAC';
 
 
 class CvTransform extends React.PureComponent {
 
     static propTypes = {
-        block: PropTypes.object.isRequired,
+        activeBlockId: PropTypes.number,    //Redux
+        block: PropTypes.object,            //Redux
     };
 
     mouseStart;
@@ -18,8 +17,7 @@ class CvTransform extends React.PureComponent {
     resize = false;
     coordsShift;
 
-     move = (evt) => { 
-        //debugger
+    move = (evt) => { 
         evt.preventDefault();
         this.mouseStart = {
             x: evt.clientX,
@@ -42,14 +40,9 @@ class CvTransform extends React.PureComponent {
         };
         
         if (this.resize) {
-            //debugger
-            let width = (this.elem.offsetWidth + this.mouseShift.x) + "px";
-            let height = (this.elem.offsetHeight + this.mouseShift.x) + "px";
-            this.props.dispatch(cvBlock_resize(this.props.id,this.mouseShift.x,this.mouseShift.y));
+            this.props.dispatch(cvBlock_resize(this.props.id,this.mouseShift.y,this.mouseShift.x));
         } else {
-            let top = (this.elem.offsetTop + this.mouseShift.y) + "px";
-            let left = (this.elem.offsetLeft + this.mouseShift.x) + "px";
-            this.props.dispatch(cvBlock_move(this.props.id,top,left));
+            this.props.dispatch(cvBlock_move(this.props.id,this.mouseShift.y,this.mouseShift.x));
         }
     }
 
@@ -102,22 +95,20 @@ class CvTransform extends React.PureComponent {
         let deskCoords = this.getElementCoords(document.querySelector('.desk'));
         let cvCoords = this.getElementCoords(document.querySelector('.cv'));
         this.coordsShift = {top:cvCoords.top-deskCoords.top + Number(this.props.block.positionTop), left:cvCoords.left-deskCoords.left + Number(this.props.block.positionLeft)};
-        console.log(this.coordsShift);
-        console.log(this.props.block.positionTop);
     }
 
     render () {
-        console.log(this.props.block);
-        //var elementsCode =  createJSX(this.props.id,this.props.data,true,this.props.active?this.props.activeElementId:false);
+        if (!this.props.activeBlockId) {
+            return null;
+        }
         this.getPosition();
         let style = {top:this.coordsShift.top + 'px', left:this.coordsShift.left + 'px', width:this.props.block.width + "px", height:this.props.block.height + "px"};
-        //let style = {top:'10px', left:'10px', width:"100px", height:"100px"};
         let className = 'cv__transform';
         return (
             <div className={className} style={style}>
-                <button className='cv__block-button cv__block-button--move' onMouseDown={this.onMouseDown}></button>
-                <button className='cv__block-button cv__block-button--delete' onClick={this.onClickDelete}></button>
-                <button className='cv__block-button cv__block-button--resize' onMouseDown={this.onMouseDownSize}></button>
+                <button className='cv__transform-button cv__transform-button--move' onMouseDown={this.onMouseDown}></button>
+                <button className='cv__transform-button cv__transform-button--delete' onClick={this.onClickDelete}></button>
+                <button className='cv__transform-button cv__transform-button--resize' onMouseDown={this.onMouseDownSize}></button>
             </div>
         );
     }
@@ -125,7 +116,8 @@ class CvTransform extends React.PureComponent {
 
 const mapStateToProps = function (state) {
     return {
-      block: state.cvData.blocks.find( b => b.id==state.cvData.activeBlockId),
+        block: state.cvData.blocks.find( b => b.id === state.cvData.activeBlockId),
+        activeBlockId: state.cvData.activeBlockId,
     };
 };
 

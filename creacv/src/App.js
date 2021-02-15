@@ -27,7 +27,8 @@ let blocksArr = [
 let imagesArr = [
     {type:'image', style:{file:''}},
     {type:'image', style:{file:'', borderRadius:'50%'}},
-    {type:'image', style:{file:'', border:'1px solid red'}},
+    {type:'image', style:{file:'', border:'3px solid gray'}},
+    {type:'image', style:{file:'', borderRadius:'50%', border:'3px solid gray'}},
 ];
 
 let textSimpleArr = [

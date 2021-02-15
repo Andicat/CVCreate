@@ -3,21 +3,22 @@ import PropTypes from 'prop-types';
 import Option from './Option';
 
 import {connect} from 'react-redux';
-import {createOption} from './move';
-import {cvElement_update} from '../redux/cvDataAC';
 
 class OptionPanel extends React.PureComponent {
 
     static propTypes = {
-        style: PropTypes.object.isRequired, 
-        elementId: PropTypes.string.isRequired, //из Redux
+        styleToEdit: PropTypes.object,       //Redux
+        activeElementId: PropTypes.string,   //Redux
     };
 
     render () {
+        if (!this.props.activeElementId) {
+            return null;
+        }
         return (
             <form className="options">
-                {Object.keys(this.props.style).map( (s,i) => (
-                    <Option key={i} optionName={s} optionValue={this.props.style[s]}/>
+                {Object.keys(this.props.styleToEdit).map( (s,i) => (
+                    <Option key={i} optionName={s} optionValue={this.props.styleToEdit[s]}/>
                 ))}
             </form>
         );
@@ -26,8 +27,8 @@ class OptionPanel extends React.PureComponent {
 
 const mapStateToProps = function (state) {
     return {
-        style: state.cvData.styleToEdit,
-        elementId: state.cvData.activeElementId, 
+        styleToEdit: state.cvData.styleToEdit,
+        activeElementId: state.cvData.activeElementId, 
     };
 };
 

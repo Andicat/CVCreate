@@ -18,19 +18,33 @@ function cvDataReducer(state = initState, action) {
 
     switch (action.type) {
 
+        //add new block to cv-page
         case CV_BLOCK_ADD: {
             let newId = state.blocks.reduce(function (r, v) { return ( r < v.id ? v.id : r);},0) + 1;
-            let newState={...state,
-                blocks:[...state.blocks,{...action.block, id:newId, positionTop:'30',positionLeft:'30',width:'100',height:'100'}]
+            let newState = {...state,
+                blocks: [...state.blocks,{...action.block, id:newId, positionTop:'30',positionLeft:'30',width:'100',height:'100'}],
+                activeBlockId: newId,
+                activeElementId: null
             };
             return newState;
         }
 
+        //delete block to cv-page
+        case CV_BLOCK_DELETE: {
+            let newState = {...state,
+                blocks: state.blocks.filter(b => b.id!==action.blockId),
+                activeBlockId: null,
+                activeElementId: null
+            };
+            return newState;
+        }
+
+        //move block on cv-page
         case CV_BLOCK_MOVE: {
             let newBlocks = state.blocks.map(b => {
                 if (b.id===state.activeBlockId) {
-                    b.positionTop = action.positionTop;
-                    b.positionLeft = action.positionLeft;    
+                    b.positionTop = Number(b.positionTop) + action.shiftTop;
+                    b.positionLeft = Number(b.positionLeft) + action.shiftLeft;
                     return {...b};
                 }
                 return b});
@@ -38,11 +52,12 @@ function cvDataReducer(state = initState, action) {
             return newState;
         }
 
+        //set size for block on cv-page
         case CV_BLOCK_RESIZE: {
             let newBlocks = state.blocks.map(b => {
                 if (b.id===state.activeBlockId) {
-                    b.width = Number(b.width) + action.width;
-                    b.height = Number(b.height) + action.height;    
+                    b.height = Number(b.height) + action.shiftHeight;    
+                    b.width = Number(b.width) + action.shiftWidth;
                     return {...b};
                 }
                 return b});
@@ -50,45 +65,31 @@ function cvDataReducer(state = initState, action) {
             return newState;
         }
 
-        case CV_BLOCK_DELETE: {
-            let newState={...state,
-                blocks:state.blocks.filter(b => b.id!==action.blockId)
-            };
-            return newState;
-        }
-
+        //activate block on cv-page
         case CV_BLOCK_ACTIVATE: {
+            console.log('active id block',state.activeBlockId);
             if (state.activeBlockId !== action.blockId) {
-                //console.log('activate block', action.blockId);
                 let newState = {...state, activeBlockId:action.blockId};
                 return newState;
             }
             return state;
         }
 
+        //activate element on cv-page
         case CV_ELEMENT_ACTIVATE: {
-            //let fullId = '' + state.activeBlockId + state.activeElementId; 
             if (state.activeElementId !== action.elementId) {
-                //console.log('activate element', action.elementId);
                 let newState = {...state, activeElementId:action.elementId, styleToEdit:action.style};
-                //console.log('state после обработки редьюсером:',newState.styleToEdit);
                 return newState;
             }
             return state;
         }
 
+        //update elements style
         case CV_ELEMENT_UPDATE: {
             let newStyleToEdit = {};
             let newBlocks = state.blocks.map(b => {
                 if (b.id===state.activeBlockId) {
                     if (b.elements) {
-                        /*b.elements[state.activeElementId] = {...b.elements[state.activeElementId]}
-                        b.elements[state.activeElementId].style[action.styleName] = action.styleValue;
-                        b.elements[state.activeElementId].style = {... b.elements[state.activeElementId].style};
-                        newStyleToEdit = b.elements[state.activeElementId].style;
-                        //console.log(elll)
-                        b.elements = [...b.elements];*/
-                        //debugger
                         b.elements = b.elements.map((e,i) => {
                             if (('' + state.activeBlockId + i)===('' + state.activeElementId)) {
                                 e.style[action.styleName] = action.styleValue;
@@ -98,31 +99,21 @@ function cvDataReducer(state = initState, action) {
                             };
                             return e;
                         });
-                        //.;
                     } else {
                         b.style[action.styleName] = action.styleValue;
                         b.style = {...b.style};
                         newStyleToEdit = b.style;
                         
                     }
-                    //console.log('style before change',b)
-                    //console.log('style after change',{...b})
                     return {...b};
                 }
                 return b});
-                //console.log(state.blocks===newBlocks);
             let newState = {...state, blocks:newBlocks,styleToEdit:newStyleToEdit};
-                //console.log(state===newState);
-                //console.log('style name',action.styleName);
-                //console.log('style value',action.styleValue);
-                //console.log('state после обработки редьюсером:',newState);
             return newState;
-            //}
-            //return state;
         }
-
+        
+        //update elements text
         case CV_TEXT_UPDATE: {
-           
             let newBlocks = state.blocks.map(b => {
                 if (b.id===state.activeBlockId) {
                     if (b.elements) {
@@ -133,27 +124,15 @@ function cvDataReducer(state = initState, action) {
                             };
                             return e;
                         });
-
-                        //.;
                     } else {
                         b.text = action.textValue;
                     }
-                    //console.log('style before change',b)
-                    //console.log('style after change',{...b})
                     return {...b};
                 }
                 return b});
-                //console.log(state.blocks===newBlocks);
             let newState = {...state, blocks:newBlocks};
-                //console.log(state===newState);
-                //console.log('style name',action.styleName);
-                //console.log('style value',action.styleValue);
-                //console.log('state после обработки редьюсером:',newState);
             return newState;
-            //}
-            //return state;
         }
-
         default:
             return state;
     }

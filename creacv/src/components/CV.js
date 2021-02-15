@@ -4,30 +4,32 @@ import PropTypes from 'prop-types';
 import CvBlock from './CvBlock';
 import CvTransform from './CvTransform';
 import OptionPanel from './OptionPanel';
+import {cvBlock_activate} from '../redux/cvDataAC';
 
 import {connect} from 'react-redux';
 
 class CV extends React.PureComponent {
 
     static propTypes = {
-        cvData: PropTypes.object,  //из Redux
+        blocks: PropTypes.array,  //из Redux
     };
 
+    onClick = (evt) => {
+        if (evt.target.className==='cv') {
+            this.props.dispatch(cvBlock_activate(null));
+        };
+    }
+
     render () {
-        //console.log('render cv',this.props.cvData);
-        let toolCode = null;
-        if (this.props.cvData.activeElementId!=null) {
-            toolCode = <OptionPanel></OptionPanel>;
-        }
-        var cvBlocksCode = this.props.cvData.blocks.map( b => {
-            return <CvBlock key={b.id} id={b.id} data={b} active={(this.props.cvData.activeBlockId===b.id)?true:false} activeElementId={this.props.cvData.activeElementId}></CvBlock>
+        var cvBlocksCode = this.props.blocks.map( b => {
+            return <CvBlock key={b.id} id={b.id} data={b}></CvBlock>
         });
         
         return (
             <div className='desk'>
-                {toolCode}
-                {this.props.cvData.activeBlockId && <CvTransform></CvTransform>}
-                <div className='cv'>
+                <OptionPanel></OptionPanel>
+                <CvTransform></CvTransform>
+                <div className='cv' onClick={this.onClick}>
                     {cvBlocksCode}
                 </div>
             </div>
@@ -37,7 +39,7 @@ class CV extends React.PureComponent {
 
 const mapStateToProps = function (state) {
     return {
-      cvData: state.cvData,
+        blocks: state.cvData.blocks,
     };
 };
   

@@ -13,12 +13,16 @@ class Panel extends React.PureComponent {
     };
 
     state = {
-        //style:{...this.props.style},
+        activeMenuId:null,
+    }
+
+    menuSelected = (id) => {
+        this.setState( {activeMenuId:(id===this.state.activeMenuId)?null:id} );
     }
 
     render () {
         var groupsCode = this.props.groups.map( (g,i) => {
-            return <PanelMenu key={i} data={g}/>
+            return <PanelMenu key={i} id={i} data={g} active={(this.state.activeMenuId===i)?true:false} cbSelected={this.menuSelected}/>
             });
 
         return <aside className="panel">

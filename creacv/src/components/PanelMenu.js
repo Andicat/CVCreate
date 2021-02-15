@@ -2,34 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PanelBlock from './PanelBlock';
 
-import {connect} from 'react-redux';
-import { cvBlock_add } from '../redux/cvDataAC';
-import { createJSX } from './move';
-
 class PanelMenu extends React.PureComponent {
 
     static propTypes = {
+        id: PropTypes.number.isRequired,
         data: PropTypes.object.isRequired,
+        cbSelected: PropTypes.func.isRequired,
+        active: PropTypes.bool.isRequired,
     };
 
-    state = {
-        active: false,
-    }
-
-
     onClick = () => {
-        this.setState({active:!this.state.active});
-        //console.log('open group',this.state.active);
+        this.props.cbSelected(this.props.id);
     }
-
 
     render () {
-        let className = 'panel__group' + (this.state.active?' panel__group--active':'');
-        return <li className={className}>
-                    <div className="panel__group-name" onClick={this.onClick}>
+        return <li className='panel__group'>
+                    <div className={"panel__group-name" +  (this.props.active?' panel__group-name--active':'')} onClick={this.onClick}>
                         {this.props.data.name}
                     </div>
-                    {this.state.active && <ul>
+                    {this.props.active && <ul>
                         {this.props.data.elements.map( (e,i) => { return <PanelBlock key={i} id={i} data={e}/>})}
                     </ul>}
                 </li>;
@@ -37,5 +28,3 @@ class PanelMenu extends React.PureComponent {
 }
 
 export default PanelMenu;
-
-//export default PanelBlock;
