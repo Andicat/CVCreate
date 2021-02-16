@@ -25,6 +25,7 @@ class CV extends React.PureComponent {
         var cvBlocksCode = this.props.blocks.map( b => {
             return <CvBlock key={b.id} id={b.id} data={b}></CvBlock>
         });
+        console.log('render cv',cvBlocksCode);
         
         return (
             <div className='desk'>

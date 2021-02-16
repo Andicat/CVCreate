@@ -13,12 +13,12 @@ class Option extends React.PureComponent {
         optionValue: PropTypes.any,
     };
 
-    onChange = (value) => {
+    onChangeValue = (value) => {
         this.props.dispatch(cvElement_update(this.props.elementId,this.props.optionName,value));
     }
 
     render () {
-        let optionCode = createOption(this.props.optionName,this.props.optionValue,this.onChange);
+        let optionCode = createOption(this.props.optionName,this.props.optionValue,this.onChangeValue);
         return (
             <div className='options__elem'>
                 {optionCode}

@@ -6,6 +6,7 @@ const CV_BLOCK_ACTIVATE = 'CV_BLOCK_ACTIVATE';
 const CV_ELEMENT_ACTIVATE = 'CV_ELEMENT_ACTIVATE';
 const CV_ELEMENT_UPDATE = 'CV_ELEMENT_UPDATE';
 const CV_TEXT_UPDATE = 'CV_TEXT_UPDATE';
+const CV_BLOCK_SEND_BACK = 'CV_BLOCK_SEND_BACK';
 
 const cvBlock_add = function(block) {
     return {
@@ -71,12 +72,20 @@ const cvElement_textUpdate = function(elementId,textValue) {
     };
 }
 
+const cvBlock_sendBack = function(blockId) {
+    return {
+        type: CV_BLOCK_SEND_BACK,
+        blockId: blockId,
+    };
+}
+
 export {
     cvBlock_add, CV_BLOCK_ADD,
     cvBlock_delete, CV_BLOCK_DELETE,
     cvBlock_move, CV_BLOCK_MOVE,
     cvBlock_resize, CV_BLOCK_RESIZE,
     cvBlock_activate, CV_BLOCK_ACTIVATE,
+    cvBlock_sendBack, CV_BLOCK_SEND_BACK,
     cvElement_activate, CV_ELEMENT_ACTIVATE,
     cvElement_update, CV_ELEMENT_UPDATE,
     cvElement_textUpdate, CV_TEXT_UPDATE,

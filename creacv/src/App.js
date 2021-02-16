@@ -31,7 +31,7 @@ let imagesArr = [
     {type:'image', style:{file:'', borderRadius:'50%', border:'3px solid gray'}},
 ];
 
-let textStyleDefault = {fontsize:'16', bold:false, italic:false, center:false, uppercase:false, color:'#000000'};
+let textStyleDefault = {fontsize:'16', bold:false, italic:false, center:false, uppercase:false, color:'#000000', layout:''};
 
 let textSimpleArr = [
     {type:'text', text:'Text with background', style:{bgcolor:'#E05B49',...textStyleDefault, fontsize:'20'}},

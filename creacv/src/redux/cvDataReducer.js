@@ -3,6 +3,7 @@
         CV_BLOCK_MOVE,
         CV_BLOCK_RESIZE,
         CV_BLOCK_ACTIVATE,
+        CV_BLOCK_SEND_BACK,
         CV_ELEMENT_ACTIVATE,
         CV_ELEMENT_UPDATE,
         CV_TEXT_UPDATE } from './cvDataAC';
@@ -11,7 +12,7 @@ const initState = {
     blocks: [],
     activeBlockId: null,
     activeElementId: null,
-    styleToEdit: null,
+    styleToEdit: {},
 }
 
 function cvDataReducer(state = initState, action) {
@@ -73,6 +74,16 @@ function cvDataReducer(state = initState, action) {
                 return newState;
             }
             return state;
+        }
+
+        //send block on back of cv-page
+        case CV_BLOCK_SEND_BACK: {
+            let sortFunc = function(a,b) {  
+                return a.id === state.activeBlockId ? -1 : b.id == state.activeBlockId ? 1 : 0;  
+              }
+            let newBlocks = [...state.blocks].sort(sortFunc);
+            let newState = {...state, blocks:newBlocks};
+            return newState;
         }
 
         //activate element on cv-page

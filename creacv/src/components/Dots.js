@@ -30,7 +30,7 @@ class Dots extends React.PureComponent {
         style = {...style, width:this.props.style.size + 'px', height:this.props.style.size + 'px', margin:this.props.style.size*0.5 + 'px', borderRadius: '50%'};
         let className = ' cv__element  cv__element--dots' + (this.props.active?' cv__element--active':'');
         return <div className={className} onClick={this.onClick}>
-                    {Array.from({length: this.props.style.count}, v => <div style={style}></div>)}
+                    {Array.from({length: this.props.style.count}, (v,i) => <div key={i} style={style}></div>)}
                 </div>;
     }
 }
