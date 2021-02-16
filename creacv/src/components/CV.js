@@ -19,6 +19,7 @@ class CV extends React.PureComponent {
             this.props.dispatch(cvBlock_activate(null));
         };
     }
+    
 
     render () {
         var cvBlocksCode = this.props.blocks.map( b => {

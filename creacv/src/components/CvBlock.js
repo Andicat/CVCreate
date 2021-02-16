@@ -14,7 +14,10 @@ class CvBlock extends React.PureComponent {
         activeElementId: PropTypes.string, //Redux
     };
 
-    onClick = () => {
+    onClick = (evt) => {
+        if (evt.ctrlKey && this.props.activeBlockId) {
+            //this.props.dispatch(cvBlock_activateGroup(this.props.id));
+        }
         this.props.dispatch(cvBlock_activate(this.props.id));
     }
 

@@ -1,17 +1,62 @@
-﻿@mixin button {
-    cursor: pointer;
-    border: none;
+﻿@mixin option-button {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: bold;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+    color: rgb(10, 22, 17);
     outline: none;
-    background-color: $color-main;
-    font-size: 14px;
-    color: white;
-    padding: 5px;
     border-radius: 5px;
-    min-width: 100px;
-    margin-right: 5px;
+    border: 1px solid rgb(142, 160, 154);
 
     &:hover {
-        transform: scale(1.05);
+        background: #dcdcdc linear-gradient(#fff, #c1cfc8);
+        cursor: pointer;
+    }
+
+    &:active {
+        background: #dcdcdc linear-gradient(#fff, #9bafa5);
+    }
+}
+
+@mixin option-input {
+    width: 45px;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+    color: #000;
+    outline: none;
+    box-shadow: 0 0 0 1px rgb(142, 160, 154) inset, 0 1px 1px #fff;
+}
+
+@mixin option-checkbox {
+    display: none;
+
+    & ~ label {
+        @include option-button;
+        background-size: 72%;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    &:hover ~ label {
+        background-size: 72%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #c7ddd2;
+        cursor: pointer;
+    }
+
+    &:checked ~ label {
+        background-size: 72%;
+        background-color: #c7ddd2;
     }
 }
 

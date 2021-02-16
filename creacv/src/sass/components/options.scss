@@ -1,15 +1,16 @@
 .options {
     position: absolute;
     text-align: center;
-    min-height: 40px;
-    background-color: #a8babe;
+    min-height: 45px;
+    background-color: white;
     width: 100%;
     top: 0;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid #738f78;
 
     &__elem {
-        margin-left: 8px;
+        margin-left: 10px;
         display: flex;
     }
 
@@ -45,47 +46,70 @@
     border: none;
 
     &__button {
-        width: 25px;
-        padding: 0;
-        font-size: 16px;
-        line-height: 24px;
+        @include option-button;
+
+        &--left {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-right: none;
+        }
+
+        &--right {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-left: none;
+        }
     }
 
     &__number {
-        width: 45px;
-        padding: 0;
+        @include option-input;
     }
 
     &__checkbox {
-        display: none;
-        
-        & ~ label {
-            box-sizing: border-box;
-            background-image: url('./../../img/icon-font-bold.svg');
-            background-size: 80%;
-            background-position: center;
-            background-repeat: no-repeat;
-            display: block;
-            //border: 1px solid gray;
-            border-radius: 2px;
-            width: 25px;
-            height: 25px;
-            padding: 0;
+        @include option-checkbox;
 
-            &:hover {
-                cursor: pointer;
+        &--bold {
+            & ~ label,
+            &:hover ~ label {
+                background-image: url('./../../img/icon-font-bold.svg');   
             }
-           
         }
 
-        &:checked ~ label {
-            background-color: #efefef;
+        &--italic {
+            & ~ label,
+            &:hover ~ label {
+                background-image: url('./../../img/icon-font-italic.svg');   
+            }
+        }
+
+        &--center {
+            & ~ label,
+            &:hover ~ label {
+                background-image: url('./../../img/icon-font-center.svg');   
+            }
+        }
+
+        &--uppercase {
+            & ~ label,
+            &:hover ~ label {
+                background-image: url('./../../img/icon-font-capital.svg');   
+            }
         }
     }
     
     &__color {
-        border: none;
-        border-radius: 2px;
+        @include option-button;
+        padding: 2px;
+
+        &:hover {
+            background: none;
+            background-color: #c7ddd2;
+        }
+
+        &:active {
+            background: none;
+            background-color: #9bafa5;
+        }
     }
 
     &__file {

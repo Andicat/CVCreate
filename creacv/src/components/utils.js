@@ -2,44 +2,28 @@ import React from 'react';
 import Image from "./Image";
 import Text from "./Text";
 import Figure from "./Figure";
+import Dots from './Dots';
 
 //create jsx-code for block
 function createJSX (id, elem, cv, activeId, key = 0) {
+
     let elemCode;
     let elemId = '' + id + key;
     switch (elem.type) {
         case 'image': 
-            elemCode = <Image key={elemId} id={elemId} cv={cv} style={elem.style} src={elem.src} active={activeId===elemId}/>;
+            elemCode = <Image key={elemId} id={elemId} cv={cv} style={elem.style} active={activeId===elemId}/>;
             break;
         case 'text':
             elemCode = <Text key={elemId} id={elemId} cv={cv} style={elem.style} text={elem.text} active={activeId===elemId}/>;
             break;
-        case 'figure': 
+        case 'figure':
             elemCode = <Figure key={elemId} id={elemId} cv={cv} style={elem.style}/>;
             break;
         case 'group': 
             elemCode = <div key={elemId} className={'cv__group' + (elem.direction?(' cv__group--' + elem.direction):'')}>{elem.elements.map( (e,i) => createJSX(id,{...e, id:elem.id},cv,activeId,i))}</div>;
             break;
-        default:
-            elemCode = null;
-    }
-    return elemCode;
-};
-
-function optionRenderFunc (type,text,style,className,cbOnClick) {
-    let elemCode;
-    switch (type) {
-        case 'image': 
-            elemCode = <img className={className} src={text} style={style} alt='' onClick={cbOnClick}/>;
-            break;
-        case 'text':
-            elemCode = <span className={className} style={style} onClick={cbOnClick}>{text}</span>;
-            break;
-        case 'figure': 
-            elemCode = <div className={className} style={style} onClick={cbOnClick}/>;
-            break;
-        case 'group': 
-            //elemCode = <div key={elemId} className={'cv__group' + (elem.direction?(' cv__group--' + elem.direction):'')}>{elem.elements.map( (e,i) => createJSX({...e, id:elem.id},active,i))}</div>;
+        case 'dots-row':
+            elemCode = <Dots key={elemId} id={elemId} cv={cv} style={elem.style} active={activeId===elemId}/>;
             break;
         default:
             elemCode = null;
@@ -48,6 +32,21 @@ function optionRenderFunc (type,text,style,className,cbOnClick) {
 };
 
 function createOption (optionType,optionValue,cbOnChange) {
+
+    const OPTIONS = {
+        fontsize: codeNumber(),
+        bold: codeCheckbox(),
+        italic: codeCheckbox(),
+        uppercase: codeCheckbox(),
+        center: codeCheckbox(),
+        width: codeNumber(),
+        height: codeNumber(),
+        color: codeColor(),
+        bgcolor: codeColor(),
+        file: codeFile(),
+        count: codeNumber(),
+        size: codeNumber(),
+    }
 
     function setValue(elem,value) {
         if (elem) {
@@ -79,15 +78,15 @@ function createOption (optionType,optionValue,cbOnChange) {
 
     function codeNumber() {
         return <React.Fragment>
-                    <input type='button' className='option option__button' value='&ndash;' onClick= {(evt) => {setValue(evt.target.nextSibling,Number(optionValue)-1)}}/>
+                    <input type='button' className='option option__button option__button--left' value='&ndash;' onClick= {(evt) => {setValue(evt.target.nextSibling,Number(optionValue)-1)}}/>
                     <input type='text' className='option option__number' value={optionValue} onChange={setValueInput}></input>
-                    <input type='button' className='option option__button' value='+' onClick= {(evt) => {setValue(evt.target.previousSibling,Number(optionValue)+1)}}/>
+                    <input type='button' className='option option__button option__button--right' value='+' onClick= {(evt) => {setValue(evt.target.previousSibling,Number(optionValue)+1)}}/>
                 </React.Fragment>
     };
 
     function codeCheckbox() {
         return <React.Fragment>
-                    <input type='checkbox' id={optionType} className='option option__checkbox' checked={optionValue} onChange={setValueCheckBox}/>
+                    <input type='checkbox' id={optionType} className={'option option__checkbox option__checkbox--' + optionType} checked={optionValue} onChange={setValueCheckBox}/>
                     <label htmlFor={optionType}/>
                 </React.Fragment>
     };
@@ -103,36 +102,10 @@ function createOption (optionType,optionValue,cbOnChange) {
                 </React.Fragment>
     };
 
-    let elemCode;
-    switch (optionType) {
-        case 'fontsize': 
-            elemCode = codeNumber();
-            break;
-        case 'bold':
-            elemCode = codeCheckbox();
-            break;
-        case 'width':
-            elemCode = codeNumber();
-            break;
-        case 'height':
-            elemCode = codeNumber();
-            break;
-        case 'color':
-            elemCode = codeColor();
-            break;
-        case 'bgcolor':
-            elemCode = codeColor();
-            break;
-        case 'file':
-            elemCode = codeFile();
-            break;
-        default:
-            elemCode = null;
-    }
-    return elemCode;
+    return OPTIONS[optionType];
 };
 
-function createStyle (styles,cd) {
+function createStyle (styles) {
     let styleAttr = {};
 
     for (let key in styles) {
@@ -143,6 +116,15 @@ function createStyle (styles,cd) {
             case 'bold':
                 styleAttr.fontWeight = styles[key]?'bold':'normal';
                 break;
+            case 'italic':
+                styleAttr.fontStyle = styles[key]?'italic':'normal';
+                break;
+            case 'uppercase':
+                styleAttr.textTransform = styles[key]?'uppercase':'none';
+                break;
+            case 'center':
+                styleAttr.textAlign = styles[key]?'center':'start';
+                break;
             case 'width': 
                 styleAttr.width = styles[key] + 'px';
                 break;
@@ -152,8 +134,6 @@ function createStyle (styles,cd) {
             case 'bgcolor': 
                 styleAttr.backgroundColor = styles[key];
                 break;
-            case 'file':
-                break;
             default:
                 styleAttr[key] = styles[key];;
         }
@@ -161,4 +141,4 @@ function createStyle (styles,cd) {
     return styleAttr;
 };
 
-export {createJSX, optionRenderFunc, createOption, createStyle};
+export {createJSX, createOption, createStyle};

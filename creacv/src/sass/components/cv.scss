@@ -45,9 +45,14 @@
 
         &--image {
             z-index: 10;
-            //background-image: url('./../../img/image.svg');
-            //background-repeat: no-repeat;
-            //background-size: cover;
+        }
+
+        &--dots {
+            margin-left: 5px;
+            width: auto;
+            display: flex;
+            align-items: center;
+            margin-left: auto;
         }
     }
 
@@ -105,5 +110,4 @@
            cursor: pointer;
         }
     }
-
 }

@@ -31,20 +31,31 @@ let imagesArr = [
     {type:'image', style:{file:'', borderRadius:'50%', border:'3px solid gray'}},
 ];
 
+let textStyleDefault = {fontsize:'16', bold:false, italic:false, center:false, uppercase:false, color:'#000000'};
+
 let textSimpleArr = [
-    {type:'text', text:'Large text', style:{fontsize:'24', bold:false, color:'#000000'}},
-    {type:'text', text:'Medium text', style:{fontsize:'16', bold:false, color:'#000000'}},
-    {type:'text', text:'Small text', style:{fontsize:'12', bold:false, color:'#000000'}},
+    {type:'text', text:'Text with background', style:{bgcolor:'#E05B49',...textStyleDefault, fontsize:'20'}},
+    {type:'text', text:'Text simple', style:{...textStyleDefault, fontsize: '20'}},
+    {type:'text', text:'Small text', style:{...textStyleDefault, fontsize:'12'}},
 ];
 
 let textBlockArr = [
     {type:'group', elements:[
-        {type:'text', text:'Your header', style:{fontsize:20, bold:true, color:'#000000'}},
-        {type:'text', text:'your text', style:{fontsize:16, color:'#000000'}}
+        {type:'text', text:'Your header', style:{...textStyleDefault, fontsize:'20', bold:true}},
+        {type:'text', text:'your text', style:{...textStyleDefault}}
     ]},
     {type:'group', elements:[
-        {type:'text', text:'Your header', style:{fontsize:24, bold:true, color:'#000000'}},
-        {type:'text', text:'your text', style:{fontsize:18, color:'#000000'}}
+        {type:'text', text:'Your header', style:{...textStyleDefault, fontsize:'24', bold:true}},
+        {type:'text', text:'your text', style:{...textStyleDefault, fontsize:'18'}}
+    ]},
+];
+
+let expBlockArr = [
+    {type:'group', elements:[
+        {type:'text', text:'Your position', style:{...textStyleDefault, fontsize:'18', bold:true}},
+        {type:'text', text:'Company', style:{...textStyleDefault, fontsize:'18'}},
+        {type:'text', text:'period', style:{...textStyleDefault,italic:true}},
+        {type:'text', text:'your competencies and results', style:{...textStyleDefault}}
     ]},
 ];
 
@@ -55,27 +66,25 @@ let figuresArr = [
 
 let skillsArr = [
     {type:'group', direction:'row', elements:[
-        {type:'text', text:'your skill', style:{fontsize:18, color:'#000000', marginRight: '15px'}},
-        {type:'group', direction:'row', elements:[
-            {type:'figure', style:{bgcolor:'#E05B49', width:10, height:10, borderRadius:'50%', marginRight: '5px'}},
-            {type:'figure', style:{bgcolor:'#E05B49', width:10, height:10, borderRadius:'50%', marginRight: '5px'}},
-            {type:'figure', style:{bgcolor:'#E05B49', width:10, height:10, borderRadius:'50%', marginRight: '5px'}}
-        ]},
+        {type:'text', text:'skill in dots', style:{...textStyleDefault}},
+        {type:'dots-row', style:{bgcolor:'#E05B49', size:10, count:3}},
+        {type:'dots-row', style:{bgcolor:'#E6E6E6', size:10, count:2}},
     ]},
     {type:'group', direction:'row', elements:[
-        {type:'text', text:'your skill', style:{fontsize:18, color:'#000000', marginRight: '15px'}},
-        {type:'group', direction:'row', style:{color:'#000000'}, elements:[
-            {type:'figure', style:{bgcolor:'#E05B49', width:10, height:10, borderRadius:'50%', marginRight: '5px'}},
-            {type:'figure', style:{bgcolor:'#E05B49', width:10, height:10, borderRadius:'50%', marginRight: '5px'}},
-            {type:'figure', style:{bgcolor:'#E05B49', width:10, height:10, borderRadius:'50%', marginRight: '5px'}}
-        ]},
+        {type:'text', text:'skill in dots', style:{...textStyleDefault}},
+        {type:'dots-row', style:{bgcolor:'#E05B49', size:10, count:3}},
+    ]},
+    {type:'group', direction:'column', elements:[
+        {type:'text', text:'skill in progress', style:{...textStyleDefault}},
+        {type:'figure', style:{bgcolor:'#E05B49', height:'7', width:'100'}},
     ]},
 ];
 
 let templatesArr = [
     {name: 'Images', elements:imagesArr},
     {name: 'Simple Text', elements:textSimpleArr},
-    {name: 'Block Text', elements:textBlockArr},
+    {name: 'Header with text', elements:textBlockArr},
+    {name: 'Work experience', elements:expBlockArr},
     {name: 'Figures', elements:figuresArr},
     {name: 'Skills', elements:skillsArr},
     /*{name: 'Text', type:'text', },
