@@ -12,8 +12,17 @@ class PanelBlock extends React.PureComponent {
         data: PropTypes.object.isRequired,
     };
 
-    onClick = () => {
-        this.props.dispatch(cvBlock_add(JSON.parse(JSON.stringify(this.props.data))));
+    onClick = (evt) => {
+        let elementDOM = evt.target.previousSibling;
+        elementDOM.style.position='absolute';
+        elementDOM.style.visibility='hidden';
+        elementDOM.style.height='auto';
+        let autoHeight = elementDOM.offsetHeight;
+        let autoWidth = elementDOM.offsetWidth;
+        elementDOM.style.position='';
+        elementDOM.style.visibility='';
+        let deepCopyBlock = JSON.parse(JSON.stringify(this.props.data));
+        this.props.dispatch(cvBlock_add({...deepCopyBlock, width:autoWidth, height:autoHeight}));
     }
 
     render () {

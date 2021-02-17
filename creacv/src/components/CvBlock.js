@@ -18,7 +18,7 @@ class CvBlock extends React.PureComponent {
         if (evt.ctrlKey && this.props.activeBlockId) {
             //this.props.dispatch(cvBlock_activateGroup(this.props.id));
         }
-        this.props.dispatch(cvBlock_activate(this.props.id));
+        this.props.dispatch(cvBlock_activate(this.props.id, evt.currentTarget));
     }
 
     render () {

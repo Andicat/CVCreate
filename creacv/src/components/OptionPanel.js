@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Option from './Option';
 
 import {connect} from 'react-redux';
-import {cvBlock_sendBack} from '../redux/cvDataAC';
+import {cvBlock_sendBack, cvBlock_copy, cvBlock_sizeAuto} from '../redux/cvDataAC';
 
 class OptionPanel extends React.PureComponent {
 
@@ -14,8 +14,16 @@ class OptionPanel extends React.PureComponent {
     };
 
 
-    sendBack = () => {
+    sendBlockBack = () => {
         this.props.dispatch(cvBlock_sendBack(this.props.activeBlockId));
+    }
+
+    copyBlock = () => {
+        this.props.dispatch(cvBlock_copy(this.props.activeBlockId));
+    }
+
+    setBlockSizeAuto = () => {
+        this.props.dispatch(cvBlock_sizeAuto(this.props.activeBlockId));
     }
 
     render () {
@@ -30,7 +38,15 @@ class OptionPanel extends React.PureComponent {
         if (this.props.activeBlockId) {
             codeBlockOptions = (
                 <div className='options__block'>
-                    <input type='button' className={'option option__back'} onClick={this.sendBack}/>
+                    <div className='options__elem'>
+                        <input type='button' className={'option option__autosize'} onClick={this.setBlockSizeAuto}/>
+                    </div>
+                    <div className='options__elem'>
+                        <input type='button' className={'option option__back'} onClick={this.sendBlockBack}/>
+                    </div>
+                    <div className='options__elem'>
+                        <input type='button' className={'option option__copy'} onClick={this.copyBlock}/>
+                    </div>
                 </div>
             );
         }

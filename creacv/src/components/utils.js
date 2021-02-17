@@ -46,6 +46,8 @@ function createOption (optionType,optionValue,cbOnChange) {
         file: codeFile(),
         count: codeNumber(),
         size: codeNumber(),
+        borderwidth: codeNumber(),
+        bordercolor: codeColor(),
     }
 
     function setValue(elem,value) {
@@ -98,7 +100,7 @@ function createOption (optionType,optionValue,cbOnChange) {
     function codeFile() {
         return <React.Fragment>
                     <input type='file' name="file" id="file" className='option option__file' accept="image/*" onChange={setImage}></input>
-                    <label htmlFor="file">Load file</label>
+                    <label htmlFor="file">Load Image</label>
                 </React.Fragment>
     };
 
@@ -134,6 +136,18 @@ function createStyle (styles) {
             case 'bgcolor': 
                 styleAttr.backgroundColor = styles[key];
                 break;
+            case 'bordercolor': 
+                styleAttr.borderColor = styles[key];
+                break;
+            case 'borderwidth': 
+                styleAttr.borderWidth = styles[key] + 'px';
+                break;
+            /*case '': 
+                //styleAttr.backgroundColor = styles[key];
+                break;
+            case '': 
+                //styleAttr.backgroundColor = styles[key];
+                break;*/
             default:
                 styleAttr[key] = styles[key];;
         }
