@@ -26,6 +26,14 @@
                 outline: none;
             }
         }
+
+        &--active-multi {
+            z-index: 10;
+            outline: 2px solid rgb(32, 78, 124);
+            &:hover {
+                outline: 2px solid rgb(32, 78, 124);
+            }
+        }
     }
 
     &__element {

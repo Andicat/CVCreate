@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import Option from './Option';
 
 import {connect} from 'react-redux';
-import {cvBlock_sendBack, cvBlock_copy, cvBlock_sizeAuto} from '../redux/cvDataAC';
+import {cvBlock_sendBack, cvBlock_copy, cvBlock_setSize} from '../redux/cvDataAC';
+import {getAutoSize} from './utils';
 
 class OptionPanel extends React.PureComponent {
 
@@ -11,6 +12,8 @@ class OptionPanel extends React.PureComponent {
         styleToEdit: PropTypes.object,       //Redux
         activeElementId: PropTypes.string,   //Redux
         activeBlockId: PropTypes.number,     //Redux
+        activeBlocksId: PropTypes.object,    //Redux
+        activeBlockDOM: PropTypes.object,    //Redux
     };
 
 
@@ -23,12 +26,15 @@ class OptionPanel extends React.PureComponent {
     }
 
     setBlockSizeAuto = () => {
-        this.props.dispatch(cvBlock_sizeAuto(this.props.activeBlockId));
+        let sizesAuto = getAutoSize(this.props.activeBlockDOM);
+        this.props.dispatch(cvBlock_setSize(this.props.activeBlockId,sizesAuto.height,sizesAuto.width));
     }
 
     render () {
+
         let codeElementOptions = null;
         let codeBlockOptions = null;
+        let codeBlocksOptions = null;
 
         if (this.props.activeElementId) {
             codeElementOptions = Object.keys(this.props.styleToEdit).map( (s,i) => (
@@ -37,7 +43,7 @@ class OptionPanel extends React.PureComponent {
 
         if (this.props.activeBlockId) {
             codeBlockOptions = (
-                <div className='options__block'>
+               <React.Fragment>
                     <div className='options__elem'>
                         <input type='button' className={'option option__autosize'} onClick={this.setBlockSizeAuto}/>
                     </div>
@@ -47,17 +53,30 @@ class OptionPanel extends React.PureComponent {
                     <div className='options__elem'>
                         <input type='button' className={'option option__copy'} onClick={this.copyBlock}/>
                     </div>
-                </div>
+               </React.Fragment>
             );
         }
 
-        if (!codeElementOptions && !codeBlockOptions) {
+        if (this.props.activeBlocksId) {
+            codeBlocksOptions = (
+                <React.Fragment>
+                    <div className='options__elem'>
+                        <input type='button' className={'option option__align-top'} onClick={this.alignBlocksTop}/>
+                    </div>
+                </React.Fragment>
+            );
+        }
+
+        if (!codeElementOptions && !codeBlockOptions && !codeBlocksOptions) {
             return null;
         }
         return (
-            <form className="options">
+            <form className='options'>
                 {codeElementOptions}
-                {codeBlockOptions}
+                <div className='options__block'>
+                    {codeBlockOptions}
+                    {codeBlocksOptions}
+                </div>
             </form>
         );
     }
@@ -67,7 +86,9 @@ const mapStateToProps = function (state) {
     return {
         styleToEdit: state.cvData.styleToEdit,
         activeElementId: state.cvData.activeElementId,
-        activeBlockId: state.cvData.activeBlockId, 
+        activeBlockId: state.cvData.activeBlockId,
+        activeBlocksId: state.cvData.activeBlocksId,
+        activeBlockDOM: state.cvData.activeBlockDOM,
     };
 };
 

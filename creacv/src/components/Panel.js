@@ -25,7 +25,7 @@ class Panel extends React.PureComponent {
             return <PanelMenu key={i} id={i} data={g} active={(this.state.activeMenuId===i)?true:false} cbSelected={this.menuSelected}/>
             });
 
-        return <aside className="panel">
+        return <aside className='panel'>
             <ul className='panel__menu'>
                 {groupsCode}
             </ul>

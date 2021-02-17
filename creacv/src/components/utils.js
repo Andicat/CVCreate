@@ -1,7 +1,7 @@
 import React from 'react';
-import Image from "./Image";
-import Text from "./Text";
-import Figure from "./Figure";
+import Image from './Image';
+import Text from './Text';
+import Figure from './Figure';
 import Dots from './Dots';
 
 //create jsx-code for block
@@ -31,6 +31,7 @@ function createJSX (id, elem, cv, activeId, key = 0) {
     return elemCode;
 };
 
+//create jsx-code for option
 function createOption (optionType,optionValue,cbOnChange) {
 
     const OPTIONS = {
@@ -99,14 +100,15 @@ function createOption (optionType,optionValue,cbOnChange) {
 
     function codeFile() {
         return <React.Fragment>
-                    <input type='file' name="file" id="file" className='option option__file' accept="image/*" onChange={setImage}></input>
-                    <label htmlFor="file">Load Image</label>
+                    <input type='file' name='file' id='file' className='option option__file' accept='image/*' onChange={setImage}></input>
+                    <label htmlFor='file'>Load Image</label>
                 </React.Fragment>
     };
 
     return OPTIONS[optionType];
 };
 
+// create style for DOM-element
 function createStyle (styles) {
     let styleAttr = {};
 
@@ -155,4 +157,23 @@ function createStyle (styles) {
     return styleAttr;
 };
 
-export {createJSX, createOption, createStyle};
+// get auto size for DOM-element
+function getAutoSize (element) {
+    let sizes = {};
+    element.style.position = 'absolute';
+    element.style.visibility = 'hidden';
+    element.style.height = 'auto';
+    element.style.width = 'auto';
+    element.style.boxSizing = 'border-box';
+    sizes.height = element.offsetHeight + 1;
+    sizes.width = element.offsetWidth + 1;
+    element.style.position = '';
+    element.style.visibility = '';
+    element.style.width = '';
+    element.style.height = '';
+    element.style.boxSizing = '';
+
+    return sizes;
+};
+
+export {createJSX, createOption, createStyle, getAutoSize};

@@ -3,8 +3,9 @@ const CV_BLOCK_DELETE = 'CV_BLOCK_DELETE';
 const CV_BLOCK_MOVE = 'CV_BLOCK_MOVE';
 const CV_BLOCK_RESIZE = 'CV_BLOCK_RESIZE';
 const CV_BLOCK_ACTIVATE = 'CV_BLOCK_ACTIVATE';
+const CV_BLOCK_ACTIVATE_MULTI = 'CV_BLOCK_ACTIVATE_MULTI';
 const CV_BLOCK_COPY = 'CV_BLOCK_COPY';
-const CV_BLOCK_SIZE_AUTO = 'CV_BLOCK_SIZE_AUTO';
+const CV_BLOCK_SET_SIZE = 'CV_BLOCK_SET_SIZE';
 const CV_ELEMENT_ACTIVATE = 'CV_ELEMENT_ACTIVATE';
 const CV_ELEMENT_UPDATE = 'CV_ELEMENT_UPDATE';
 const CV_TEXT_UPDATE = 'CV_TEXT_UPDATE';
@@ -89,9 +90,18 @@ const cvBlock_copy = function(blockId) {
     };
 }
 
-const cvBlock_sizeAuto  = function(blockId) {
+const cvBlock_setSize = function(blockId,height,width) {
     return {
-        type: CV_BLOCK_SIZE_AUTO,
+        type: CV_BLOCK_SET_SIZE,
+        blockId: blockId,
+        width:width,
+        height:height,
+    };
+}
+
+const cvBlock_activateMulti = function(blockId) {
+    return {
+        type: CV_BLOCK_ACTIVATE_MULTI,
         blockId: blockId,
     };
 }
@@ -102,9 +112,10 @@ export {
     cvBlock_move, CV_BLOCK_MOVE,
     cvBlock_resize, CV_BLOCK_RESIZE,
     cvBlock_activate, CV_BLOCK_ACTIVATE,
+    cvBlock_activateMulti, CV_BLOCK_ACTIVATE_MULTI,
     cvBlock_sendBack, CV_BLOCK_SEND_BACK,
     cvBlock_copy, CV_BLOCK_COPY,
-    cvBlock_sizeAuto, CV_BLOCK_SIZE_AUTO,
+    cvBlock_setSize, CV_BLOCK_SET_SIZE,
     cvElement_activate, CV_ELEMENT_ACTIVATE,
     cvElement_update, CV_ELEMENT_UPDATE,
     cvElement_textUpdate, CV_TEXT_UPDATE,

@@ -3,32 +3,35 @@
         CV_BLOCK_MOVE,
         CV_BLOCK_RESIZE,
         CV_BLOCK_ACTIVATE,
+        CV_BLOCK_ACTIVATE_MULTI,
         CV_BLOCK_SEND_BACK,
         CV_BLOCK_COPY,
-        CV_BLOCK_SIZE_AUTO,
+        CV_BLOCK_SET_SIZE,
         CV_ELEMENT_ACTIVATE,
         CV_ELEMENT_UPDATE,
         CV_TEXT_UPDATE } from './cvDataAC';
 
 const initState = {
     blocks: [],
-    activeBlockId: null,
+    //activeBlockId: null,
     activeBlockDOM: null,
+    activeBlocksId: new Set(),
     activeElementId: null,
     styleToEdit: {},
 }
 
 function cvDataReducer(state = initState, action) {
-    //debugger
-
+    
     switch (action.type) {
 
         //add new block to cv-page
         case CV_BLOCK_ADD: {
             let newId = state.blocks.reduce(function (r, v) { return ( r < v.id ? v.id : r);},0) + 1;
+            let randomPosition = Math.random()*100;
             let newState = {...state,
-                blocks: [...state.blocks,{...action.block, id:newId, positionTop:30,positionLeft:30}],
-                activeBlockId: newId,
+                blocks: [...state.blocks,{...action.block, id:newId, positionTop:randomPosition,positionLeft:randomPosition}],
+                //activeBlockId: newId,
+                activeBlocksId: state.activeBlocksId.add(newId),
                 activeBlockDOM: null,
                 activeElementId: null
             };
@@ -37,9 +40,10 @@ function cvDataReducer(state = initState, action) {
 
         //delete block to cv-page
         case CV_BLOCK_DELETE: {
+            state.activeBlocksId.clear();
             let newState = {...state,
                 blocks: state.blocks.filter(b => b.id!==action.blockId),
-                activeBlockId: null,
+                //activeBlocksId: state.activeBlocksId.delete(action.blockId),
                 activeBlockDOM: null,
                 activeElementId: null
             };
@@ -49,7 +53,7 @@ function cvDataReducer(state = initState, action) {
         //move block on cv-page
         case CV_BLOCK_MOVE: {
             let newBlocks = state.blocks.map(b => {
-                if (b.id===state.activeBlockId) {
+                if (b.id === action.blockId) {
                     b.positionTop = Number(b.positionTop) + action.shiftTop;
                     b.positionLeft = Number(b.positionLeft) + action.shiftLeft;
                     return {...b};
@@ -62,7 +66,7 @@ function cvDataReducer(state = initState, action) {
         //set size for block on cv-page
         case CV_BLOCK_RESIZE: {
             let newBlocks = state.blocks.map(b => {
-                if (b.id===state.activeBlockId) {
+                if (b.id===action.blockId) {
                     b.height = Number(b.height) + action.shiftHeight;    
                     b.width = Number(b.width) + action.shiftWidth;
                     return {...b};
@@ -74,20 +78,35 @@ function cvDataReducer(state = initState, action) {
 
         //activate block on cv-page
         case CV_BLOCK_ACTIVATE: {
-            if (state.activeBlockId !== action.blockId) {
-                let newState = {...state, activeBlockId:action.blockId, activeBlockDOM:action.target, activeElementId:(action.blockId?state.activeElementId:null)};
-                return newState;
+            state.activeBlocksId.clear();
+            if (action.blockId) {
+                state.activeBlocksId.add(action.blockId);
             }
-            return state;
+            let newState = {...state, 
+                //activeBlockId:action.blockId, 
+                activeBlockDOM:action.target, 
+                activeElementId:(action.blockId?state.activeElementId:null)};
+            return newState;
+        }
+
+        //activate miltiple blocks on cv-page
+        case CV_BLOCK_ACTIVATE_MULTI: {
+            let newState = {...state,
+                    //activeBlockId:null,
+                    activeBlocksId: new Set(state.activeBlocksId.add(action.blockId)),
+                    activeBlockDOM:null,
+                    activeElementId:null,
+                }
+            return newState;
         }
 
         //send block on back of cv-page
         case CV_BLOCK_SEND_BACK: {
             let sortFunc = function(a,b) {  
-                return a.id === state.activeBlockId ? -1 : b.id === state.activeBlockId ? 1 : 0;  
+                return a.id === action.blockId ? -1 : b.id === action.blockId ? 1 : 0;  
               }
             let newBlocks = [...state.blocks].sort(sortFunc);
-            let newState = {...state, blocks:newBlocks, activeBlockId:null, activeBlockDOM:null, activeElementId:null};
+            let newState = {...state, blocks:newBlocks, activeBlockDOM:null, activeElementId:null};
             return newState;
         }
 
@@ -96,32 +115,21 @@ function cvDataReducer(state = initState, action) {
             let newId = state.blocks.reduce(function (r, v) { return ( r < v.id ? v.id : r);},0) + 1;
             let newBlock = state.blocks.find(b => b.id===action.blockId);
             let newBlocks = [...state.blocks, {...newBlock, id:newId, positionTop:newBlock.positionTop + 30,positionLeft:newBlock.positionLeft + 30}];
-            let newState = {...state, blocks:newBlocks, activeBlockId:null, activeBlockDOM:null, activeElementId:null};
+            let newState = {...state, blocks:newBlocks, activeBlockDOM:null, activeElementId:null};
             return newState;
         }
 
         //set width and height to 'auto' to block
-        case CV_BLOCK_SIZE_AUTO: {
-            if (state.activeBlockDOM) {
-                let elementDOM = state.activeBlockDOM;
-                elementDOM.style.visibility='hidden';
-                elementDOM.style.height='auto';
-                let autoHeight = elementDOM.offsetHeight;
-                let autoWidth = elementDOM.offsetWidth;
-                console.log('auto height', autoHeight);
-                console.log('auto width', autoWidth);
-                elementDOM.style.visibility='';
-                let newBlocks = state.blocks.map(b => {
-                    if (b.id===state.activeBlockId) {
-                        b.height = Number(autoHeight);
-                        b.width = Number(autoWidth);
-                        return {...b};
-                    }
-                    return b});
-                let newState = {...state, blocks:newBlocks};
-                return newState;
-            }
-            return state;
+        case CV_BLOCK_SET_SIZE: {
+            let newBlocks = state.blocks.map(b => {
+                if (b.id===action.blockId) {
+                    b.height = Number(action.height);
+                    b.width = Number(action.width);
+                    return {...b};
+                }
+                return b});
+            let newState = {...state, blocks:newBlocks};
+            return newState;
         }
 
         //activate element on cv-page

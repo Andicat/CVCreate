@@ -50,7 +50,7 @@
         justify-content: space-between;
         align-items: center;
         border-radius: 5px;
-        padding: 7px;
+        padding: 5px;
         margin: 5px;
         background-color: white;
         border-bottom: 1px solid #5e5f61;
@@ -97,6 +97,9 @@
     &__block-view {
         display: flex;
         flex-direction: column;
+        padding: 6px;
+        box-sizing: border-box;
+        overflow: hidden;
 
         .cv__element--image,
         .cv__element--figure {

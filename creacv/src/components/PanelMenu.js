@@ -17,7 +17,7 @@ class PanelMenu extends React.PureComponent {
 
     render () {
         return <li className='panel__group'>
-                    <div className={"panel__group-name" +  (this.props.active?' panel__group-name--active':'')} onClick={this.onClick}>
+                    <div className={'panel__group-name' +  (this.props.active?' panel__group-name--active':'')} onClick={this.onClick}>
                         {this.props.data.name}
                     </div>
                     {this.props.active && <ul>

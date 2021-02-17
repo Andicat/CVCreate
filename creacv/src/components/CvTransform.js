@@ -7,8 +7,7 @@ import {cvBlock_move, cvBlock_resize, cvBlock_delete} from '../redux/cvDataAC';
 class CvTransform extends React.PureComponent {
 
     static propTypes = {
-        activeBlockId: PropTypes.number,    //Redux
-        block: PropTypes.object,            //Redux
+        block: PropTypes.object,
     };
 
     mouseStart;
@@ -40,9 +39,9 @@ class CvTransform extends React.PureComponent {
         };
         
         if (this.resize) {
-            this.props.dispatch(cvBlock_resize(this.props.id,this.mouseShift.y,this.mouseShift.x));
+            this.props.dispatch(cvBlock_resize(this.props.block.id,this.mouseShift.y,this.mouseShift.x));
         } else {
-            this.props.dispatch(cvBlock_move(this.props.id,this.mouseShift.y,this.mouseShift.x));
+            this.props.dispatch(cvBlock_move(this.props.block.id,this.mouseShift.y,this.mouseShift.x));
         }
     }
 
@@ -98,11 +97,12 @@ class CvTransform extends React.PureComponent {
     }
 
     render () {
-        if (!this.props.activeBlockId) {
+        console.log('render cv transform');
+        if (!this.props.block) {
             return null;
         }
         this.getPosition();
-        let style = {top:this.coordsShift.top + 'px', left:this.coordsShift.left + 'px', width:this.props.block.width + "px", height:this.props.block.height + "px"};
+        let style = {top:this.coordsShift.top + 'px', left:this.coordsShift.left + 'px', width:this.props.block.width + 'px', height:this.props.block.height + 'px'};
         let className = 'cv__transform';
         return (
             <div className={className} style={style}>
@@ -114,11 +114,11 @@ class CvTransform extends React.PureComponent {
     }
 }
 
-const mapStateToProps = function (state) {
+/*const mapStateToProps = function (state) {
     return {
-        block: state.cvData.blocks.find( b => b.id === state.cvData.activeBlockId),
-        activeBlockId: state.cvData.activeBlockId,
+        //block: state.cvData.blocks.find( b => b.id === state.cvData.activeBlockId),
+        //activeBlockId: state.cvData.activeBlockId,
     };
-};
+};*/
 
-export default connect(mapStateToProps)(CvTransform);
+export default connect()(CvTransform);

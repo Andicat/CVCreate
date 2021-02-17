@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {connect} from 'react-redux';
 import {cvBlock_add} from '../redux/cvDataAC';
-import {createJSX} from './utils';
+import {createJSX, getAutoSize} from './utils';
 
 class PanelBlock extends React.PureComponent {
 
@@ -13,16 +13,9 @@ class PanelBlock extends React.PureComponent {
     };
 
     onClick = (evt) => {
-        let elementDOM = evt.target.previousSibling;
-        elementDOM.style.position='absolute';
-        elementDOM.style.visibility='hidden';
-        elementDOM.style.height='auto';
-        let autoHeight = elementDOM.offsetHeight;
-        let autoWidth = elementDOM.offsetWidth;
-        elementDOM.style.position='';
-        elementDOM.style.visibility='';
+        let sizesAuto = getAutoSize(evt.target.previousSibling);
         let deepCopyBlock = JSON.parse(JSON.stringify(this.props.data));
-        this.props.dispatch(cvBlock_add({...deepCopyBlock, width:autoWidth, height:autoHeight}));
+        this.props.dispatch(cvBlock_add({...deepCopyBlock, width:sizesAuto.width, height:sizesAuto.height}));
     }
 
     render () {
