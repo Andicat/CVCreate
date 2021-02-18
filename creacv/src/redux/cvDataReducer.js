@@ -9,7 +9,8 @@
         CV_BLOCK_SET_SIZE,
         CV_BLOCK_ALIGN_TOP,
         CV_BLOCK_ALIGN_LEFT,
-        CV_BLOCK_ALIGN_VERT,
+        CV_BLOCK_ALIGN_VERTICAL,
+        CV_BLOCK_ALIGN_HORISONTAL,
         CV_ELEMENT_ACTIVATE,
         CV_ELEMENT_UPDATE,
         CV_TEXT_UPDATE } from './cvDataAC';
@@ -129,32 +130,62 @@ function cvDataReducer(state = initState, action) {
         }
 
         //align blocks on vertical
-        case CV_BLOCK_ALIGN_VERT: {
+        case CV_BLOCK_ALIGN_VERTICAL: {
             let blocksToAlign = state.blocks.filter( b => state.activeBlocksId.find(ab => b.id===ab)).sort((a,b) => a.positionTop-b.positionTop);
-            let totalHeight = 0;
-            let minTop = Infinity;
-            let maxTop = -Infinity;
+            let minTop = blocksToAlign[0].positionTop + blocksToAlign[0].height;
+            let maxTop = blocksToAlign[blocksToAlign.length-1].positionTop;
             
-            blocksToAlign.forEach(b => {
-                totalHeight += b.height;
-                minTop = ((b.positionTop + b.height)<minTop)?(b.positionTop + b.height):minTop;
-                maxTop = (b.positionTop>maxTop)?b.positionTop:maxTop;
-            });
+            blocksToAlign = blocksToAlign.slice(1,blocksToAlign.length-1);
 
-            let distance = (maxTop-minTop-totalHeight)/(blocksToAlign.length-1);
+            let totalHeight = blocksToAlign.reduce((r,b) => r + b.height,0);
+            let distance = (maxTop-minTop-totalHeight)/(blocksToAlign.length+1);
 
-            for (let i=1; i<blocksToAlign.length-1; i++) {
-                blocksToAlign[i].positionTop = minTop + distance*i;
-                minTop = blocksToAlign[i].positionTop + blocksToAlign[i].height;
-            }
+            blocksToAlign = blocksToAlign.map(b => {
+                b.positionTop = minTop + distance;
+                minTop = b.positionTop + b.height;
+                return b;
+            })
                         
-            console.log(totalHeight);
-            console.log('min top',minTop);
-            console.log('max top',maxTop);
-            console.log('distance',distance);
+            //console.log(totalHeight);
+            //console.log('min top',minTop);
+            //console.log('max top',maxTop);
+            //console.log('distance',distance);
             
             let newBlocks = state.blocks.map(b => {
-                let newBlock = blocksToAlign.find(ab => b.id===ab);
+                let newBlock = blocksToAlign.find(ab => b.id===ab.id);
+                if (newBlock) {
+                    return {...newBlock};
+                }
+                return b});
+            let newState = {...state, blocks:newBlocks};
+            return newState;
+        }
+
+        //align blocks on horisontal
+        case CV_BLOCK_ALIGN_HORISONTAL: {
+            debugger
+            let blocksToAlign = state.blocks.filter( b => state.activeBlocksId.find(ab => b.id===ab)).sort((a,b) => a.positionLeft-b.positionLeft);
+            let minLeft = blocksToAlign[0].positionLeft + blocksToAlign[0].width;
+            let maxLeft = blocksToAlign[blocksToAlign.length-1].positionLeft;
+
+            blocksToAlign = blocksToAlign.slice(1,blocksToAlign.length-1);
+
+            let totalWidth = blocksToAlign.reduce((r,b) => r + b.width,0);
+            let distance = (maxLeft-minLeft-totalWidth)/(blocksToAlign.length+1);
+
+            blocksToAlign = blocksToAlign.map(b => {
+                b.positionLeft = minLeft + distance;
+                minLeft = b.positionLeft + b.width;
+                return b;
+            })
+                        
+            //console.log(totalHeight);
+            //console.log('min top',minTop);
+            //console.log('max top',maxTop);
+            //console.log('distance',distance);
+            
+            let newBlocks = state.blocks.map(b => {
+                let newBlock = blocksToAlign.find(ab => b.id===ab.id);
                 if (newBlock) {
                     return {...newBlock};
                 }

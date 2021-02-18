@@ -1,7 +1,7 @@
 ﻿@mixin option-button {
     position: relative;
     display: inline-block;
-    box-sizing: border-box;
+    box-sizing: content-box;
     width: 25px;
     height: 25px;
     padding: 0;
@@ -27,6 +27,7 @@
 }
 
 @mixin option-input {
+    box-sizing: content-box;
     width: 45px;
     text-align: center;
     outline: none;
@@ -42,6 +43,7 @@
 
     & ~ label {
         @include option-button;
+        box-sizing: content-box;
         background-size: 72%;
     }
 }

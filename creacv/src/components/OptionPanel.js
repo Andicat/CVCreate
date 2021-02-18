@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Option from './Option';
 
 import {connect} from 'react-redux';
-import {cvBlock_sendBack, cvBlock_copy, cvBlock_setSize, cvBlock_alignTop, cvBlock_alignLeft, cvBlock_alignVert} from '../redux/cvDataAC';
+import {cvBlock_sendBack, cvBlock_copy, cvBlock_setSize, cvBlock_alignTop, cvBlock_alignLeft, cvBlock_alignVertical, cvBlock_alignHorisontal} from '../redux/cvDataAC';
 import {getAutoSize} from './utils';
 
 class OptionPanel extends React.PureComponent {
@@ -39,7 +39,11 @@ class OptionPanel extends React.PureComponent {
     }
 
     alignBlocksVertical = () => {
-        this.props.dispatch(cvBlock_alignVert());
+        this.props.dispatch(cvBlock_alignVertical());
+    }
+
+    alignBlocksHorisontal = () => {
+        this.props.dispatch(cvBlock_alignHorisontal());
     }
 
     render () {
@@ -82,6 +86,9 @@ class OptionPanel extends React.PureComponent {
                     </div>
                     <div className='options__elem'>
                         <input type='button' className={'option option__align-vertical'} onClick={this.alignBlocksVertical}/>
+                    </div>
+                    <div className='options__elem'>
+                        <input type='button' className={'option option__align-horisontal'} onClick={this.alignBlocksHorisontal}/>
                     </div>
                 </React.Fragment>
             );

@@ -18,6 +18,7 @@ function createOption (optionType,optionValue,cbOnChange) {
         size: codeNumber(),
         borderwidth: codeNumber(),
         bordercolor: codeColor(),
+        padding: codeNumber(),
     }
 
     function setValue(elem,value) {
@@ -113,10 +114,10 @@ function createStyle (styles) {
             case 'borderwidth': 
                 styleAttr.borderWidth = styles[key] + 'px';
                 break;
-            /*case '': 
-                //styleAttr.backgroundColor = styles[key];
+            case 'padding': 
+                styleAttr.padding = styles[key] + 'px';
                 break;
-            case '': 
+            /*case '': 
                 //styleAttr.backgroundColor = styles[key];
                 break;*/
             default:

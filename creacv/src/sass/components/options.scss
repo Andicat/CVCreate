@@ -12,6 +12,7 @@
     &__elem {
         margin-left: 10px;
         display: flex;
+        position: relative;
     }
 
     &__block {
@@ -46,6 +47,27 @@
     margin: 0;
     padding: 0;
     border: none;
+
+    &__tooltip {
+        position: absolute;
+        background-color: lightblue;
+        padding: 2px 5px;
+        border-radius: 5px;
+        top: calc(100% + 5px);
+        left: 50%;
+        z-index: 10;
+        transform: translateX(-50%);
+
+        &::after {
+            content: "";
+            position: absolute;
+            border: 7px solid lightblue;
+            border-color: transparent transparent lightblue transparent;
+            top: 0;
+            left:50%;
+            transform: translate(-50%,-80%);
+        }
+    }
 
     &__button {
         @include option-button;
@@ -102,6 +124,8 @@
     &__color {
         @include option-button;
         padding: 2px;
+        width: 21px;
+        height: 21px;
 
         &:hover {
             background: none;
@@ -165,5 +189,12 @@
         @include option-button;
         background-image: url('./../../img/icon-align-vertical.svg');
         background-size: 90%;
+    }
+
+    &__align-horisontal {
+        @include option-button;
+        background-image: url('./../../img/icon-align-horisontal.svg');
+        background-size: 90%;
+        background-position: center;
     }
 }

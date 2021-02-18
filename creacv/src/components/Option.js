@@ -14,16 +14,29 @@ class Option extends React.PureComponent {
         optionValue: PropTypes.any,
     };
 
+    state = {
+        showTooltip: false,
+    }
+
     onChangeValue = (value) => {
         this.props.dispatch(cvElement_update(this.props.blockId, this.props.elementId,this.props.optionName,value));
+    }
+
+    onMouseOver = () => {
+        this.setState({showTooltip:true});
+    }
+
+    onMouseOut = () => {
+        this.setState({showTooltip:false});
     }
 
     render () {
         //console.log('render option',this.props.optionName);
         let optionCode = createOption(this.props.optionName,this.props.optionValue,this.onChangeValue);
         return (
-            <div className='options__elem'>
+            <div className='options__elem' onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
                 {optionCode}
+                {this.state.showTooltip && <div className='option__tooltip'>{this.props.optionName}</div>}
             </div>
         );
     }

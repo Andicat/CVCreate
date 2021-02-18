@@ -12,7 +12,8 @@ const CV_TEXT_UPDATE = 'CV_TEXT_UPDATE';
 const CV_BLOCK_SEND_BACK = 'CV_BLOCK_SEND_BACK';
 const CV_BLOCK_ALIGN_TOP = 'CV_BLOCK_ALIGN_TOP';
 const CV_BLOCK_ALIGN_LEFT = 'CV_BLOCK_ALIGN_LEFT';
-const CV_BLOCK_ALIGN_VERT = 'CV_BLOCK_ALIGN_VERT';
+const CV_BLOCK_ALIGN_VERTICAL = 'CV_BLOCK_ALIGN_VERTICAL';
+const CV_BLOCK_ALIGN_HORISONTAL = 'CV_BLOCK_ALIGN_HORISONTAL';
 
 const cvBlock_add = function(block) {
     return {
@@ -123,9 +124,15 @@ const cvBlock_alignLeft = function() {
     };
 }
 
-const cvBlock_alignVert = function() {
+const cvBlock_alignVertical = function() {
     return {
-        type: CV_BLOCK_ALIGN_VERT,
+        type: CV_BLOCK_ALIGN_VERTICAL,
+    };
+}
+
+const cvBlock_alignHorisontal = function() {
+    return {
+        type: CV_BLOCK_ALIGN_HORISONTAL,
     };
 }
 
@@ -141,7 +148,8 @@ export {
     cvBlock_setSize, CV_BLOCK_SET_SIZE,
     cvBlock_alignTop, CV_BLOCK_ALIGN_TOP,
     cvBlock_alignLeft, CV_BLOCK_ALIGN_LEFT,
-    cvBlock_alignVert, CV_BLOCK_ALIGN_VERT,
+    cvBlock_alignVertical, CV_BLOCK_ALIGN_VERTICAL,
+    cvBlock_alignHorisontal, CV_BLOCK_ALIGN_HORISONTAL,
     cvElement_activate, CV_ELEMENT_ACTIVATE,
     cvElement_update, CV_ELEMENT_UPDATE,
     cvElement_textUpdate, CV_TEXT_UPDATE,
