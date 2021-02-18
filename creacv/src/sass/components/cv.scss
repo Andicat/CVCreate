@@ -22,13 +22,6 @@
         
         &--active {
             z-index: 10;
-            &:hover {
-                outline: none;
-            }
-        }
-
-        &--active-multi {
-            z-index: 10;
             outline: 2px solid rgb(32, 78, 124);
             &:hover {
                 outline: 2px solid rgb(32, 78, 124);
@@ -53,7 +46,7 @@
             height: auto;
         }
 
-        &--dots {
+        &--dots-row {
             margin-left: 5px;
             width: auto;
             display: flex;
@@ -63,7 +56,6 @@
     }
 
     &__group {
-        //z-index: 10;
         display: flex;
         flex-direction: column;
         &--row {
@@ -76,6 +68,13 @@
         position: absolute;
         outline: 3px solid rgb(54, 90, 126);
         z-index: 5;
+
+        & ~ .cv > .cv__block--active {
+            outline: none;
+            &:hover {
+                outline: none;
+            }
+        }
     }
 
     &__transform-button {

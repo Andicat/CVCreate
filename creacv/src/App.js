@@ -43,7 +43,7 @@ let expBlockArr = [
 
 let figuresArr = [
     {type:'figure', style:{bgcolor:'#E05B49'}},
-    {type:'figure', style:{bgcolor:'#E05B49', borderRadius:'50%'}},
+    {type:'figure', style:{bgcolor:'#6AABB5', borderRadius:'50%'}},
 ];
 
 let skillsArr = [

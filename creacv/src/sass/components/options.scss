@@ -134,52 +134,36 @@
 
     &__back {
         @include option-button;
-        background: url('./../../img/icon-back.svg');
-
-        &:hover {
-            background: url('./../../img/icon-back.svg');
-            background-color: #d1e7dc;
-            cursor: pointer;
-        }
-
-        &:active {
-            background: url('./../../img/icon-back.svg');
-            background-color: #b2c9bd;
-            cursor: pointer;
-        }
+        background-image: url('./../../img/icon-back.svg');
+        background-size: 100%;
     }
 
     &__copy {
         @include option-button;
-        background: url('./../../img/icon-copy.svg');
-
-        &:hover {
-            background: url('./../../img/icon-copy.svg');
-            background-color: #d1e7dc;
-            cursor: pointer;
-        }
-
-        &:active {
-            background: url('./../../img/icon-copy.svg');
-            background-color: #b2c9bd;
-            cursor: pointer;
-        }
+        background-image: url('./../../img/icon-copy.svg');
+        background-size: 100%;
     }
 
     &__autosize {
         @include option-button;
-        background: url('./../../img/icon-size-auto.svg');
+        background-image: url('./../../img/icon-size-auto.svg');
+    }
 
-        &:hover {
-            background: url('./../../img/icon-size-auto.svg');
-            background-color: #d1e7dc;
-            cursor: pointer;
-        }
+    &__align-top {
+        @include option-button;
+        background-image: url('./../../img/icon-align-top.svg');
+        background-size: 100%;
+    }
 
-        &:active {
-            background: url('./../../img/icon-size-auto.svg');
-            background-color: #b2c9bd;
-            cursor: pointer;
-        }
+    &__align-left {
+        @include option-button;
+        background-image: url('./../../img/icon-align-left.svg');
+        background-size: 100%;
+    }
+
+    &__align-vertical {
+        @include option-button;
+        background-image: url('./../../img/icon-align-vertical.svg');
+        background-size: 90%;
     }
 }

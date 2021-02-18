@@ -10,6 +10,9 @@ const CV_ELEMENT_ACTIVATE = 'CV_ELEMENT_ACTIVATE';
 const CV_ELEMENT_UPDATE = 'CV_ELEMENT_UPDATE';
 const CV_TEXT_UPDATE = 'CV_TEXT_UPDATE';
 const CV_BLOCK_SEND_BACK = 'CV_BLOCK_SEND_BACK';
+const CV_BLOCK_ALIGN_TOP = 'CV_BLOCK_ALIGN_TOP';
+const CV_BLOCK_ALIGN_LEFT = 'CV_BLOCK_ALIGN_LEFT';
+const CV_BLOCK_ALIGN_VERT = 'CV_BLOCK_ALIGN_VERT';
 
 const cvBlock_add = function(block) {
     return {
@@ -59,18 +62,20 @@ const cvElement_activate = function(style,elementId) {
     };
 }
 
-const cvElement_update = function(elementId,styleName,styleValue) {
+const cvElement_update = function(blockId,elementId,styleName,styleValue) {
     return {
         type: CV_ELEMENT_UPDATE,
+        blockId: blockId,
         elementId: elementId,
         styleName: styleName,
         styleValue: styleValue,
     };
 }
 
-const cvElement_textUpdate = function(elementId,textValue) {
+const cvElement_textUpdate = function(blockId,elementId,textValue) {
     return {
         type: CV_TEXT_UPDATE,
+        blockId: blockId,
         elementId: elementId,
         textValue: textValue,
     };
@@ -106,6 +111,24 @@ const cvBlock_activateMulti = function(blockId) {
     };
 }
 
+const cvBlock_alignTop = function() {
+    return {
+        type: CV_BLOCK_ALIGN_TOP,
+    };
+}
+
+const cvBlock_alignLeft = function() {
+    return {
+        type: CV_BLOCK_ALIGN_LEFT,
+    };
+}
+
+const cvBlock_alignVert = function() {
+    return {
+        type: CV_BLOCK_ALIGN_VERT,
+    };
+}
+
 export {
     cvBlock_add, CV_BLOCK_ADD,
     cvBlock_delete, CV_BLOCK_DELETE,
@@ -116,6 +139,9 @@ export {
     cvBlock_sendBack, CV_BLOCK_SEND_BACK,
     cvBlock_copy, CV_BLOCK_COPY,
     cvBlock_setSize, CV_BLOCK_SET_SIZE,
+    cvBlock_alignTop, CV_BLOCK_ALIGN_TOP,
+    cvBlock_alignLeft, CV_BLOCK_ALIGN_LEFT,
+    cvBlock_alignVert, CV_BLOCK_ALIGN_VERT,
     cvElement_activate, CV_ELEMENT_ACTIVATE,
     cvElement_update, CV_ELEMENT_UPDATE,
     cvElement_textUpdate, CV_TEXT_UPDATE,

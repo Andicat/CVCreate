@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {cvBlock_move, cvBlock_resize, cvBlock_delete} from '../redux/cvDataAC';
 
 
-class CvTransform extends React.PureComponent {
+class Transform extends React.PureComponent {
 
     static propTypes = {
         block: PropTypes.object,
@@ -97,7 +97,7 @@ class CvTransform extends React.PureComponent {
     }
 
     render () {
-        console.log('render cv transform');
+        //console.log('render cv transform');
         if (!this.props.block) {
             return null;
         }
@@ -114,11 +114,4 @@ class CvTransform extends React.PureComponent {
     }
 }
 
-/*const mapStateToProps = function (state) {
-    return {
-        //block: state.cvData.blocks.find( b => b.id === state.cvData.activeBlockId),
-        //activeBlockId: state.cvData.activeBlockId,
-    };
-};*/
-
-export default connect()(CvTransform);
+export default connect()(Transform);

@@ -1,35 +1,4 @@
 import React from 'react';
-import Image from './Image';
-import Text from './Text';
-import Figure from './Figure';
-import Dots from './Dots';
-
-//create jsx-code for block
-function createJSX (id, elem, cv, activeId, key = 0) {
-
-    let elemCode;
-    let elemId = '' + id + key;
-    switch (elem.type) {
-        case 'image': 
-            elemCode = <Image key={elemId} id={elemId} cv={cv} style={elem.style} active={activeId===elemId}/>;
-            break;
-        case 'text':
-            elemCode = <Text key={elemId} id={elemId} cv={cv} style={elem.style} text={elem.text} active={activeId===elemId}/>;
-            break;
-        case 'figure':
-            elemCode = <Figure key={elemId} id={elemId} cv={cv} style={elem.style}/>;
-            break;
-        case 'group': 
-            elemCode = <div key={elemId} className={'cv__group' + (elem.direction?(' cv__group--' + elem.direction):'')}>{elem.elements.map( (e,i) => createJSX(id,{...e, id:elem.id},cv,activeId,i))}</div>;
-            break;
-        case 'dots-row':
-            elemCode = <Dots key={elemId} id={elemId} cv={cv} style={elem.style} active={activeId===elemId}/>;
-            break;
-        default:
-            elemCode = null;
-    }
-    return elemCode;
-};
 
 //create jsx-code for option
 function createOption (optionType,optionValue,cbOnChange) {
@@ -176,4 +145,4 @@ function getAutoSize (element) {
     return sizes;
 };
 
-export {createJSX, createOption, createStyle, getAutoSize};
+export {createOption, createStyle, getAutoSize};

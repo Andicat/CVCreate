@@ -7,15 +7,17 @@
         CV_BLOCK_SEND_BACK,
         CV_BLOCK_COPY,
         CV_BLOCK_SET_SIZE,
+        CV_BLOCK_ALIGN_TOP,
+        CV_BLOCK_ALIGN_LEFT,
+        CV_BLOCK_ALIGN_VERT,
         CV_ELEMENT_ACTIVATE,
         CV_ELEMENT_UPDATE,
         CV_TEXT_UPDATE } from './cvDataAC';
 
 const initState = {
     blocks: [],
-    //activeBlockId: null,
     activeBlockDOM: null,
-    activeBlocksId: new Set(),
+    activeBlocksId: [],
     activeElementId: null,
     styleToEdit: {},
 }
@@ -30,8 +32,7 @@ function cvDataReducer(state = initState, action) {
             let randomPosition = Math.random()*100;
             let newState = {...state,
                 blocks: [...state.blocks,{...action.block, id:newId, positionTop:randomPosition,positionLeft:randomPosition}],
-                //activeBlockId: newId,
-                activeBlocksId: state.activeBlocksId.add(newId),
+                activeBlocksId: [newId],
                 activeBlockDOM: null,
                 activeElementId: null
             };
@@ -40,10 +41,9 @@ function cvDataReducer(state = initState, action) {
 
         //delete block to cv-page
         case CV_BLOCK_DELETE: {
-            state.activeBlocksId.clear();
             let newState = {...state,
                 blocks: state.blocks.filter(b => b.id!==action.blockId),
-                //activeBlocksId: state.activeBlocksId.delete(action.blockId),
+                activeBlocksId: [],
                 activeBlockDOM: null,
                 activeElementId: null
             };
@@ -78,12 +78,12 @@ function cvDataReducer(state = initState, action) {
 
         //activate block on cv-page
         case CV_BLOCK_ACTIVATE: {
-            state.activeBlocksId.clear();
+            let newActiveBlocksId = [];
             if (action.blockId) {
-                state.activeBlocksId.add(action.blockId);
+                newActiveBlocksId.push(action.blockId);
             }
-            let newState = {...state, 
-                //activeBlockId:action.blockId, 
+            let newState = {...state,
+                activeBlocksId: newActiveBlocksId,
                 activeBlockDOM:action.target, 
                 activeElementId:(action.blockId?state.activeElementId:null)};
             return newState;
@@ -91,12 +91,75 @@ function cvDataReducer(state = initState, action) {
 
         //activate miltiple blocks on cv-page
         case CV_BLOCK_ACTIVATE_MULTI: {
+            let newActiveBlocksId = [...state.activeBlocksId,action.blockId];
             let newState = {...state,
-                    //activeBlockId:null,
-                    activeBlocksId: new Set(state.activeBlocksId.add(action.blockId)),
-                    activeBlockDOM:null,
-                    activeElementId:null,
+                activeBlocksId: newActiveBlocksId,
+                activeBlockDOM:null,
+                activeElementId:null,
+            }
+            return newState;
+        }
+
+        //align blocks on top
+        case CV_BLOCK_ALIGN_TOP: {
+            let firstActiveBlock = state.blocks.find(b => b.id===state.activeBlocksId[0]);
+            let positionTop = firstActiveBlock.positionTop;
+            let newBlocks = state.blocks.map(b => {
+                if (state.activeBlocksId.find(ab => b.id===ab)) {
+                    b.positionTop = positionTop;
+                    return {...b};
                 }
+                return b});
+            let newState = {...state, blocks:newBlocks};
+            return newState;
+        }
+
+        //align blocks on left
+        case CV_BLOCK_ALIGN_LEFT: {
+            let firstActiveBlock = state.blocks.find(b => b.id===state.activeBlocksId[0]);
+            let positionLeft = firstActiveBlock.positionLeft;
+            let newBlocks = state.blocks.map(b => {
+                if (state.activeBlocksId.find(ab => b.id===ab)) {
+                    b.positionLeft = positionLeft;
+                    return {...b};
+                }
+                return b});
+            let newState = {...state, blocks:newBlocks};
+            return newState;
+        }
+
+        //align blocks on vertical
+        case CV_BLOCK_ALIGN_VERT: {
+            let blocksToAlign = state.blocks.filter( b => state.activeBlocksId.find(ab => b.id===ab)).sort((a,b) => a.positionTop-b.positionTop);
+            let totalHeight = 0;
+            let minTop = Infinity;
+            let maxTop = -Infinity;
+            
+            blocksToAlign.forEach(b => {
+                totalHeight += b.height;
+                minTop = ((b.positionTop + b.height)<minTop)?(b.positionTop + b.height):minTop;
+                maxTop = (b.positionTop>maxTop)?b.positionTop:maxTop;
+            });
+
+            let distance = (maxTop-minTop-totalHeight)/(blocksToAlign.length-1);
+
+            for (let i=1; i<blocksToAlign.length-1; i++) {
+                blocksToAlign[i].positionTop = minTop + distance*i;
+                minTop = blocksToAlign[i].positionTop + blocksToAlign[i].height;
+            }
+                        
+            console.log(totalHeight);
+            console.log('min top',minTop);
+            console.log('max top',maxTop);
+            console.log('distance',distance);
+            
+            let newBlocks = state.blocks.map(b => {
+                let newBlock = blocksToAlign.find(ab => b.id===ab);
+                if (newBlock) {
+                    return {...newBlock};
+                }
+                return b});
+            let newState = {...state, blocks:newBlocks};
             return newState;
         }
 
@@ -106,7 +169,12 @@ function cvDataReducer(state = initState, action) {
                 return a.id === action.blockId ? -1 : b.id === action.blockId ? 1 : 0;  
               }
             let newBlocks = [...state.blocks].sort(sortFunc);
-            let newState = {...state, blocks:newBlocks, activeBlockDOM:null, activeElementId:null};
+            let newState = {...state, 
+                blocks:newBlocks, 
+                activeBlocksId: [],
+                activeBlockDOM:null,
+                activeElementId:null
+            };
             return newState;
         }
 
@@ -115,7 +183,12 @@ function cvDataReducer(state = initState, action) {
             let newId = state.blocks.reduce(function (r, v) { return ( r < v.id ? v.id : r);},0) + 1;
             let newBlock = state.blocks.find(b => b.id===action.blockId);
             let newBlocks = [...state.blocks, {...newBlock, id:newId, positionTop:newBlock.positionTop + 30,positionLeft:newBlock.positionLeft + 30}];
-            let newState = {...state, blocks:newBlocks, activeBlockDOM:null, activeElementId:null};
+            let newState = {...state,
+                blocks:newBlocks,
+                activeBlocksId: [],
+                activeBlockDOM:null,
+                activeElementId:null
+            };
             return newState;
         }
 
@@ -145,10 +218,10 @@ function cvDataReducer(state = initState, action) {
         case CV_ELEMENT_UPDATE: {
             let newStyleToEdit = {};
             let newBlocks = state.blocks.map(b => {
-                if (b.id===state.activeBlockId) {
+                if (b.id===action.blockId) {
                     if (b.elements) {
                         b.elements = b.elements.map((e,i) => {
-                            if (('' + state.activeBlockId + i)===('' + state.activeElementId)) {
+                            if ((action.blockId + '-' + i)===(state.activeElementId)) {
                                 e.style[action.styleName] = action.styleValue;
                                 e.style = {...e.style};
                                 newStyleToEdit = e.style;
@@ -172,10 +245,10 @@ function cvDataReducer(state = initState, action) {
         //update elements text
         case CV_TEXT_UPDATE: {
             let newBlocks = state.blocks.map(b => {
-                if (b.id===state.activeBlockId) {
+                if (b.id===action.blockId) {
                     if (b.elements) {
                         b.elements = b.elements.map((e,i) => {
-                            if (('' + state.activeBlockId + i)===('' + state.activeElementId)) {
+                            if ((action.blockId + '-' + i)===(state.activeElementId)) {
                                 e.text = action.textValue;
                                 return {...e};
                             };
