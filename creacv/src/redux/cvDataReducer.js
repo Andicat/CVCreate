@@ -7,10 +7,18 @@
         CV_BLOCK_SEND_BACK,
         CV_BLOCK_COPY,
         CV_BLOCK_SET_SIZE,
-        CV_BLOCK_ALIGN_TOP,
-        CV_BLOCK_ALIGN_LEFT,
-        CV_BLOCK_ALIGN_VERTICAL,
-        CV_BLOCK_ALIGN_HORISONTAL,
+        CV_BLOCKS_ALIGN_TOP,
+        CV_BLOCKS_ALIGN_BOTTOM,
+        CV_BLOCKS_ALIGN_LEFT,
+        CV_BLOCKS_ALIGN_RIGHT,
+        CV_BLOCKS_ALIGN_VERTICAL,
+        CV_BLOCKS_ALIGN_HORISONTAL,
+        CV_BLOCKS_DISTRIBUTE_VERTICAL,
+        CV_BLOCKS_DISTRIBUTE_HORISONTAL,
+        CV_BLOCKS_ALIGN_WIDTH,
+        CV_BLOCKS_ALIGN_HEIGHT,
+        CV_BLOCKS_GROUP,
+        CV_BLOCKS_UNGROUP,
         CV_ELEMENT_ACTIVATE,
         CV_ELEMENT_UPDATE,
         CV_TEXT_UPDATE } from './cvDataAC';
@@ -102,7 +110,7 @@ function cvDataReducer(state = initState, action) {
         }
 
         //align blocks on top
-        case CV_BLOCK_ALIGN_TOP: {
+        case CV_BLOCKS_ALIGN_TOP: {
             let firstActiveBlock = state.blocks.find(b => b.id===state.activeBlocksId[0]);
             let positionTop = firstActiveBlock.positionTop;
             let newBlocks = state.blocks.map(b => {
@@ -115,8 +123,22 @@ function cvDataReducer(state = initState, action) {
             return newState;
         }
 
+        //align blocks on bottom
+        case CV_BLOCKS_ALIGN_BOTTOM: {
+            let firstActiveBlock = state.blocks.find(b => b.id===state.activeBlocksId[0]);
+            let positionBottom = firstActiveBlock.positionTop + firstActiveBlock.height;
+            let newBlocks = state.blocks.map(b => {
+                if (state.activeBlocksId.find(ab => b.id===ab)) {
+                    b.positionTop = positionBottom - b.height;
+                    return {...b};
+                }
+                return b});
+            let newState = {...state, blocks:newBlocks};
+            return newState;
+        }
+
         //align blocks on left
-        case CV_BLOCK_ALIGN_LEFT: {
+        case CV_BLOCKS_ALIGN_LEFT: {
             let firstActiveBlock = state.blocks.find(b => b.id===state.activeBlocksId[0]);
             let positionLeft = firstActiveBlock.positionLeft;
             let newBlocks = state.blocks.map(b => {
@@ -129,8 +151,78 @@ function cvDataReducer(state = initState, action) {
             return newState;
         }
 
+        //align blocks on right
+        case CV_BLOCKS_ALIGN_RIGHT: {
+            let firstActiveBlock = state.blocks.find(b => b.id===state.activeBlocksId[0]);
+            let positionRight = firstActiveBlock.positionLeft + firstActiveBlock.width;
+            let newBlocks = state.blocks.map(b => {
+                if (state.activeBlocksId.find(ab => b.id===ab)) {
+                    b.positionLeft = positionRight - b.width;
+                    return {...b};
+                }
+                return b});
+            let newState = {...state, blocks:newBlocks};
+            return newState;
+        }
+
         //align blocks on vertical
-        case CV_BLOCK_ALIGN_VERTICAL: {
+        case CV_BLOCKS_ALIGN_VERTICAL: {
+            let firstActiveBlock = state.blocks.find(b => b.id===state.activeBlocksId[0]);
+            let positionCenter = firstActiveBlock.positionLeft + firstActiveBlock.width/2;
+            let newBlocks = state.blocks.map(b => {
+                if (state.activeBlocksId.find(ab => b.id===ab)) {
+                    b.positionLeft = positionCenter - b.width/2;
+                    return {...b};
+                }
+                return b});
+            let newState = {...state, blocks:newBlocks};
+            return newState;
+        }
+
+        //align blocks on horisontal
+        case CV_BLOCKS_ALIGN_HORISONTAL: {
+            let firstActiveBlock = state.blocks.find(b => b.id===state.activeBlocksId[0]);
+            let positionCenter = firstActiveBlock.positionTop + firstActiveBlock.height/2;
+            let newBlocks = state.blocks.map(b => {
+                if (state.activeBlocksId.find(ab => b.id===ab)) {
+                    b.positionTop = positionCenter - b.height/2;
+                    return {...b};
+                }
+                return b});
+            let newState = {...state, blocks:newBlocks};
+            return newState;
+        }
+
+        //align blocks on same width
+        case CV_BLOCKS_ALIGN_WIDTH: {
+            let firstActiveBlock = state.blocks.find(b => b.id===state.activeBlocksId[0]);
+            let width = firstActiveBlock.width;
+            let newBlocks = state.blocks.map(b => {
+                if (state.activeBlocksId.find(ab => b.id===ab)) {
+                    b.width = width;
+                    return {...b};
+                }
+                return b});
+            let newState = {...state, blocks:newBlocks};
+            return newState;
+        }
+
+        //align blocks on same height
+        case CV_BLOCKS_ALIGN_HEIGHT: {
+            let firstActiveBlock = state.blocks.find(b => b.id===state.activeBlocksId[0]);
+            let height = firstActiveBlock.height;
+            let newBlocks = state.blocks.map(b => {
+                if (state.activeBlocksId.find(ab => b.id===ab)) {
+                    b.height = height;
+                    return {...b};
+                }
+                return b});
+            let newState = {...state, blocks:newBlocks};
+            return newState;
+        }
+
+        //distribute blocks on vertical
+        case CV_BLOCKS_DISTRIBUTE_VERTICAL: {
             let blocksToAlign = state.blocks.filter( b => state.activeBlocksId.find(ab => b.id===ab)).sort((a,b) => a.positionTop-b.positionTop);
             let minTop = blocksToAlign[0].positionTop + blocksToAlign[0].height;
             let maxTop = blocksToAlign[blocksToAlign.length-1].positionTop;
@@ -161,9 +253,8 @@ function cvDataReducer(state = initState, action) {
             return newState;
         }
 
-        //align blocks on horisontal
-        case CV_BLOCK_ALIGN_HORISONTAL: {
-            debugger
+        //distribute blocks on horisontal
+        case CV_BLOCKS_DISTRIBUTE_HORISONTAL: {
             let blocksToAlign = state.blocks.filter( b => state.activeBlocksId.find(ab => b.id===ab)).sort((a,b) => a.positionLeft-b.positionLeft);
             let minLeft = blocksToAlign[0].positionLeft + blocksToAlign[0].width;
             let maxLeft = blocksToAlign[blocksToAlign.length-1].positionLeft;
@@ -192,6 +283,24 @@ function cvDataReducer(state = initState, action) {
                 return b});
             let newState = {...state, blocks:newBlocks};
             return newState;
+        }
+
+        //group blocks
+        case CV_BLOCKS_GROUP: {
+            let blocksToGroup = state.blocks.filter( b => state.activeBlocksId.find(ab => b.id===ab));
+            let minLeft = blocksToGroup.reduce(function (r, v) { return ( r > v.positionLeft ? v.positionLeft : r);},Infinity);
+            let minTop = blocksToGroup.reduce(function (r, v) { return ( r > v.positionTop ? v.positionTop : r);},Infinity);
+            
+            console.log('min top',minTop);
+            console.log('min left',minLeft);
+
+            
+            return state;
+        }
+
+        //ungroup blocks
+        case CV_BLOCKS_UNGROUP: {
+            break
         }
 
         //send block on back of cv-page
