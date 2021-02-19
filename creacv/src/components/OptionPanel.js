@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Option from './Option';
 
 import {connect} from 'react-redux';
-import {cvBlock_sendBack, cvBlock_copy, cvBlock_setSize, cvBlock_alignTop, cvBlock_alignLeft, cvBlock_alignVertical, cvBlock_alignHorisontal} from '../redux/cvDataAC';
+import {cvBlock_sendBack, cvBlock_copy, cvBlock_setSize, cvBlocks_align, cvBlocks_alignSize, cvBlocks_distribute, cvBlocks_group} from '../redux/cvDataAC';
 import {getAutoSize} from './utils';
 
 class OptionPanel extends React.PureComponent {
@@ -31,19 +31,51 @@ class OptionPanel extends React.PureComponent {
     }
 
     alignBlocksTop = () => {
-        this.props.dispatch(cvBlock_alignTop());
+        this.props.dispatch(cvBlocks_align('top'));
+    }
+
+    alignBlocksBottom = () => {
+        this.props.dispatch(cvBlocks_align('bottom'));
     }
 
     alignBlocksLeft = () => {
-        this.props.dispatch(cvBlock_alignLeft());
+        this.props.dispatch(cvBlocks_align('left'));
+    }
+
+    alignBlocksRight = () => {
+        this.props.dispatch(cvBlocks_align('right'));
     }
 
     alignBlocksVertical = () => {
-        this.props.dispatch(cvBlock_alignVertical());
+        this.props.dispatch(cvBlocks_align('vertical'));
     }
 
     alignBlocksHorisontal = () => {
-        this.props.dispatch(cvBlock_alignHorisontal());
+        this.props.dispatch(cvBlocks_align('horisontal'));
+    }
+
+    distributeBlocksVertical = () => {
+        this.props.dispatch(cvBlocks_distribute('vertical'));
+    }
+
+    distributeBlocksHorisontal = () => {
+        this.props.dispatch(cvBlocks_distribute('horisontal'));
+    }
+
+    setBlocksSizeWidth = () => {
+        this.props.dispatch(cvBlocks_alignSize('width'));
+    }
+
+    setBlocksSizeHeight = () => {
+        this.props.dispatch(cvBlocks_alignSize('height'));
+    }
+
+    groupBlocks = () => {
+        this.props.dispatch(cvBlocks_group(true));
+    }
+
+    ungroupBlocks = () => {
+        this.props.dispatch(cvBlocks_group(false));
     }
 
     render () {
@@ -82,13 +114,37 @@ class OptionPanel extends React.PureComponent {
                         <input type='button' className={'option option__align-top'} onClick={this.alignBlocksTop}/>
                     </div>
                     <div className='options__elem'>
+                        <input type='button' className={'option option__align-bottom'} onClick={this.alignBlocksBottom}/>
+                    </div>
+                    <div className='options__elem'>
                         <input type='button' className={'option option__align-left'} onClick={this.alignBlocksLeft}/>
+                    </div>
+                    <div className='options__elem'>
+                        <input type='button' className={'option option__align-right'} onClick={this.alignBlocksRight}/>
                     </div>
                     <div className='options__elem'>
                         <input type='button' className={'option option__align-vertical'} onClick={this.alignBlocksVertical}/>
                     </div>
                     <div className='options__elem'>
                         <input type='button' className={'option option__align-horisontal'} onClick={this.alignBlocksHorisontal}/>
+                    </div>
+                    <div className='options__elem'>
+                        <input type='button' className={'option option__distribute-vertical'} onClick={this.distributeBlocksVertical}/>
+                    </div>
+                    <div className='options__elem'>
+                        <input type='button' className={'option option__distribute-horisontal'} onClick={this.distributeBlocksHorisontal}/>
+                    </div>
+                    <div className='options__elem'>
+                        <input type='button' className={'option option__align-width'} onClick={this.setBlocksSizeWidth}/>
+                    </div>
+                    <div className='options__elem'>
+                        <input type='button' className={'option option__align-height'} onClick={this.setBlocksSizeHeight}/>
+                    </div>
+                    <div className='options__elem'>
+                        <input type='button' className={'option option__group'} onClick={this.groupBlocks}/>
+                    </div>
+                    <div className='options__elem'>
+                        <input type='button' className={'option option__ungroup'} onClick={this.ungroupBlocks}/>
                     </div>
                 </React.Fragment>
             );
@@ -100,8 +156,8 @@ class OptionPanel extends React.PureComponent {
         return (
             <form className='options'>
                 {codeElementOptions}
+                {codeBlocksOptions}
                 <div className='options__block'>
-                    {codeBlocksOptions}
                     {codeBlockOptions}
                 </div>
             </form>

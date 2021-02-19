@@ -1,5 +1,21 @@
-﻿$color-main: rgb(131, 150, 150);
-$color-gray: gray;
-$color-text: rgb(39, 37, 37);
-$color-active: rgb(178, 212, 178);
-$color-blocked: rgb(201, 138, 138);
+﻿$color-bg-header: rgb(49, 150, 180);
+$color-bg: rgba($color-bg-header,0.15);
+
+$color-white: #ffffff;
+$color-black: #000000;
+
+$color-button-border: rgb(142, 160, 154);
+$color-button-font: rgb(10, 22, 17);
+$color-button-hover: #d1e7dc;
+$color-button-active: #c7ddd2;
+
+$color-block-hover: lightslategray;
+$color-block-active: rgb(32, 78, 124);
+
+$color-transform: rgb(54, 90, 126);
+
+$color-option-border: #738f78;
+$color-tooltip: lightblue;
+
+$color-panel-bg: #293039;
+$color-panel-border: #5e5f61;

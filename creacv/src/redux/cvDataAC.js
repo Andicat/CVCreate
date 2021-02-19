@@ -10,10 +10,18 @@ const CV_ELEMENT_ACTIVATE = 'CV_ELEMENT_ACTIVATE';
 const CV_ELEMENT_UPDATE = 'CV_ELEMENT_UPDATE';
 const CV_TEXT_UPDATE = 'CV_TEXT_UPDATE';
 const CV_BLOCK_SEND_BACK = 'CV_BLOCK_SEND_BACK';
-const CV_BLOCK_ALIGN_TOP = 'CV_BLOCK_ALIGN_TOP';
-const CV_BLOCK_ALIGN_LEFT = 'CV_BLOCK_ALIGN_LEFT';
-const CV_BLOCK_ALIGN_VERTICAL = 'CV_BLOCK_ALIGN_VERTICAL';
-const CV_BLOCK_ALIGN_HORISONTAL = 'CV_BLOCK_ALIGN_HORISONTAL';
+const CV_BLOCKS_ALIGN_TOP = 'CV_BLOCKS_ALIGN_TOP';
+const CV_BLOCKS_ALIGN_BOTTOM = 'CV_BLOCKS_ALIGN_BOTTOM';
+const CV_BLOCKS_ALIGN_LEFT = 'CV_BLOCKS_ALIGN_LEFT';
+const CV_BLOCKS_ALIGN_RIGHT = 'CV_BLOCKS_ALIGN_RIGHT';
+const CV_BLOCKS_ALIGN_VERTICAL = 'CV_BLOCKS_ALIGN_VERTICAL';
+const CV_BLOCKS_ALIGN_HORISONTAL = 'CV_BLOCKS_ALIGN_HORISONTAL';
+const CV_BLOCKS_DISTRIBUTE_VERTICAL = 'CV_BLOCKS_DISTRIBUTE_VERTICAL';
+const CV_BLOCKS_DISTRIBUTE_HORISONTAL = 'CV_BLOCKS_DISTRIBUTE_HORISONTAL';
+const CV_BLOCKS_ALIGN_WIDTH = 'CV_BLOCKS_ALIGN_WIDTH';
+const CV_BLOCKS_ALIGN_HEIGHT = 'CV_BLOCKS_ALIGN_HEIGHT';
+const CV_BLOCKS_GROUP = 'CV_BLOCKS_GROUP';
+const CV_BLOCKS_UNGROUP = 'CV_BLOCKS_UNGROUP';
 
 const cvBlock_add = function(block) {
     return {
@@ -112,28 +120,52 @@ const cvBlock_activateMulti = function(blockId) {
     };
 }
 
-const cvBlock_alignTop = function() {
-    return {
-        type: CV_BLOCK_ALIGN_TOP,
-    };
+const cvBlocks_align = function(mode) {
+    switch (mode) {
+        case 'top':
+            return { type: CV_BLOCKS_ALIGN_TOP };
+        case 'bottom':
+            return { type: CV_BLOCKS_ALIGN_BOTTOM };
+        case 'left':
+            return { type: CV_BLOCKS_ALIGN_LEFT };
+        case 'right':
+            return { type: CV_BLOCKS_ALIGN_RIGHT };
+        case 'vertical':
+            return { type: CV_BLOCKS_ALIGN_VERTICAL };
+        case 'horisontal':
+            return { type: CV_BLOCKS_ALIGN_HORISONTAL };
+        default:
+    }
 }
 
-const cvBlock_alignLeft = function() {
-    return {
-        type: CV_BLOCK_ALIGN_LEFT,
-    };
+const cvBlocks_distribute = function(mode) {
+    switch (mode) {
+        case 'vertical':
+            return { type: CV_BLOCKS_DISTRIBUTE_VERTICAL };
+        case 'horisontal':
+            return { type: CV_BLOCKS_DISTRIBUTE_HORISONTAL };
+        default:
+    }
 }
 
-const cvBlock_alignVertical = function() {
-    return {
-        type: CV_BLOCK_ALIGN_VERTICAL,
-    };
+const cvBlocks_alignSize = function(mode) {
+    switch (mode) {
+        case 'width':
+            return { type: CV_BLOCKS_ALIGN_WIDTH };
+        case 'height':
+            return { type: CV_BLOCKS_ALIGN_HEIGHT };
+        default:
+    }
 }
 
-const cvBlock_alignHorisontal = function() {
-    return {
-        type: CV_BLOCK_ALIGN_HORISONTAL,
-    };
+const cvBlocks_group = function(mode) {
+    switch (mode.toString()) {
+        case 'true':
+            return { type: CV_BLOCKS_GROUP };
+        case 'false':
+            return { type: CV_BLOCKS_UNGROUP };
+        default:
+    }
 }
 
 export {
@@ -146,10 +178,10 @@ export {
     cvBlock_sendBack, CV_BLOCK_SEND_BACK,
     cvBlock_copy, CV_BLOCK_COPY,
     cvBlock_setSize, CV_BLOCK_SET_SIZE,
-    cvBlock_alignTop, CV_BLOCK_ALIGN_TOP,
-    cvBlock_alignLeft, CV_BLOCK_ALIGN_LEFT,
-    cvBlock_alignVertical, CV_BLOCK_ALIGN_VERTICAL,
-    cvBlock_alignHorisontal, CV_BLOCK_ALIGN_HORISONTAL,
+    cvBlocks_align, CV_BLOCKS_ALIGN_TOP, CV_BLOCKS_ALIGN_BOTTOM, CV_BLOCKS_ALIGN_LEFT, CV_BLOCKS_ALIGN_RIGHT, CV_BLOCKS_ALIGN_VERTICAL, CV_BLOCKS_ALIGN_HORISONTAL,
+    cvBlocks_distribute, CV_BLOCKS_DISTRIBUTE_VERTICAL, CV_BLOCKS_DISTRIBUTE_HORISONTAL,
+    cvBlocks_alignSize, CV_BLOCKS_ALIGN_WIDTH, CV_BLOCKS_ALIGN_HEIGHT,
+    cvBlocks_group, CV_BLOCKS_GROUP, CV_BLOCKS_UNGROUP,
     cvElement_activate, CV_ELEMENT_ACTIVATE,
     cvElement_update, CV_ELEMENT_UPDATE,
     cvElement_textUpdate, CV_TEXT_UPDATE,

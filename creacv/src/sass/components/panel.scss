@@ -1,5 +1,5 @@
 .panel {
-    background-color: #293039;
+    background-color: $color-panel-bg;
     width: 250px;
 
     &__group {
@@ -9,12 +9,11 @@
             box-sizing: border-box;
             min-height: 45px;
             padding: 10px;
-            color: rgb(228, 220, 220);
+            color: $color-white;
             font-size: 20px;
-            text-shadow: 0 -1px rgb(46,53,58);
             outline: none;
-            background-color: #293039;
-            border-bottom: 1px solid #5e5f61;
+            background-color: $color-panel-bg;
+            border-bottom: 1px solid $color-panel-border;
             
             &::after {
                 content: '';
@@ -52,8 +51,8 @@
         border-radius: 5px;
         padding: 5px;
         margin: 5px;
-        background-color: white;
-        border-bottom: 1px solid #5e5f61;
+        background-color: $color-white;
+        border-bottom: 1px solid $color-panel-border;
         
         &:hover,
         &:focus,
@@ -69,7 +68,7 @@
         height: 30px;
         margin-left: 10px;
         outline: none;
-        border: 1px solid #5e5f61;
+        border: 1px solid $color-panel-border;
         border-radius: 50%;
         background-image: url('./../../img/icon-add.svg');
         background-repeat: no-repeat;
@@ -108,52 +107,3 @@
         }
     }
 }
-
-.accordion-menu li.open .dropdownlink {
-  color: #CDDC39;
-  .fa-chevron-down {
-    transform: rotate(180deg);
-  }
-}
-.accordion-menu li:last-child .dropdownlink {
-  border-bottom: 0;
-}
-.dropdownlink {
-  cursor: pointer;
-  display: block;
-  padding: 15px 15px 15px 45px;
-  font-size: 18px;
-  border-bottom: 1px solid #ccc;
-  color: #212121;
-  position: relative;
-  transition: all 0.4s ease-out;
-  i {
-    position: absolute;
-    top: 17px;
-    left: 16px;
-  }
-  .fa-chevron-down {
-    right: 12px;
-    left: auto;
-  }
-}
-
-.submenuItems {
-  display: none;
-  background: #C8E6C9;
-  li {
-    border-bottom: 1px solid #B6B6B6;
-  }
-}
-
-.submenuItems a {
-  display: block;
-  color: #727272;
-  padding: 12px 12px 12px 45px;
-  transition: all 0.4s ease-out;
-  &:hover {
-    background-color: #CDDC39;
-    color: #fff;
-  }
-}
-

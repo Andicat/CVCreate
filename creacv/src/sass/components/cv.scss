@@ -1,11 +1,11 @@
 .cv {
     height: 877px;
     width: 620px;
-    background-color: #fff;
+    background-color: $color-white;
     margin: 20px auto;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 14px 28px rgba($color-black, 0.25), 0 10px 10px rgba($color-black, 0.22);
 
     &__block {
         display: flex;
@@ -16,15 +16,22 @@
         overflow: hidden;
         
         &:hover {
-            outline: 1px solid lightslategray;
+            outline: 1px solid $color-block-hover;
             cursor: pointer;
         }
         
         &--active {
             z-index: 10;
-            outline: 2px solid rgb(32, 78, 124);
+            outline: 2px solid $color-block-active;
             &:hover {
-                outline: 2px solid rgb(32, 78, 124);
+                outline: 2px solid $color-block-active;
+            }
+        }
+
+        &--active-first {
+            outline-width : 3px;
+            &:hover {
+                outline-width: 3px;
             }
         }
     }
@@ -35,11 +42,7 @@
         box-sizing: border-box;
 
         &--active {
-            outline: 1px solid lightslategray;
-        }
-
-        &--text {
-            //z-index: 10;
+            outline: 1px solid $color-block-hover;
         }
 
         &--image {
@@ -54,20 +57,20 @@
             align-items: center;
             margin-left: auto;
         }
-    }
 
-    &__group {
-        display: flex;
-        flex-direction: column;
-        &--row {
-            flex-direction: row;
-            align-items: center;
+        &--group {
+            display: flex;
+            flex-direction: column;
+            &-row {
+                flex-direction: row;
+                align-items: center;
+            }
         }
     }
 
     &__transform {
         position: absolute;
-        outline: 3px solid rgb(54, 90, 126);
+        outline: 3px solid $color-transform;
         z-index: 5;
 
         & ~ .cv > .cv__block--active {
@@ -101,6 +104,10 @@
             left: 0;
             transform: translate(-50%, -50%);
             background-image: url('./../../img/icon-move.svg');
+
+            /*&:hover {
+                cursor: move;
+            }*/
         }
 
         &--resize {

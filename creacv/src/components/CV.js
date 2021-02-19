@@ -36,8 +36,10 @@ class CV extends React.PureComponent {
         //console.log('active block',activeOneId);
         //console.log('block 2',this.props.cvData.blocks.find(b => b.id === activeOneId));
         var cvBlocksCode = this.props.blocks.map( b => {
-            let isActive = !!this.props.activeBlocksId.find(ab => ab===b.id);
-            return <CvBlock key={b.id} id={b.id} data={b} active={isActive} activeElementId={isActive?activeElementId:null}></CvBlock>
+            let activeIndex = this.props.activeBlocksId.findIndex(ab => ab===b.id);
+            //activeIndex = activeIndex?activeIndex:-1;
+            //console.log('active id',activeIndex);
+            return <CvBlock key={b.id} id={b.id} data={b} activeIndex={activeIndex} activeElementId={activeIndex>=0?activeElementId:null}></CvBlock>
         });
         
         return (

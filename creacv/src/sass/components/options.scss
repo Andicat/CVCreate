@@ -2,12 +2,12 @@
     position: absolute;
     text-align: center;
     min-height: 45px;
-    background-color: white;
+    background-color: $color-white;
     width: 100%;
     top: 0;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #738f78;
+    border-bottom: 1px solid $color-option-border;
 
     &__elem {
         margin-left: 10px;
@@ -50,7 +50,7 @@
 
     &__tooltip {
         position: absolute;
-        background-color: lightblue;
+        background-color: $color-tooltip;
         padding: 2px 5px;
         border-radius: 5px;
         top: calc(100% + 5px);
@@ -61,8 +61,8 @@
         &::after {
             content: "";
             position: absolute;
-            border: 7px solid lightblue;
-            border-color: transparent transparent lightblue transparent;
+            border: 7px solid $color-tooltip;
+            border-color: transparent transparent $color-tooltip transparent;
             top: 0;
             left:50%;
             transform: translate(-50%,-80%);
@@ -129,12 +129,12 @@
 
         &:hover {
             background: none;
-            background-color: #c7ddd2;
+            background-color: $color-button-active;
         }
 
         &:active {
             background: none;
-            background-color: #9bafa5;
+            background-color: $color-button-active;
         }
     }
 
@@ -148,7 +148,6 @@
             justify-content: center;
             align-items: center;
             padding: 0 4px;
-            //font-weight: normal;
             
             &:hover {
                 cursor: pointer;
@@ -176,25 +175,60 @@
     &__align-top {
         @include option-button;
         background-image: url('./../../img/icon-align-top.svg');
-        background-size: 100%;
+    }
+
+    &__align-bottom {
+        @include option-button;
+        background-image: url('./../../img/icon-align-bottom.svg');
     }
 
     &__align-left {
         @include option-button;
         background-image: url('./../../img/icon-align-left.svg');
-        background-size: 100%;
+    }
+
+    &__align-right {
+        @include option-button;
+        background-image: url('./../../img/icon-align-right.svg');
     }
 
     &__align-vertical {
         @include option-button;
         background-image: url('./../../img/icon-align-vertical.svg');
-        background-size: 90%;
     }
 
     &__align-horisontal {
         @include option-button;
         background-image: url('./../../img/icon-align-horisontal.svg');
-        background-size: 90%;
-        background-position: center;
+    }
+
+    &__distribute-vertical {
+        @include option-button;
+        background-image: url('./../../img/icon-distribute-vertical.svg');
+    }
+
+    &__distribute-horisontal {
+        @include option-button;
+        background-image: url('./../../img/icon-distribute-horisontal.svg');
+    }
+
+    &__align-width {
+        @include option-button;
+        background-image: url('./../../img/icon-align-width.svg');
+    }
+
+    &__align-height {
+        @include option-button;
+        background-image: url('./../../img/icon-align-height.svg');
+    }
+
+    &__group {
+        @include option-button;
+        background-image: url('./../../img/icon-group.svg');
+    }
+
+    &__ungroup {
+        @include option-button;
+        background-image: url('./../../img/icon-ungroup.svg');
     }
 }

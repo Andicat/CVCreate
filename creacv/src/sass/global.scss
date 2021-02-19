@@ -8,7 +8,7 @@ body {
     margin: 0;
     padding: 0;
     border: 0;*/
-    background-color: lightblue;
+    background-color: $color-bg;
     padding: 0;
     border: 0;
     margin: 0;
@@ -20,17 +20,16 @@ html {
 
 #app {
     min-height: 100%;
-    background-color: rgb(199, 214, 212);
     margin: 0;
     padding: 0;
     border: 0;
 }
 
 header {
-    color: white;
+    color: $color-white;
     font-size: 24px;
     padding: 10px 40px;
-    background-color: darkcyan;
+    background-color: $color-bg-header;
     background-image: url('./../img/logo.svg');
     background-repeat: no-repeat;
     background-position: 5px;

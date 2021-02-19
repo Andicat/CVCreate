@@ -1,15 +1,28 @@
-<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+ <g opacity="0.33">
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="62" width="62" y="-1" x="-1"/>
+ </g>
 
  <g>
-  <title>background</title>
-  <rect fill="none" id="canvas_background" height="26" width="26" y="-1" x="-1"/>
- </g>
- <g>
   <title>Layer 1</title>
-  <g transform="rotate(-90 11.947643280029299,11.895284652709961) " id="svg_5">
-   <path stroke="null" id="svg_1" fill="black" d="m21.60733,1l0,2l-19.31937,0l0,-2l19.31937,0z"/>
-   <path id="svg_2" fill="black" d="m16.13799,8.44772l-1.4142,1.41422l-1.8285,-1.82847l0,7.93303l1.8285,-1.8285l1.4142,1.4142l-4.2427,4.2427l-4.24258,-4.2427l1.41421,-1.4142l1.82837,1.8284l0,-7.93283l-1.82837,1.82837l-1.41421,-1.41422l4.24258,-4.24264l4.2427,4.24264z"/>
-   <path stroke="null" id="svg_4" fill="black" d="m21.60733,20.79057l0,2l-19.31937,0l0,-2l19.31937,0z"/>
-  </g>
+  <g opacity="0.33" id="svg_35"/>
+  <g opacity="0.33" id="svg_36"/>
+  <g opacity="0.33" id="svg_37"/>
+  <g opacity="0.33" id="svg_38"/>
+  <g opacity="0.33" id="svg_39"/>
+  <g opacity="0.33" id="svg_40"/>
+  <g opacity="0.33" id="svg_41"/>
+  <g opacity="0.33" id="svg_42"/>
+  <g opacity="0.33" id="svg_43"/>
+  <g opacity="0.33" id="svg_44"/>
+  <g opacity="0.33" id="svg_45"/>
+  <g opacity="0.33" id="svg_46"/>
+  <g opacity="0.33" id="svg_47"/>
+  <g opacity="0.33" id="svg_48"/>
+  <g opacity="0.33" id="svg_49"/>
+  <rect transform="rotate(179.9868927001953 29.78886032104492,30.74023056030273) " stroke="null" id="svg_7" height="3.741" width="48.92076" y="28.86998" x="5.32848" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="null" stroke-width="null" fill="null"/>
+  <rect transform="rotate(179.9868927001953 40.68783569335937,30.759960174560547) " id="svg_9" height="37.26611" width="15" y="12.12691" x="33.18784" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="null" stroke-width="null" stroke="null" fill="null"/>
+  <rect transform="rotate(179.9868927001953 19.132083892822266,30.65578269958496) " stroke="null" id="svg_10" height="23.88484" width="15" y="18.71338" x="11.63208" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="null" stroke-width="null" fill="null"/>
  </g>
 </svg>

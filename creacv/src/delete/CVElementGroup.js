@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import CVElement from './CVElement';
+import CVElement from '../components/CVElement';
 
 class CVElementGroup extends React.PureComponent {
 

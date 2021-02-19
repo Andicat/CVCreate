@@ -9,20 +9,21 @@
     line-height: 24px;
     font-weight: bold;
     text-align: center;
-    color: rgb(10, 22, 17);
+    color: $color-button-font;
     outline: none;
     border-radius: 5px;
-    border: 1px solid rgb(142, 160, 154);
+    border: 1px solid $color-button-border;
     background-position: center;
     background-repeat: no-repeat;
+    background-size: 100%;
 
     &:hover {
-        background-color: #d1e7dc;
+        background-color: $color-button-hover;
         cursor: pointer;
     }
 
     &:active {
-        background-color: #c7ddd2;
+        background-color: $color-button-active;
     }
 }
 
@@ -31,14 +32,14 @@
     width: 45px;
     text-align: center;
     outline: none;
-    box-shadow: 0 0 0 1px rgb(142, 160, 154) inset, 0 1px 1px #fff;
+    box-shadow: 0 0 0 1px $color-button-border inset, 0 1px 1px $color-white;
 }
 
 @mixin option-checkbox {
     display: none;
 
     &:checked ~ label {
-        background-color: #c7ddd2;
+        background-color: $color-button-active;
     }
 
     & ~ label {
