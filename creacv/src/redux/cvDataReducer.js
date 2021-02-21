@@ -1,4 +1,5 @@
-﻿import { CV_BLOCK_ADD,
+﻿import {CV_ID} from './../components/utils';
+import { CV_BLOCK_ADD,
         CV_BLOCK_DELETE,
         CV_BLOCK_MOVE,
         CV_BLOCK_RESIZE,
@@ -7,6 +8,7 @@
         CV_BLOCK_SEND_BACK,
         CV_BLOCK_COPY,
         CV_BLOCK_SET_SIZE,
+        CV_BLOCK_LOCK,
         CV_BLOCKS_ALIGN_TOP,
         CV_BLOCKS_ALIGN_BOTTOM,
         CV_BLOCKS_ALIGN_LEFT,
@@ -18,12 +20,13 @@
         CV_BLOCKS_ALIGN_WIDTH,
         CV_BLOCKS_ALIGN_HEIGHT,
         CV_BLOCKS_GROUP,
-        CV_BLOCKS_UNGROUP,
+        CV_BLOCK_UNGROUP,
         CV_ELEMENT_ACTIVATE,
-        CV_ELEMENT_UPDATE,
+        CV_STYLE_UPDATE,
         CV_TEXT_UPDATE } from './cvDataAC';
 
 const initState = {
+    stylePage: {bgcolor:'#ffffff', width:620,height:877},
     blocks: [],
     activeBlockDOM: null,
     activeBlocksId: [],
@@ -37,10 +40,23 @@ function cvDataReducer(state = initState, action) {
 
         //add new block to cv-page
         case CV_BLOCK_ADD: {
+            function setId(block,parentId,index = 0) {
+                if (!parentId) {
+                    block.id = newId;    
+                } else {
+                    block.id = parentId + '-' + index;
+                }
+                if (block.elements) {
+                    block.elements.forEach((e,i) => setId(e,block.id,i));
+                }
+            }
+
             let newId = state.blocks.reduce(function (r, v) { return ( r < v.id ? v.id : r);},0) + 1;
             let randomPosition = Math.random()*100;
+            let newBlock = {...action.block, positionTop:randomPosition,positionLeft:randomPosition};
+            setId(newBlock);
             let newState = {...state,
-                blocks: [...state.blocks,{...action.block, id:newId, positionTop:randomPosition,positionLeft:randomPosition}],
+                blocks: [...state.blocks,newBlock],
                 activeBlocksId: [newId],
                 activeBlockDOM: null,
                 activeElementId: null
@@ -287,20 +303,69 @@ function cvDataReducer(state = initState, action) {
 
         //group blocks
         case CV_BLOCKS_GROUP: {
+            //debugger
             let blocksToGroup = state.blocks.filter( b => state.activeBlocksId.find(ab => b.id===ab));
-            let minLeft = blocksToGroup.reduce(function (r, v) { return ( r > v.positionLeft ? v.positionLeft : r);},Infinity);
-            let minTop = blocksToGroup.reduce(function (r, v) { return ( r > v.positionTop ? v.positionTop : r);},Infinity);
-            
-            console.log('min top',minTop);
-            console.log('min left',minLeft);
+            let top = Infinity;
+            let bottom = 0;
+            let left = Infinity;
+            let right = 0;
 
-            
-            return state;
+            blocksToGroup.forEach( b => {
+                top = (b.positionTop<top)?b.positionTop:top;
+                bottom = ((b.positionTop+b.height)>bottom)?(b.positionTop+b.height):bottom;
+                left = (b.positionLeft<left)?b.positionLeft:left;
+                right = ((b.positionLeft+b.width)>right)?(b.positionLeft+b.width):right;
+            });
+
+            let newElements = blocksToGroup.map( b => {
+                let elemWidth = b.width;
+                let elemHeight = b.height;
+                let elemTop = b.positionTop - top;
+                let elemLeft = b.positionLeft - left;
+                delete b.positionTop;
+                delete b.positionLeft;
+                return {...b, style:{...b.style, position:'absolute', width: elemWidth, height: elemHeight, top: elemTop, left: elemLeft}};
+            });
+
+            let newId = state.blocks.reduce(function (r, v) { return ( r < v.id ? v.id : r);},0) + 1;
+            let newGroupBlock = {type:'group', ungroup:true, direction:'absolute', id:newId, height:(bottom-top), width:(right-left), positionTop:top, positionLeft:left};
+            newGroupBlock.elements = newElements;
+            let newBlocks = state.blocks.filter(b => !state.activeBlocksId.find(ab => b.id===ab));
+            let newState = {...state, 
+                blocks:[...newBlocks,newGroupBlock],
+                activeBlocksId: [newId],
+                activeBlockDOM: null,
+                activeElementId: null
+            };
+            return newState;
         }
 
-        //ungroup blocks
-        case CV_BLOCKS_UNGROUP: {
-            break
+        //ungroup block
+        case CV_BLOCK_UNGROUP: {
+            //debugger
+            let blockToUnGroup = state.blocks.find(b => b.id===action.blockId);
+            let top = blockToUnGroup.positionTop;
+            let left = blockToUnGroup.positionLeft;
+
+            let newBlocks = blockToUnGroup.elements.map( (b,i) => {
+                let newId = state.blocks.reduce(function (r, v) { return ( r < v.id ? v.id : r);},0) + 1 + i;
+                let positionTop = top + b.style.top;
+                let positionLeft = left + b.style.left;
+                delete b.style.top;
+                delete b.style.left;
+                delete b.style.width;
+                delete b.style.height;
+                delete b.style.position;
+                return {...b, id:newId, positionTop:positionTop, positionLeft:positionLeft};
+            });
+
+            let newState = {...state,
+                blocks: [...state.blocks.filter(b => b.id!==action.blockId),...newBlocks],
+                activeBlocksId: [],
+                activeBlockDOM: null,
+                activeElementId: null
+            };
+            return newState;
         }
 
         //send block on back of cv-page
@@ -320,11 +385,26 @@ function cvDataReducer(state = initState, action) {
 
         //copy block
         case CV_BLOCK_COPY: {
+            function copyBlock(blockTemp,parentId,index = 0) {
+                let block = {...blockTemp, style:{...blockTemp.style}};
+                if (!parentId) {
+                    block.id = newId;    
+                } else {
+                    block.id = parentId + '-' + index;
+                }
+                if (block.elements) {
+                    block.elements = block.elements.map((e,i) => copyBlock(e,block.id,i));
+                }
+                return block;
+            };
+
             let newId = state.blocks.reduce(function (r, v) { return ( r < v.id ? v.id : r);},0) + 1;
-            let newBlock = state.blocks.find(b => b.id===action.blockId);
-            let newBlocks = [...state.blocks, {...newBlock, id:newId, positionTop:newBlock.positionTop + 30,positionLeft:newBlock.positionLeft + 30}];
+            let activeBlock = state.blocks.find(b => b.id===action.blockId);
+            let newBlock = copyBlock(activeBlock);
+            newBlock.positionTop = activeBlock.positionTop + 30;
+            newBlock.positionLeft = activeBlock.positionLeft + 30; 
             let newState = {...state,
-                blocks:newBlocks,
+                blocks: [...state.blocks,newBlock],
                 activeBlocksId: [],
                 activeBlockDOM:null,
                 activeElementId:null
@@ -345,6 +425,18 @@ function cvDataReducer(state = initState, action) {
             return newState;
         }
 
+        //lock block position on cv-page
+        case CV_BLOCK_LOCK: {
+            let newBlocks = state.blocks.map(b => {
+                if (b.id===action.blockId) {
+                    b.lock = action.mode;
+                    return {...b};
+                }
+                return b});
+            let newState = {...state, blocks:newBlocks};
+            return newState;
+        }
+
         //activate element on cv-page
         case CV_ELEMENT_ACTIVATE: {
             if (state.activeElementId !== action.elementId) {
@@ -355,52 +447,63 @@ function cvDataReducer(state = initState, action) {
         }
 
         //update elements style
-        case CV_ELEMENT_UPDATE: {
+        case CV_STYLE_UPDATE: {
+
+            function updateStyle(block) {
+                if (block.id==state.activeElementId) {
+                    block.style[action.styleName] = action.styleValue;
+                    block.style = {...block.style};
+                    newStyleToEdit = block.style;
+                    return {...block};
+                }
+                if (block.elements) {
+                    block.elements = block.elements.map(e => updateStyle(e));
+                    return {...block};
+                }
+                return block;
+            }
+            if (action.blockId===CV_ID) {
+                state.stylePage[action.styleName] = action.styleValue;
+                let newState = {...state,
+                    stylePage: {...state.stylePage},
+                };
+                return newState;
+            }
             let newStyleToEdit = {};
             let newBlocks = state.blocks.map(b => {
-                if (b.id===action.blockId) {
-                    if (b.elements) {
-                        b.elements = b.elements.map((e,i) => {
-                            if ((action.blockId + '-' + i)===(state.activeElementId)) {
-                                e.style[action.styleName] = action.styleValue;
-                                e.style = {...e.style};
-                                newStyleToEdit = e.style;
-                                return {...e};
-                            };
-                            return e;
-                        });
-                    } else {
-                        b.style[action.styleName] = action.styleValue;
-                        b.style = {...b.style};
-                        newStyleToEdit = b.style;
-                        
-                    }
-                    return {...b};
+                if (b.id === action.blockId) {
+                    let newBlock = updateStyle(b);
+                    return newBlock;
                 }
                 return b});
-            let newState = {...state, blocks:newBlocks,styleToEdit:newStyleToEdit};
+            let newState = {...state, 
+                blocks:newBlocks,
+                styleToEdit:newStyleToEdit};
             return newState;
         }
         
         //update elements text
         case CV_TEXT_UPDATE: {
+            function updateText(block) {
+                if (block.id==state.activeElementId) {
+                    block.text = action.textValue;
+                    return {...block};
+                }
+                if (block.elements) {
+                    block.elements = block.elements.map(e => updateText(e));
+                    return {...block};
+                }
+                return block;
+            }
+            
             let newBlocks = state.blocks.map(b => {
-                if (b.id===action.blockId) {
-                    if (b.elements) {
-                        b.elements = b.elements.map((e,i) => {
-                            if ((action.blockId + '-' + i)===(state.activeElementId)) {
-                                e.text = action.textValue;
-                                return {...e};
-                            };
-                            return e;
-                        });
-                    } else {
-                        b.text = action.textValue;
-                    }
-                    return {...b};
+                if (b.id === action.blockId) {
+                    let newBlock = updateText(b);
+                    return newBlock;
                 }
                 return b});
-            let newState = {...state, blocks:newBlocks};
+            let newState = {...state, 
+                blocks:newBlocks};
             return newState;
         }
         default:

@@ -119,6 +119,17 @@
                 background-image: url('./../../img/icon-font-capital.svg');   
             }
         }
+
+        &--lock {
+            & ~ label,
+            &:hover ~ label {
+                background-image: url('./../../img/icon-lock.svg');   
+            }
+
+            &:checked ~ label {
+                background-image: url('./../../img/icon-unlock.svg');  
+            }
+        }
     }
     
     &__color {

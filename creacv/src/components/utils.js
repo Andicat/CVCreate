@@ -1,16 +1,25 @@
 import React from 'react';
 
+const FONT_SIZE_MIN = 6;
+const FONT_SIZE_MAX = 60;
+const WIDTH_MIN = 0;
+const WIDTH_MAX = 1000;
+const HEIGHT_MIN = 0;
+const HEIGHT_MAX = 1000;
+
+const CV_ID = 1.1;
+
 //create jsx-code for option
 function createOption (optionType,optionValue,cbOnChange) {
 
     const OPTIONS = {
-        fontsize: codeNumber(),
+        fontsize: codeNumber(FONT_SIZE_MIN,FONT_SIZE_MAX,1),
         bold: codeCheckbox(),
         italic: codeCheckbox(),
         uppercase: codeCheckbox(),
         center: codeCheckbox(),
-        width: codeNumber(),
-        height: codeNumber(),
+        width: codeNumber(WIDTH_MIN,WIDTH_MAX,1),
+        height: codeNumber(HEIGHT_MIN, HEIGHT_MAX,1),
         color: codeColor(),
         bgcolor: codeColor(),
         file: codeFile(),
@@ -19,6 +28,7 @@ function createOption (optionType,optionValue,cbOnChange) {
         borderwidth: codeNumber(),
         bordercolor: codeColor(),
         padding: codeNumber(),
+        opacity: codeRange(0,1,0.01),
     }
 
     function setValue(elem,value) {
@@ -49,17 +59,21 @@ function createOption (optionType,optionValue,cbOnChange) {
         }
     }
 
-    function codeNumber() {
+    function codeNumber(min,max,step) {
         return <React.Fragment>
                     <input type='button' className='option option__button option__button--left' value='&ndash;' onClick= {(evt) => {setValue(evt.target.nextSibling,Number(optionValue)-1)}}/>
-                    <input type='text' className='option option__number' value={optionValue} onChange={setValueInput}></input>
+                    <input type='text' className='option option__number' min={min} max={max} step={step} value={optionValue} onChange={setValueInput}></input>
                     <input type='button' className='option option__button option__button--right' value='+' onClick= {(evt) => {setValue(evt.target.previousSibling,Number(optionValue)+1)}}/>
                 </React.Fragment>
     };
 
+    function codeRange(min,max,step) {
+        return <input type="range" className='option option__range'min={min} max={max} step={step} value={optionValue} onInput={setValueInput}/>;
+    };
+
     function codeCheckbox() {
         return <React.Fragment>
-                    <input type='checkbox' id={optionType} className={'option option__checkbox option__checkbox--' + optionType} checked={optionValue} onChange={setValueCheckBox}/>
+                    <input type='checkbox' className={'option option__checkbox option__checkbox--' + optionType} id={optionType} checked={optionValue} onChange={setValueCheckBox}/>
                     <label htmlFor={optionType}/>
                 </React.Fragment>
     };
@@ -105,6 +119,12 @@ function createStyle (styles) {
             case 'height': 
                 styleAttr.height = styles[key] + 'px';
                 break;
+            case 'top': 
+                styleAttr.top = styles[key] + 'px';
+                break;
+            case 'left': 
+                styleAttr.left = styles[key] + 'px';
+                break;
             case 'bgcolor': 
                 styleAttr.backgroundColor = styles[key];
                 break;
@@ -146,4 +166,4 @@ function getAutoSize (element) {
     return sizes;
 };
 
-export {createOption, createStyle, getAutoSize};
+export {createOption, createStyle, getAutoSize, CV_ID};

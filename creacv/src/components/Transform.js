@@ -15,6 +15,7 @@ class Transform extends React.PureComponent {
     elem;
     resize = false;
     coordsShift;
+    shift = 4;
 
     move = (evt) => { 
         evt.preventDefault();
@@ -102,13 +103,18 @@ class Transform extends React.PureComponent {
             return null;
         }
         this.getPosition();
-        let style = {top:this.coordsShift.top + 'px', left:this.coordsShift.left + 'px', width:this.props.block.width + 'px', height:this.props.block.height + 'px'};
-        let className = 'cv__transform';
+        let style = {top:(this.coordsShift.top - this.shift) + 'px', left:(this.coordsShift.left - this.shift) + 'px', width:(this.props.block.width + this.shift*2) + 'px', height:(this.props.block.height + this.shift*2) + 'px'};
+        let className = 'cv__transform' + (this.props.block.lock?' cv__transform--locked':'');
+        //console.log('transform',className,this.props.block.lock);
         return (
             <div className={className} style={style}>
-                <button className='cv__transform-button cv__transform-button--move' onMouseDown={this.onMouseDown}></button>
-                <button className='cv__transform-button cv__transform-button--delete' onClick={this.onClickDelete}></button>
-                <button className='cv__transform-button cv__transform-button--resize' onMouseDown={this.onMouseDownSize}></button>
+                {!this.props.block.lock && (
+                    <React.Fragment>
+                        <button className='cv__transform-button cv__transform-button--move' onMouseDown={this.onMouseDown}></button>
+                        <button className='cv__transform-button cv__transform-button--delete' onClick={this.onClickDelete}></button>
+                        <button className='cv__transform-button cv__transform-button--resize' onMouseDown={this.onMouseDownSize}></button>
+                    </React.Fragment>
+                )}
             </div>
         );
     }

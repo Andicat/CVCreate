@@ -100,6 +100,10 @@
         box-sizing: border-box;
         overflow: hidden;
 
+        .cv__element {
+            //position: relative;
+        }
+
         .cv__element--image,
         .cv__element--figure {
             height: 50px;

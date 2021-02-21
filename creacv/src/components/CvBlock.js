@@ -25,10 +25,11 @@ class CvBlock extends React.PureComponent {
     }
 
     render () {
+        console.log('render block',this.props.id);
         let style = {top:this.props.data.positionTop + 'px', left:this.props.data.positionLeft + 'px', width:this.props.data.width + 'px', height:this.props.data.height + 'px'};
         let className = 'cv__block' + (this.props.activeIndex>=0?' cv__block--active':'') + (this.props.activeIndex===0?' cv__block--active-first':'');
-        let elementId = this.props.id + '-' + 0;
-        let elementCode = <CVElement  key={elementId} id={elementId} blockId={this.props.id} cv={true} data={this.props.data} activeElementId={this.props.activeElementId}></CVElement>;
+        //let elementId = this.props.id + '-' + 0;
+        let elementCode = <CVElement id={'' + this.props.id} blockId={this.props.id} cv={true} data={this.props.data} activeElementId={this.props.activeElementId}></CVElement>;
         return (
             <div className={className} style={style} onClick={this.onClick}>
                 {elementCode} 

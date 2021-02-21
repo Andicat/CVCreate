@@ -3,17 +3,26 @@ import PropTypes from 'prop-types';
 import Option from './Option';
 
 import {connect} from 'react-redux';
-import {cvBlock_sendBack, cvBlock_copy, cvBlock_setSize, cvBlocks_align, cvBlocks_alignSize, cvBlocks_distribute, cvBlocks_group} from '../redux/cvDataAC';
-import {getAutoSize} from './utils';
+import {cvBlock_sendBack,
+    cvBlock_copy,
+    cvBlock_setSize,
+    cvBlocks_align,
+    cvBlocks_alignSize,
+    cvBlocks_distribute,
+    cvBlocks_group,
+    cvBlock_ungroup, 
+    cvBlock_lock} from '../redux/cvDataAC';
+import {getAutoSize, CV_ID} from './utils';
 
 class OptionPanel extends React.PureComponent {
 
     static propTypes = {
+        stylePage: PropTypes.object,    
         styleToEdit: PropTypes.object,     
-        activeElementId: PropTypes.string,   //Redux
+        activeElementId: PropTypes.string,   
         block: PropTypes.object,
-        activeBlocksId: PropTypes.array,    //Redux
-        activeBlockDOM: PropTypes.object,    //Redux
+        activeBlocksId: PropTypes.array,    
+        activeBlockDOM: PropTypes.object,    
     };
 
 
@@ -71,11 +80,15 @@ class OptionPanel extends React.PureComponent {
     }
 
     groupBlocks = () => {
-        this.props.dispatch(cvBlocks_group(true));
+        this.props.dispatch(cvBlocks_group());
     }
 
-    ungroupBlocks = () => {
-        this.props.dispatch(cvBlocks_group(false));
+    ungroupBlock = () => {
+        this.props.dispatch(cvBlock_ungroup(this.props.block.id));
+    }
+
+    lockPositionBlock = (evt) => {
+        this.props.dispatch(cvBlock_lock(this.props.block.id,evt.target.checked));
     }
 
     render () {
@@ -91,9 +104,15 @@ class OptionPanel extends React.PureComponent {
         };
 
         if (this.props.block) {
+            //console.log('direction',this.props.direction);
             codeBlockOptions = (
                <React.Fragment>
-                   {this.props.activeBlockDOM && (
+                   <div className='options__elem'>
+                        <input type='checkbox' id={'lock'} className={'option option__checkbox option__checkbox--lock'} 
+                        checked={this.props.block.lock?this.props.block.lock:false} onChange={this.lockPositionBlock}/>
+                        <label htmlFor={'lock'}/>
+                    </div>
+                   {(!this.props.block.ungroup && this.props.activeBlockDOM) && (
                         <div className='options__elem'>
                             <input type='button' className={'option option__autosize'} onClick={this.setBlockSizeAuto}/>
                         </div>)}
@@ -103,8 +122,15 @@ class OptionPanel extends React.PureComponent {
                     <div className='options__elem'>
                         <input type='button' className={'option option__copy'} onClick={this.copyBlock}/>
                     </div>
+                    {this.props.block.ungroup && (
+                        <div className='options__elem'>
+                            <input type='button' className={'option option__ungroup'} onClick={this.ungroupBlock}/>
+                        </div>)}
                </React.Fragment>
             );
+        } else {
+            codeElementOptions = Object.keys(this.props.stylePage).map( (s,i) => (
+                <Option key={i} optionName={s} optionValue={this.props.stylePage[s]} blockId={CV_ID}/>));
         }
 
         if (this.props.activeBlocksId.length > 1) {
@@ -143,9 +169,6 @@ class OptionPanel extends React.PureComponent {
                     <div className='options__elem'>
                         <input type='button' className={'option option__group'} onClick={this.groupBlocks}/>
                     </div>
-                    <div className='options__elem'>
-                        <input type='button' className={'option option__ungroup'} onClick={this.ungroupBlocks}/>
-                    </div>
                 </React.Fragment>
             );
         }
@@ -167,6 +190,7 @@ class OptionPanel extends React.PureComponent {
 
 const mapStateToProps = function (state) {
     return {
+        stylePage: state.cvData.stylePage,
         styleToEdit: state.cvData.styleToEdit,
         activeElementId: state.cvData.activeElementId,
         //activeblock.id: state.cvData.activeblock.id,

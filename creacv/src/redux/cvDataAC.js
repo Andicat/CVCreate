@@ -7,7 +7,7 @@ const CV_BLOCK_ACTIVATE_MULTI = 'CV_BLOCK_ACTIVATE_MULTI';
 const CV_BLOCK_COPY = 'CV_BLOCK_COPY';
 const CV_BLOCK_SET_SIZE = 'CV_BLOCK_SET_SIZE';
 const CV_ELEMENT_ACTIVATE = 'CV_ELEMENT_ACTIVATE';
-const CV_ELEMENT_UPDATE = 'CV_ELEMENT_UPDATE';
+const CV_STYLE_UPDATE = 'CV_STYLE_UPDATE';
 const CV_TEXT_UPDATE = 'CV_TEXT_UPDATE';
 const CV_BLOCK_SEND_BACK = 'CV_BLOCK_SEND_BACK';
 const CV_BLOCKS_ALIGN_TOP = 'CV_BLOCKS_ALIGN_TOP';
@@ -21,7 +21,8 @@ const CV_BLOCKS_DISTRIBUTE_HORISONTAL = 'CV_BLOCKS_DISTRIBUTE_HORISONTAL';
 const CV_BLOCKS_ALIGN_WIDTH = 'CV_BLOCKS_ALIGN_WIDTH';
 const CV_BLOCKS_ALIGN_HEIGHT = 'CV_BLOCKS_ALIGN_HEIGHT';
 const CV_BLOCKS_GROUP = 'CV_BLOCKS_GROUP';
-const CV_BLOCKS_UNGROUP = 'CV_BLOCKS_UNGROUP';
+const CV_BLOCK_UNGROUP = 'CV_BLOCK_UNGROUP';
+const CV_BLOCK_LOCK = 'CV_BLOCK_LOCK';
 
 const cvBlock_add = function(block) {
     return {
@@ -71,9 +72,9 @@ const cvElement_activate = function(style,elementId) {
     };
 }
 
-const cvElement_update = function(blockId,elementId,styleName,styleValue) {
+const cvStyle_update = function(blockId,elementId,styleName,styleValue) {
     return {
-        type: CV_ELEMENT_UPDATE,
+        type: CV_STYLE_UPDATE,
         blockId: blockId,
         elementId: elementId,
         styleName: styleName,
@@ -158,14 +159,23 @@ const cvBlocks_alignSize = function(mode) {
     }
 }
 
-const cvBlocks_group = function(mode) {
-    switch (mode.toString()) {
-        case 'true':
-            return { type: CV_BLOCKS_GROUP };
-        case 'false':
-            return { type: CV_BLOCKS_UNGROUP };
-        default:
-    }
+const cvBlocks_group = function() {
+    return { type: CV_BLOCKS_GROUP };
+}
+
+const cvBlock_ungroup = function(blockId) {
+    return { 
+        type: CV_BLOCK_UNGROUP,
+        blockId: blockId,
+    };
+}
+
+const cvBlock_lock = function(blockId, mode) {
+    return { 
+        type: CV_BLOCK_LOCK,
+        blockId: blockId,
+        mode: mode,
+    };
 }
 
 export {
@@ -178,11 +188,13 @@ export {
     cvBlock_sendBack, CV_BLOCK_SEND_BACK,
     cvBlock_copy, CV_BLOCK_COPY,
     cvBlock_setSize, CV_BLOCK_SET_SIZE,
+    cvBlock_lock, CV_BLOCK_LOCK,
     cvBlocks_align, CV_BLOCKS_ALIGN_TOP, CV_BLOCKS_ALIGN_BOTTOM, CV_BLOCKS_ALIGN_LEFT, CV_BLOCKS_ALIGN_RIGHT, CV_BLOCKS_ALIGN_VERTICAL, CV_BLOCKS_ALIGN_HORISONTAL,
     cvBlocks_distribute, CV_BLOCKS_DISTRIBUTE_VERTICAL, CV_BLOCKS_DISTRIBUTE_HORISONTAL,
     cvBlocks_alignSize, CV_BLOCKS_ALIGN_WIDTH, CV_BLOCKS_ALIGN_HEIGHT,
-    cvBlocks_group, CV_BLOCKS_GROUP, CV_BLOCKS_UNGROUP,
+    cvBlocks_group, CV_BLOCKS_GROUP, 
+    cvBlock_ungroup, CV_BLOCK_UNGROUP,
     cvElement_activate, CV_ELEMENT_ACTIVATE,
-    cvElement_update, CV_ELEMENT_UPDATE,
+    cvStyle_update, CV_STYLE_UPDATE,
     cvElement_textUpdate, CV_TEXT_UPDATE,
 }

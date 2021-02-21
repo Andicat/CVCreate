@@ -27,8 +27,8 @@ class PanelBlock extends React.PureComponent {
         //if (this.props.data.type==='group') {
         //    elementCode = <CVElementGroup  blockId={this.props.id} cv={false} data={this.props.data} activeElementId={this.props.activeElementId}></CVElementGroup>;
         //} else {
-            let elementId = this.props.id + '-' + 0;
-            elementCode = <CVElement  key={elementId} id={elementId} blockId={this.props.id} cv={false} data={this.props.data} active={elementId===this.props.activeElementId}></CVElement>;
+            //let elementId = this.props.id + '-' + 0;
+            elementCode = <CVElement key={'' + this.props.id} id={'' + this.props.id} blockId={this.props.id} cv={false} data={this.props.data} active={false}></CVElement>;
         //}
         return (    
             <li className='panel__block'>

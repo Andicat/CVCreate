@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import image from './../img/image.svg';
+//import image from './../img/image.svg';
 
 import {connect} from 'react-redux';
 import {cvElement_activate, cvElement_textUpdate} from '../redux/cvDataAC';
@@ -36,7 +36,7 @@ class CVElement extends React.PureComponent {
 
     render () {
         if (this.props.cv) {
-            console.log('render element', this.props.activeElementId);
+            //console.log('render element', this.props.activeElementId);
         };
         let isActive = (this.props.activeElementId===this.props.id);
         let style = createStyle(this.props.data.style);
@@ -44,8 +44,9 @@ class CVElement extends React.PureComponent {
         let className = ' cv__element cv__element--' + type + (isActive?' cv__element--active':'') + (this.props.data.direction?(' cv__element--' + type + '-' + this.props.data.direction):'');
         let elementCode = null;
         switch (type) {
-            case 'image': 
-                let src = (this.props.data.style['file']) || image;
+            case 'image':
+                //let src = (this.props.data.style['file']) || image;
+                let src = (this.props.data.style['file']);
                 elementCode = <img className={className} src={src} style={style} alt='' onClick={this.onClick}/>;
                 break;
             case 'text':
@@ -64,9 +65,9 @@ class CVElement extends React.PureComponent {
                 break;
             case 'group':
                 let CVElementChild = connect()(CVElement);
-                elementCode = <div className={className}>
+                elementCode = <div className={className} style={style}>
                                 {this.props.data.elements.map( (e,i) => (
-                                    <CVElementChild key={this.props.id + '-' + i} id={this.props.id + '-' + i} blockId={this.props.blockId} cv={this.props.cv} data={e} activeElementId={this.props.activeElementId}></CVElementChild>
+                                    <CVElementChild key={'' + (e.id?e.id:i)} id={'' + (e.id?e.id:i)} blockId={this.props.blockId} cv={this.props.cv} data={e} activeElementId={this.props.activeElementId}></CVElementChild>
                                 ))}
                               </div>;
                 break;

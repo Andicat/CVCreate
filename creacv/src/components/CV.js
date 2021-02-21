@@ -7,10 +7,12 @@ import OptionPanel from './OptionPanel';
 import {cvBlock_activate} from '../redux/cvDataAC';
 
 import {connect} from 'react-redux';
+import {createStyle} from './utils';
 
 class CV extends React.PureComponent {
 
     static propTypes = {
+        stylePage: PropTypes.object,  
         blocks: PropTypes.array,
         activeBlocksId: PropTypes.array,
         activeElementId: PropTypes.string,
@@ -25,7 +27,8 @@ class CV extends React.PureComponent {
     
 
     render () {
-        console.log('render cv', this.props.activeBlocksId);
+        console.log('render cv', this.props.blocks);
+        let style = createStyle(this.props.stylePage);
         let activeOneId = (this.props.activeBlocksId.length===1) && this.props.activeBlocksId[0];
         let activeBlock = null;
         let activeElementId = null;
@@ -46,7 +49,7 @@ class CV extends React.PureComponent {
             <div className='desk'>
                 <OptionPanel block={activeBlock}></OptionPanel>
                 {activeBlock && <Transform block={activeBlock}></Transform>}
-                <div className='cv' onClick={this.onClick}>
+                <div className='cv' style={style} onClick={this.onClick}>
                     {cvBlocksCode}
                 </div>
             </div>
@@ -56,6 +59,7 @@ class CV extends React.PureComponent {
 
 const mapStateToProps = function (state) {
     return {
+        stylePage: state.cvData.stylePage,
         blocks: state.cvData.blocks,
         activeBlocksId: state.cvData.activeBlocksId,
         activeElementId: state.cvData.activeElementId
