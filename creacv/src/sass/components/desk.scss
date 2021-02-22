@@ -4,4 +4,9 @@
     justify-content: center;
     padding-top: 40px;
     position: relative;
-}
+    position: fixed; 
+    left: 250px; 
+    right: 0; 
+    top: 0; 
+    bottom: 0; 
+    overflow: scroll; }

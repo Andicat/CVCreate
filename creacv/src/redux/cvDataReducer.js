@@ -28,7 +28,7 @@ import { CV_BLOCK_ADD,
         CV_LOAD } from './cvDataAC';
 
 const initState = {
-    stylePage: {bgcolor:'#ffffff', width:'210mm',height:'297mm'},
+    stylePage: {bgcolor:'#ffffff'},
     blocks: [],
     activeBlockDOM: null,
     activeBlocksId: [],

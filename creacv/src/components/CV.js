@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import CvBlock from './CvBlock';
-import CvAction from './CvAction';
 import Transform from './Transform';
 import OptionPanel from './OptionPanel';
+import Option from './Option';
+import Action from './Action';
+import {CV_ID} from './utils';
 import {cvBlock_activate} from '../redux/cvDataAC';
 
 import {connect} from 'react-redux';
@@ -63,6 +65,7 @@ class CV extends React.PureComponent {
         let activeOneId = (this.props.activeBlocksId.length===1) && this.props.activeBlocksId[0];
         let activeBlock = null;
         let activeElementId = null;
+        let codeOptions = null;
         if (activeOneId) {
             activeBlock = this.props.blocks.find(b => b.id === activeOneId);
             activeElementId = this.props.activeElementId;
@@ -71,10 +74,18 @@ class CV extends React.PureComponent {
             let activeIndex = this.props.activeBlocksId.findIndex(ab => ab===b.id);
             return <CvBlock key={b.id} id={b.id} data={b} activeIndex={activeIndex} activeElementId={activeIndex>=0?activeElementId:null}></CvBlock>
         });
+        if (this.props.stylePage) {
+            codeOptions = Object.keys(this.props.stylePage).map( (s,i) => (
+                <Option key={i} optionName={s} optionValue={this.props.stylePage[s]} blockId={CV_ID}/>));
+        }
         
         return (
             <div className='desk'>
-                <CvAction cbSave={this.saveCV} cbLoad={this.loadCV}></CvAction>
+                <form className='options options__cv'>
+                {codeOptions}
+                <Action key={1} actionName={'save'} cbOnChange={this.props.cbSave}></Action>
+                <Action key={2} actionName={'load'} cbOnChange={this.props.cbLoad}></Action>
+            </form>
                 <OptionPanel block={activeBlock}></OptionPanel>
                 {activeBlock && <Transform block={activeBlock}></Transform>}
                 <div className='cv' style={style} onClick={this.onClick}>

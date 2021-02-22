@@ -41,6 +41,8 @@ const OPTIONS_TEXT = {
     align_width: 'set same width for blocks',
     align_height: 'set same height for blocks',
     group: 'group blocks',
+    save: 'save CV',
+    load: 'load saved CV',
 }
 
 //create jsx-code for option
@@ -79,6 +81,8 @@ function createOption (optionType,optionValue,cbOnChange) {
         align_width: codeButton(),
         align_height: codeButton(),
         group: codeButton(),
+        save: codeButton(),
+        load: codeButton(),
     }
     
 
