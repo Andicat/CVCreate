@@ -58,6 +58,10 @@ class CV extends React.PureComponent {
             this.props.dispatch(cv_load(data.blocks,data.style));
         });
     }
+
+    showHTML = () => {
+
+    }
     
     render () {
         console.log('render cv', this.props.blocks);
@@ -83,8 +87,9 @@ class CV extends React.PureComponent {
             <div className='desk'>
                 <form className='options options__cv'>
                 {codeOptions}
-                <Action key={1} actionName={'save'} cbOnChange={this.props.cbSave}></Action>
-                <Action key={2} actionName={'load'} cbOnChange={this.props.cbLoad}></Action>
+                <Action actionName={'save'} cbOnChange={this.saveCV}></Action>
+                <Action actionName={'load'} cbOnChange={this.loadCV}></Action>
+                <Action actionName={'html'} cbOnChange={this.showHTML}></Action>
             </form>
                 <OptionPanel block={activeBlock}></OptionPanel>
                 {activeBlock && <Transform block={activeBlock}></Transform>}

@@ -7,7 +7,6 @@ import {createOption, OPTIONS_TEXT} from './utils';
 class Action extends React.PureComponent {
 
     static propTypes = {
-        blockId: PropTypes.number.isRequired,
         actionName: PropTypes.string,
         actionValue: PropTypes.any,
         cbOnChange: PropTypes.func,
@@ -38,10 +37,4 @@ class Action extends React.PureComponent {
     }
 }
 
-const mapStateToProps = function (state) {
-    return {
-        elementId: state.cvData.activeElementId, 
-    };
-  };
-
-export default connect(mapStateToProps)(Action);
+export default connect()(Action);

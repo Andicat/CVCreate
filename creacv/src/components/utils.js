@@ -43,6 +43,7 @@ const OPTIONS_TEXT = {
     group: 'group blocks',
     save: 'save CV',
     load: 'load saved CV',
+    html: 'see html',
 }
 
 //create jsx-code for option
@@ -83,6 +84,7 @@ function createOption (optionType,optionValue,cbOnChange) {
         group: codeButton(),
         save: codeButton(),
         load: codeButton(),
+        html: codeButton(),
     }
     
 
