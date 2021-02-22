@@ -3,23 +3,18 @@ import PropTypes from 'prop-types';
 
 import {connect} from 'react-redux';
 import {createOption, OPTIONS_TEXT} from './utils';
-import {cvStyle_update} from '../redux/cvDataAC';
 
-class Option extends React.PureComponent {
+class Action extends React.PureComponent {
 
     static propTypes = {
         blockId: PropTypes.number.isRequired,
-        elementId: PropTypes.string,
-        optionName: PropTypes.string,
-        optionValue: PropTypes.any,
+        actionName: PropTypes.string,
+        actionValue: PropTypes.any,
+        cbOnChange: PropTypes.func,
     };
 
     state = {
         showTooltip: false,
-    }
-
-    onChangeValue = (value) => {
-        this.props.dispatch(cvStyle_update(this.props.blockId, this.props.elementId,this.props.optionName,value));
     }
 
     onMouseOver = () => {
@@ -32,11 +27,12 @@ class Option extends React.PureComponent {
 
     render () {
         //console.log('render option',this.props.elementId);
-        let optionCode = createOption(this.props.optionName,this.props.optionValue,this.onChangeValue);
+
+        let optionCode = createOption(this.props.actionName,this.props.actionValue,this.props.cbOnChange);
         return (
             <div className='options__elem' onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
                 {optionCode}
-                {this.state.showTooltip && <div className='option__tooltip'>{OPTIONS_TEXT[this.props.optionName]}</div>}
+                {this.state.showTooltip && <div className='option__tooltip'>{OPTIONS_TEXT[this.props.actionName]}</div>}
             </div>
         );
     }
@@ -48,4 +44,4 @@ const mapStateToProps = function (state) {
     };
   };
 
-export default connect(mapStateToProps)(Option);
+export default connect(mapStateToProps)(Action);

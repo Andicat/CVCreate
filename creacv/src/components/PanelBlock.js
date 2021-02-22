@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import CVElement from './CVElement';
-import CVElementGroup from '../delete/CVElementGroup';
 
 import {connect} from 'react-redux';
 import {cvBlock_add} from '../redux/cvDataAC';

@@ -1,4 +1,5 @@
 ﻿import {CV_ID} from './../components/utils';
+
 import { CV_BLOCK_ADD,
         CV_BLOCK_DELETE,
         CV_BLOCK_MOVE,
@@ -23,10 +24,11 @@ import { CV_BLOCK_ADD,
         CV_BLOCK_UNGROUP,
         CV_ELEMENT_ACTIVATE,
         CV_STYLE_UPDATE,
-        CV_TEXT_UPDATE } from './cvDataAC';
+        CV_TEXT_UPDATE,
+        CV_LOAD } from './cvDataAC';
 
 const initState = {
-    stylePage: {bgcolor:'#ffffff', width:620,height:877},
+    stylePage: {bgcolor:'#ffffff', width:'210mm',height:'297mm'},
     blocks: [],
     activeBlockDOM: null,
     activeBlocksId: [],
@@ -506,6 +508,16 @@ function cvDataReducer(state = initState, action) {
                 blocks:newBlocks};
             return newState;
         }
+
+        //load CV-doc from json
+        case CV_LOAD: {
+            let newState = {...state,
+                stylePage:action.style,
+                blocks:action.blocks
+            };
+            return newState;
+        }
+
         default:
             return state;
     }

@@ -1,0 +1,31 @@
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="65.60241" width="65.60241" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g stroke="null" id="svg_19">
+   <g stroke="null" id="svg_1">
+    <path stroke="null" id="svg_2" d="m439.68422,123.48858l-44.68092,-43.53967c-9.16712,-8.93192 -21.5974,-13.94892 -34.56074,-13.94892l-28.63006,0l0,83.34375c0,6.57523 -5.47095,11.90625 -12.21875,11.90625l-195.5,0c-6.7478,0 -12.21875,-5.33102 -12.21875,-11.90625l0,-83.34375l-24.4375,0c-13.49561,0 -24.4375,10.66056 -24.4375,23.8125l0,333.375c0,13.1512 10.94189,23.8125 24.4375,23.8125l342.12501,0c13.49561,0 24.4375,-10.6613 24.4375,-23.8125l0,-266.02283c0,-12.63179 -5.14868,-24.74491 -14.31579,-33.67608zm-34.55921,275.88642l-293.25001,0l0,-142.875l293.25001,0l0,142.875z"/>
+    <rect stroke="null" y="66" id="svg_3" height="71.4375" width="48.875" x="234.0625"/>
+   </g>
+   <g stroke="null" id="svg_4"/>
+   <g stroke="null" id="svg_5"/>
+   <g stroke="null" id="svg_6"/>
+   <g stroke="null" id="svg_7"/>
+   <g stroke="null" id="svg_8"/>
+   <g stroke="null" id="svg_9"/>
+   <g stroke="null" id="svg_10"/>
+   <g stroke="null" id="svg_11"/>
+   <g stroke="null" id="svg_12"/>
+   <g stroke="null" id="svg_13"/>
+   <g stroke="null" id="svg_14"/>
+   <g stroke="null" id="svg_15"/>
+   <g stroke="null" id="svg_16"/>
+   <g stroke="null" id="svg_17"/>
+   <g stroke="null" id="svg_18"/>
+  </g>
+ </g>
+</svg>

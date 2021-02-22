@@ -23,6 +23,7 @@ const CV_BLOCKS_ALIGN_HEIGHT = 'CV_BLOCKS_ALIGN_HEIGHT';
 const CV_BLOCKS_GROUP = 'CV_BLOCKS_GROUP';
 const CV_BLOCK_UNGROUP = 'CV_BLOCK_UNGROUP';
 const CV_BLOCK_LOCK = 'CV_BLOCK_LOCK';
+const CV_LOAD = 'CV_LOAD';
 
 const cvBlock_add = function(block) {
     return {
@@ -178,6 +179,14 @@ const cvBlock_lock = function(blockId, mode) {
     };
 }
 
+const cv_load = function(blocks,style) {
+    return { 
+        type: CV_LOAD,
+        blocks:blocks,
+        style:style,
+    };
+}
+
 export {
     cvBlock_add, CV_BLOCK_ADD,
     cvBlock_delete, CV_BLOCK_DELETE,
@@ -197,4 +206,5 @@ export {
     cvElement_activate, CV_ELEMENT_ACTIVATE,
     cvStyle_update, CV_STYLE_UPDATE,
     cvElement_textUpdate, CV_TEXT_UPDATE,
+    cv_load, CV_LOAD,
 }

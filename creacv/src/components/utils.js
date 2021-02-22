@@ -9,27 +9,78 @@ const HEIGHT_MAX = 1000;
 
 const CV_ID = 1.1;
 
+const OPTIONS_TEXT = {
+    fontsize: 'font Size',
+    bold: 'font Bold',
+    italic: 'font Italic',
+    underline: 'font Underline',
+    uppercase: 'font Uppercase',
+    center: 'align text to Center',
+    color: 'color of text',
+    bgcolor: 'background color',
+    file: 'load image',
+    count: 'count of dots',
+    radius: 'radius of dots',
+    borderwidth: 'width of border',
+    bordercolor: 'color of border',
+    padding: 'padding',
+    opacity: 'opacity',
+    copy: 'copy block',
+    back: 'send block on back',
+    autosize: 'set block size on Auto',
+    lock: 'lock block position',
+    ungroup: 'ungroup blocks',
+    align_top: 'align blocks on top',
+    align_bottom: 'align blocks on bottom',
+    align_left: 'align blocks on left',
+    align_right: 'align blocks on right',
+    align_vertical: 'align blocks on vertical',
+    align_horisontal: 'align blocks on horisontal',
+    distribute_vertical: 'distribute blocks on vertical',
+    distribute_horisontal: 'distribute blocks on horisontal',
+    align_width: 'set same width for blocks',
+    align_height: 'set same height for blocks',
+    group: 'group blocks',
+}
+
 //create jsx-code for option
 function createOption (optionType,optionValue,cbOnChange) {
 
-    const OPTIONS = {
+    const OPTIONS_CODE = {
         fontsize: codeNumber(FONT_SIZE_MIN,FONT_SIZE_MAX,1),
         bold: codeCheckbox(),
         italic: codeCheckbox(),
         uppercase: codeCheckbox(),
         center: codeCheckbox(),
-        width: codeNumber(WIDTH_MIN,WIDTH_MAX,1),
-        height: codeNumber(HEIGHT_MIN, HEIGHT_MAX,1),
+        //width: codeNumber(WIDTH_MIN,WIDTH_MAX,1),
+        //height: codeNumber(HEIGHT_MIN, HEIGHT_MAX,1),
         color: codeColor(),
         bgcolor: codeColor(),
         file: codeFile(),
         count: codeNumber(),
-        size: codeNumber(),
+        radius: codeNumber(),
         borderwidth: codeNumber(),
         bordercolor: codeColor(),
         padding: codeNumber(),
         opacity: codeRange(0,1,0.01),
+        copy: codeButton(),
+        back: codeButton(),
+        autosize: codeButton(),
+        lock: codeCheckbox(),
+        ungroup: codeButton(),
+        align_top: codeButton(),
+        align_bottom: codeButton(),
+        align_left: codeButton(),
+        align_right: codeButton(),
+        align_vertical: codeButton(),
+        align_horisontal: codeButton(),
+        distribute_vertical: codeButton(),
+        distribute_horisontal: codeButton(),
+        align_width: codeButton(),
+        align_height: codeButton(),
+        group: codeButton(),
     }
+    
 
     function setValue(elem,value) {
         if (elem) {
@@ -89,7 +140,11 @@ function createOption (optionType,optionValue,cbOnChange) {
                 </React.Fragment>
     };
 
-    return OPTIONS[optionType];
+    function codeButton() {
+        return <input type='button' className={'option option__button option__button--' + optionType} onClick={cbOnChange}/>;
+    };
+
+    return OPTIONS_CODE[optionType];
 };
 
 // create style for DOM-element
@@ -113,12 +168,12 @@ function createStyle (styles) {
             case 'center':
                 styleAttr.textAlign = styles[key]?'center':'start';
                 break;
-            case 'width': 
-                styleAttr.width = styles[key] + 'px';
-                break;
-            case 'height': 
-                styleAttr.height = styles[key] + 'px';
-                break;
+            //case 'width': 
+            //    styleAttr.width = styles[key] + 'px';
+            //    break;
+            //case 'height': 
+            //    styleAttr.height = styles[key] + 'px';
+            //    break;
             case 'top': 
                 styleAttr.top = styles[key] + 'px';
                 break;
@@ -141,7 +196,7 @@ function createStyle (styles) {
                 //styleAttr.backgroundColor = styles[key];
                 break;*/
             default:
-                styleAttr[key] = styles[key];;
+                styleAttr[key] = styles[key];
         }
     }
     return styleAttr;
@@ -166,4 +221,4 @@ function getAutoSize (element) {
     return sizes;
 };
 
-export {createOption, createStyle, getAutoSize, CV_ID};
+export {createOption, createStyle, getAutoSize, CV_ID, OPTIONS_TEXT};

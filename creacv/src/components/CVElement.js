@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-//import image from './../img/image.svg';
+import image from './../img/image.svg';
 
 import {connect} from 'react-redux';
 import {cvElement_activate, cvElement_textUpdate} from '../redux/cvDataAC';
@@ -45,8 +45,7 @@ class CVElement extends React.PureComponent {
         let elementCode = null;
         switch (type) {
             case 'image':
-                //let src = (this.props.data.style['file']) || image;
-                let src = (this.props.data.style['file']);
+                let src = (this.props.data.style['file']) || image;
                 elementCode = <img className={className} src={src} style={style} alt='' onClick={this.onClick}/>;
                 break;
             case 'text':
@@ -58,7 +57,7 @@ class CVElement extends React.PureComponent {
                 elementCode = <div className={className} style={style} onClick={this.onClick}></div>;;
                 break;
             case 'dots-row':
-                style = {...style, width:this.props.data.style.size + 'px', height:this.props.data.style.size + 'px', margin:this.props.data.style.size*0.5 + 'px', borderRadius: '50%'};
+                style = {...style, width:this.props.data.style.radius + 'px', height:this.props.data.style.radius + 'px', margin:this.props.data.style.radius*0.5 + 'px', borderRadius: '50%'};
                 elementCode = <div className={className} onClick={this.onClick}>
                                 {Array.from({length: this.props.data.style.count}, (v,i) => <div key={i} style={style}></div>)}
                               </div>;

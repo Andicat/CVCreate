@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Option from './Option';
+import Action from './Action';
 
 import {connect} from 'react-redux';
 import {cvBlock_sendBack,
@@ -11,13 +12,12 @@ import {cvBlock_sendBack,
     cvBlocks_distribute,
     cvBlocks_group,
     cvBlock_ungroup, 
-    cvBlock_lock} from '../redux/cvDataAC';
-import {getAutoSize, CV_ID} from './utils';
+    cvBlock_lock } from '../redux/cvDataAC';
+import {getAutoSize} from './utils';
 
 class OptionPanel extends React.PureComponent {
 
     static propTypes = {
-        stylePage: PropTypes.object,    
         styleToEdit: PropTypes.object,     
         activeElementId: PropTypes.string,   
         block: PropTypes.object,
@@ -93,82 +93,45 @@ class OptionPanel extends React.PureComponent {
 
     render () {
         //console.log('render option panel');
-        //debugger
         let codeElementOptions = null;
         let codeBlockOptions = null;
         let codeBlocksOptions = null;
-
+        
         if (this.props.activeElementId) {
             codeElementOptions = Object.keys(this.props.styleToEdit).map( (s,i) => (
                     <Option key={i} optionName={s} optionValue={this.props.styleToEdit[s]} blockId={this.props.block.id}/>));
         };
 
         if (this.props.block) {
-            //console.log('direction',this.props.direction);
             codeBlockOptions = (
                <React.Fragment>
-                   <div className='options__elem'>
-                        <input type='checkbox' id={'lock'} className={'option option__checkbox option__checkbox--lock'} 
-                        checked={this.props.block.lock?this.props.block.lock:false} onChange={this.lockPositionBlock}/>
-                        <label htmlFor={'lock'}/>
-                    </div>
-                   {(!this.props.block.ungroup && this.props.activeBlockDOM) && (
-                        <div className='options__elem'>
-                            <input type='button' className={'option option__autosize'} onClick={this.setBlockSizeAuto}/>
-                        </div>)}
-                    <div className='options__elem'>
-                        <input type='button' className={'option option__back'} onClick={this.sendBlockBack}/>
-                    </div>
-                    <div className='options__elem'>
-                        <input type='button' className={'option option__copy'} onClick={this.copyBlock}/>
-                    </div>
+                    <Action key={1} actionName={'lock'} actionValue={this.props.block.lock?this.props.block.lock:false} cbOnChange={this.lockPositionBlock}></Action>
+                    {(!this.props.block.ungroup && this.props.activeBlockDOM) && (
+                        <Action key={2} actionName={'autosize'} cbOnChange={this.setBlockSizeAuto}></Action>
+                    )}
+                    <Action key={3} actionName={'back'} cbOnChange={this.sendBlockBack}></Action>
+                    <Action key={4} actionName={'copy'} cbOnChange={this.copyBlock}></Action>
                     {this.props.block.ungroup && (
-                        <div className='options__elem'>
-                            <input type='button' className={'option option__ungroup'} onClick={this.ungroupBlock}/>
-                        </div>)}
+                        <Action key={5} actionName={'ungroup'} cbOnChange={this.ungroupBlock}></Action>
+                    )}
                </React.Fragment>
             );
-        } else {
-            codeElementOptions = Object.keys(this.props.stylePage).map( (s,i) => (
-                <Option key={i} optionName={s} optionValue={this.props.stylePage[s]} blockId={CV_ID}/>));
         }
 
         if (this.props.activeBlocksId.length > 1) {
             codeBlocksOptions = (
                 <React.Fragment>
-                    <div className='options__elem'>
-                        <input type='button' className={'option option__align-top'} onClick={this.alignBlocksTop}/>
-                    </div>
-                    <div className='options__elem'>
-                        <input type='button' className={'option option__align-bottom'} onClick={this.alignBlocksBottom}/>
-                    </div>
-                    <div className='options__elem'>
-                        <input type='button' className={'option option__align-left'} onClick={this.alignBlocksLeft}/>
-                    </div>
-                    <div className='options__elem'>
-                        <input type='button' className={'option option__align-right'} onClick={this.alignBlocksRight}/>
-                    </div>
-                    <div className='options__elem'>
-                        <input type='button' className={'option option__align-vertical'} onClick={this.alignBlocksVertical}/>
-                    </div>
-                    <div className='options__elem'>
-                        <input type='button' className={'option option__align-horisontal'} onClick={this.alignBlocksHorisontal}/>
-                    </div>
-                    <div className='options__elem'>
-                        <input type='button' className={'option option__distribute-vertical'} onClick={this.distributeBlocksVertical}/>
-                    </div>
-                    <div className='options__elem'>
-                        <input type='button' className={'option option__distribute-horisontal'} onClick={this.distributeBlocksHorisontal}/>
-                    </div>
-                    <div className='options__elem'>
-                        <input type='button' className={'option option__align-width'} onClick={this.setBlocksSizeWidth}/>
-                    </div>
-                    <div className='options__elem'>
-                        <input type='button' className={'option option__align-height'} onClick={this.setBlocksSizeHeight}/>
-                    </div>
-                    <div className='options__elem'>
-                        <input type='button' className={'option option__group'} onClick={this.groupBlocks}/>
-                    </div>
+                    <Action key={6} actionName={'align_top'} cbOnChange={this.alignBlocksTop}></Action>
+                    <Action key={7} actionName={'align_bottom'} cbOnChange={this.alignBlocksBottom}></Action>
+                    <Action key={8} actionName={'align_left'} cbOnChange={this.alignBlocksLeft}></Action>
+                    <Action key={9} actionName={'align_right'} cbOnChange={this.alignBlocksRight}></Action>
+                    <Action key={10} actionName={'align_vertical'} cbOnChange={this.alignBlocksVertical}></Action>
+                    <Action key={11} actionName={'align_horisontal'} cbOnChange={this.alignBlocksHorisontal}></Action>
+                    <Action key={12} actionName={'distribute_vertical'} cbOnChange={this.distributeBlocksVertical}></Action>
+                    <Action key={13} actionName={'distribute_horisontal'} cbOnChange={this.distributeBlocksHorisontal}></Action>
+                    <Action key={14} actionName={'align_width'} cbOnChange={this.setBlocksSizeWidth}></Action>
+                    <Action key={15} actionName={'align_height'} cbOnChange={this.setBlocksSizeHeight}></Action>
+                    <Action key={16} actionName={'group'} cbOnChange={this.groupBlocks}></Action>
                 </React.Fragment>
             );
         }
@@ -190,10 +153,8 @@ class OptionPanel extends React.PureComponent {
 
 const mapStateToProps = function (state) {
     return {
-        stylePage: state.cvData.stylePage,
         styleToEdit: state.cvData.styleToEdit,
         activeElementId: state.cvData.activeElementId,
-        //activeblock.id: state.cvData.activeblock.id,
         activeBlocksId: state.cvData.activeBlocksId,
         activeBlockDOM: state.cvData.activeBlockDOM,
     };

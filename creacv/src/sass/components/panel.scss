@@ -2,7 +2,12 @@
     background-color: $color-panel-bg;
     width: 250px;
 
+    &__menu {
+    //    min-width: 300px;
+    }
+
     &__group {
+
         &-name {
             transition: all 0.3s;
             position: relative;

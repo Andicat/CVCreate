@@ -8,19 +8,15 @@ import CV from './components/CV';
 
 let store = createStore(combinedReducer);
 
-function App(props) {
-    //{console.log(props.image)}
-    /*let imagesArr = [
-        {type:'image', style:{file:props.image, opacity:1}},
-        {type:'image', style:{file:props.image, opacity:1, borderRadius:'50%'}},
-        {type:'image', style:{file:props.image, opacity:1, bordercolor: '#E05B49', borderwidth: '3', borderStyle: 'solid'}},
-        {type:'image', style:{file:props.image, opacity:1, borderRadius:'50%', bordercolor: '#E05B49', borderwidth: '3', borderStyle: 'solid'}},
-    ];*/
-    let imagesArr = props.imagesArr;
+function App() {
 
-    let ttt = JSON.stringify(imagesArr);
-    console.log(ttt);
-    
+    let imagesArr = [
+        {type:'image', style:{file:'', opacity:1}},
+        {type:'image', style:{file:'', opacity:1, borderRadius:'50%'}},
+        {type:'image', style:{file:'', opacity:1, bordercolor: '#E05B49', borderwidth: '3', borderStyle: 'solid'}},
+        {type:'image', style:{file:'', opacity:1, borderRadius:'50%', bordercolor: '#E05B49', borderwidth: '3', borderStyle: 'solid'}},
+    ];
+
     let textStyleDefault = {fontsize:'16', bold:false, italic:false, center:false, uppercase:false, color:'#000000', padding:0};
     
     let textSimpleArr = [
@@ -57,16 +53,16 @@ function App(props) {
     let skillsArr = [
         {type:'group', direction:'row', elements:[
             {type:'text', text:'skill in dots', style:{...textStyleDefault}},
-            {type:'dots-row', style:{bgcolor:'#E05B49', size:10, count:3}},
-            {type:'dots-row', style:{bgcolor:'#E6E6E6', size:10, count:2}},
+            {type:'dots-row', style:{bgcolor:'#E05B49', radius:10, count:3}},
+            {type:'dots-row', style:{bgcolor:'#E6E6E6', radius:10, count:2}},
         ]},
         {type:'group', direction:'row', elements:[
             {type:'text', text:'skill in dots', style:{...textStyleDefault}},
-            {type:'dots-row', style:{bgcolor:'#E05B49', size:10, count:3}},
+            {type:'dots-row', style:{bgcolor:'#E05B49', radius:10, count:3}},
         ]},
         {type:'group', direction:'column', elements:[
             {type:'text', text:'skill in progress', style:{...textStyleDefault}},
-            {type:'figure', style:{bgcolor:'#E05B49', height:'7', width:'100'}},
+            {type:'figure', style:{bgcolor:'#E05B49', height:'7px', width:'100'}},
         ]},
     ];
     
