@@ -13,22 +13,28 @@ class Panel extends React.PureComponent {
     };
 
     state = {
-        activeMenuId:null,
+        activeMenuId: null,
+        show: true,
     }
 
-    menuSelected = (id) => {
+    selectMenu = (id) => {
         this.setState( {activeMenuId:(id===this.state.activeMenuId)?null:id} );
+    }
+
+    showPanel = () => {
+        this.setState( {show:!this.state.show} );
     }
 
     render () {
         var groupsCode = this.props.groups.map( (g,i) => {
-            return <PanelMenu key={i} id={i} data={g} active={(this.state.activeMenuId===i)?true:false} cbSelected={this.menuSelected}/>
+            return <PanelMenu key={i} id={i} data={g} active={(this.state.activeMenuId===i)?true:false} cbSelected={this.selectMenu}/>
             });
 
         return <aside className='panel'>
-            <ul className='panel__menu'>
+            {this.state.show && <ul className='panel__menu'>
                 {groupsCode}
-            </ul>
+            </ul>}
+            <button className='panel__button-hide' onClick={this.showPanel}/>
         </aside>;
     }
 }

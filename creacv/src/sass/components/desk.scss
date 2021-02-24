@@ -1,12 +1,25 @@
-.desk {
+/*.desk {
     flex-grow: 1;
     display: flex;
     justify-content: center;
     padding-top: 40px;
     position: relative;
     position: fixed; 
-    left: 250px; 
+    left: 0; 
     right: 0; 
     top: 0; 
     bottom: 0; 
-    overflow: scroll; }
+    overflow-y: scroll; 
+
+}*/
+
+.desk {
+   
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+    position: relative;
+   
+    overflow-y: scroll; 
+
+}

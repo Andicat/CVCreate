@@ -74,11 +74,13 @@ function App() {
         {name: 'Figures', elements:figuresArr},
         {name: 'Skills', elements:skillsArr},
     ];
+
+    //<header>Create your CV</header>
     
     return (
         <Provider store={store}>
             <React.Fragment>
-                <header>Create your CV</header>
+            <header>Create your CV</header>
                 <main>
                     <Panel groups={templatesArr}/>
                     <CV/>
