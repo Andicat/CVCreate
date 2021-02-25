@@ -43,14 +43,14 @@
         &--delete {
             top: 0;
             right: 0;
-            transform: translate(50%, -50%);
+            transform: translate(60%, -60%);
             background-image: url('./../../img/icon-delete.svg');
         }
     
         &--move {
             top: 0;
             left: 0;
-            transform: translate(-50%, -50%);
+            transform: translate(-60%, -60%);
             background-image: url('./../../img/icon-move.svg');
     
             /*&:hover {
@@ -61,7 +61,7 @@
         &--resize {
             bottom: 0;
             right: 0;
-            transform: translate(50%, 50%) rotate(-45deg);
+            transform: translate(60%, 60%) rotate(-45deg);
             background-image: url('./../../img/icon-resize.svg');
         }
     

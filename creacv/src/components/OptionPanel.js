@@ -27,6 +27,13 @@ class OptionPanel extends React.PureComponent {
         stylePage: PropTypes.object,   
     };
 
+    state = {
+        tooltip: null,
+    }
+
+    setTooltip = (text) => {
+        this.setState({tooltip:text});
+    }
 
     sendBlockBack = () => {
         this.props.dispatch(cvBlock_sendBack(this.props.activeBlock.id));
@@ -90,7 +97,6 @@ class OptionPanel extends React.PureComponent {
     }
 
     lockPositionBlock = (evt) => {
-        debugger
         this.props.dispatch(cvBlock_lock(this.props.activeBlock.id,evt));
     }
 
@@ -103,43 +109,43 @@ class OptionPanel extends React.PureComponent {
         
         if (this.props.activeElementId) {
             codeElementOptions = Object.keys(this.props.styleToEdit).map( (s,i) => (
-                    <Option key={i} optionName={s} optionValue={this.props.styleToEdit[s]} blockId={this.props.activeBlock.id}/>));
+                    <Option key={i} optionName={s} optionValue={this.props.styleToEdit[s]} blockId={this.props.activeBlock.id} cbSetTooltip={this.setTooltip}/>));
         };
 
         if (this.props.activeBlock) {
             codeBlockOptions = (
                <React.Fragment>
-                    <Action key={1} actionName={'lock'} actionValue={this.props.activeBlock.lock?this.props.activeBlock.lock:false} cbOnChange={this.lockPositionBlock}></Action>
+                    <Action key={1} actionName={'lock'} actionValue={this.props.activeBlock.lock?this.props.activeBlock.lock:false} cbOnChange={this.lockPositionBlock} cbSetTooltip={this.setTooltip}></Action>
                     {(!this.props.activeBlock.ungroup && this.props.activeBlockDOM) && (
-                        <Action key={2} actionName={'autosize'} cbOnChange={this.setBlockSizeAuto}></Action>
+                        <Action key={2} actionName={'autosize'} cbOnChange={this.setBlockSizeAuto} cbSetTooltip={this.setTooltip}></Action>
                     )}
-                    <Action key={3} actionName={'back'} cbOnChange={this.sendBlockBack}></Action>
-                    <Action key={4} actionName={'copy'} cbOnChange={this.copyBlock}></Action>
+                    <Action key={3} actionName={'back'} cbOnChange={this.sendBlockBack} cbSetTooltip={this.setTooltip}></Action>
+                    <Action key={4} actionName={'copy'} cbOnChange={this.copyBlock} cbSetTooltip={this.setTooltip}></Action>
                     {this.props.activeBlock.ungroup && (
-                        <Action key={5} actionName={'ungroup'} cbOnChange={this.ungroupBlock}></Action>
+                        <Action key={5} actionName={'ungroup'} cbOnChange={this.ungroupBlock} cbSetTooltip={this.setTooltip}></Action>
                     )}
                </React.Fragment>
             );
         } else if (this.props.stylePage) {
             codePageOptions = Object.keys(this.props.stylePage).map( (s,i) => (
-                <Option key={i} optionName={s} optionValue={this.props.stylePage[s]} blockId={CV_ID}/>));
+                <Option key={i} optionName={s} optionValue={this.props.stylePage[s]} blockId={CV_ID} cbSetTooltip={this.setTooltip}/>));
         }
         
 
         if (this.props.activeBlocksId.length > 1) {
             codeBlocksOptions = (
                 <React.Fragment>
-                    <Action key={6} actionName={'align_top'} cbOnChange={this.alignBlocksTop}></Action>
-                    <Action key={7} actionName={'align_bottom'} cbOnChange={this.alignBlocksBottom}></Action>
-                    <Action key={8} actionName={'align_left'} cbOnChange={this.alignBlocksLeft}></Action>
-                    <Action key={9} actionName={'align_right'} cbOnChange={this.alignBlocksRight}></Action>
-                    <Action key={10} actionName={'align_vertical'} cbOnChange={this.alignBlocksVertical}></Action>
-                    <Action key={11} actionName={'align_horisontal'} cbOnChange={this.alignBlocksHorisontal}></Action>
-                    <Action key={12} actionName={'distribute_vertical'} cbOnChange={this.distributeBlocksVertical}></Action>
-                    <Action key={13} actionName={'distribute_horisontal'} cbOnChange={this.distributeBlocksHorisontal}></Action>
-                    <Action key={14} actionName={'align_width'} cbOnChange={this.setBlocksSizeWidth}></Action>
-                    <Action key={15} actionName={'align_height'} cbOnChange={this.setBlocksSizeHeight}></Action>
-                    <Action key={16} actionName={'group'} cbOnChange={this.groupBlocks}></Action>
+                    <Action key={6} actionName={'align_top'} cbOnChange={this.alignBlocksTop} cbSetTooltip={this.setTooltip}></Action>
+                    <Action key={7} actionName={'align_bottom'} cbOnChange={this.alignBlocksBottom} cbSetTooltip={this.setTooltip}></Action>
+                    <Action key={8} actionName={'align_left'} cbOnChange={this.alignBlocksLeft} cbSetTooltip={this.setTooltip}></Action>
+                    <Action key={9} actionName={'align_right'} cbOnChange={this.alignBlocksRight} cbSetTooltip={this.setTooltip}></Action>
+                    <Action key={10} actionName={'align_vertical'} cbOnChange={this.alignBlocksVertical} cbSetTooltip={this.setTooltip}></Action>
+                    <Action key={11} actionName={'align_horisontal'} cbOnChange={this.alignBlocksHorisontal} cbSetTooltip={this.setTooltip}></Action>
+                    <Action key={12} actionName={'distribute_vertical'} cbOnChange={this.distributeBlocksVertical} cbSetTooltip={this.setTooltip}></Action>
+                    <Action key={13} actionName={'distribute_horisontal'} cbOnChange={this.distributeBlocksHorisontal} cbSetTooltip={this.setTooltip}></Action>
+                    <Action key={14} actionName={'align_width'} cbOnChange={this.setBlocksSizeWidth} cbSetTooltip={this.setTooltip}></Action>
+                    <Action key={15} actionName={'align_height'} cbOnChange={this.setBlocksSizeHeight} cbSetTooltip={this.setTooltip}></Action>
+                    <Action key={16} actionName={'group'} cbOnChange={this.groupBlocks} cbSetTooltip={this.setTooltip}></Action>
                 </React.Fragment>
             );
         }
@@ -161,6 +167,9 @@ class OptionPanel extends React.PureComponent {
                     <div className='option-panel__group option-panel__group--block'>
                         {codeBlockOptions}
                     </div>
+                }
+                {this.state.tooltip && 
+                    <span className='option-panel__tooltip'>{this.state.tooltip}</span>
                 }
             </div>
         );

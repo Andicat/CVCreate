@@ -1,19 +1,30 @@
-.panel {
+.template-panel {
     position: relative;
     background-color: $color-panel-bg;
-    min-width: 20px;
+    min-width: 10px;
     height: 100vh;
     display: flex;
     z-index: 10;
+    //width: 300px;
     //overflow-y: auto;
     //overflow-x: visible;
 
     &__menu {
-        width: 250px;
+        //width: 250px;
     //    min-width: 300px;
+    //width: 100%;
+    width: 300px;
+
+    & ~.template-panel__button-hide {
+        border-radius: 0 10px 10px 0;
+        background-image: url('./../../img/icon-close.svg');
+        background-size: 12px;
+    }
+
     }
 
     &__group {
+        
 
         &-name {
             transition: all 0.3s;
@@ -31,12 +42,16 @@
             &::after {
                 content: '';
                 position: absolute;
-                width: 26px;
-                height: 26px;
-                border-radius: 50%;
+                width: 25px;
+                height: 25px;
+                padding: 0;
+                outline: none;
+                border: none;
+                background-color: transparent;
+                //border-radius: 50%;
                 background-image: url('./../../img/icon-open.svg');
                 background-repeat: no-repeat;
-                background-size: 26px;
+                background-size: 100%;
                 right: 14px;
                 top: 8px;
             }
@@ -44,10 +59,8 @@
             &:hover {
                 cursor: pointer;
                 &::after {
-                    box-shadow:
-                    inset 0 1px 3px rgba(0,10,20,.5),
-                    0 1px rgb(83,94,104),
-                    0 0 1px rgb(86,96,106);
+                    animation: arrow-open 1s linear infinite;
+                    cursor: pointer;
                 }
             }
     
@@ -62,7 +75,7 @@
         justify-content: space-between;
         align-items: center;
         border-radius: 5px;
-        padding: 5px;
+        //padding-right: 5px;
         margin: 5px;
         background-color: $color-white;
         border-bottom: 1px solid $color-panel-border;
@@ -77,34 +90,39 @@
 
     &__block-add {
         transition: all 0.3s;
-        width: 30px;
-        height: 30px;
-        margin-left: 10px;
+        width: 25px;
+        height: 25px;
+        margin-right: 5px;
+        padding: 0;
         outline: none;
-        border: 1px solid $color-panel-border;
-        border-radius: 50%;
+        border: none;
+        background-color: transparent;
+        //border: 1px solid $color-panel-border;
+        //border-radius: 50%;
         background-image: url('./../../img/icon-add.svg');
         background-repeat: no-repeat;
         background-size: 100%;
         background-position: center;
 
         &:hover {
-            box-shadow:
+            /*box-shadow:
                 inset 0 1px 3px rgba(0,10,20,.5),
                 0 1px rgb(83,94,104),
-                0 0 1px rgb(86,96,106);
+                0 0 1px rgb(86,96,106);*/
+                animation: arrow-add 1s linear infinite;
             cursor: pointer;
         }
 
-        &:active {
+        /*&:active {
             border: 1px solid rgb(22,32,43);
             border-bottom: 1px solid rgb(25,34,45);
             box-shadow:
                 inset 0 1px 3px rgba(0,10,20,.5),
                 0 1px rgb(83,94,104),
                 0 0 1px rgb(86,96,106);
-        }
+        }*/
     }
+
 
     &__block-view {
         display: flex;
@@ -126,17 +144,29 @@
 
     &__button-hide {
         position: absolute;
-        height: 100px;
+        height: 45px;
+        width: 25px;
         padding: 0;
-        background-color: transparent;
+        background-color: $color-panel-bg;
+        border-radius: 0 10px 10px 0;
+        background-image: url('./../../img/icon-template.svg');
+        background-repeat: no-repeat;
+        background-size: 90%;
+        background-position: center;
+        /*background-color: transparent;
+        background-image: url('./../../img/icon-hide.svg');
+        background-repeat: no-repeat;
+        background-size: contain;*/
         right: 0;
-        top: 50%;
-        transform: translate(100%,-50%);
+        top: 0;
+        transform: translateX(100%);
         z-index: 10;
-        border-right: transparent;
+        //border: none;
+        /*border-right: transparent;
         border-left: 20px solid $color-panel-bg;
         border-top: 50px solid transparent;
-        border-bottom: 50px solid transparent;
+        border-bottom: 50px solid transparent;*/
+        border: 1px solid $color-panel-border;
 
         &:hover,
         &:focus,
@@ -144,5 +174,29 @@
             outline: none;
             cursor: pointer;
         }
+    }
+}
+
+@keyframes arrow-add {
+    0% {
+        background-position: center;
+    }
+    50% {
+        background-position: 3px;
+    }
+    100% {
+        background-position: center;
+    }
+}
+
+@keyframes arrow-open {
+    0% {
+        background-position-y: center;
+    }
+    50% {
+        background-position-y: 3px;
+    }
+    100% {
+        background-position-y: center;
     }
 }

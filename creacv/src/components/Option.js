@@ -12,23 +12,30 @@ class Option extends React.PureComponent {
         elementId: PropTypes.string,
         optionName: PropTypes.string,
         optionValue: PropTypes.any,
+        cbSetTooltip: PropTypes.func,
     };
 
     state = {
-        showTooltip: false,
+        //showTooltip: false,
     }
 
     onChangeValue = (value) => {
-        this.props.dispatch(cvStyle_update(this.props.blockId, this.props.elementId,this.props.optionName,value));
+        if (this.props.cbSetTooltip) {
+            this.props.dispatch(cvStyle_update(this.props.blockId, this.props.elementId,this.props.optionName,value));
+        }
     }
 
     onMouseOver = () => {
-        this.setState({showTooltip:true});
+        if (this.props.cbSetTooltip) {
+            this.props.cbSetTooltip(OPTIONS_TEXT[this.props.optionName]);
+        }
     }
 
     onMouseOut = () => {
-        this.setState({showTooltip:false});
+        this.props.cbSetTooltip(null);
     }
+
+    //{this.state.showTooltip && <div className='option__tooltip'>{OPTIONS_TEXT[this.props.optionName]}</div>}
 
     render () {
         //console.log('render option',this.props.elementId);
@@ -36,7 +43,6 @@ class Option extends React.PureComponent {
         return (
             <div className='option' onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
                 {optionCode}
-                {this.state.showTooltip && <div className='option__tooltip'>{OPTIONS_TEXT[this.props.optionName]}</div>}
             </div>
         );
     }

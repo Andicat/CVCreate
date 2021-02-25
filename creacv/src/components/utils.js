@@ -47,6 +47,9 @@ const OPTIONS_TEXT = {
 }
 
 function createTemplates () {
+
+    let textStyleDefault = {fontsize:'16', bold:false, italic:false, center:false, uppercase:false, color:'#000000', padding:0};
+
     let imagesArr = [
         {type:'image', style:{file:'', opacity:1}},
         {type:'image', style:{file:'', opacity:1, borderRadius:'50%'}},
@@ -54,22 +57,12 @@ function createTemplates () {
         {type:'image', style:{file:'', opacity:1, borderRadius:'50%', bordercolor: '#E05B49', borderwidth: '3', borderStyle: 'solid'}},
     ];
 
-    let textStyleDefault = {fontsize:'16', bold:false, italic:false, center:false, uppercase:false, color:'#000000', padding:0};
-    
-    let textSimpleArr = [
+    let textArr = [
         {type:'text', text:'Text with background', style:{bgcolor:'#E05B49',...textStyleDefault, fontsize:'20'}},
         {type:'text', text:'Text simple', style:{...textStyleDefault, fontsize: '20'}},
-        {type:'text', text:'Small text', style:{...textStyleDefault, fontsize:'12'}},
-    ];
-    
-    let textBlockArr = [
         {type:'group', elements:[
             {type:'text', text:'Your header', style:{...textStyleDefault, fontsize:'20', bold:true}},
             {type:'text', text:'your text', style:{...textStyleDefault}}
-        ]},
-        {type:'group', elements:[
-            {type:'text', text:'Your header', style:{...textStyleDefault, fontsize:'24', bold:true}},
-            {type:'text', text:'your text', style:{...textStyleDefault, fontsize:'18'}}
         ]},
     ];
     
@@ -105,8 +98,7 @@ function createTemplates () {
     
     let templatesArr = [
         {name: 'Images', elements:imagesArr},
-        {name: 'Simple Text', elements:textSimpleArr},
-        {name: 'Header with text', elements:textBlockArr},
+        {name: 'Text', elements:textArr},
         {name: 'Work experience', elements:expBlockArr},
         {name: 'Figures', elements:figuresArr},
         {name: 'Skills', elements:skillsArr},

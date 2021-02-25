@@ -15,4 +15,40 @@
         display: flex;
         margin-left: auto;
     }
+
+    &__menu-item {
+        margin-right: 10px;
+    }
+
+    &__button {
+        position: relative;
+        display: inline-block;
+        box-sizing: content-box;
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        outline: none;
+        border: none;
+        border-radius: 50%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 32px 32px;
+
+        &:hover {
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+
+        &--save {
+            background-image: url('./../../img/icon-save.svg');
+        }
+    
+        &--load {
+            background-image: url('./../../img/icon-download.svg');
+        }
+
+        &--html {
+            background-image: url('./../../img/icon-html.svg');
+        }
+    }
 }

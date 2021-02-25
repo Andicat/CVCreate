@@ -9,16 +9,19 @@ class Transform extends React.PureComponent {
     static propTypes = {
         block: PropTypes.object,
         cv: PropTypes.object,
-        panel: PropTypes.bool,
+        showPanel: PropTypes.bool,
     };
 
     mouseStart;
     mouseShift;
     elem;
     resize = false;
-    shiftTop = null;
-    shiftLeft = null;
-    shiftBorder = 4;
+    
+    state = {
+        shiftTop: this.props.cv.offsetTop,
+        shiftLeft: this.props.cv.offsetLeft,
+        shiftBorder : 4,
+    };
 
     componentDidMount() {
         window.addEventListener("resize", this.setPosition);
@@ -28,10 +31,12 @@ class Transform extends React.PureComponent {
         window.removeEventListener("resize", this.setPosition);
     }
 
+    componentDidUpdate() {
+        this.setPosition();
+    }
+
     setPosition = () => {
-        debugger
-        this.shiftTop = this.props.cv.offsetTop;
-        this.shiftLeft = this.props.cv.offsetLeft;
+        this.setState({shiftTop: this.props.cv.offsetTop, shiftLeft: this.props.cv.offsetLeft});
     }
 
     move = (evt) => { 
@@ -87,8 +92,8 @@ class Transform extends React.PureComponent {
         if (!this.props.block) {
             return null;
         }
-        this.setPosition();
-        let style = {top:(this.props.block.positionTop + this.shiftTop - this.shiftBorder) + 'px', left:(this.props.block.positionLeft + this.shiftLeft - this.shiftBorder) + 'px', width:(this.props.block.width + this.shiftBorder*2) + 'px', height:(this.props.block.height + this.shiftBorder*2) + 'px'};
+        //let style = {top:(this.props.block.positionTop + this.shiftTop - this.shiftBorder) + 'px', left:(this.props.block.positionLeft + this.shiftLeft - this.shiftBorder) + 'px', width:(this.props.block.width + this.shiftBorder*2) + 'px', height:(this.props.block.height + this.shiftBorder*2) + 'px'};
+        let style = {top:(this.props.block.positionTop + this.state.shiftTop - this.state.shiftBorder) + 'px', left:(this.props.block.positionLeft + this.state.shiftLeft - this.state.shiftBorder) + 'px', width:(this.props.block.width + this.state.shiftBorder*2) + 'px', height:(this.props.block.height + this.state.shiftBorder*2) + 'px'};
         let className = 'transform' + (this.props.block.lock?' transform--locked':'');
         return (
             <div className={className} style={style}>
@@ -106,7 +111,7 @@ class Transform extends React.PureComponent {
 
 const mapStateToProps = function (state) {
     return {
-        show: state.cvData.showPanel,
+        //show: state.cvData.showPanel,
     };
 };
 

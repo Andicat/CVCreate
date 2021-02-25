@@ -10,18 +10,23 @@ class Action extends React.PureComponent {
         actionName: PropTypes.string,
         actionValue: PropTypes.any,
         cbOnChange: PropTypes.func,
+        cbSetTooltip: PropTypes.func,
     };
 
     state = {
-        showTooltip: false,
+        //showTooltip: false,
     }
 
     onMouseOver = () => {
-        this.setState({showTooltip:true});
+        if (this.props.cbSetTooltip) {
+            this.props.cbSetTooltip(OPTIONS_TEXT[this.props.actionName]);    
+        }
     }
 
     onMouseOut = () => {
-        this.setState({showTooltip:false});
+        if (this.props.cbSetTooltip) {
+            this.props.cbSetTooltip(null);
+        }
     }
 
     render () {
@@ -31,7 +36,6 @@ class Action extends React.PureComponent {
         return (
             <div className='option' onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
                 {optionCode}
-                {this.state.showTooltip && <div className='option__tooltip'>{OPTIONS_TEXT[this.props.actionName]}</div>}
             </div>
         );
     }

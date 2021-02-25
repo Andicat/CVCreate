@@ -1,9 +1,15 @@
 .option-panel {
+    position: relative;
+    box-sizing: border-box;
     background-color: $color-bg;
     height: 50px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    padding: 5px;
+    //box-shadow: 0 14px 28px rgba($color-black, 0.25), 0 10px 10px rgba($color-black, 0.22);
+    //z-index: 10;
 
     &__group {
         display: flex;
@@ -11,6 +17,7 @@
         padding: 5px 0;
         border-radius: 5px;
         margin: 0 15px;
+        
         border: 1px solid $color-option-border;
         
         &--block {
@@ -19,5 +26,31 @@
     
         &--blocks {
         }
+    }
+
+    &__tooltip {
+        font-size: 14px;
+        //line-height: 14px;
+        width: auto;
+        text-align: center;
+        position: absolute;
+        background-color: $color-tooltip;
+        //width: 75px;
+        padding: 2px 5px;
+        border-radius: 5px;
+        top: 47px;
+        left: 50%;
+        z-index: 100;
+        transform: translateX(-50%);
+
+        /*&::after {
+            content: "";
+            position: absolute;
+            border: 7px solid $color-tooltip;
+            border-color: transparent transparent $color-tooltip transparent;
+            top: 0;
+            left:50%;
+            transform: translate(-50%,-80%);
+        }*/
     }
 }

@@ -14,6 +14,7 @@ class CVDocument extends React.PureComponent {
         blocks: PropTypes.array,
         activeBlock: PropTypes.object,
         activeBlocksId: PropTypes.array,
+        showPanel: PropTypes.bool,
     };
 
     onClick = (evt) => {
@@ -31,7 +32,7 @@ class CVDocument extends React.PureComponent {
         
         return (
             <div className='cv-container'>
-                {(this.props.activeBlock && this.cv) && <Transform block={this.props.activeBlock} cv={this.cv}></Transform>}
+                {(this.props.activeBlock && this.cv) && <Transform block={this.props.activeBlock} cv={this.cv} showPanel={this.props.showPanel}></Transform>}
                 <div className='cv' style={createStyle(this.props.stylePage)} onClick={this.onClick} ref={(f) => this.cv = f}>
                     {cvBlocksCode}
                 </div>

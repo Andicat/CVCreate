@@ -5,7 +5,10 @@
     position: relative;
     overflow-y: scroll; 
     height: calc(100vh - 100px);
-    padding-top: 20px;
+    padding-top: 10px;
+    &::-webkit-scrollbar {
+        width: 0;
+    }
 }
 
 .cv {

@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 import {cvBlock_add} from '../redux/cvDataAC';
 import {getAutoSize} from './utils';
 
-class PanelBlock extends React.PureComponent {
+class TemplateBlock extends React.PureComponent {
 
     static propTypes = {
         id: PropTypes.number.isRequired,
@@ -30,14 +30,14 @@ class PanelBlock extends React.PureComponent {
             elementCode = <CVElement key={'' + this.props.id} id={'' + this.props.id} blockId={this.props.id} cv={false} data={this.props.data} active={false}></CVElement>;
         //}
         return (    
-            <li className='panel__block'>
-                <div className='panel__block-view'>
+            <li className='template-panel__block'>
+                <div className='template-panel__block-view'>
                     {elementCode}
                 </div>
-                <button className='panel__block-add' onClick={this.onClick}></button>
+                <button className='template-panel__block-add' onClick={this.onClick}></button>
             </li>
         );
     }
 }
 
-export default connect()(PanelBlock);
+export default connect()(TemplateBlock);

@@ -24,28 +24,6 @@
         border-radius: 2px;
     }
 
-    &__tooltip {
-        position: absolute;
-        background-color: $color-tooltip;
-        //width: 75px;
-        padding: 2px 5px;
-        border-radius: 5px;
-        top: calc(100% + 5px);
-        left: 50%;
-        z-index: 10;
-        transform: translateX(-50%);
-
-        &::after {
-            content: "";
-            position: absolute;
-            border: 7px solid $color-tooltip;
-            border-color: transparent transparent $color-tooltip transparent;
-            top: 0;
-            left:50%;
-            transform: translate(-50%,-80%);
-        }
-    }
-
     &__button {
         @include option-button;
 
@@ -123,19 +101,6 @@
         &--ungroup {
             background-image: url('./../../img/icon-ungroup.svg');
         }
-    
-        &--save {
-            background-image: url('./../../img/icon-save.svg');
-        }
-    
-        &--load {
-            background-image: url('./../../img/icon-download.svg');
-        }
-
-        &--html {
-            background-image: url('./../../img/icon-html.svg');
-        }
-
     }
 
     &__number {

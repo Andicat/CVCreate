@@ -25,8 +25,7 @@ import { CV_BLOCK_ADD,
         CV_ELEMENT_ACTIVATE,
         CV_STYLE_UPDATE,
         CV_TEXT_UPDATE,
-        CV_LOAD,
-        PANEL_SHOW } from './cvDataAC';
+        CV_LOAD } from './cvDataAC';
 
 const initState = {
     stylePage: {bgcolor:'#ffffff'},
@@ -516,14 +515,6 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
             let newState = {...state,
                 stylePage:action.style,
                 blocks:action.blocks
-            };
-            return newState;
-        }
-
-        //show/hide Panel
-        case PANEL_SHOW: {
-            let newState = {...state,
-                showPanel: action.mode,
             };
             return newState;
         }

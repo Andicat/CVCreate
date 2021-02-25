@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PanelBlock from './PanelBlock';
+import TemplateBlock from './TemplateBlock';
 
-class PanelMenu extends React.PureComponent {
+class TemplateGroup extends React.PureComponent {
 
     static propTypes = {
         id: PropTypes.number.isRequired,
@@ -16,15 +16,15 @@ class PanelMenu extends React.PureComponent {
     }
 
     render () {
-        return <li className='panel__group'>
-                    <div className={'panel__group-name' +  (this.props.active?' panel__group-name--active':'')} onClick={this.onClick}>
+        return <li className='template-panel__group'>
+                    <div className={'template-panel__group-name' +  (this.props.active?' template-panel__group-name--active':'')} onClick={this.onClick}>
                         {this.props.data.name}
                     </div>
                     {this.props.active && <ul>
-                        {this.props.data.elements.map( (e,i) => { return <PanelBlock key={i} id={i} data={e}/>})}
+                        {this.props.data.elements.map( (e,i) => { return <TemplateBlock key={i} id={i} data={e}/>})}
                     </ul>}
                 </li>;
     }
 }
 
-export default PanelMenu;
+export default TemplateGroup;

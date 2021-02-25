@@ -24,7 +24,6 @@ const CV_BLOCKS_GROUP = 'CV_BLOCKS_GROUP';
 const CV_BLOCK_UNGROUP = 'CV_BLOCK_UNGROUP';
 const CV_BLOCK_LOCK = 'CV_BLOCK_LOCK';
 const CV_LOAD = 'CV_LOAD';
-const PANEL_SHOW = 'PANEL_SHOW';
 
 const cvBlock_add = function(block) {
     return {
@@ -180,13 +179,6 @@ const cvBlock_lock = function(blockId, mode) {
     };
 }
 
-const panel_show = function(mode) {
-    return { 
-        type: PANEL_SHOW,
-        mode: mode,
-    };
-}
-
 const cv_load = function(blocks,style) {
     return { 
         type: CV_LOAD,
@@ -215,5 +207,4 @@ export {
     cvStyle_update, CV_STYLE_UPDATE,
     cvElement_textUpdate, CV_TEXT_UPDATE,
     cv_load, CV_LOAD,
-    panel_show, PANEL_SHOW,
 }
