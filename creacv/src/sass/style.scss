@@ -6,7 +6,10 @@
 
 // Components
 //---------------------------------
+@import "./components/header.scss";
 @import "./components/cv.scss";
-@import "./components/options.scss";
+@import "./components/transform.scss";
+@import "./components/option-panel.scss";
+@import "./components/option.scss";
 @import "./components/panel.scss";
 @import "./components/desk.scss";

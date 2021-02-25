@@ -8,14 +8,31 @@ class Transform extends React.PureComponent {
 
     static propTypes = {
         block: PropTypes.object,
+        cv: PropTypes.object,
+        panel: PropTypes.bool,
     };
 
     mouseStart;
     mouseShift;
     elem;
     resize = false;
-    coordsShift;
-    shift = 4;
+    shiftTop = null;
+    shiftLeft = null;
+    shiftBorder = 4;
+
+    componentDidMount() {
+        window.addEventListener("resize", this.setPosition);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.setPosition);
+    }
+
+    setPosition = () => {
+        debugger
+        this.shiftTop = this.props.cv.offsetTop;
+        this.shiftLeft = this.props.cv.offsetLeft;
+    }
 
     move = (evt) => { 
         evt.preventDefault();
@@ -66,53 +83,20 @@ class Transform extends React.PureComponent {
         this.props.dispatch(cvBlock_delete(this.props.block.id));
     }
 
-    getElementCoords = (elem) => {
-        var bbox = elem.getBoundingClientRect();
-    
-        var body = document.body;
-        var docEl = document.documentElement;
-    
-        var scrollTop = window.pageYOffset||docEl.scrollTop||body.scrollTop;
-        var scrollLeft = window.pageXOffset||docEl.scrollLeft||body.scrollLeft;
-    
-        var clientTop = docEl.clientTop||body.clientTop||0;
-        var clientLeft = docEl.clientLeft||body.clientLeft||0;
-    
-        var top = bbox.top + scrollTop - clientTop;
-        var left = bbox.left + scrollLeft - clientLeft;
-    
-        return {
-            width: elem.offsetWidth,
-            height: elem.offsetHeight,
-            left: left,
-            top: top,
-            bottom: top + elem.offsetHeight,
-            right: left + elem.offsetWidth,
-        };
-    }
-    
-    getPosition() {
-        let deskCoords = this.getElementCoords(document.querySelector('.desk'));
-        let cvCoords = this.getElementCoords(document.querySelector('.cv'));
-        this.coordsShift = {top:cvCoords.top-deskCoords.top + Number(this.props.block.positionTop), left:cvCoords.left-deskCoords.left + Number(this.props.block.positionLeft)};
-    }
-
     render () {
-        //console.log('render cv transform');
         if (!this.props.block) {
             return null;
         }
-        this.getPosition();
-        let style = {top:(this.coordsShift.top - this.shift) + 'px', left:(this.coordsShift.left - this.shift) + 'px', width:(this.props.block.width + this.shift*2) + 'px', height:(this.props.block.height + this.shift*2) + 'px'};
-        let className = 'cv__transform' + (this.props.block.lock?' cv__transform--locked':'');
-        //console.log('transform',className,this.props.block.lock);
+        this.setPosition();
+        let style = {top:(this.props.block.positionTop + this.shiftTop - this.shiftBorder) + 'px', left:(this.props.block.positionLeft + this.shiftLeft - this.shiftBorder) + 'px', width:(this.props.block.width + this.shiftBorder*2) + 'px', height:(this.props.block.height + this.shiftBorder*2) + 'px'};
+        let className = 'transform' + (this.props.block.lock?' transform--locked':'');
         return (
             <div className={className} style={style}>
                 {!this.props.block.lock && (
                     <React.Fragment>
-                        <button className='cv__transform-button cv__transform-button--move' onMouseDown={this.onMouseDown}></button>
-                        <button className='cv__transform-button cv__transform-button--delete' onClick={this.onClickDelete}></button>
-                        <button className='cv__transform-button cv__transform-button--resize' onMouseDown={this.onMouseDownSize}></button>
+                        <button className='transform__button transform__button--move' onMouseDown={this.onMouseDown}></button>
+                        <button className='transform__button transform__button--delete' onClick={this.onClickDelete}></button>
+                        <button className='transform__button transform__button--resize' onMouseDown={this.onMouseDownSize}></button>
                     </React.Fragment>
                 )}
             </div>
@@ -120,4 +104,10 @@ class Transform extends React.PureComponent {
     }
 }
 
-export default connect()(Transform);
+const mapStateToProps = function (state) {
+    return {
+        show: state.cvData.showPanel,
+    };
+};
+
+export default connect(mapStateToProps)(Transform);

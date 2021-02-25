@@ -36,7 +36,8 @@ class CVElement extends React.PureComponent {
 
     render () {
         if (this.props.cv) {
-            //console.log('render element', this.props.activeElementId);
+            //console.log('render element', this.props.id);
+            //console.log('active element', this.props.activeElementId);
         };
         let isActive = (this.props.activeElementId===this.props.id);
         let style = createStyle(this.props.data.style);

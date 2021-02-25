@@ -25,7 +25,8 @@ import { CV_BLOCK_ADD,
         CV_ELEMENT_ACTIVATE,
         CV_STYLE_UPDATE,
         CV_TEXT_UPDATE,
-        CV_LOAD } from './cvDataAC';
+        CV_LOAD,
+        PANEL_SHOW } from './cvDataAC';
 
 const initState = {
     stylePage: {bgcolor:'#ffffff'},
@@ -34,10 +35,11 @@ const initState = {
     activeBlocksId: [],
     activeElementId: null,
     styleToEdit: {},
+    showPanel: true,
 }
 
-function cvDataReducer(state = initState, action) {
-    
+function cvDataReducer(state = initState, action, cvId = CV_ID) {
+
     switch (action.type) {
 
         //add new block to cv-page
@@ -464,7 +466,7 @@ function cvDataReducer(state = initState, action) {
                 }
                 return block;
             }
-            if (action.blockId===CV_ID) {
+            if (action.blockId===cvId) {
                 state.stylePage[action.styleName] = action.styleValue;
                 let newState = {...state,
                     stylePage: {...state.stylePage},
@@ -514,6 +516,14 @@ function cvDataReducer(state = initState, action) {
             let newState = {...state,
                 stylePage:action.style,
                 blocks:action.blocks
+            };
+            return newState;
+        }
+
+        //show/hide Panel
+        case PANEL_SHOW: {
+            let newState = {...state,
+                showPanel: action.mode,
             };
             return newState;
         }

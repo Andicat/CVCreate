@@ -1,9 +1,10 @@
 .panel {
     position: relative;
     background-color: $color-panel-bg;
-    min-width: 10px;
+    min-width: 20px;
     height: 100vh;
     display: flex;
+    z-index: 10;
     //overflow-y: auto;
     //overflow-x: visible;
 

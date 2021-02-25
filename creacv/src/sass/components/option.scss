@@ -1,29 +1,7 @@
-.options {
-    position: absolute;
-    text-align: center;
-    min-height: 45px;
-    background-color: $color-white;
-    width: 100%;
-    top: 0;
+.option {
     display: flex;
-    align-items: center;
-    border-bottom: 1px solid $color-option-border;
-
-    &__elem {
-        margin-left: 10px;
-        display: flex;
-        position: relative;
-    }
-
-    &__block {
-        display: flex;
-        margin-left: auto;
-        margin-right: 10px;
-    }
-
-    &__cv {
-        background-color: $color-bg-options;
-    }
+    margin: 0 5px;
+    padding: 0;
 
     input[type=color]::-webkit-color-swatch-wrapper {
         padding: 0;
@@ -45,12 +23,6 @@
         border: none;
         border-radius: 2px;
     }
-}
-
-.option {
-    margin: 0;
-    padding: 0;
-    border: none;
 
     &__tooltip {
         position: absolute;

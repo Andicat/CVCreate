@@ -1,0 +1,23 @@
+.option-panel {
+    background-color: $color-bg;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__group {
+        display: flex;
+        position: relative;
+        padding: 5px 0;
+        border-radius: 5px;
+        margin: 0 15px;
+        border: 1px solid $color-option-border;
+        
+        &--block {
+            
+        }
+    
+        &--blocks {
+        }
+    }
+}

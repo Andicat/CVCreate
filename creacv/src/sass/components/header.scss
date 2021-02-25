@@ -1,0 +1,18 @@
+.header {
+    display: flex;
+    box-sizing: border-box;
+    height: 50px;
+    color: $color-white;
+    font-size: 24px;
+    padding: 10px 40px;
+    background-color: $color-bg-header;
+    background-image: url('./../../img/logo.svg');
+    background-repeat: no-repeat;
+    background-position: 5px;
+    background-size: 30px;
+
+    &__menu {
+        display: flex;
+        margin-left: auto;
+    }
+}

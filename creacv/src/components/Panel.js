@@ -2,10 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PanelMenu from './PanelMenu';
 
+import {connect} from 'react-redux';
+import {panel_show} from '../redux/cvDataAC';
+
 class Panel extends React.PureComponent {
 
     static propTypes = {
         groups: PropTypes.array,
+        show: PropTypes.bool
     };
 
     static defaultProps = {
@@ -14,7 +18,6 @@ class Panel extends React.PureComponent {
 
     state = {
         activeMenuId: null,
-        show: true,
     }
 
     selectMenu = (id) => {
@@ -22,7 +25,7 @@ class Panel extends React.PureComponent {
     }
 
     showPanel = () => {
-        this.setState( {show:!this.state.show} );
+        this.props.dispatch(panel_show(!this.props.show));
     }
 
     render () {
@@ -31,7 +34,7 @@ class Panel extends React.PureComponent {
             });
 
         return <aside className='panel'>
-            {this.state.show && <ul className='panel__menu'>
+            {this.props.show && <ul className='panel__menu'>
                 {groupsCode}
             </ul>}
             <button className='panel__button-hide' onClick={this.showPanel}/>
@@ -39,4 +42,11 @@ class Panel extends React.PureComponent {
     }
 }
 
-export default Panel;
+const mapStateToProps = function (state) {
+    return {
+        show: state.cvData.showPanel,
+    };
+};
+
+export default connect(mapStateToProps)(Panel);
+

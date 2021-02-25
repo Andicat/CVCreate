@@ -29,7 +29,7 @@ class Action extends React.PureComponent {
 
         let optionCode = createOption(this.props.actionName,this.props.actionValue,this.props.cbOnChange);
         return (
-            <div className='options__elem' onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
+            <div className='option' onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
                 {optionCode}
                 {this.state.showTooltip && <div className='option__tooltip'>{OPTIONS_TEXT[this.props.actionName]}</div>}
             </div>

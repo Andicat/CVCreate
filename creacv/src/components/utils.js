@@ -46,6 +46,75 @@ const OPTIONS_TEXT = {
     html: 'see html',
 }
 
+function createTemplates () {
+    let imagesArr = [
+        {type:'image', style:{file:'', opacity:1}},
+        {type:'image', style:{file:'', opacity:1, borderRadius:'50%'}},
+        {type:'image', style:{file:'', opacity:1, bordercolor: '#E05B49', borderwidth: '3', borderStyle: 'solid'}},
+        {type:'image', style:{file:'', opacity:1, borderRadius:'50%', bordercolor: '#E05B49', borderwidth: '3', borderStyle: 'solid'}},
+    ];
+
+    let textStyleDefault = {fontsize:'16', bold:false, italic:false, center:false, uppercase:false, color:'#000000', padding:0};
+    
+    let textSimpleArr = [
+        {type:'text', text:'Text with background', style:{bgcolor:'#E05B49',...textStyleDefault, fontsize:'20'}},
+        {type:'text', text:'Text simple', style:{...textStyleDefault, fontsize: '20'}},
+        {type:'text', text:'Small text', style:{...textStyleDefault, fontsize:'12'}},
+    ];
+    
+    let textBlockArr = [
+        {type:'group', elements:[
+            {type:'text', text:'Your header', style:{...textStyleDefault, fontsize:'20', bold:true}},
+            {type:'text', text:'your text', style:{...textStyleDefault}}
+        ]},
+        {type:'group', elements:[
+            {type:'text', text:'Your header', style:{...textStyleDefault, fontsize:'24', bold:true}},
+            {type:'text', text:'your text', style:{...textStyleDefault, fontsize:'18'}}
+        ]},
+    ];
+    
+    let expBlockArr = [
+        {type:'group', elements:[
+            {type:'text', text:'Your position', style:{...textStyleDefault, fontsize:'18', bold:true}},
+            {type:'text', text:'Company', style:{...textStyleDefault, fontsize:'18'}},
+            {type:'text', text:'period', style:{...textStyleDefault,italic:true}},
+            {type:'text', text:'your competencies and results', style:{...textStyleDefault}}
+        ]},
+    ];
+    
+    let figuresArr = [
+        {type:'figure', style:{bgcolor:'#E05B49', opacity:1}},
+        {type:'figure', style:{bgcolor:'#6AABB5', opacity:1, borderRadius:'50%'}},
+    ];
+    
+    let skillsArr = [
+        {type:'group', direction:'row', elements:[
+            {type:'text', text:'skill in dots', style:{...textStyleDefault}},
+            {type:'dots-row', style:{bgcolor:'#E05B49', radius:10, count:3}},
+            {type:'dots-row', style:{bgcolor:'#E6E6E6', radius:10, count:2}},
+        ]},
+        {type:'group', direction:'row', elements:[
+            {type:'text', text:'skill in dots', style:{...textStyleDefault}},
+            {type:'dots-row', style:{bgcolor:'#E05B49', radius:10, count:3}},
+        ]},
+        {type:'group', direction:'column', elements:[
+            {type:'text', text:'skill in progress', style:{...textStyleDefault}},
+            {type:'figure', style:{bgcolor:'#E05B49', height:'7px', width:'100'}},
+        ]},
+    ];
+    
+    let templatesArr = [
+        {name: 'Images', elements:imagesArr},
+        {name: 'Simple Text', elements:textSimpleArr},
+        {name: 'Header with text', elements:textBlockArr},
+        {name: 'Work experience', elements:expBlockArr},
+        {name: 'Figures', elements:figuresArr},
+        {name: 'Skills', elements:skillsArr},
+    ];
+
+    return templatesArr;
+}
+
 //create jsx-code for option
 function createOption (optionType,optionValue,cbOnChange) {
 
@@ -118,36 +187,36 @@ function createOption (optionType,optionValue,cbOnChange) {
 
     function codeNumber(min,max,step) {
         return <React.Fragment>
-                    <input type='button' className='option option__button option__button--left' value='&ndash;' onClick= {(evt) => {setValue(evt.target.nextSibling,Number(optionValue)-1)}}/>
-                    <input type='text' className='option option__number' min={min} max={max} step={step} value={optionValue} onChange={setValueInput}></input>
-                    <input type='button' className='option option__button option__button--right' value='+' onClick= {(evt) => {setValue(evt.target.previousSibling,Number(optionValue)+1)}}/>
+                    <input type='button' className='option__button option__button--left' value='&ndash;' onClick= {(evt) => {setValue(evt.target.nextSibling,Number(optionValue)-1)}}/>
+                    <input type='text' className='option__number' min={min} max={max} step={step} value={optionValue} onChange={setValueInput}></input>
+                    <input type='button' className='option__button option__button--right' value='+' onClick= {(evt) => {setValue(evt.target.previousSibling,Number(optionValue)+1)}}/>
                 </React.Fragment>
     };
 
     function codeRange(min,max,step) {
-        return <input type="range" className='option option__range'min={min} max={max} step={step} value={optionValue} onInput={setValueInput}/>;
+        return <input type="range" className='option__range'min={min} max={max} step={step} value={optionValue} onInput={setValueInput}/>;
     };
 
     function codeCheckbox() {
         return <React.Fragment>
-                    <input type='checkbox' className={'option option__checkbox option__checkbox--' + optionType} id={optionType} checked={optionValue} onChange={setValueCheckBox}/>
+                    <input type='checkbox' className={'option__checkbox option__checkbox--' + optionType} id={optionType} checked={optionValue} onChange={setValueCheckBox}/>
                     <label htmlFor={optionType}/>
                 </React.Fragment>
     };
 
     function codeColor() {
-        return <input type='color' className='option option__color' value={optionValue} onChange={setValueInput}></input>
+        return <input type='color' className='option__color' value={optionValue} onChange={setValueInput}></input>
     }
 
     function codeFile() {
         return <React.Fragment>
-                    <input type='file' name='file' id='file' className='option option__file' accept='image/*' onChange={setImage}></input>
+                    <input type='file' name='file' id='file' className='option__file' accept='image/*' onChange={setImage}></input>
                     <label htmlFor='file'>Load Image</label>
                 </React.Fragment>
     };
 
     function codeButton() {
-        return <input type='button' className={'option option__button option__button--' + optionType} onClick={cbOnChange}/>;
+        return <input type='button' className={'option__button option__button--' + optionType} onClick={cbOnChange}/>;
     };
 
     return OPTIONS_CODE[optionType];
@@ -227,4 +296,4 @@ function getAutoSize (element) {
     return sizes;
 };
 
-export {createOption, createStyle, getAutoSize, CV_ID, OPTIONS_TEXT};
+export {createOption, createStyle, getAutoSize, createTemplates, CV_ID, OPTIONS_TEXT};

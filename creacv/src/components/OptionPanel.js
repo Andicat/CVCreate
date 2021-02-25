@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Option from './Option';
 import Action from './Action';
+import {CV_ID} from './utils';
 
 import {connect} from 'react-redux';
 import {cvBlock_sendBack,
@@ -20,23 +21,24 @@ class OptionPanel extends React.PureComponent {
     static propTypes = {
         styleToEdit: PropTypes.object,     
         activeElementId: PropTypes.string,   
-        block: PropTypes.object,
+        activeBlock: PropTypes.object,
         activeBlocksId: PropTypes.array,    
-        activeBlockDOM: PropTypes.object,    
+        activeBlockDOM: PropTypes.object, 
+        stylePage: PropTypes.object,   
     };
 
 
     sendBlockBack = () => {
-        this.props.dispatch(cvBlock_sendBack(this.props.block.id));
+        this.props.dispatch(cvBlock_sendBack(this.props.activeBlock.id));
     }
 
     copyBlock = () => {
-        this.props.dispatch(cvBlock_copy(this.props.block.id));
+        this.props.dispatch(cvBlock_copy(this.props.activeBlock.id));
     }
 
     setBlockSizeAuto = () => {
         let sizesAuto = getAutoSize(this.props.activeBlockDOM);
-        this.props.dispatch(cvBlock_setSize(this.props.block.id,sizesAuto.height,sizesAuto.width));
+        this.props.dispatch(cvBlock_setSize(this.props.activeBlock.id,sizesAuto.height,sizesAuto.width));
     }
 
     alignBlocksTop = () => {
@@ -84,39 +86,45 @@ class OptionPanel extends React.PureComponent {
     }
 
     ungroupBlock = () => {
-        this.props.dispatch(cvBlock_ungroup(this.props.block.id));
+        this.props.dispatch(cvBlock_ungroup(this.props.activeBlock.id));
     }
 
     lockPositionBlock = (evt) => {
-        this.props.dispatch(cvBlock_lock(this.props.block.id,evt.target.checked));
+        debugger
+        this.props.dispatch(cvBlock_lock(this.props.activeBlock.id,evt));
     }
 
     render () {
-        //console.log('render option panel');
+        //console.log('render option panel', this.props);
         let codeElementOptions = null;
         let codeBlockOptions = null;
         let codeBlocksOptions = null;
+        let codePageOptions = null;
         
         if (this.props.activeElementId) {
             codeElementOptions = Object.keys(this.props.styleToEdit).map( (s,i) => (
-                    <Option key={i} optionName={s} optionValue={this.props.styleToEdit[s]} blockId={this.props.block.id}/>));
+                    <Option key={i} optionName={s} optionValue={this.props.styleToEdit[s]} blockId={this.props.activeBlock.id}/>));
         };
 
-        if (this.props.block) {
+        if (this.props.activeBlock) {
             codeBlockOptions = (
                <React.Fragment>
-                    <Action key={1} actionName={'lock'} actionValue={this.props.block.lock?this.props.block.lock:false} cbOnChange={this.lockPositionBlock}></Action>
-                    {(!this.props.block.ungroup && this.props.activeBlockDOM) && (
+                    <Action key={1} actionName={'lock'} actionValue={this.props.activeBlock.lock?this.props.activeBlock.lock:false} cbOnChange={this.lockPositionBlock}></Action>
+                    {(!this.props.activeBlock.ungroup && this.props.activeBlockDOM) && (
                         <Action key={2} actionName={'autosize'} cbOnChange={this.setBlockSizeAuto}></Action>
                     )}
                     <Action key={3} actionName={'back'} cbOnChange={this.sendBlockBack}></Action>
                     <Action key={4} actionName={'copy'} cbOnChange={this.copyBlock}></Action>
-                    {this.props.block.ungroup && (
+                    {this.props.activeBlock.ungroup && (
                         <Action key={5} actionName={'ungroup'} cbOnChange={this.ungroupBlock}></Action>
                     )}
                </React.Fragment>
             );
+        } else if (this.props.stylePage) {
+            codePageOptions = Object.keys(this.props.stylePage).map( (s,i) => (
+                <Option key={i} optionName={s} optionValue={this.props.stylePage[s]} blockId={CV_ID}/>));
         }
+        
 
         if (this.props.activeBlocksId.length > 1) {
             codeBlocksOptions = (
@@ -136,23 +144,32 @@ class OptionPanel extends React.PureComponent {
             );
         }
 
-        if (!codeElementOptions && !codeBlockOptions && !codeBlocksOptions) {
-            return null;
-        }
         return (
-            <form className='options'>
-                {codeElementOptions}
-                {codeBlocksOptions}
-                <div className='options__block'>
-                    {codeBlockOptions}
-                </div>
-            </form>
+            <div className='option-panel'>
+                {((codePageOptions && !codeBlocksOptions) || codeElementOptions) && 
+                    <div className='option-panel__group option-panel__group--style'>
+                        {codePageOptions}
+                        {codeElementOptions}
+                    </div>
+                }
+                {codeBlocksOptions && 
+                    <div className='option-panel__group option-panel__group--blocks'>
+                        {codeBlocksOptions}
+                    </div>
+                }
+                {codeBlockOptions && 
+                    <div className='option-panel__group option-panel__group--block'>
+                        {codeBlockOptions}
+                    </div>
+                }
+            </div>
         );
     }
 }
 
 const mapStateToProps = function (state) {
     return {
+        stylePage: state.cvData.stylePage,
         styleToEdit: state.cvData.styleToEdit,
         activeElementId: state.cvData.activeElementId,
         activeBlocksId: state.cvData.activeBlocksId,

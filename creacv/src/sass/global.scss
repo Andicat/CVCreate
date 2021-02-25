@@ -27,17 +27,6 @@ html {
     border: 0;
 }
 
-header {
-    color: $color-white;
-    font-size: 24px;
-    padding: 10px 40px;
-    background-color: $color-bg-header;
-    background-image: url('./../img/logo.svg');
-    background-repeat: no-repeat;
-    background-position: 5px;
-    background-size: 30px;
-}
-
 main {
     display: flex;
 }
