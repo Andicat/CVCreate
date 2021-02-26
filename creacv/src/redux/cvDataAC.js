@@ -73,21 +73,19 @@ const cvElement_activate = function(style,elementId) {
     };
 }
 
-const cvStyle_update = function(blockId,elementId,styleName,styleValue) {
+const cvStyle_update = function(blockId,styleName,styleValue) {
     return {
         type: CV_STYLE_UPDATE,
         blockId: blockId,
-        elementId: elementId,
         styleName: styleName,
         styleValue: styleValue,
     };
 }
 
-const cvElement_textUpdate = function(blockId,elementId,textValue) {
+const cvElement_textUpdate = function(blockId,textValue) {
     return {
         type: CV_TEXT_UPDATE,
         blockId: blockId,
-        elementId: elementId,
         textValue: textValue,
     };
 }
@@ -171,11 +169,10 @@ const cvBlock_ungroup = function(blockId) {
     };
 }
 
-const cvBlock_lock = function(blockId, mode) {
+const cvBlock_lock = function(blockId) {
     return { 
         type: CV_BLOCK_LOCK,
         blockId: blockId,
-        mode: mode,
     };
 }
 

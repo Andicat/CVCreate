@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TemplateGroup from './TemplateGroup';
+import CSSTransitionGroup from 'react-transition-group';
 
 class TemplatePanel extends React.PureComponent {
 
@@ -26,7 +27,9 @@ class TemplatePanel extends React.PureComponent {
             });
 
         return <ul className='template-panel__menu'>
-                    {groupsCode}
+                    <CSSTransitionGroup transitionName="example">
+                        {groupsCode}
+                    </CSSTransitionGroup>    
                </ul>
     }
 }

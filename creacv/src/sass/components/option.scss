@@ -1,4 +1,5 @@
 .option {
+    position: relative;
     display: flex;
     margin: 0 5px;
     padding: 0;
@@ -101,6 +102,27 @@
         &--ungroup {
             background-image: url('./../../img/icon-ungroup.svg');
         }
+
+        &--opacity {
+            background-image: url('./../../img/icon-opacity.svg');   
+        }
+    }
+
+    &__drop-down {
+        display: none;
+        position: absolute;
+        background-color: $color-white;
+        border-radius: 5px;
+        border: 1px solid $color-button-border;
+        padding: 5px;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+
+        &--show {
+            display: flex;
+        }
     }
 
     &__number {
@@ -135,6 +157,13 @@
             & ~ label,
             &:hover ~ label {
                 background-image: url('./../../img/icon-font-capital.svg');   
+            }
+        }
+
+        &--underline {
+            & ~ label,
+            &:hover ~ label {
+                background-image: url('./../../img/icon-font-underline.svg');   
             }
         }
 

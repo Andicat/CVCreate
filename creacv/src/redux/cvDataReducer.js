@@ -331,7 +331,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
             });
 
             let newId = state.blocks.reduce(function (r, v) { return ( r < v.id ? v.id : r);},0) + 1;
-            let newGroupBlock = {type:'group', ungroup:true, direction:'absolute', id:newId, height:(bottom-top), width:(right-left), positionTop:top, positionLeft:left};
+            let newGroupBlock = {type:'group', group:true, direction:'absolute', id:newId, height:(bottom-top), width:(right-left), positionTop:top, positionLeft:left};
             newGroupBlock.elements = newElements;
             let newBlocks = state.blocks.filter(b => !state.activeBlocksId.find(ab => b.id===ab));
             let newState = {...state, 
@@ -432,7 +432,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
         case CV_BLOCK_LOCK: {
             let newBlocks = state.blocks.map(b => {
                 if (b.id===action.blockId) {
-                    b.lock = action.mode;
+                    b.lock = !b.lock;
                     return {...b};
                 }
                 return b});
@@ -451,7 +451,6 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
 
         //update elements style
         case CV_STYLE_UPDATE: {
-
             function updateStyle(block) {
                 if (block.id==state.activeElementId) {
                     block.style[action.styleName] = action.styleValue;

@@ -30,7 +30,7 @@ class CVElement extends React.PureComponent {
     onBlur = (evt) => {
         let textCurr = evt.target.innerText;
         if (this.props.data.text!==textCurr) {
-            this.props.dispatch(cvElement_textUpdate(this.props.blockId,this.props.id,textCurr));
+            this.props.dispatch(cvElement_textUpdate(this.props.blockId,textCurr));
         }
     }
 

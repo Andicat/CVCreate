@@ -2,6 +2,9 @@ import React from 'react';
 
 const FONT_SIZE_MIN = 6;
 const FONT_SIZE_MAX = 60;
+const PADDING_MIN = 0;
+const PADDING_MAX = 100;
+
 const WIDTH_MIN = 0;
 const WIDTH_MAX = 1000;
 const HEIGHT_MIN = 0;
@@ -23,7 +26,8 @@ const OPTIONS_TEXT = {
     radius: 'radius of dots',
     borderwidth: 'width of border',
     bordercolor: 'color of border',
-    padding: 'padding',
+    paddingLeft: 'padding on left',
+    paddingTop: 'padding on top',
     opacity: 'opacity',
     copy: 'copy block',
     back: 'send block on back',
@@ -41,14 +45,25 @@ const OPTIONS_TEXT = {
     align_width: 'set same width for blocks',
     align_height: 'set same height for blocks',
     group: 'group blocks',
-    save: 'save CV',
-    load: 'load saved CV',
-    html: 'see html',
+}
+
+function debounce(cb) {
+    var DEBOUNCE_INTERVAL = 1000;
+    var lastTimeout = null;
+    return function () {
+        var parameters = arguments;
+        if (lastTimeout) {
+            window.clearTimeout(lastTimeout);
+        }
+        lastTimeout = window.setTimeout(function () {
+            cb.apply(this, parameters);
+        }, DEBOUNCE_INTERVAL);
+    };
 }
 
 function createTemplates () {
 
-    let textStyleDefault = {fontsize:'16', bold:false, italic:false, center:false, uppercase:false, color:'#000000', padding:0};
+    let textStyleDefault = {color:'#000000', fontsize:'16', bold:false, italic:false, center:false, uppercase:false, underline:false, paddingLeft:0, paddingTop:0};
 
     let imagesArr = [
         {type:'image', style:{file:'', opacity:1}},
@@ -58,15 +73,16 @@ function createTemplates () {
     ];
 
     let textArr = [
-        {type:'text', text:'Text with background', style:{bgcolor:'#E05B49',...textStyleDefault, fontsize:'20'}},
         {type:'text', text:'Text simple', style:{...textStyleDefault, fontsize: '20'}},
+        {type:'text', text:'Text with background', style:{bgcolor:'#8e9fa0',...textStyleDefault, fontsize:'20'}},
+        {type:'text', text:'Big text', style:{...textStyleDefault, fontsize: '40', bold:true}},
         {type:'group', elements:[
             {type:'text', text:'Your header', style:{...textStyleDefault, fontsize:'20', bold:true}},
             {type:'text', text:'your text', style:{...textStyleDefault}}
         ]},
     ];
     
-    let expBlockArr = [
+    let textBlockArr = [
         {type:'group', elements:[
             {type:'text', text:'Your position', style:{...textStyleDefault, fontsize:'18', bold:true}},
             {type:'text', text:'Company', style:{...textStyleDefault, fontsize:'18'}},
@@ -99,7 +115,7 @@ function createTemplates () {
     let templatesArr = [
         {name: 'Images', elements:imagesArr},
         {name: 'Text', elements:textArr},
-        {name: 'Work experience', elements:expBlockArr},
+        {name: 'Info', elements:textBlockArr},
         {name: 'Figures', elements:figuresArr},
         {name: 'Skills', elements:skillsArr},
     ];
@@ -111,10 +127,11 @@ function createTemplates () {
 function createOption (optionType,optionValue,cbOnChange) {
 
     const OPTIONS_CODE = {
-        fontsize: codeNumber(FONT_SIZE_MIN,FONT_SIZE_MAX,1),
+        fontsize: codeNumber(FONT_SIZE_MIN,FONT_SIZE_MAX),
         bold: codeCheckbox(),
         italic: codeCheckbox(),
         uppercase: codeCheckbox(),
+        underline: codeCheckbox(),
         center: codeCheckbox(),
         //width: codeNumber(WIDTH_MIN,WIDTH_MAX,1),
         //height: codeNumber(HEIGHT_MIN, HEIGHT_MAX,1),
@@ -125,7 +142,8 @@ function createOption (optionType,optionValue,cbOnChange) {
         radius: codeNumber(),
         borderwidth: codeNumber(),
         bordercolor: codeColor(),
-        padding: codeNumber(),
+        paddingLeft: codeNumber(PADDING_MIN,PADDING_MAX),
+        paddingTop: codeNumber(PADDING_MIN,PADDING_MAX),
         opacity: codeRange(0,1,0.01),
         copy: codeButton(),
         back: codeButton(),
@@ -143,17 +161,20 @@ function createOption (optionType,optionValue,cbOnChange) {
         align_width: codeButton(),
         align_height: codeButton(),
         group: codeButton(),
-        save: codeButton(),
-        load: codeButton(),
-        html: codeButton(),
     }
-    
 
     function setValue(elem,value) {
-        if (elem) {
-            elem.value = value;
+        if (!elem) return;
+        let min = elem.min?Number(elem.min):0;
+        let max = elem.max?Number(elem.max):Infinity;
+        if (value>=min && value<=max) {
+            cbOnChange(value);
+            return;
         }
-        cbOnChange(value);
+    }
+
+    function openDrop(elem) {
+        elem.classList.toggle('option__drop-down--show');
     }
 
     function setValueInput(evt) {
@@ -177,16 +198,21 @@ function createOption (optionType,optionValue,cbOnChange) {
         }
     }
 
-    function codeNumber(min,max,step) {
+    function codeNumber(min,max) {
         return <React.Fragment>
                     <input type='button' className='option__button option__button--left' value='&ndash;' onClick= {(evt) => {setValue(evt.target.nextSibling,Number(optionValue)-1)}}/>
-                    <input type='text' className='option__number' min={min} max={max} step={step} value={optionValue} onChange={setValueInput}></input>
+                    <input type='text' className='option__number' min={min} max={max} value={optionValue} readOnly></input>
                     <input type='button' className='option__button option__button--right' value='+' onClick= {(evt) => {setValue(evt.target.previousSibling,Number(optionValue)+1)}}/>
                 </React.Fragment>
     };
 
     function codeRange(min,max,step) {
-        return <input type="range" className='option__range'min={min} max={max} step={step} value={optionValue} onInput={setValueInput}/>;
+        return <React.Fragment>
+                    <input type='button' className={'option__button option__down option__button--' + optionType} onClick= {(evt) => {openDrop(evt.target.nextSibling)}}/>
+                    <div className='option__drop-down' onMouseLeave={(evt) => openDrop(evt.currentTarget)}>
+                        <input type="range" className='option__range'min={min} max={max} step={step} value={optionValue} onInput={setValueInput}/>
+                    </div>
+                </React.Fragment>
     };
 
     function codeCheckbox() {
@@ -232,6 +258,9 @@ function createStyle (styles) {
             case 'uppercase':
                 styleAttr.textTransform = styles[key]?'uppercase':'none';
                 break;
+            case 'underline':
+                styleAttr.textDecoration = styles[key]?'underline':'none';
+                break;
             case 'center':
                 styleAttr.textAlign = styles[key]?'center':'start';
                 break;
@@ -256,10 +285,13 @@ function createStyle (styles) {
             case 'borderwidth': 
                 styleAttr.borderWidth = styles[key] + 'px';
                 break;
-            case 'padding': 
-                styleAttr.padding = styles[key] + 'px';
+            case 'paddingLeft': 
+                styleAttr.paddingLeft = styles[key] + 'px';
                 break;
-            /*case '': 
+            case 'paddingTop': 
+                styleAttr.paddingTop = styles[key] + 'px';
+                break;
+                /*case '': 
                 //styleAttr.backgroundColor = styles[key];
                 break;*/
             default:
@@ -288,4 +320,4 @@ function getAutoSize (element) {
     return sizes;
 };
 
-export {createOption, createStyle, getAutoSize, createTemplates, CV_ID, OPTIONS_TEXT};
+export {createOption, createStyle, getAutoSize, createTemplates, debounce, CV_ID, OPTIONS_TEXT};

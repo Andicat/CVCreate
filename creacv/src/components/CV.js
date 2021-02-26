@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import OptionPanel from './OptionPanel';
-import Action from './Action';
 
 import TemplatePanel from './TemplatePanel';
 import CVDocument from './CVDocument';
@@ -18,7 +17,6 @@ class CV extends React.PureComponent {
         stylePage: PropTypes.object,  
         blocks: PropTypes.array,
         activeBlocksId: PropTypes.array,
-        activeElementId: PropTypes.string,
     };
 
     state = {
@@ -60,23 +58,15 @@ class CV extends React.PureComponent {
 
     showPanel = () => {
         this.setState({showPanel:!this.state.showPanel});
-        //this.props.dispatch(panel_show(!this.props.show));
     }
     
     render () {
         let activeOneId = (this.props.activeBlocksId.length===1) && this.props.activeBlocksId[0];
         let activeBlock = null;
-        let activeElementId = null;
         if (activeOneId) {
             activeBlock = this.props.blocks.find(b => b.id === activeOneId);
-            activeElementId = this.props.activeElementId;
         }
 
-        /**
-         * <Action actionName={'save'} cbOnChange={this.saveCV}></Action>
-                        <Action actionName={'load'} cbOnChange={this.loadCV}></Action>
-                        <Action actionName={'html'} cbOnChange={this.showHTML}></Action>
-         */
         return (
             <React.Fragment>
                 <header className='header'>
@@ -99,7 +89,7 @@ class CV extends React.PureComponent {
                         <button className='template-panel__button-hide' onClick={this.showPanel}/>
                     </aside>
                     <div className='desk'>
-                        <OptionPanel activeBlock={activeBlock}/>
+                        <OptionPanel activeBlockGroup={activeBlock?activeBlock.group:false} activeBlockId={activeBlock?activeBlock.id:false} activeBlockLock={activeBlock?activeBlock.lock:false}/>
                         <CVDocument activeBlock={activeBlock} stylePage={this.props.stylePage} showPanel={this.state.showPanel}/>
                     </div>
                 </main>
@@ -113,7 +103,6 @@ const mapStateToProps = function (state) {
         stylePage: state.cvData.stylePage,
         blocks: state.cvData.blocks,
         activeBlocksId: state.cvData.activeBlocksId,
-        activeElementId: state.cvData.activeElementId,
     };
 };
   

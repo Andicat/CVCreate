@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Option from './Option';
-import Action from './Action';
 import {CV_ID} from './utils';
 
 import {connect} from 'react-redux';
-import {cvBlock_sendBack,
+import {cvStyle_update,
+    cvBlock_sendBack,
     cvBlock_copy,
     cvBlock_setSize,
     cvBlocks_align,
@@ -14,14 +14,16 @@ import {cvBlock_sendBack,
     cvBlocks_group,
     cvBlock_ungroup, 
     cvBlock_lock } from '../redux/cvDataAC';
-import {getAutoSize} from './utils';
+import {getAutoSize, debounce} from './utils';
 
 class OptionPanel extends React.PureComponent {
 
     static propTypes = {
         styleToEdit: PropTypes.object,     
         activeElementId: PropTypes.string,   
-        activeBlock: PropTypes.object,
+        activeBlockId: PropTypes.any,
+        activeBlockGroup: PropTypes.bool,
+        activeBlockLock: PropTypes.bool,
         activeBlocksId: PropTypes.array,    
         activeBlockDOM: PropTypes.object, 
         stylePage: PropTypes.object,   
@@ -31,73 +33,117 @@ class OptionPanel extends React.PureComponent {
         tooltip: null,
     }
 
+    BLOCK_ACTION = [
+        'lock',
+        'autosize',
+        'back',
+        'copy',
+        'ungroup',
+    ];
+
+    BLOCKS_ACTION = [
+        'align_top',
+        'align_bottom',
+        'align_left',
+        'align_right',
+        'align_vertical',
+        'align_horisontal',
+        'distribute_vertical',
+        'distribute_horisontal',
+        'align_width',
+        'align_height',
+        'group',
+    ];
+
+    delayedCallback = debounce(function (event) {
+        event();
+    });
+
     setTooltip = (text) => {
-        this.setState({tooltip:text});
+        this.delayedCallback(() => this.setState({tooltip:text}));
+    }
+    
+    setStyle = (blockId,optionName,value) => {
+        this.props.dispatch(cvStyle_update(blockId,optionName,value));
     }
 
-    sendBlockBack = () => {
-        this.props.dispatch(cvBlock_sendBack(this.props.activeBlock.id));
-    }
-
-    copyBlock = () => {
-        this.props.dispatch(cvBlock_copy(this.props.activeBlock.id));
-    }
-
-    setBlockSizeAuto = () => {
-        let sizesAuto = getAutoSize(this.props.activeBlockDOM);
-        this.props.dispatch(cvBlock_setSize(this.props.activeBlock.id,sizesAuto.height,sizesAuto.width));
-    }
-
-    alignBlocksTop = () => {
-        this.props.dispatch(cvBlocks_align('top'));
-    }
-
-    alignBlocksBottom = () => {
-        this.props.dispatch(cvBlocks_align('bottom'));
-    }
-
-    alignBlocksLeft = () => {
-        this.props.dispatch(cvBlocks_align('left'));
-    }
-
-    alignBlocksRight = () => {
-        this.props.dispatch(cvBlocks_align('right'));
-    }
-
-    alignBlocksVertical = () => {
-        this.props.dispatch(cvBlocks_align('vertical'));
-    }
-
-    alignBlocksHorisontal = () => {
-        this.props.dispatch(cvBlocks_align('horisontal'));
-    }
-
-    distributeBlocksVertical = () => {
-        this.props.dispatch(cvBlocks_distribute('vertical'));
-    }
-
-    distributeBlocksHorisontal = () => {
-        this.props.dispatch(cvBlocks_distribute('horisontal'));
-    }
-
-    setBlocksSizeWidth = () => {
-        this.props.dispatch(cvBlocks_alignSize('width'));
-    }
-
-    setBlocksSizeHeight = () => {
-        this.props.dispatch(cvBlocks_alignSize('height'));
-    }
-
-    groupBlocks = () => {
-        this.props.dispatch(cvBlocks_group());
-    }
-
-    ungroupBlock = () => {
-        this.props.dispatch(cvBlock_ungroup(this.props.activeBlock.id));
-    }
-
-    lockPositionBlock = (evt) => {
-        this.props.dispatch(cvBlock_lock(this.props.activeBlock.id,evt));
+    setAction = (blockId,optionName,value) => {
+        switch (optionName) {
+            case 'align_top': {
+                this.props.dispatch(cvBlocks_align('top'));
+                break;
+            }
+            case 'align_bottom': {
+                this.props.dispatch(cvBlocks_align('bottom'));
+                break;
+            }
+            case 'align_left': {
+                this.props.dispatch(cvBlocks_align('left'));
+                break;
+            }
+            case 'align_right': {
+                this.props.dispatch(cvBlocks_align('right'));
+                break;
+            }
+            case 'align_vertical': {
+                this.props.dispatch(cvBlocks_align('vertical'));
+                break;
+            }
+            case 'align_horisontal': {
+                this.props.dispatch(cvBlocks_align('horisontal'));
+                break;
+            }
+            case 'distribute_vertical': {
+                this.props.dispatch(cvBlocks_distribute('vertical'));
+                break;
+            }
+            case 'distribute_horisontal': {
+                this.props.dispatch(cvBlocks_distribute('horisontal'));
+                break;
+            }
+            case 'align_width': {
+                this.props.dispatch(cvBlocks_alignSize('width'));
+                break;
+            }
+            case 'align_height': {
+                this.props.dispatch(cvBlocks_alignSize('height'));
+                 break;
+            }
+            case 'group': {
+                this.props.dispatch(cvBlocks_group());
+                this.setState({tooltip:null});
+                break;
+            }
+            case 'lock': {
+                this.props.dispatch(cvBlock_lock(blockId));
+                break;
+            }
+            case 'autosize': {
+                if (this.props.activeBlockDOM) {
+                    let sizesAuto = getAutoSize(this.props.activeBlockDOM);
+                    this.props.dispatch(cvBlock_setSize(blockId,sizesAuto.height,sizesAuto.width));            
+                }
+                break;
+            }
+            case 'back': {
+                this.props.dispatch(cvBlock_sendBack(blockId));
+                this.setState({tooltip:null});
+                break;
+            }
+            case 'copy': {
+                this.props.dispatch(cvBlock_copy(blockId));
+                this.setState({tooltip:null});
+                break;
+            }
+            case 'ungroup': {
+                this.props.dispatch(cvBlock_ungroup(blockId));
+                this.setState({tooltip:null});
+                break;
+            }
+            default:
+                //console.log('action', optionName, value);
+                return;
+        }
     }
 
     render () {
@@ -106,48 +152,27 @@ class OptionPanel extends React.PureComponent {
         let codeBlockOptions = null;
         let codeBlocksOptions = null;
         let codePageOptions = null;
+        let blockAction = this.BLOCK_ACTION;
         
-        if (this.props.activeElementId) {
-            codeElementOptions = Object.keys(this.props.styleToEdit).map( (s,i) => (
-                    <Option key={i} optionName={s} optionValue={this.props.styleToEdit[s]} blockId={this.props.activeBlock.id} cbSetTooltip={this.setTooltip}/>));
-        };
-
-        if (this.props.activeBlock) {
-            codeBlockOptions = (
-               <React.Fragment>
-                    <Action key={1} actionName={'lock'} actionValue={this.props.activeBlock.lock?this.props.activeBlock.lock:false} cbOnChange={this.lockPositionBlock} cbSetTooltip={this.setTooltip}></Action>
-                    {(!this.props.activeBlock.ungroup && this.props.activeBlockDOM) && (
-                        <Action key={2} actionName={'autosize'} cbOnChange={this.setBlockSizeAuto} cbSetTooltip={this.setTooltip}></Action>
-                    )}
-                    <Action key={3} actionName={'back'} cbOnChange={this.sendBlockBack} cbSetTooltip={this.setTooltip}></Action>
-                    <Action key={4} actionName={'copy'} cbOnChange={this.copyBlock} cbSetTooltip={this.setTooltip}></Action>
-                    {this.props.activeBlock.ungroup && (
-                        <Action key={5} actionName={'ungroup'} cbOnChange={this.ungroupBlock} cbSetTooltip={this.setTooltip}></Action>
-                    )}
-               </React.Fragment>
-            );
-        } else if (this.props.stylePage) {
+        if (this.props.activeBlocksId.length > 1) { //few active blocks
+            codeBlocksOptions = this.BLOCKS_ACTION.map( (a,i) => (
+                <Option key={i} optionName={a} cbOnChange={this.setAction} cbSetTooltip={this.setTooltip}/>));
+        } else if (this.props.activeBlockId) { //one active block
+            if (!this.props.activeBlockGroup) {
+                blockAction = blockAction.filter(a => a!=='ungroup');
+            };
+            if (this.props.activeBlockGroup || !this.props.activeBlockDOM) {
+                blockAction = blockAction.filter(a => a!=='autosize');
+            };
+            codeBlocksOptions = blockAction.map( (a,i) => (
+                <Option key={i} optionName={a} optionValue={a=='lock'?this.props.activeBlockLock:null} blockId={this.props.activeBlockId} cbOnChange={this.setAction} cbSetTooltip={this.setTooltip}/>));
+            if (this.props.activeElementId) { //active element
+                codeElementOptions = Object.keys(this.props.styleToEdit).map( (s,i) => (
+                    <Option key={i} optionName={s} optionValue={this.props.styleToEdit[s]} blockId={this.props.activeBlockId} cbOnChange={this.setStyle} cbSetTooltip={this.setTooltip}/>));
+            };
+        } else if (this.props.stylePage) { //non active block, but active page
             codePageOptions = Object.keys(this.props.stylePage).map( (s,i) => (
-                <Option key={i} optionName={s} optionValue={this.props.stylePage[s]} blockId={CV_ID} cbSetTooltip={this.setTooltip}/>));
-        }
-        
-
-        if (this.props.activeBlocksId.length > 1) {
-            codeBlocksOptions = (
-                <React.Fragment>
-                    <Action key={6} actionName={'align_top'} cbOnChange={this.alignBlocksTop} cbSetTooltip={this.setTooltip}></Action>
-                    <Action key={7} actionName={'align_bottom'} cbOnChange={this.alignBlocksBottom} cbSetTooltip={this.setTooltip}></Action>
-                    <Action key={8} actionName={'align_left'} cbOnChange={this.alignBlocksLeft} cbSetTooltip={this.setTooltip}></Action>
-                    <Action key={9} actionName={'align_right'} cbOnChange={this.alignBlocksRight} cbSetTooltip={this.setTooltip}></Action>
-                    <Action key={10} actionName={'align_vertical'} cbOnChange={this.alignBlocksVertical} cbSetTooltip={this.setTooltip}></Action>
-                    <Action key={11} actionName={'align_horisontal'} cbOnChange={this.alignBlocksHorisontal} cbSetTooltip={this.setTooltip}></Action>
-                    <Action key={12} actionName={'distribute_vertical'} cbOnChange={this.distributeBlocksVertical} cbSetTooltip={this.setTooltip}></Action>
-                    <Action key={13} actionName={'distribute_horisontal'} cbOnChange={this.distributeBlocksHorisontal} cbSetTooltip={this.setTooltip}></Action>
-                    <Action key={14} actionName={'align_width'} cbOnChange={this.setBlocksSizeWidth} cbSetTooltip={this.setTooltip}></Action>
-                    <Action key={15} actionName={'align_height'} cbOnChange={this.setBlocksSizeHeight} cbSetTooltip={this.setTooltip}></Action>
-                    <Action key={16} actionName={'group'} cbOnChange={this.groupBlocks} cbSetTooltip={this.setTooltip}></Action>
-                </React.Fragment>
-            );
+                <Option key={i} optionName={s} optionValue={this.props.stylePage[s]} blockId={CV_ID} cbOnChange={this.setStyle} cbSetTooltip={this.setTooltip}/>));
         }
 
         return (
