@@ -10,6 +10,7 @@ import { CV_BLOCK_ADD,
         CV_BLOCK_COPY,
         CV_BLOCK_SET_SIZE,
         CV_BLOCK_LOCK,
+        CV_BLOCK_LINK,
         CV_BLOCKS_ALIGN_TOP,
         CV_BLOCKS_ALIGN_BOTTOM,
         CV_BLOCKS_ALIGN_LEFT,
@@ -55,7 +56,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
             }
 
             let newId = state.blocks.reduce(function (r, v) { return ( r < v.id ? v.id : r);},0) + 1;
-            let randomPosition = Math.random()*100;
+            let randomPosition = 50 + Math.random()*100;
             let newBlock = {...action.block, positionTop:randomPosition,positionLeft:randomPosition};
             setId(newBlock);
             let newState = {...state,
@@ -433,6 +434,18 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
             let newBlocks = state.blocks.map(b => {
                 if (b.id===action.blockId) {
                     b.lock = !b.lock;
+                    return {...b};
+                }
+                return b});
+            let newState = {...state, blocks:newBlocks};
+            return newState;
+        }
+
+        //wrap block with link
+        case CV_BLOCK_LINK: {
+            let newBlocks = state.blocks.map(b => {
+                if (b.id===action.blockId) {
+                    b.link = action.linkValue;
                     return {...b};
                 }
                 return b});

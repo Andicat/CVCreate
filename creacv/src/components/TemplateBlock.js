@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import CVElement from './CVElement';
+import CvElement from './CvElement';
 
 import {connect} from 'react-redux';
 import {cvBlock_add} from '../redux/cvDataAC';
@@ -12,6 +12,7 @@ class TemplateBlock extends React.PureComponent {
     static propTypes = {
         id: PropTypes.number.isRequired,
         data: PropTypes.object.isRequired,
+        transitionClass: PropTypes.string,
     };
 
     onClick = (evt) => {
@@ -21,16 +22,10 @@ class TemplateBlock extends React.PureComponent {
     }
 
     render () {
-        let elementCode = null;
-        //debugger
-        //if (this.props.data.type==='group') {
-        //    elementCode = <CVElementGroup  blockId={this.props.id} cv={false} data={this.props.data} activeElementId={this.props.activeElementId}></CVElementGroup>;
-        //} else {
-            //let elementId = this.props.id + '-' + 0;
-            elementCode = <CVElement key={'' + this.props.id} id={'' + this.props.id} blockId={this.props.id} cv={false} data={this.props.data} active={false}></CVElement>;
-        //}
+        //console.log('render panel.block',this.props.transitionClass);
+        let elementCode = <CvElement key={'' + this.props.id} id={'' + this.props.id} blockId={this.props.id} cv={false} data={this.props.data} active={false}></CvElement>;
         return (    
-            <li className='template-panel__block'>
+            <li className={'template-panel__block ' + this.props.transitionClass}>
                 <div className='template-panel__block-view'>
                     {elementCode}
                 </div>

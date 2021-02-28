@@ -4,10 +4,32 @@
     justify-content: center;
     position: relative;
     overflow-y: scroll; 
-    height: calc(100vh - 100px);
+    height: calc(100vh - 150px);
     padding-top: 10px;
+    padding-bottom: 50px;
+
     &::-webkit-scrollbar {
         width: 0;
+    }
+}
+
+.cv-view {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow-y: scroll; 
+    height: 100vh;
+    background-color: $color-white;
+    padding: 0;
+
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+
+    .cv__block:hover {
+        outline: none;
+        cursor: default;
     }
 }
 
@@ -29,11 +51,12 @@
         
         &:hover {
             outline: 1px solid $color-block-hover;
+            //z-index: 10;
             cursor: pointer;
         }
         
         &--active {
-            z-index: 10;
+            z-index: 15;
             outline: 2px solid $color-block-active;
             &:hover {
                 outline: 2px solid $color-block-active;
@@ -44,6 +67,12 @@
             outline-width : 3px;
             &:hover {
                 outline-width: 3px;
+            }
+        }
+
+        &--lock {
+            &:hover {
+                z-index: 0;
             }
         }
     }
@@ -63,7 +92,7 @@
         }
 
         &--image {
-            width: auto;
+            width: 100%;
             height: auto;
         }
 
@@ -72,6 +101,11 @@
             width: auto;
             display: flex;
             align-items: center;
+        }
+
+        &--progress {
+            min-height: 10px;
+            display: flex;
             margin-left: auto;
         }
 
@@ -90,11 +124,11 @@
 
             &-absolute {
                 position: relative;
-                .cv__element {
-                   // position: absolute;
-                }
-
             }
+        }
+
+        &--link {
+            cursor: pointer;
         }
     }
 
@@ -139,8 +173,7 @@
         background-repeat: no-repeat;
         background-size: 100%;
         background-position: center;
-        //z-index: 100;
-
+        
         &--delete {
             top: 0;
             right: 0;
@@ -153,10 +186,6 @@
             left: 0;
             transform: translate(-50%, -50%);
             background-image: url('./../../img/icon-move.svg');
-
-            /*&:hover {
-                cursor: move;
-            }*/
         }
 
         &--resize {

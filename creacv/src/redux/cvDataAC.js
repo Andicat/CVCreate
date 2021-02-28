@@ -24,6 +24,7 @@ const CV_BLOCKS_GROUP = 'CV_BLOCKS_GROUP';
 const CV_BLOCK_UNGROUP = 'CV_BLOCK_UNGROUP';
 const CV_BLOCK_LOCK = 'CV_BLOCK_LOCK';
 const CV_LOAD = 'CV_LOAD';
+const CV_BLOCK_LINK = 'CV_BLOCK_LINK';
 
 const cvBlock_add = function(block) {
     return {
@@ -184,6 +185,14 @@ const cv_load = function(blocks,style) {
     };
 }
 
+const cvBlock_setLink = function(blockId,linkValue) {
+    return { 
+        type: CV_BLOCK_LINK,
+        blockId:blockId,
+        linkValue:linkValue,
+    };
+}
+
 export {
     cvBlock_add, CV_BLOCK_ADD,
     cvBlock_delete, CV_BLOCK_DELETE,
@@ -195,6 +204,7 @@ export {
     cvBlock_copy, CV_BLOCK_COPY,
     cvBlock_setSize, CV_BLOCK_SET_SIZE,
     cvBlock_lock, CV_BLOCK_LOCK,
+    cvBlock_setLink, CV_BLOCK_LINK,
     cvBlocks_align, CV_BLOCKS_ALIGN_TOP, CV_BLOCKS_ALIGN_BOTTOM, CV_BLOCKS_ALIGN_LEFT, CV_BLOCKS_ALIGN_RIGHT, CV_BLOCKS_ALIGN_VERTICAL, CV_BLOCKS_ALIGN_HORISONTAL,
     cvBlocks_distribute, CV_BLOCKS_DISTRIBUTE_VERTICAL, CV_BLOCKS_DISTRIBUTE_HORISONTAL,
     cvBlocks_alignSize, CV_BLOCKS_ALIGN_WIDTH, CV_BLOCKS_ALIGN_HEIGHT,

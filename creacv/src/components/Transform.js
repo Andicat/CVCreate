@@ -9,7 +9,7 @@ class Transform extends React.PureComponent {
     static propTypes = {
         block: PropTypes.object,
         cv: PropTypes.object,
-        showPanel: PropTypes.bool,
+        transitionClass: PropTypes.string,
     };
 
     mouseStart;
@@ -89,12 +89,13 @@ class Transform extends React.PureComponent {
     }
 
     render () {
+        //console.log('render transform');
         if (!this.props.block) {
             return null;
         }
         //let style = {top:(this.props.block.positionTop + this.shiftTop - this.shiftBorder) + 'px', left:(this.props.block.positionLeft + this.shiftLeft - this.shiftBorder) + 'px', width:(this.props.block.width + this.shiftBorder*2) + 'px', height:(this.props.block.height + this.shiftBorder*2) + 'px'};
         let style = {top:(this.props.block.positionTop + this.state.shiftTop - this.state.shiftBorder) + 'px', left:(this.props.block.positionLeft + this.state.shiftLeft - this.state.shiftBorder) + 'px', width:(this.props.block.width + this.state.shiftBorder*2) + 'px', height:(this.props.block.height + this.state.shiftBorder*2) + 'px'};
-        let className = 'transform' + (this.props.block.lock?' transform--locked':'');
+        let className = 'transform '  + this.props.transitionClass + (this.props.block.lock?' transform--locked':'');
         return (
             <div className={className} style={style}>
                 {!this.props.block.lock && (

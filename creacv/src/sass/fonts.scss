@@ -1,0 +1,79 @@
+@font-face {
+    font-style: normal;
+    font-weight: normal;
+    font-family: "Roboto";
+
+    src:
+        url("./../fonts/roboto.woff2") format("woff2"),
+        url("./../fonts/roboto.woff") format("woff");
+}
+
+@font-face {
+    font-style: normal;
+    font-weight: bold;
+    font-family: "Roboto";
+  
+    src:
+        url("./../fonts/roboto-bold.woff2") format("woff2"),
+        url("./../fonts/roboto-bold.woff") format("woff");
+}
+
+@font-face {
+    font-style: normal;
+    font-weight: normal;
+    font-family: "PTSans";
+
+    src:
+        url("./../fonts/ptsans.woff2") format("woff2"),
+        url("./../fonts/ptsans.woff") format("woff");
+}
+
+@font-face {
+    font-style: normal;
+    font-weight: bold;
+    font-family: "Roboto";
+
+    src:
+        url("./../fonts/ptsans-bold.woff2") format("woff2"),
+        url("./../fonts/ptsans-bold.woff") format("woff");
+}
+
+@font-face {
+    font-style: normal;
+    font-weight: normal;
+	font-family: "Helvetica";
+
+	src: 
+        url("./../fonts/helvetica-cyrillic-oblique.woff2") format("woff2"),
+		url("./../fonts/helvetica-cyrillic-oblique.woff") format("woff");
+}
+
+@font-face {
+    font-style: normal;
+    font-weight: bold;
+	font-family: "Helvetica";
+
+	src: 
+        url("./../fonts/helvetica-cyrillic-bold-oblique.woff2") format("woff2"),
+		url("./../fonts/helvetica-cyrillic-bold-oblique.woff") format("woff");
+}
+
+@font-face {
+    font-style: normal;
+    font-weight: normal;
+	font-family: "Garamond";
+
+	src: 
+        url("./../fonts/garamond.woff2") format("woff2"),
+		url("./../fonts/garamond.woff") format("woff");
+}
+
+@font-face {
+    font-style: normal;
+    font-weight: bold;
+	font-family: "Garamond";
+
+	src: 
+        url("./../fonts/garamond-bold.woff2") format("woff2"),
+		url("./../fonts/garamond-bold.woff") format("woff");
+}

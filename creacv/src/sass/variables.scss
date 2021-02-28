@@ -4,6 +4,7 @@ $color-bg: #cae6ee;
 
 $color-white: #ffffff;
 $color-black: #000000;
+$color-gray: #222222;
 
 $color-button-bg: #f4fafa;
 $color-button-border: #8e9fa0;
@@ -17,26 +18,7 @@ $color-block-active: #204e7c;
 $color-transform: #365a7e;
 
 $color-option-border: #738f8f;
-$color-tooltip: #89cbdd;
+$color-tooltip: #b8cdd3;
 
 $color-panel-bg: #293039;
 $color-panel-border: #5e5f61;
-
-
-.example-enter {
-    opacity: 0.01;
-}
-
-.example-enter.example-enter-active {
-    opacity: 1;
-    transition: opacity 300ms ease-in;
-}
-
-.example-leave {
-    opacity: 1;
-}
-
-.example-leave.example-leave-active {
-    opacity: 0.01;
-    transition: opacity 300ms ease-in;
-}

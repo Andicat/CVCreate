@@ -1,22 +1,8 @@
-/*.desk {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    padding-top: 40px;
-    position: relative;
-    position: fixed; 
-    left: 0; 
-    right: 0; 
-    top: 0; 
-    bottom: 0; 
-    overflow-y: scroll; 
-
-}*/
-
 .desk {
     width: 100%;
     height: 1;
     display: flex;
     flex-direction: column;
     position: relative;
+    overflow-x: auto;
 }

@@ -1,0 +1,142 @@
+.header,
+.main {
+    &.entering {
+        //display: none;
+        //animation: fadeIn 2000ms forwards;
+    }
+      
+    &.entered {
+        //display: flex;
+        animation: fadeIn 500ms forwards;
+    }
+      
+    &.exiting {
+        animation: fadeOut 500ms forwards;
+        //animation: fadeOut 200ms forwards;
+    }
+      
+    &.exited {
+        animation: fadeOut 500ms forwards;
+        //display: none;
+        //animation: fadeOut 500ms forwards;
+    }  
+}
+
+.transform {
+    &.entering {
+        display: none;
+    }
+      
+    &.entered {
+        display: block;
+        animation: fadeIn 200ms forwards;
+    }
+      
+    &.exiting {
+        display: none;
+    }
+      
+    &.exited {
+    }  
+}
+
+.template-panel__menu {
+    &.entering {
+        display: block;
+        animation: panel-open 500ms forwards;
+    }
+      
+    &.entered {
+        display: block;
+    }
+      
+    &.exiting {
+        display: block;
+        animation: panel-close 500ms forwards;
+    }
+      
+    &.exited {
+        //display: none;
+    }
+
+    &.entering ~.template-panel__button-hide,
+    &.entered ~.template-panel__button-hide {
+        border-radius: 0 10px 10px 0;
+        background-image: url('./../img/icon-close.svg');
+        background-size: 12px;
+    }
+}
+
+
+.template-panel__block {
+    &.entering {
+    }
+      
+    &.entered {
+        display: flex;
+        animation: fadeInBlock 300ms forwards;
+    }
+      
+    &.exiting {
+    }
+      
+    &.exited {
+    }  
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+        
+@keyframes panel-open {
+    0% {
+        opacity: 0;
+        width: 0;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        width: 300px;
+    }
+}
+
+@keyframes panel-close {
+    0% {
+        opacity: 1;
+        width: 300px;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+        width: 0;
+    }
+
+}
+
+@keyframes fadeInBlock {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

@@ -9,7 +9,6 @@ class Option extends React.PureComponent {
         blockId: PropTypes.number.isRequired,
         optionName: PropTypes.string,
         optionValue: PropTypes.any,
-        cbSetTooltip: PropTypes.func.isRequired,
         cbOnChange: PropTypes.func.isRequired,
     };
 
@@ -17,24 +16,46 @@ class Option extends React.PureComponent {
         blockId: 0,
     };
 
+    state = {
+        tooltip: null,
+    }
+
     onChangeValue = (value) => {
         this.props.cbOnChange(this.props.blockId,this.props.optionName,value);
     }
 
-    onMouseOver = () => {
-        this.props.cbSetTooltip(OPTIONS_TEXT[this.props.optionName]);
+    //delayedCallback = debounce(function (event) {
+    //    event();
+    //});
+
+    //setTooltip = (text) => {
+        //this.setState({tooltip:text});
+        //this.delayedCallback(() => this.setState({tooltip:text}));
+    //}
+
+    onMouseOver = (evt) => {
+        //console.log(evt.target.getAttribute('data-tooltip'));
+        if (evt.target.getAttribute('data-tooltip')) {
+            //this.delayedCallback(() => this.setState({tooltip:OPTIONS_TEXT[this.props.optionName]}));
+            this.setState({tooltip:OPTIONS_TEXT[this.props.optionName]});
+        }
     }
 
     onMouseOut = () => {
-        this.props.cbSetTooltip(null);
+        this.setState({tooltip:null});
     }
 
      render () {
+        // debugger
         let optionCode = createOption(this.props.optionName,this.props.optionValue,this.onChangeValue);
         return (
-            <div className='option' onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
+            <div className='option' onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut} onClick={this.onMouseOut}>
                 {optionCode}
+                {this.state.tooltip && 
+                    <span className='option__tooltip'>{this.state.tooltip}</span>
+                }
             </div>
+            
         );
     }
 }

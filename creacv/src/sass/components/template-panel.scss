@@ -5,26 +5,13 @@
     height: 100vh;
     display: flex;
     z-index: 10;
-    //width: 300px;
-    //overflow-y: auto;
-    //overflow-x: visible;
 
     &__menu {
-        //width: 250px;
-    //    min-width: 300px;
-    //width: 100%;
-    width: 300px;
-
-    & ~.template-panel__button-hide {
-        border-radius: 0 10px 10px 0;
-        background-image: url('./../../img/icon-close.svg');
-        background-size: 12px;
-    }
-
+        width: 300px;
+        display: none;
     }
 
     &__group {
-        
 
         &-name {
             transition: all 0.3s;
@@ -48,7 +35,6 @@
                 outline: none;
                 border: none;
                 background-color: transparent;
-                //border-radius: 50%;
                 background-image: url('./../../img/icon-open.svg');
                 background-repeat: no-repeat;
                 background-size: 100%;
@@ -71,11 +57,10 @@
     }
 
     &__block {
-        display: flex;
+        display: none;
         justify-content: space-between;
         align-items: center;
         border-radius: 5px;
-        //padding-right: 5px;
         margin: 5px;
         background-color: $color-white;
         border-bottom: 1px solid $color-panel-border;
@@ -97,52 +82,42 @@
         outline: none;
         border: none;
         background-color: transparent;
-        //border: 1px solid $color-panel-border;
-        //border-radius: 50%;
         background-image: url('./../../img/icon-add.svg');
         background-repeat: no-repeat;
         background-size: 100%;
         background-position: center;
 
         &:hover {
-            /*box-shadow:
-                inset 0 1px 3px rgba(0,10,20,.5),
-                0 1px rgb(83,94,104),
-                0 0 1px rgb(86,96,106);*/
-                animation: arrow-add 1s linear infinite;
+            animation: arrow-add 1s linear infinite;
             cursor: pointer;
         }
-
-        /*&:active {
-            border: 1px solid rgb(22,32,43);
-            border-bottom: 1px solid rgb(25,34,45);
-            box-shadow:
-                inset 0 1px 3px rgba(0,10,20,.5),
-                0 1px rgb(83,94,104),
-                0 0 1px rgb(86,96,106);
-        }*/
     }
-
 
     &__block-view {
         display: flex;
         flex-direction: column;
+        justify-content: center;
         padding: 6px;
         box-sizing: border-box;
         overflow: hidden;
-
-        .cv__element {
-            //position: relative;
-        }
+        width: 100%;
+        min-height: 50px;
 
         .cv__element--image,
         .cv__element--figure {
             height: 50px;
             width: 50px;
         }
+
+        .cv__element--progress {
+            height: 10px;
+            min-width: 100px;
+            width: 100%;
+        }
     }
 
     &__button-hide {
+        transition: all 0.5s;
         position: absolute;
         height: 45px;
         width: 25px;
@@ -153,19 +128,10 @@
         background-repeat: no-repeat;
         background-size: 90%;
         background-position: center;
-        /*background-color: transparent;
-        background-image: url('./../../img/icon-hide.svg');
-        background-repeat: no-repeat;
-        background-size: contain;*/
         right: 0;
         top: 0;
         transform: translateX(100%);
         z-index: 10;
-        //border: none;
-        /*border-right: transparent;
-        border-left: 20px solid $color-panel-bg;
-        border-top: 50px solid transparent;
-        border-bottom: 50px solid transparent;*/
         border: 1px solid $color-panel-border;
 
         &:hover,
@@ -200,3 +166,4 @@
         background-position-y: center;
     }
 }
+

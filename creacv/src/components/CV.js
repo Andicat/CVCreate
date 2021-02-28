@@ -1,19 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Transition} from "react-transition-group";
+import { NavLink } from 'react-router-dom';
 
 import OptionPanel from './OptionPanel';
 
 import TemplatePanel from './TemplatePanel';
-import CVDocument from './CVDocument';
+import CvDocument from './CvDocument';
 
 import {connect} from 'react-redux';
-import {createTemplates} from './utils';
+import {createTemplates, saveFileJSON, readFileJSON} from './utils';
 import {db} from '../App';
 import {cv_load} from '../redux/cvDataAC';
+
 
 class CV extends React.PureComponent {
 
     static propTypes = {
+        transitionClass: PropTypes.string,
         stylePage: PropTypes.object,  
         blocks: PropTypes.array,
         activeBlocksId: PropTypes.array,
@@ -25,35 +29,35 @@ class CV extends React.PureComponent {
 
     saveCV = () => {
         let stateToSave = {style:this.props.stylePage,blocks:this.props.blocks};
-        db.collection("CV").doc('Katya').set(stateToSave)
-            .then(() => {
-                console.log("Document successfully written!");
-            })
-            .catch((error) => {
-                console.error("Error writing document: ", error);
-            });
+        saveFileJSON(JSON.stringify(stateToSave),'CV','.json');
     }
 
-    loadCV = () => {
-        let loadDoc = new Promise((resolve) => {
-            db.collection("CV").doc('Katya').get().then((doc) => {
-            if (doc.exists) {
-                console.log("Document data:", doc.data());
-                    resolve(doc.data());
-                } else {
-                    console.log("No such document!");
-                }
-            }).catch((error) => {
-                console.log("Error getting document:", error);
-            });
-        });
-        loadDoc.then((data) => { 
-            this.props.dispatch(cv_load(data.blocks,data.style));
-        });
+    onLoadCV = (data) => {
+        this.props.dispatch(cv_load(data.blocks,data.style));
+    }
+
+    loadCV = (evt) => {
+        readFileJSON(evt.target.files[0],this.onLoadCV);
+        evt.target.value = null;
     }
 
     showHTML = () => {
-
+        let cvBlock = document.querySelector('.cv');
+        let cvStyle = document.getElementsByTagName('style')[0];
+        let styleTag = document.createElement('style');
+        styleTag.setAttribute('type','text/css');
+        if (styleTag.styleSheet){
+            styleTag.styleSheet.cssText = cvStyle.innerHTML;
+        } else {
+        styleTag.appendChild(document.createTextNode(cvStyle.innerHTML));
+        }
+        
+        var windowCV = window.open('', 'wnd');
+        let headTag = windowCV.document.head;
+        headTag.appendChild(styleTag);
+        windowCV.document.body.innerHTML = cvBlock.outerHTML;
+        windowCV.document.body.style.overflow = 'auto';
+        windowCV.document.body.style.height = 'auto';
     }
 
     showPanel = () => {
@@ -61,36 +65,45 @@ class CV extends React.PureComponent {
     }
     
     render () {
+        //console.log('render cv');
         let activeOneId = (this.props.activeBlocksId.length===1) && this.props.activeBlocksId[0];
         let activeBlock = null;
         if (activeOneId) {
             activeBlock = this.props.blocks.find(b => b.id === activeOneId);
         }
 
+        //<button className='header__button header__button--html' onClick={this.showHTML}>Show</button>
+
         return (
             <React.Fragment>
-                <header className='header'>
+                <header className={'header ' + this.props.transitionClass}>
                     <span className='header__logo'>Create your CV</span>
                     <ul className='header__menu'>
                         <li className='header__menu-item'>
-                            <button className='header__button header__button--save' onClick={this.saveCV}/>
+                            <button className='header__button header__button--save' onClick={this.saveCV}>Save</button>
                         </li>
                         <li className='header__menu-item'>
-                            <button className='header__button header__button--load' onClick={this.loadCV}/>
+                            <input type='file' name='file-cv' id='file-cv' className='option__file' accept='text/*' onChange={this.loadCV}></input>
+                            <label className='header__button header__button--load' htmlFor='file-cv' data-tooltip={true}>Load</label>
                         </li>
                         <li className='header__menu-item'>
-                            <button className='header__button header__button--html' onClick={this.showHTML}/>
+                            <NavLink to='/view' className='header__button header__button--html'>Show</NavLink>    
                         </li>
                     </ul>
                 </header>
-                <main>
-                    <aside className='template-panel'>
-                        {this.state.showPanel && <TemplatePanel groups={createTemplates()}/>}
+                <main className={'main ' + this.props.transitionClass}>
+                    <div className='template-panel'>
+                        <Transition in={this.state.showPanel} unmountOnExit timeout={{ enter: 500, exit: 500 }}>
+                            {stateName => {
+                                return <TemplatePanel transitionClass={stateName} groups={createTemplates()}/>
+                            }}
+                        </Transition>
+                        {this.state.showPanel && null}
                         <button className='template-panel__button-hide' onClick={this.showPanel}/>
-                    </aside>
+                    </div>
                     <div className='desk'>
-                        <OptionPanel activeBlockGroup={activeBlock?activeBlock.group:false} activeBlockId={activeBlock?activeBlock.id:false} activeBlockLock={activeBlock?activeBlock.lock:false}/>
-                        <CVDocument activeBlock={activeBlock} stylePage={this.props.stylePage} showPanel={this.state.showPanel}/>
+                        <OptionPanel activeBlockGroup={activeBlock?activeBlock.group:false} activeBlockLink={activeBlock?activeBlock.link:''} activeBlockId={activeBlock?activeBlock.id:false} activeBlockLock={activeBlock?activeBlock.lock:false}/>
+                        <CvDocument activeBlock={activeBlock} stylePage={this.props.stylePage} showPanel={this.state.showPanel}/>
                     </div>
                 </main>
             </React.Fragment>

@@ -1,7 +1,9 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
-import CV from './components/CV';
+import { BrowserRouter } from 'react-router-dom';
+
+import PagesRouter from './pages/PagesRouter';
 
 import combinedReducer from './redux/reducers.js';
 
@@ -14,13 +16,13 @@ import '@firebase/database';
 
 
 var firebaseConfig = {
-    apiKey: "AIzaSyAq9TFZvy9lyxxV3vrJXGXT5M_Ivwf7-RY",
-    authDomain: "creacv-a2bd7.firebaseapp.com",
-    projectId: "creacv-a2bd7",
-    storageBucket: "creacv-a2bd7.appspot.com",
-    messagingSenderId: "1093581926352",
-    appId: "1:1093581926352:web:7d1b8619531df14b8253d5",
-    measurementId: "G-08QQHJN47T"
+    apiKey: 'AIzaSyAq9TFZvy9lyxxV3vrJXGXT5M_Ivwf7-RY',
+    authDomain: 'creacv-a2bd7.firebaseapp.com',
+    projectId: 'creacv-a2bd7',
+    storageBucket: 'creacv-a2bd7.appspot.com',
+    messagingSenderId: '1093581926352',
+    appId: '1:1093581926352:web:7d1b8619531df14b8253d5',
+    measurementId: 'G-08QQHJN47T'
 };
 
 // Initialize Firebase
@@ -33,9 +35,11 @@ let store = createStore(combinedReducer);
 function App() {
 
     return (
-        <Provider store={store}>
-            <CV/>
-        </Provider>
+        <BrowserRouter>
+            <Provider store={store}>
+                <PagesRouter/>
+            </Provider>
+        </BrowserRouter>
     );
 }
 

@@ -13,8 +13,9 @@ import {cvStyle_update,
     cvBlocks_distribute,
     cvBlocks_group,
     cvBlock_ungroup, 
-    cvBlock_lock } from '../redux/cvDataAC';
-import {getAutoSize, debounce} from './utils';
+    cvBlock_lock,
+    cvBlock_setLink } from '../redux/cvDataAC';
+import {getAutoSize} from './utils';
 
 class OptionPanel extends React.PureComponent {
 
@@ -24,14 +25,11 @@ class OptionPanel extends React.PureComponent {
         activeBlockId: PropTypes.any,
         activeBlockGroup: PropTypes.bool,
         activeBlockLock: PropTypes.bool,
+        activeBlockLink: PropTypes.string,
         activeBlocksId: PropTypes.array,    
         activeBlockDOM: PropTypes.object, 
         stylePage: PropTypes.object,   
     };
-
-    state = {
-        tooltip: null,
-    }
 
     BLOCK_ACTION = [
         'lock',
@@ -39,6 +37,7 @@ class OptionPanel extends React.PureComponent {
         'back',
         'copy',
         'ungroup',
+        'link',
     ];
 
     BLOCKS_ACTION = [
@@ -55,14 +54,6 @@ class OptionPanel extends React.PureComponent {
         'group',
     ];
 
-    delayedCallback = debounce(function (event) {
-        event();
-    });
-
-    setTooltip = (text) => {
-        this.delayedCallback(() => this.setState({tooltip:text}));
-    }
-    
     setStyle = (blockId,optionName,value) => {
         this.props.dispatch(cvStyle_update(blockId,optionName,value));
     }
@@ -140,6 +131,10 @@ class OptionPanel extends React.PureComponent {
                 this.setState({tooltip:null});
                 break;
             }
+            case 'link': {
+                this.props.dispatch(cvBlock_setLink(blockId,value));
+                break;
+            }
             default:
                 //console.log('action', optionName, value);
                 return;
@@ -153,10 +148,11 @@ class OptionPanel extends React.PureComponent {
         let codeBlocksOptions = null;
         let codePageOptions = null;
         let blockAction = this.BLOCK_ACTION;
+        //debugger
         
         if (this.props.activeBlocksId.length > 1) { //few active blocks
             codeBlocksOptions = this.BLOCKS_ACTION.map( (a,i) => (
-                <Option key={i} optionName={a} cbOnChange={this.setAction} cbSetTooltip={this.setTooltip}/>));
+                <Option key={i} optionName={a} cbOnChange={this.setAction}/>));
         } else if (this.props.activeBlockId) { //one active block
             if (!this.props.activeBlockGroup) {
                 blockAction = blockAction.filter(a => a!=='ungroup');
@@ -164,15 +160,22 @@ class OptionPanel extends React.PureComponent {
             if (this.props.activeBlockGroup || !this.props.activeBlockDOM) {
                 blockAction = blockAction.filter(a => a!=='autosize');
             };
-            codeBlocksOptions = blockAction.map( (a,i) => (
-                <Option key={i} optionName={a} optionValue={a=='lock'?this.props.activeBlockLock:null} blockId={this.props.activeBlockId} cbOnChange={this.setAction} cbSetTooltip={this.setTooltip}/>));
+            codeBlocksOptions = blockAction.map( (a,i) => {
+                let value = null;
+                if (a=='lock') {
+                    value = this.props.activeBlockLock;
+                } else if (a=='link') {
+                    value = this.props.activeBlockLink;
+                }
+                return <Option key={i} optionName={a} optionValue={value} blockId={this.props.activeBlockId} cbOnChange={this.setAction}/>;
+            });
             if (this.props.activeElementId) { //active element
                 codeElementOptions = Object.keys(this.props.styleToEdit).map( (s,i) => (
-                    <Option key={i} optionName={s} optionValue={this.props.styleToEdit[s]} blockId={this.props.activeBlockId} cbOnChange={this.setStyle} cbSetTooltip={this.setTooltip}/>));
+                    <Option key={i} optionName={s} optionValue={this.props.styleToEdit[s]} blockId={this.props.activeBlockId} cbOnChange={this.setStyle}/>));
             };
         } else if (this.props.stylePage) { //non active block, but active page
             codePageOptions = Object.keys(this.props.stylePage).map( (s,i) => (
-                <Option key={i} optionName={s} optionValue={this.props.stylePage[s]} blockId={CV_ID} cbOnChange={this.setStyle} cbSetTooltip={this.setTooltip}/>));
+                <Option key={i} optionName={s} optionValue={this.props.stylePage[s]} blockId={CV_ID} cbOnChange={this.setStyle}/>));
         }
 
         return (
@@ -192,9 +195,6 @@ class OptionPanel extends React.PureComponent {
                     <div className='option-panel__group option-panel__group--block'>
                         {codeBlockOptions}
                     </div>
-                }
-                {this.state.tooltip && 
-                    <span className='option-panel__tooltip'>{this.state.tooltip}</span>
                 }
             </div>
         );

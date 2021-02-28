@@ -45,12 +45,6 @@
     &:checked ~ label {
         background-color: $color-button-active;
     }
-
-    & ~ label {
-        @include option-button;
-        box-sizing: content-box;
-        background-size: 72%;
-    }
 }
 
 
