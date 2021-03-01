@@ -3,8 +3,6 @@ import {Transition} from "react-transition-group";
 
 import CV from './../components/CV';
 
-//import appData from '../appData';
-
 class Page_CV extends React.PureComponent {
           
     render() {

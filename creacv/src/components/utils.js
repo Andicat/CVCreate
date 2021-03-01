@@ -47,7 +47,6 @@ const OPTIONS_TEXT = {
     height: 'height',
     width: 'width',
     link: 'set link for block',
-    list: 'add another list item',
 }
 
 const FONTS = ['PTSans','Roboto','Helvetica','Garamond'];
@@ -68,7 +67,9 @@ const FONTS = ['PTSans','Roboto','Helvetica','Garamond'];
 
 function createTemplates () {
 
-    let textStyleDefault = {font:'Roboto',color:'#000000', fontsize:'16', bold:false, italic:false, center:false, uppercase:false, underline:false, padding:{left:1,right:0,top:0,bottom:0}};
+    let textStyleDefault = {font:'Roboto', color:'#000000', fontsize:'16',
+                            bold:false, italic:false, center:false,
+                            uppercase:false, underline:false, padding:{left:1,right:0,top:0,bottom:0}};
 
     let imagesArr = [
         {type:'image', style:{file:'', opacity:1}},
@@ -79,7 +80,7 @@ function createTemplates () {
 
     let textArr = [
         {type:'text', text:'Text simple', style:{...textStyleDefault, fontsize: '20'}},
-        {type:'text', text:'Text with background', style:{bgcolor:'#8e9fa0',...textStyleDefault, fontsize:'20'}},
+        {type:'text', text:'Text with background', style:{bgcolor:'#8e9fa0',...textStyleDefault, fontsize:'14'}},
         {type:'text', text:'Big text', style:{...textStyleDefault, fontsize: '40', bold:true}},
         {type:'group', elements:[
             {type:'text', text:'Your header', style:{...textStyleDefault, fontsize:'20', bold:true}},
@@ -93,9 +94,6 @@ function createTemplates () {
             {type:'text', text:'Company', style:{...textStyleDefault, fontsize:'18'}},
             {type:'text', text:'period', style:{...textStyleDefault,italic:true}},
             {type:'text', text:'your competencies and results', style:{...textStyleDefault}}
-        ]},
-        {type:'list', list:true, elements:[
-            {type:'text', text:'list text 1', style:{...textStyleDefault}},
         ]},
     ];
     
@@ -141,7 +139,7 @@ function createTemplates () {
 function createOption (optionType,optionValue,cbOnChange) {
 
     if (optionType==='copy' || optionType==='back' || optionType==='autosize' || optionType==='ungroup' || optionType==='group' 
-                            || optionType==='list'|| optionType.indexOf('align')>=0 || optionType.indexOf('distribute')>=0) {
+                            || optionType.indexOf('align')>=0 || optionType.indexOf('distribute')>=0) {
         return codeButton(optionType,cbOnChange);
     } else if (optionType==='bold' || optionType==='italic' || optionType==='uppercase' || optionType==='underline' || optionType==='center' || optionType==='lock') {
         return codeCheckbox(optionType,optionValue);
@@ -426,19 +424,5 @@ export {createOption, createStyle, getAutoSize, createTemplates, saveFileJSON, r
                 console.error("Error writing document: ", error);
             });*/
     
-//load firebase
-/*let loadDoc = new Promise((resolve) => {
-            db.collection("CV").doc('Katya').get().then((doc) => {
-            if (doc.exists) {
-                console.log("Document data:", doc.data());
-                    resolve(doc.data());
-                } else {
-                    console.log("No such document!");
-                }
-            }).catch((error) => {
-                console.log("Error getting document:", error);
-            });
-        });
-        loadDoc.then((data) => { 
-            this.props.dispatch(cv_load(data.blocks,data.style));
-        });*/
+
+

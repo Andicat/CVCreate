@@ -510,7 +510,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                 }
                 return block;
             }
-
+            //action.textValue = action.textValue.split(/\n+/ig);
             let newBlocks = state.blocks.map(b => {
                 if (b.id === action.blockId) {
                     let newBlock = updateText(b);

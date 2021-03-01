@@ -32,6 +32,7 @@ class CvElement extends React.PureComponent {
         //let textCurr = evt.target.innerText;
         let textCurr = evt.target.innerText;
         if (this.props.data.text!==textCurr) {
+            //evt.target.innerText = evt.target.childNodes[0].innerText;
             this.props.dispatch(cvElement_textUpdate(this.props.blockId,textCurr));
         }
     }
@@ -71,10 +72,17 @@ class CvElement extends React.PureComponent {
                 elementCode = <img className={className} src={src} style={style} alt='' onClick={this.onClick}/>;
                 break;
             case 'text':
-                let textLines = this.props.data.text.split(/\n+/ig);
-                console.log(textLines)
+                let text = this.props.data.text;
+                if (text instanceof Array) {
+                    //console.log(text);
+                    text = text.map( (w,i) => <span key={i}>{w}{i<text.length-1&&<br/>}</span>);
+                    
+                }
+                //console.log(text[0]);
+                //console.log(this.props.data.text[0]);
+                //console.log(textLines);
                 elementCode = <span className={className} style={style} suppressContentEditableWarning={this.props.editable} contentEditable={this.props.editable} onClick={this.onClick} onBlur={this.onBlur}>
-                                {textLines.map( (w,i) => <React.Fragment key={i}>{w}{i<textLines.length-1&&<br/>}</React.Fragment>)}        
+                                {text}
                               </span>;
                 break;
             case 'figure':
@@ -112,16 +120,6 @@ class CvElement extends React.PureComponent {
                 elementCode = <a className={className} style={style} href={this.props.data.href} suppressContentEditableWarning={this.props.editable} contentEditable={this.props.editable} onClick={this.onClick} onBlur={this.onBlur}>
                                 {this.props.data.text}
                                 </a>;
-                break;
-            case 'list':
-                let CvListElement = connect()(CvElement);
-                elementCode = <ul className={className} style={style}>
-                                {this.props.data.elements.map( (e,i) => (
-                                    <li key={i}>
-                                        <CvListElement key={'' + (e.id?e.id:i)} id={'' + (e.id?e.id:i)} blockId={this.props.blockId} editable={this.props.editable} data={e} activeElementId={this.props.activeElementId}></CvListElement>
-                                    </li>
-                                ))}
-                              </ul>;
                 break;
             default:
                 elementCode = null;
