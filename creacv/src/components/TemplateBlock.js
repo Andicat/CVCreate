@@ -22,7 +22,7 @@ class TemplateBlock extends React.PureComponent {
     }
 
     render () {
-        //console.log('render panel.block',this.props.transitionClass);
+        //console.log('render template block', this.props.id);
         let elementCode = <CvElement key={'' + this.props.id} id={'' + this.props.id} blockId={this.props.id} cv={false} data={this.props.data} active={false}></CvElement>;
         return (    
             <li className={'template-panel__block ' + this.props.transitionClass}>

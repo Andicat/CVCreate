@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Transition} from "react-transition-group";
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import OptionPanel from './OptionPanel';
-
 import TemplatePanel from './TemplatePanel';
 import CvDocument from './CvDocument';
 
-import {connect} from 'react-redux';
-import {createTemplates, saveFileJSON, readFileJSON} from './utils';
+import {saveFileJSON, readFileJSON} from './utils';
 import {db} from '../App';
 import {cv_load} from '../redux/cvDataAC';
 
@@ -65,15 +64,24 @@ class CV extends React.PureComponent {
     }
     
     render () {
+        //debugger
         //console.log('render cv');
         let activeOneId = (this.props.activeBlocksId.length===1) && this.props.activeBlocksId[0];
         let activeBlock = null;
+        let activeBlockOptions;
         if (activeOneId) {
             activeBlock = this.props.blocks.find(b => b.id === activeOneId);
+            activeBlockOptions = {id:activeBlock.id,
+                                lock: activeBlock.lock,
+                                link:activeBlock.link,
+                                list:activeBlock.list,
+                                group:activeBlock.group,
+                            };
         }
 
         //<button className='header__button header__button--html' onClick={this.showHTML}>Show</button>
 
+        //<OptionPanel activeBlockGroup={activeBlock?activeBlock.group:false} activeBlockLink={activeBlock?activeBlock.link:''} activeBlockId={activeBlock?activeBlock.id:false} activeBlockLock={activeBlock?activeBlock.lock:false}/>
         return (
             <React.Fragment>
                 <header className={'header ' + this.props.transitionClass}>
@@ -95,14 +103,14 @@ class CV extends React.PureComponent {
                     <div className='template-panel'>
                         <Transition in={this.state.showPanel} unmountOnExit timeout={{ enter: 500, exit: 500 }}>
                             {stateName => {
-                                return <TemplatePanel transitionClass={stateName} groups={createTemplates()}/>
+                                return <TemplatePanel transitionClass={stateName}/>
                             }}
                         </Transition>
                         {this.state.showPanel && null}
                         <button className='template-panel__button-hide' onClick={this.showPanel}/>
                     </div>
                     <div className='desk'>
-                        <OptionPanel activeBlockGroup={activeBlock?activeBlock.group:false} activeBlockLink={activeBlock?activeBlock.link:''} activeBlockId={activeBlock?activeBlock.id:false} activeBlockLock={activeBlock?activeBlock.lock:false}/>
+                        <OptionPanel activeBlockOptions={activeBlockOptions}/>
                         <CvDocument activeBlock={activeBlock} stylePage={this.props.stylePage} showPanel={this.state.showPanel}/>
                     </div>
                 </main>

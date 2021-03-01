@@ -112,7 +112,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                 newActiveBlocksId.push(action.blockId);
             }
             let newState = {...state,
-                activeBlocksId: newActiveBlocksId,
+                activeBlocksId:newActiveBlocksId,
                 activeBlockDOM:action.target, 
                 activeElementId:(action.blockId?state.activeElementId:null)};
             return newState;
@@ -122,7 +122,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
         case CV_BLOCK_ACTIVATE_MULTI: {
             let newActiveBlocksId = [...state.activeBlocksId,action.blockId];
             let newState = {...state,
-                activeBlocksId: newActiveBlocksId,
+                activeBlocksId:newActiveBlocksId,
                 activeBlockDOM:null,
                 activeElementId:null,
             }
@@ -500,7 +500,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
         //update elements text
         case CV_TEXT_UPDATE: {
             function updateText(block) {
-                if (block.id==state.activeElementId) {
+                if (block.id == state.activeElementId) {
                     block.text = action.textValue;
                     return {...block};
                 }
@@ -510,7 +510,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                 }
                 return block;
             }
-            
+
             let newBlocks = state.blocks.map(b => {
                 if (b.id === action.blockId) {
                     let newBlock = updateText(b);

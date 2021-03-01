@@ -121,6 +121,10 @@
         &--padding {
             background-image: url('./../../img/icon-padding.svg'); 
         }
+
+        &--list {
+            background-image: url('./../../img/icon-list.svg'); 
+        }
     }
 
     &__drop-down {
@@ -130,7 +134,7 @@
         border-radius: 5px;
         border: 1px solid $color-button-border;
         padding: 10px;
-        top: 100%;
+        top: 0%;
         left: 50%;
         transform: translateX(-50%);
         z-index: 100;

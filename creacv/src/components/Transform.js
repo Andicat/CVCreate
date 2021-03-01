@@ -95,7 +95,7 @@ class Transform extends React.PureComponent {
         }
         //let style = {top:(this.props.block.positionTop + this.shiftTop - this.shiftBorder) + 'px', left:(this.props.block.positionLeft + this.shiftLeft - this.shiftBorder) + 'px', width:(this.props.block.width + this.shiftBorder*2) + 'px', height:(this.props.block.height + this.shiftBorder*2) + 'px'};
         let style = {top:(this.props.block.positionTop + this.state.shiftTop - this.state.shiftBorder) + 'px', left:(this.props.block.positionLeft + this.state.shiftLeft - this.state.shiftBorder) + 'px', width:(this.props.block.width + this.state.shiftBorder*2) + 'px', height:(this.props.block.height + this.state.shiftBorder*2) + 'px'};
-        let className = 'transform '  + this.props.transitionClass + (this.props.block.lock?' transform--locked':'');
+        let className = 'transform '  + this.props.transitionClass + (this.props.block.lock?' transform--locked':'') + (this.props.block.link?' transform--linked':'');
         return (
             <div className={className} style={style}>
                 {!this.props.block.lock && (

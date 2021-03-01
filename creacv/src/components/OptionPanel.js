@@ -20,12 +20,9 @@ import {getAutoSize} from './utils';
 class OptionPanel extends React.PureComponent {
 
     static propTypes = {
-        styleToEdit: PropTypes.object,     
-        activeElementId: PropTypes.string,   
-        activeBlockId: PropTypes.any,
-        activeBlockGroup: PropTypes.bool,
-        activeBlockLock: PropTypes.bool,
-        activeBlockLink: PropTypes.string,
+        styleToEdit: PropTypes.object,
+        activeElementId: PropTypes.string,
+        activeBlockOptions: PropTypes.object,
         activeBlocksId: PropTypes.array,    
         activeBlockDOM: PropTypes.object, 
         stylePage: PropTypes.object,   
@@ -33,10 +30,8 @@ class OptionPanel extends React.PureComponent {
 
     BLOCK_ACTION = [
         'lock',
-        'autosize',
         'back',
         'copy',
-        'ungroup',
         'link',
     ];
 
@@ -135,6 +130,11 @@ class OptionPanel extends React.PureComponent {
                 this.props.dispatch(cvBlock_setLink(blockId,value));
                 break;
             }
+            case 'list': {
+                debugger
+                //this.props.dispatch(cvBlock_addListItem(blockId,value));
+                break;
+            }
             default:
                 //console.log('action', optionName, value);
                 return;
@@ -142,36 +142,38 @@ class OptionPanel extends React.PureComponent {
     }
 
     render () {
+        //debugger
         //console.log('render option panel', this.props);
         let codeElementOptions = null;
         let codeBlockOptions = null;
         let codeBlocksOptions = null;
         let codePageOptions = null;
-        let blockAction = this.BLOCK_ACTION;
-        //debugger
+        let blockAction = [...this.BLOCK_ACTION];
         
         if (this.props.activeBlocksId.length > 1) { //few active blocks
             codeBlocksOptions = this.BLOCKS_ACTION.map( (a,i) => (
                 <Option key={i} optionName={a} cbOnChange={this.setAction}/>));
-        } else if (this.props.activeBlockId) { //one active block
-            if (!this.props.activeBlockGroup) {
-                blockAction = blockAction.filter(a => a!=='ungroup');
-            };
-            if (this.props.activeBlockGroup || !this.props.activeBlockDOM) {
-                blockAction = blockAction.filter(a => a!=='autosize');
-            };
+        } else if (this.props.activeBlockOptions) { //one active block
+            if (this.props.activeBlockOptions.group) {
+                blockAction.push('ungroup');
+            } else {
+                blockAction.push('autosize');
+            }
+            if (this.props.activeBlockOptions.list) {
+                blockAction.push('list');
+            }
             codeBlocksOptions = blockAction.map( (a,i) => {
                 let value = null;
-                if (a=='lock') {
-                    value = this.props.activeBlockLock;
-                } else if (a=='link') {
-                    value = this.props.activeBlockLink;
+                if (a==='lock') {
+                    value = !!this.props.activeBlockOptions.lock;
+                } else if (a==='link') {
+                    value = this.props.activeBlockOptions.link;
                 }
-                return <Option key={i} optionName={a} optionValue={value} blockId={this.props.activeBlockId} cbOnChange={this.setAction}/>;
+                return <Option key={'block-' + i} optionName={a} optionValue={value} blockId={this.props.activeBlockOptions.id} cbOnChange={this.setAction}/>;
             });
             if (this.props.activeElementId) { //active element
                 codeElementOptions = Object.keys(this.props.styleToEdit).map( (s,i) => (
-                    <Option key={i} optionName={s} optionValue={this.props.styleToEdit[s]} blockId={this.props.activeBlockId} cbOnChange={this.setStyle}/>));
+                    <Option key={'option-' + i} optionName={s} optionValue={this.props.styleToEdit[s]} blockId={this.props.activeBlockOptions.id} cbOnChange={this.setStyle}/>));
             };
         } else if (this.props.stylePage) { //non active block, but active page
             codePageOptions = Object.keys(this.props.stylePage).map( (s,i) => (

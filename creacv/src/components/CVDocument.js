@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Transition} from "react-transition-group";
+import {connect} from 'react-redux';
+
 import CvBlock from './CvBlock';
 import Transform from './Transform';
-import {Transition} from "react-transition-group";
 
 import {cvBlock_activate} from '../redux/cvDataAC';
-
-import {connect} from 'react-redux';
 import {createStyle} from './utils';
 
-class CVDocument extends React.PureComponent {
+class CvDocument extends React.PureComponent {
 
     static propTypes = {
         blocks: PropTypes.array,
@@ -57,4 +57,4 @@ const mapStateToProps = function (state) {
     };
 };
   
-export default connect(mapStateToProps)(CVDocument);
+export default connect(mapStateToProps)(CvDocument);

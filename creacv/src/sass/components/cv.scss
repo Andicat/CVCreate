@@ -130,6 +130,11 @@
         &--link {
             cursor: pointer;
         }
+
+        &--list {
+            list-style: disc;
+            padding-left: 20px;
+        }
     }
 
     &__transform {

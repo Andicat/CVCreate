@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Transition} from "react-transition-group";
+import {connect} from 'react-redux';
 
 import CvElement from './CvElement';
 
-import {connect} from 'react-redux';
 import {cvBlock_activate, cvBlock_activateMulti} from '../redux/cvDataAC';
 
 
@@ -17,6 +18,13 @@ class CvBlock extends React.PureComponent {
         editable: PropTypes.bool,
     };
 
+    blockRef = React.createRef();
+
+    componentDidMount() {
+        console.log('activate block');
+        this.props.dispatch(cvBlock_activate(this.props.id, this.blockRef.current));
+    }
+
     onClick = (evt) => {
         if (evt.ctrlKey || evt.shiftKey) {
             evt.preventDefault();
@@ -28,15 +36,23 @@ class CvBlock extends React.PureComponent {
     }
 
     render () {
-        //console.log('render block',this.props.editable);
+        //console.log('render block',this.props.transitionClass);
         let style = {top:this.props.data.positionTop + 'px', left:this.props.data.positionLeft + 'px', width:this.props.data.width + 'px', height:this.props.data.height + 'px'};
-        let className = 'cv__block' + (this.props.activeIndex>=0?' cv__block--active':'') + (this.props.activeIndex===0?' cv__block--active-first':'') + (this.props.data.lock?' cv__block--lock':'');
+        let className = 'cv__block' + (this.props.activeIndex>=0?' cv__block--active':'')
+                        + (this.props.activeIndex===0?' cv__block--active-first':'')
+                        + (this.props.data.lock?' cv__block--lock':'');
         let elementCode = <CvElement id={'' + this.props.id} blockId={this.props.id} editable={this.props.editable} data={this.props.data} activeElementId={this.props.activeElementId}></CvElement>;
 
         return (
-            <div className={className} style={style} onClick={this.onClick}>
-                {elementCode} 
-            </div>
+            <Transition in={true} unmountOnExit timeout={{ enter: 1000, exit: 1000 }}>
+                {stateName => {
+                    //console.log('render block transition', stateName);
+                    return <div className={className + ' ' + {stateName}} style={style} onClick={this.onClick} ref={this.blockRef}>
+                    {elementCode} 
+                </div>
+            }}
+        </Transition>
+            
         );
     }
 }

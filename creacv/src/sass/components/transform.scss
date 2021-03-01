@@ -43,6 +43,19 @@
 
     }
 
+    &--linked::before {
+        content: 'linked';
+        position: absolute;
+        font-size: 12px;
+        font-style: italic;
+        font-weight: bold;
+        color: $color-transform;
+        height: 16px;
+        top: -18px;
+        left: 10px;
+        
+    }
+
     &__button {
         position: absolute;
         width: 16px;

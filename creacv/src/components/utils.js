@@ -47,6 +47,7 @@ const OPTIONS_TEXT = {
     height: 'height',
     width: 'width',
     link: 'set link for block',
+    list: 'add another list item',
 }
 
 const FONTS = ['PTSans','Roboto','Helvetica','Garamond'];
@@ -67,7 +68,7 @@ const FONTS = ['PTSans','Roboto','Helvetica','Garamond'];
 
 function createTemplates () {
 
-    let textStyleDefault = {font:'Roboto',color:'#000000', fontsize:'16', bold:false, italic:false, center:false, uppercase:false, underline:false, padding:{left:0,right:0,top:0,bottom:0}};
+    let textStyleDefault = {font:'Roboto',color:'#000000', fontsize:'16', bold:false, italic:false, center:false, uppercase:false, underline:false, padding:{left:1,right:0,top:0,bottom:0}};
 
     let imagesArr = [
         {type:'image', style:{file:'', opacity:1}},
@@ -92,6 +93,9 @@ function createTemplates () {
             {type:'text', text:'Company', style:{...textStyleDefault, fontsize:'18'}},
             {type:'text', text:'period', style:{...textStyleDefault,italic:true}},
             {type:'text', text:'your competencies and results', style:{...textStyleDefault}}
+        ]},
+        {type:'list', list:true, elements:[
+            {type:'text', text:'list text 1', style:{...textStyleDefault}},
         ]},
     ];
     
@@ -136,7 +140,8 @@ function createTemplates () {
 //create jsx-code for option
 function createOption (optionType,optionValue,cbOnChange) {
 
-    if (optionType==='copy' || optionType==='back' || optionType==='autosize' || optionType==='ungroup' || optionType==='group' || optionType.indexOf('align')>=0 || optionType.indexOf('distribute')>=0) {
+    if (optionType==='copy' || optionType==='back' || optionType==='autosize' || optionType==='ungroup' || optionType==='group' 
+                            || optionType==='list'|| optionType.indexOf('align')>=0 || optionType.indexOf('distribute')>=0) {
         return codeButton(optionType,cbOnChange);
     } else if (optionType==='bold' || optionType==='italic' || optionType==='uppercase' || optionType==='underline' || optionType==='center' || optionType==='lock') {
         return codeCheckbox(optionType,optionValue);
@@ -278,7 +283,6 @@ function createOption (optionType,optionValue,cbOnChange) {
     };
 
     function codeList(optionValue,list) {
-        console.log('option list');
         return (<select className='option__select' data-tooltip={true} value={optionValue} onChange={setValueInput}>
                     {list.map( (f,i) => {
                         let style = {fontFamily:f};
@@ -293,8 +297,8 @@ function createOption (optionType,optionValue,cbOnChange) {
         return <React.Fragment>
                     <input type='button' className={'option__button option__down option__button--' + optionType} data-tooltip={true} onClick={(evt) => {openDrop(evt.target.nextSibling,true)}} onMouseLeave={(evt) => onMouseLeave(evt,evt.currentTarget.nextSibling)}/>
                     <form name={optionType} className='option__drop-down' onMouseLeave={(evt) => openDrop(evt.currentTarget,false)}>
-                        {Object.keys(optionValue).map(o => {
-                            return <div className='option__drop-down-line'>
+                        {Object.keys(optionValue).map((o,i) => {
+                            return <div key={i} className='option__drop-down-line'>
                                         <span>{o}</span>
                                         <input type='button' className='option__button option__button--left' value='&ndash;' onClick= {(evt) => {setGroupValue(evt.target.nextSibling,Number(optionValue[o])-1,optionValue,o)}}/>
                                         <input type='text' className='option__number' min={min} max={max} value={optionValue[o]} readOnly></input>

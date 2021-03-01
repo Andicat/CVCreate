@@ -27,14 +27,24 @@ class CvElement extends React.PureComponent {
     }
 
     onBlur = (evt) => {
+        //console.log(evt.target);
+        //console.log(evt.target.innerHTML);
+        //let textCurr = evt.target.innerText;
         let textCurr = evt.target.innerText;
         if (this.props.data.text!==textCurr) {
             this.props.dispatch(cvElement_textUpdate(this.props.blockId,textCurr));
         }
     }
 
+    /*onListClick = (evt) => {
+        console.log('click list', evt.target);
+        if (this.props.editable) {
+            //this.props.dispatch(cvElement_activate(this.props.data.style,this.props.id));
+        }
+    }*/
+
     render () {
-        //console.log('render element', this.props.editable);
+        //console.log('render element', this.props.data.id + " " + this.props.data.type + " " + this.props.data.text);
         if (this.props.editable) {
             //console.log('render element', this.props.id);
             //console.log('active element', this.props.activeElementId);
@@ -61,8 +71,10 @@ class CvElement extends React.PureComponent {
                 elementCode = <img className={className} src={src} style={style} alt='' onClick={this.onClick}/>;
                 break;
             case 'text':
+                let textLines = this.props.data.text.split(/\n+/ig);
+                console.log(textLines)
                 elementCode = <span className={className} style={style} suppressContentEditableWarning={this.props.editable} contentEditable={this.props.editable} onClick={this.onClick} onBlur={this.onBlur}>
-                                {this.props.data.text}
+                                {textLines.map( (w,i) => <React.Fragment key={i}>{w}{i<textLines.length-1&&<br/>}</React.Fragment>)}        
                               </span>;
                 break;
             case 'figure':
@@ -89,10 +101,10 @@ class CvElement extends React.PureComponent {
                               </div>;
                 break;
             case 'group':
-                let CvElementChild = connect()(CvElement);
+                let CvGroupElement = connect()(CvElement);
                 elementCode = <div className={className} style={style}>
                                 {this.props.data.elements.map( (e,i) => (
-                                    <CvElementChild key={'' + (e.id?e.id:i)} id={'' + (e.id?e.id:i)} blockId={this.props.blockId} editable={this.props.editable} data={e} activeElementId={this.props.activeElementId}></CvElementChild>
+                                    <CvGroupElement key={'' + (e.id?e.id:i)} id={'' + (e.id?e.id:i)} blockId={this.props.blockId} editable={this.props.editable} data={e} activeElementId={this.props.activeElementId}></CvGroupElement>
                                 ))}
                               </div>;
                 break;
@@ -100,6 +112,16 @@ class CvElement extends React.PureComponent {
                 elementCode = <a className={className} style={style} href={this.props.data.href} suppressContentEditableWarning={this.props.editable} contentEditable={this.props.editable} onClick={this.onClick} onBlur={this.onBlur}>
                                 {this.props.data.text}
                                 </a>;
+                break;
+            case 'list':
+                let CvListElement = connect()(CvElement);
+                elementCode = <ul className={className} style={style}>
+                                {this.props.data.elements.map( (e,i) => (
+                                    <li key={i}>
+                                        <CvListElement key={'' + (e.id?e.id:i)} id={'' + (e.id?e.id:i)} blockId={this.props.blockId} editable={this.props.editable} data={e} activeElementId={this.props.activeElementId}></CvListElement>
+                                    </li>
+                                ))}
+                              </ul>;
                 break;
             default:
                 elementCode = null;
