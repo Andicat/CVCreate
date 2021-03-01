@@ -47,7 +47,6 @@
     }
 }
 
-
 @mixin visually-hidden {
     position: absolute;
     clip: rect(0 0 0 0);
@@ -56,4 +55,38 @@
     margin: -1px;
     border: 0px;
     padding: 0px;
+}
+
+@mixin insetshadow {
+    color: #202020;
+    letter-spacing: .1em;
+    text-shadow: 
+      -1px -1px 1px #111, 
+      2px 2px 1px #363636;
+}
+
+@mixin glow-text {
+    background: 50% 100% / 50% 50% no-repeat
+                radial-gradient(ellipse at bottom, #fff, transparent, transparent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 50px;
+    font-family: "Source Sans Pro", sans-serif;
+    animation: reveal 3000ms ease-in-out forwards 200ms,
+                glow 2500ms linear infinite 2000ms;
+    
+    @keyframes reveal {
+        80%{
+            letter-spacing: 8px;
+        }
+        100% {
+            background-size: 300% 300%;
+        }
+    }
+    @keyframes glow {
+        40% {
+            text-shadow: 0 0 8px #fff;
+        }
+    }
 }

@@ -1,0 +1,83 @@
+$duration:  1.8s;
+$dimension: 60px;
+
+.loader {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+
+    &__text {
+        color: $color-white;
+        display: block;
+        font-size: 40px;
+        text-shadow: 1px 1px 2px #666;
+        letter-spacing: -1px;
+        margin-bottom: 5px;
+    }
+
+    &__layer {
+        display: block;
+        position: absolute;
+        left: 0;
+        height: $dimension;
+        width: $dimension;
+        box-shadow: 3px 3px 2px rgba(0,0,0,.2);
+        transform: rotateX(50deg) rotateY(0deg) rotateZ(45deg);
+
+        &--1 {
+            background: #df5c4a;
+            left: 25%;
+            opacity: 0.8;
+            margin-top: $dimension/2;
+            animation: movedown $duration cubic-bezier(0.39, 0.575, 0.565, 1) $duration/2 infinite normal;
+            
+        }
+
+        &--2 {
+            background: $color-bg-header;
+            left: 25%;
+            opacity: 0.8;
+            margin-top: $dimension/4;
+        }
+
+        &--3 {
+            left: 25%;
+            background: rgba(255,255,255,.6);
+            animation: moveup $duration cubic-bezier(0.39, 0.575, 0.565, 1) infinite normal;
+        }
+    }
+}
+
+@keyframes moveup {
+    0%, 60%, 100% {
+        transform: 
+            rotateX(50deg)
+            rotateY(0deg)
+            rotateZ(45deg)
+            translateZ(0);
+    }
+    25% {
+        transform:
+            rotateX(50deg)
+            rotateY(0deg)
+            rotateZ(45deg)
+            translateZ(1em);
+    }
+}
+  
+@keyframes movedown {
+    0%, 60%, 100% {
+        transform: 
+            rotateX(50deg)
+            rotateY(0deg)
+            rotateZ(45deg)
+            translateZ(0);
+    }
+    25% {
+        transform:
+            rotateX(50deg)
+            rotateY(0deg)
+            rotateZ(45deg)
+            translateZ(-1em);
+    }
+}
