@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,MAAM,CAAC;EACH,MAAM,EAAE,IAAI;EACZ,KAAK,EAAE,IAAI;EACX,gBAAgB,EAAE,IAAI;EACtB,QAAQ,EAAE,QAAQ;EAClB,IAAI,EAAE,IAAI;CAMb;;AAXD,AAOI,MAPE,AAOD,MAAM,CAAC;EACJ,OAAO,EAAE,wBAAwB;EACjC,MAAM,EAAE,IAAI;CACf",
-    "sources": [
-        "creacv/src/sass/components/image.scss"
-    ],
-    "names": [],
-    "file": "image.min.css"
-}
