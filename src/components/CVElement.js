@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import image from './../img/image.svg';
+//import image from './../img/image.svg';
 
 import {connect} from 'react-redux';
 import {cvElement_activate, cvElement_textUpdate} from '../redux/cvDataAC';
@@ -14,6 +14,7 @@ class CvElement extends React.PureComponent {
         blockId: PropTypes.number.isRequired,
         data: PropTypes.object,
         activeElementId: PropTypes.string,
+        templateImageUrl: PropTypes.string,
     };
 
     static defaultProps = {
@@ -68,7 +69,7 @@ class CvElement extends React.PureComponent {
         let elementCode = null;
         switch (type) {
             case 'image':
-                let src = (this.props.data.style['file']) || image;
+                let src = (this.props.data.style['file']) || this.props.templateImageUrl;
                 elementCode = <img className={className} src={src} style={style} alt='' onClick={this.onClick}/>;
                 break;
             case 'text':
@@ -138,4 +139,10 @@ class CvElement extends React.PureComponent {
     }
 }
 
-export default connect()(CvElement);
+const mapStateToProps = function (state) {
+    return {
+        templateImageUrl: state.templatesData.imageUrl,
+    };
+};
+
+export default connect(mapStateToProps)(CvElement);

@@ -65,76 +65,6 @@ const FONTS = ['PTSans','Roboto','Helvetica','Garamond'];
     };
 }*/
 
-function createTemplates () {
-
-    let textStyleDefault = {font:'Roboto', color:'#000000', fontsize:'16',
-                            bold:false, italic:false, center:false,
-                            uppercase:false, underline:false, padding:{left:1,right:0,top:0,bottom:0}};
-
-    let imagesArr = [
-        {type:'image', style:{file:'', opacity:1}},
-        {type:'image', style:{file:'', opacity:1, borderRadius:'50%'}},
-        {type:'image', style:{file:'', opacity:1, bordercolor: '#E05B49', borderwidth: '3', borderStyle: 'solid'}},
-        {type:'image', style:{file:'', opacity:1, borderRadius:'50%', bordercolor: '#E05B49', borderwidth: '3', borderStyle: 'solid'}},
-    ];
-
-    let textArr = [
-        {type:'text', text:'Text simple', style:{...textStyleDefault, fontsize: '20'}},
-        {type:'text', text:'Text with background', style:{bgcolor:'#8e9fa0',...textStyleDefault, fontsize:'14'}},
-        {type:'text', text:'Big text', style:{...textStyleDefault, fontsize: '40', bold:true}},
-        {type:'group', elements:[
-            {type:'text', text:'Your header', style:{...textStyleDefault, fontsize:'20', bold:true}},
-            {type:'text', text:'your text', style:{...textStyleDefault}}
-        ]},
-    ];
-    
-    let textBlockArr = [
-        {type:'group', elements:[
-            {type:'text', text:'Your position', style:{...textStyleDefault, fontsize:'18', bold:true}},
-            {type:'text', text:'Company', style:{...textStyleDefault, fontsize:'18'}},
-            {type:'text', text:'period', style:{...textStyleDefault,italic:true}},
-            {type:'text', text:'your competencies and results', style:{...textStyleDefault}}
-        ]},
-    ];
-    
-    let figuresArr = [
-        {type:'figure', style:{bgcolor:'#E05B49', opacity:1}},
-        {type:'figure', style:{bgcolor:'#6AABB5', opacity:1, borderRadius:'50%'}},
-    ];
-    
-    let progressArr = [
-        /*{type:'group', direction:'row', elements:[
-            {type:'text', text:'skill in dots', style:{...textStyleDefault}},
-            {type:'dots-row', style:{maincolor:'#E05B49', addcolor:'#E6E6E6', radius:10, maincount:3, addcount: 2}},
-        ]},
-        {type:'group', direction:'row', elements:[
-            {type:'text', text:'skill in progress', style:{...textStyleDefault}},
-            {type:'progress', style:{maincolor:'#E05B49', addcolor:'#E6E6E6', progress:50}},
-        ]},
-        {type:'group', direction:'column', elements:[
-            {type:'text', text:'skill in progress', style:{...textStyleDefault}},
-            {type:'progress', style:{maincolor:'#E05B49', addcolor:'#E6E6E6', progress:50}},
-        ]},*/
-        {type:'dots-row', style:{maincolor:'#E05B49', addcolor:'#E6E6E6', radius:10, maincount:5, addcount: 3}},
-        {type:'progress', style:{maincolor:'#E05B49', addcolor:'#E6E6E6', progress:50}}
-    ];
-
-    let iconsArr = [
-        {type:'image', style:{file:icon, opacity:1}},
-    ];
-    
-    let templatesArr = [
-        {name: 'Images', elements:imagesArr},
-        {name: 'Text', elements:textArr},
-        {name: 'Info', elements:textBlockArr},
-        {name: 'Figures', elements:figuresArr},
-        {name: 'Progress', elements:progressArr},
-        {name: 'Icons', elements:iconsArr},
-    ];
-
-    return templatesArr;
-}
-
 //create jsx-code for option
 function createOption (optionType,optionValue,cbOnChange) {
 
@@ -380,6 +310,7 @@ function getAutoSize (element) {
 };
 
 function saveFileJSON (data, filename, type) {
+    data = JSON.stringify(data);
     var file = new Blob([data], {type: type});
     if (window.navigator.msSaveOrOpenBlob) // IE10+
         window.navigator.msSaveOrOpenBlob(file, filename);
@@ -413,16 +344,11 @@ function readFileJSON (file,cbOnLoad) {
     }
 };
 
-export {createOption, createStyle, getAutoSize, createTemplates, saveFileJSON, readFileJSON, CV_ID, OPTIONS_TEXT};
-
-//save firebase;
-/*db.collection("CV").doc('Katya').set(stateToSave)
-            .then(() => {
-                console.log("Document successfully written!");
-            })
-            .catch((error) => {
-                console.error("Error writing document: ", error);
-            });*/
-    
+//localStorge
+function saveLocalStorage(data) {
+    localStorage.setItem('CV',JSON.stringify(data));
+}
+   
 
 
+export {createOption, createStyle, getAutoSize, saveFileJSON, readFileJSON, saveLocalStorage, CV_ID, OPTIONS_TEXT};

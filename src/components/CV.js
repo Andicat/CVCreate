@@ -8,8 +8,7 @@ import OptionPanel from './OptionPanel';
 import TemplatePanel from './TemplatePanel';
 import CvDocument from './CvDocument';
 
-import {saveFileJSON, readFileJSON} from './utils';
-import {db} from '../App';
+import {saveFileJSON, readFileJSON, saveLocalStorage} from './utils';
 import {cv_load} from '../redux/cvDataAC';
 
 
@@ -28,11 +27,19 @@ class CV extends React.PureComponent {
 
     saveCV = () => {
         let stateToSave = {style:this.props.stylePage,blocks:this.props.blocks};
-        saveFileJSON(JSON.stringify(stateToSave),'CV','.json');
+        saveFileJSON(stateToSave,'CV','.json');
+        saveLocalStorage(stateToSave);
     }
+
+    saveLS = () => {
+        debugger
+        let stateToSave = {style:this.props.stylePage,blocks:this.props.blocks};
+        saveLocalStorage(stateToSave);
+    } 
 
     onLoadCV = (data) => {
         this.props.dispatch(cv_load(data.blocks,data.style));
+        saveLocalStorage({style:data.style,blocks:data.blocks});
     }
 
     loadCV = (evt) => {
@@ -95,7 +102,7 @@ class CV extends React.PureComponent {
                             <label className='header__button header__button--load' htmlFor='file-cv' data-tooltip={true}>Load</label>
                         </li>
                         <li className='header__menu-item'>
-                            <NavLink to='/view' className='header__button header__button--html'>Show</NavLink>    
+                            <NavLink to='/view' className='header__button header__button--html' onClick={this.saveLS}>Show</NavLink>    
                         </li>
                     </ul>
                 </header>

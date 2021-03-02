@@ -6,6 +6,7 @@ import CV from './../components/CV';
 class Page_CV extends React.PureComponent {
           
     render() {
+        console.log(this.props.history);
         return (
             <Transition in={true} unmountOnExit timeout={{ enter: 500, exit: 500 }}>
                 {stateName => {
