@@ -1,5 +1,6 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
+import { Beforeunload } from 'react-beforeunload';
 
 import Page_Load from './Page_Load';
 import Page_CV from './Page_CV';
@@ -18,8 +19,8 @@ class PagesRouter extends React.Component {
 
     //уход со страницы    
     beforeUnload = function(evt) {
-        //debugger
-        evt.returnValue = 'А у вас есть несохранённые изменения!';
+        debugger
+        //evt.returnValue = 'А у вас есть несохранённые изменения!';
         //this.props.history.push('/')
     }
           
@@ -27,9 +28,11 @@ class PagesRouter extends React.Component {
 
         return (
             <React.Fragment>
-                <Route path='/' exact component={Page_Load}/>
-                <Route path='/cv' component={Page_CV} />
-                <Route path='/view' component={Page_View} />
+                
+                    <Route path='/' exact component={Page_Load}/>
+                    <Route path='/cv' component={Page_CV} />
+                    <Route path='/view' component={Page_View} />
+
             </React.Fragment>
         );
     }

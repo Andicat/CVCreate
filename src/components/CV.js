@@ -13,6 +13,10 @@ import {cv_load} from '../redux/cvDataAC';
 
 
 class CV extends React.PureComponent {
+    
+    componentWillUnmount() {
+        debugger
+    }
 
     static propTypes = {
         transitionClass: PropTypes.string,
