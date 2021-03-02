@@ -16,13 +16,16 @@ class CvBlock extends React.PureComponent {
         activeIndex: PropTypes.number.isRequired,        
         activeElementId: PropTypes.string,
         editable: PropTypes.bool,
+        newBlock: PropTypes.bool,
     };
 
     blockRef = React.createRef();
 
     componentDidMount() {
-        console.log('activate block');
-        this.props.dispatch(cvBlock_activate(this.props.id, this.blockRef.current));
+        if (this.props.newBlock) {
+            console.log('activate block');
+            this.props.dispatch(cvBlock_activate(this.props.id, this.blockRef.current));
+        }
     }
 
     onClick = (evt) => {
@@ -57,4 +60,10 @@ class CvBlock extends React.PureComponent {
     }
 }
 
-export default connect()(CvBlock);
+const mapStateToProps = function (state) {
+    return {
+        newBlock: state.cvData.newBlock,
+    };
+};
+
+export default connect(mapStateToProps)(CvBlock);

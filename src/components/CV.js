@@ -32,7 +32,6 @@ class CV extends React.PureComponent {
     }
 
     saveLS = () => {
-        debugger
         let stateToSave = {style:this.props.stylePage,blocks:this.props.blocks};
         saveLocalStorage(stateToSave);
     } 

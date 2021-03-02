@@ -35,7 +35,7 @@ class CvView extends React.PureComponent {
                                 <button className='header__button header__button--print' onClick={this.viewForPrint}>View for print</button>
                             </li>
                             <li className='header__menu-item'>
-                                <NavLink to='/' className='header__button header__button--edit'>Back to edit</NavLink>    
+                                <NavLink to='/cv' className='header__button header__button--edit'>Back to edit</NavLink>    
                             </li>
                         </ul>
                     </header>
@@ -45,7 +45,7 @@ class CvView extends React.PureComponent {
                         <div className='header__print no-print'>
                             <span>You can save this page to PDF-file. Open a webpage in Chrome, press Ctrl+P to open the Print dialog and change the destination printer to “Save as PDF”. Hit the “Print” button and the webpage will download as a PDF document
                             </span>
-                            <NavLink to='/' className='header__button header__button--edit'>Back to edit</NavLink>
+                            <NavLink to='/cv' className='header__button header__button--edit'>Back to edit</NavLink>
                         </div>
                     )}
                     <div className='cv-view'>

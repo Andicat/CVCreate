@@ -13,19 +13,10 @@ class Page_Load extends React.PureComponent {
     componentDidMount() {
         this.initializeApp();
         this.loadData();
-        window.onbeforeunload = this.beforeUnload;
-        window.onhashchange = this.beforeUnload;
     }
-
+ 
     db = null;
     storage = null;
-
-    //уход со страницы    
-    beforeUnload = function(evt) {
-        debugger
-        evt.returnValue = 'А у вас есть несохранённые изменения!';
-        this.props.history.push('/');
-    }
     
     initializeApp = () => {
         let firebaseConfig = {
@@ -78,7 +69,7 @@ class Page_Load extends React.PureComponent {
             this.props.dispatch(cv_load(data.blocks,data.style));
         });
 
-        setTimeout(() => this.props.history.push('/cv'),2000);
+        setTimeout(() => this.props.history.push('/cv'),1000);
     }
 
     //load from firebase
@@ -201,6 +192,10 @@ class Page_Load extends React.PureComponent {
                 console.error("Error writing document: ", error);
             });
     }
+
+    // HOC возвращает каждый раз НОВЫЙ, обёрнутый компонент
+    // поэтому оборачивать в HOC лучше не внутри render, чтобы не рендерить каждый раз НОВЫЙ компонент
+    
 
     render() {
         return <div className='loader'>

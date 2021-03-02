@@ -36,6 +36,7 @@ const initState = {
     activeElementId: null,
     styleToEdit: {},
     showPanel: true,
+    newBlock: false,
 }
 
 function cvDataReducer(state = initState, action, cvId = CV_ID) {
@@ -63,7 +64,8 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                 blocks: [...state.blocks,newBlock],
                 activeBlocksId: [newId],
                 activeBlockDOM: null,
-                activeElementId: null
+                activeElementId: null,
+                newBlock: true,
             };
             return newState;
         }
@@ -74,7 +76,8 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                 blocks: state.blocks.filter(b => b.id!==action.blockId),
                 activeBlocksId: [],
                 activeBlockDOM: null,
-                activeElementId: null
+                activeElementId: null,
+                newBlock: false,
             };
             return newState;
         }
@@ -88,7 +91,10 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                     return {...b};
                 }
                 return b});
-            let newState = {...state, blocks:newBlocks};
+            let newState = {...state, 
+                blocks:newBlocks,
+                newBlock: false,
+            };
             return newState;
         }
 
@@ -101,7 +107,10 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                     return {...b};
                 }
                 return b});
-            let newState = {...state, blocks:newBlocks};
+            let newState = {...state,
+                blocks:newBlocks,
+                newBlock: false,
+            };
             return newState;
         }
 
@@ -114,7 +123,9 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
             let newState = {...state,
                 activeBlocksId:newActiveBlocksId,
                 activeBlockDOM:action.target, 
-                activeElementId:(action.blockId?state.activeElementId:null)};
+                activeElementId:(action.blockId?state.activeElementId:null),
+                newBlock: false,
+            };
             return newState;
         }
 
@@ -125,6 +136,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                 activeBlocksId:newActiveBlocksId,
                 activeBlockDOM:null,
                 activeElementId:null,
+                newBlock: false,
             }
             return newState;
         }
@@ -139,7 +151,9 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                     return {...b};
                 }
                 return b});
-            let newState = {...state, blocks:newBlocks};
+            let newState = {...state,
+                blocks:newBlocks
+            };
             return newState;
         }
 
@@ -153,7 +167,9 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                     return {...b};
                 }
                 return b});
-            let newState = {...state, blocks:newBlocks};
+            let newState = {...state,
+                blocks:newBlocks
+            };
             return newState;
         }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 //import {withRouter} from 'react-router';
-//import {connect} from 'react-redux';
+import {connect} from 'react-redux';
 import {templates_load} from '../redux/templatesDataAC';
 import {cv_load} from '../redux/cvDataAC';
 
@@ -9,11 +9,10 @@ import '@firebase/firestore';
 import '@firebase/storage';
 //import isoFetch from 'isomorphic-fetch';
 
-let withDataLoad = (fetchConfig,propName) => Component => {
+let withDataLoad = (propName) => Component => {
 
     class ComponentWithDataLoad extends React.PureComponent {
 
-      
         componentDidMount() {
             this.initializeApp();
             this.loadData();
@@ -28,6 +27,7 @@ let withDataLoad = (fetchConfig,propName) => Component => {
 
         db = null;
         storage = null;
+        //blocksLoaded = [];
 
         //уход со страницы    
         beforeUnload = function(evt) {
@@ -81,16 +81,17 @@ let withDataLoad = (fetchConfig,propName) => Component => {
                     var data = JSON.parse(ls);
                     resolve(data);
                 }
-                resolve(true);
+                resolve(false);
             });
             await loadLS.then((data) => {
-                this.props.dispatch(cv_load(data.blocks,data.style));
+                if (data) {
+                    this.props.dispatch(cv_load(data.blocks,data.style));
+                    //this.blocksLoaded = data.blocks;
+                }
             });
 
-            this.setState({
-                dataReady:true,
-                combinedProps:{...this.props,[propName]:loadedData},
-            });
+            //setTimeout( () => this.setState({dataReady:true,combinedProps:{...this.props,[propName]:this.blocksLoaded}}), 2000);
+            setTimeout( () => this.setState({dataReady:true,combinedProps:{...this.props}}), 2000);
         }
 
         //load from firebase
@@ -226,7 +227,7 @@ let withDataLoad = (fetchConfig,propName) => Component => {
             return <Component {...this.state.combinedProps} /> ;
         } 
     }
-    return ComponentWithDataLoad;
+    return connect()(ComponentWithDataLoad);
 }
 
 export { withDataLoad };
