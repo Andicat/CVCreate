@@ -4,9 +4,24 @@ import {NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import CvBlock from './CvBlock';
-import {createStyle} from './utils';
+import {createStyle, saveLocalStorage} from './utils';
 
 class CvView extends React.PureComponent {
+
+    componentDidMount() {
+        window.addEventListener("beforeunload", this.onUnload);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("beforeunload", this.onUnload);
+    }
+
+    onUnload = e => {
+        saveLocalStorage('CV-State',this.props);
+/*        e.preventDefault();
+        this.props.history.replace('/cv');
+        console.log("HELLO WORLD");*/
+    };
 
     static propTypes = {
         blocks: PropTypes.array,

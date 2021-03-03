@@ -15,7 +15,7 @@ import {cv_load} from '../redux/cvDataAC';
 class CV extends React.PureComponent {
     
     componentWillUnmount() {
-        debugger
+        //debugger
     }
 
     static propTypes = {
@@ -32,17 +32,17 @@ class CV extends React.PureComponent {
     saveCV = () => {
         let stateToSave = {style:this.props.stylePage,blocks:this.props.blocks};
         saveFileJSON(stateToSave,'CV','.json');
-        saveLocalStorage(stateToSave);
+        saveLocalStorage('CV',stateToSave);
     }
 
     saveLS = () => {
         let stateToSave = {style:this.props.stylePage,blocks:this.props.blocks};
-        saveLocalStorage(stateToSave);
+        saveLocalStorage('CV',stateToSave);
     } 
 
     onLoadCV = (data) => {
         this.props.dispatch(cv_load(data.blocks,data.style));
-        saveLocalStorage({style:data.style,blocks:data.blocks});
+        saveLocalStorage('CV',{style:data.style,blocks:data.blocks});
     }
 
     loadCV = (evt) => {

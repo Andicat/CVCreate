@@ -345,8 +345,8 @@ function readFileJSON (file,cbOnLoad) {
 };
 
 //localStorge
-function saveLocalStorage(data) {
-    localStorage.setItem('CV',JSON.stringify(data));
+function saveLocalStorage(LsName,data) {
+    localStorage.setItem(LsName,JSON.stringify(data));
 }
    
 

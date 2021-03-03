@@ -6,7 +6,7 @@ import CvView from './../components/CvView';
 //import appData from '../appData';
 
 class Page_View extends React.PureComponent {
-          
+      
     render() {
         return (
             <Transition in={true} unmountOnExit timeout={{ enter: 500, exit: 500 }}>

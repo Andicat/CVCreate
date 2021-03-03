@@ -11,8 +11,21 @@ import '@firebase/storage';
 class Page_Load extends React.PureComponent {
 
     componentDidMount() {
-        this.initializeApp();
-        this.loadData();
+        console.log('Page load did mount',this.db);
+        //debugger
+        //this.initializeApp();
+        //this.loadData();
+        let ttt = this.props.history;
+    }
+
+    state = {
+        dataLoaded:false,
+    }
+
+    componentWillUnmount() {
+        //debugger
+        console.log('Page load will unmount',this.db);
+        //window.removeEventListener("beforeunload", this.onUnload);
     }
  
     db = null;
@@ -29,6 +42,7 @@ class Page_Load extends React.PureComponent {
             measurementId: 'G-08QQHJN47T'
         };
 
+        debugger
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         this.db = firebase.firestore();
@@ -67,6 +81,7 @@ class Page_Load extends React.PureComponent {
         });
         await loadLS.then((data) => {
             this.props.dispatch(cv_load(data.blocks,data.style));
+            this.setState({dataLoaded:true});
         });
 
         setTimeout(() => this.props.history.push('/cv'),1000);

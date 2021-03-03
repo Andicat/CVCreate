@@ -20,7 +20,7 @@ class TemplatePanel extends React.PureComponent {
     }
 
     render () {
-        console.log('render template panel',this.props);
+        //console.log('render template panel',this.props);
         var groupsCode = this.props.templatesArr.map( (g,i) => {
             return <TemplateGroup key={i} id={i} data={g} active={(this.state.activeMenuId===i)?true:false} cbSelected={this.selectMenu}/>
             });
