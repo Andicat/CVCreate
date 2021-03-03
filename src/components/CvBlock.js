@@ -13,7 +13,7 @@ class CvBlock extends React.PureComponent {
     static propTypes = {
         id: PropTypes.number.isRequired,
         data: PropTypes.object.isRequired,
-        activeIndex: PropTypes.number.isRequired,        
+        activeIndex: PropTypes.number,        
         activeElementId: PropTypes.string,
         editable: PropTypes.bool,
         newBlock: PropTypes.bool,
@@ -23,7 +23,6 @@ class CvBlock extends React.PureComponent {
 
     componentDidMount() {
         if (this.props.newBlock) {
-            console.log('activate block');
             this.props.dispatch(cvBlock_activate(this.props.id, this.blockRef.current));
         }
     }
@@ -49,7 +48,6 @@ class CvBlock extends React.PureComponent {
         return (
             <Transition in={true} unmountOnExit timeout={{ enter: 1000, exit: 1000 }}>
                 {stateName => {
-                    //console.log('render block transition', stateName);
                     return <div className={className + ' ' + {stateName}} style={style} onClick={this.onClick} ref={this.blockRef}>
                     {elementCode} 
                 </div>

@@ -26,7 +26,6 @@ class CvDocument extends React.PureComponent {
     }
 
     render () {
-        
         //console.log('render cv-doc', this.props.blocks);
         let cvBlocksCode = this.props.blocks.map( b => {
             let activeIndex = this.props.activeBlocksId.findIndex(ab => ab===b.id);

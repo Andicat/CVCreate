@@ -207,4 +207,55 @@
            cursor: pointer;
         }
     }
+
+    &--link {
+        margin: 20px auto;
+    }
+
+    &__login {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        box-sizing: border-box;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        input {
+            //@include transition(all);
+            display: block;
+            box-sizing: border-box;
+            width: 90%;
+            margin: 0;
+            padding: 5px 10px;
+            background-color: rgba($color: white, $alpha: 0.2);
+            border: 1px solid white;
+            color: white;
+            border-radius: 5px;
+            font-size: calc(1em + 1vh);
+            line-height: 100%;
+
+            &::placeholder {
+                color: white;
+            }
+
+            &:focus {
+                transform: scale(1);
+                outline: none;
+                border-color: #020030;
+                &::placeholder {
+                    color: transparent;
+                }   
+            }
+        }
+
+        &--error input {
+            transform: scale(1.2);
+            border-color: brown;
+            &::placeholder {
+                color: brown;
+            }
+        }
+    }
 }

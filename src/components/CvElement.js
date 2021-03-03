@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-//import image from './../img/image.svg';
 
 import {connect} from 'react-redux';
 import {cvElement_activate, cvElement_textUpdate} from '../redux/cvDataAC';
@@ -141,7 +140,7 @@ class CvElement extends React.PureComponent {
 
 const mapStateToProps = function (state) {
     return {
-        templateImageUrl: state.templatesData.imageUrl,
+        templateImageUrl: state.cvData.templateImageUrl,
     };
 };
 

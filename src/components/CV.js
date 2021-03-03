@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import OptionPanel from './OptionPanel';
 import TemplatePanel from './TemplatePanel';
 import CvDocument from './CvDocument';
+import CvLogin from './CvLogin';
 
 import {saveFileJSON, readFileJSON, saveLocalStorage} from './utils';
 import {cv_load} from '../redux/cvDataAC';
@@ -14,15 +15,12 @@ import {cv_load} from '../redux/cvDataAC';
 
 class CV extends React.PureComponent {
     
-    componentWillUnmount() {
-        //debugger
-    }
-
     static propTypes = {
         transitionClass: PropTypes.string,
         stylePage: PropTypes.object,  
         blocks: PropTypes.array,
         activeBlocksId: PropTypes.array,
+        login: PropTypes.string,
     };
 
     state = {
@@ -75,7 +73,10 @@ class CV extends React.PureComponent {
     
     render () {
         //debugger
-        //console.log('render cv');
+        console.log('render cv');
+        if (!this.props.login) {
+            return <CvLogin/>;    
+        }
         let activeOneId = (this.props.activeBlocksId.length===1) && this.props.activeBlocksId[0];
         let activeBlock = null;
         let activeBlockOptions;
@@ -134,6 +135,7 @@ const mapStateToProps = function (state) {
         stylePage: state.cvData.stylePage,
         blocks: state.cvData.blocks,
         activeBlocksId: state.cvData.activeBlocksId,
+        login: state.cvData.login,
     };
 };
   

@@ -1,4 +1,5 @@
 ﻿import {CV_ID} from './../components/utils';
+import {saveFirebase} from './../components/withDataLoad';
 
 import { CV_BLOCK_ADD,
         CV_BLOCK_DELETE,
@@ -26,9 +27,12 @@ import { CV_BLOCK_ADD,
         CV_ELEMENT_ACTIVATE,
         CV_STYLE_UPDATE,
         CV_TEXT_UPDATE,
-        CV_LOAD } from './cvDataAC';
+        CV_LOAD,
+        TEMPLATE_LOAD,
+        TEMPLATE_ADD } from './cvDataAC';
 
 const initState = {
+    login: null,
     stylePage: {bgcolor:'#ffffff'},
     blocks: [],
     activeBlockDOM: null,
@@ -37,6 +41,9 @@ const initState = {
     styleToEdit: {},
     showPanel: true,
     newBlock: false,
+    templatesArr: [],
+    templatesCustomArr: [],
+    templateImageUrl: null,
 }
 
 function cvDataReducer(state = initState, action, cvId = CV_ID) {
@@ -544,6 +551,31 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                 stylePage:action.style,
                 blocks:action.blocks
             };
+            return newState;
+        }
+
+        //load templates
+        case TEMPLATE_LOAD: {
+            let newState = {...state,
+                templatesArr:action.data.templates,
+                templateImageUrl:action.data.image
+            };
+            return newState;
+        }
+
+        //add template
+        case TEMPLATE_ADD: {
+            let activeBlock = state.blocks.find(b => b.id===action.blockId);
+            let newTemplateBlock = {type:activeBlock.type, style:{...activeBlock.style}};
+            if (activeBlock.text) {
+                newTemplateBlock.text = activeBlock.text;
+            }
+            if (activeBlock.elements) {
+                newTemplateBlock.elements = [...activeBlock.elements];
+            }
+            
+            let newState = {...state, templatesCustomArr:[...state.templatesCustomArr,newTemplateBlock]};
+            saveFirebase('Templates','blocksCustom',{templatesCustom:newState.templatesCustomArr});
             return newState;
         }
 

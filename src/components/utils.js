@@ -47,6 +47,7 @@ const OPTIONS_TEXT = {
     height: 'height',
     width: 'width',
     link: 'set link for block',
+    save: 'save this block to panel',
 }
 
 const FONTS = ['PTSans','Roboto','Helvetica','Garamond'];
@@ -69,7 +70,7 @@ const FONTS = ['PTSans','Roboto','Helvetica','Garamond'];
 function createOption (optionType,optionValue,cbOnChange) {
 
     if (optionType==='copy' || optionType==='back' || optionType==='autosize' || optionType==='ungroup' || optionType==='group' 
-                            || optionType.indexOf('align')>=0 || optionType.indexOf('distribute')>=0) {
+                            || optionType==='save'|| optionType.indexOf('align')>=0 || optionType.indexOf('distribute')>=0) {
         return codeButton(optionType,cbOnChange);
     } else if (optionType==='bold' || optionType==='italic' || optionType==='uppercase' || optionType==='underline' || optionType==='center' || optionType==='lock') {
         return codeCheckbox(optionType,optionValue);

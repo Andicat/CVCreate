@@ -9,6 +9,7 @@ class TemplatePanel extends React.PureComponent {
     static propTypes = {
         transitionClass: PropTypes.string,
         templatesArr: PropTypes.array,
+        templatesCustomArr: PropTypes.array,
     };
 
     state = {
@@ -24,16 +25,20 @@ class TemplatePanel extends React.PureComponent {
         var groupsCode = this.props.templatesArr.map( (g,i) => {
             return <TemplateGroup key={i} id={i} data={g} active={(this.state.activeMenuId===i)?true:false} cbSelected={this.selectMenu}/>
             });
-
         return <ul className={'template-panel__menu ' + this.props.transitionClass}>
                     {groupsCode}
+                    {this.props.templatesCustomArr.length &&
+                        <TemplateGroup key={groupsCode.length+1} id={groupsCode.length+1} data={{name:'Your templates',elements:this.props.templatesCustomArr}} active={(this.state.activeMenuId===(groupsCode.length+1))?true:false} cbSelected={this.selectMenu}/>
+                    }
+                    
                </ul>
     }
 }
 
 const mapStateToProps = function (state) {
     return {
-        templatesArr: state.templatesData.templatesArr,
+        templatesArr: state.cvData.templatesArr,
+        templatesCustomArr: state.cvData.templatesCustomArr,
     };
 };
   

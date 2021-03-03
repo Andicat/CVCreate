@@ -14,7 +14,8 @@ import {cvStyle_update,
     cvBlocks_group,
     cvBlock_ungroup, 
     cvBlock_lock,
-    cvBlock_setLink } from '../redux/cvDataAC';
+    cvBlock_setLink,
+    templates_add } from '../redux/cvDataAC';
 import {getAutoSize} from './utils';
 
 class OptionPanel extends React.PureComponent {
@@ -33,6 +34,7 @@ class OptionPanel extends React.PureComponent {
         'back',
         'copy',
         'link',
+        'save',
     ];
 
     BLOCKS_ACTION = [
@@ -130,9 +132,8 @@ class OptionPanel extends React.PureComponent {
                 this.props.dispatch(cvBlock_setLink(blockId,value));
                 break;
             }
-            case 'list': {
-                debugger
-                //this.props.dispatch(cvBlock_addListItem(blockId,value));
+            case 'save': {
+                this.props.dispatch(templates_add(blockId));
                 break;
             }
             default:

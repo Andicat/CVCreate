@@ -1,9 +1,6 @@
 import React from 'react';
 import {Transition} from "react-transition-group";
-
 import CvView from './../components/CvView';
-
-//import appData from '../appData';
 
 class Page_View extends React.PureComponent {
       
