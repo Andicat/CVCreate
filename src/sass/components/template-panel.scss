@@ -9,6 +9,12 @@
     &__menu {
         width: 300px;
         display: none;
+        overflow-y: scroll;
+        padding-bottom: 50px;
+
+        &::-webkit-scrollbar {
+            width: 0;
+        }
     }
 
     &__group {
@@ -52,6 +58,15 @@
     
             &--active::after {
                 transform: rotate(180deg);
+            }
+        }
+
+        &--user {
+            .template-panel__block-view {
+                .cv__element {
+                    width: auto;
+                    //max-width: 100%;
+                }
             }
         }
     }

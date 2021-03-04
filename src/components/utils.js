@@ -92,6 +92,8 @@ function createOption (optionType,optionValue,cbOnChange) {
         return codeLink(optionType,optionValue);
     } else if (optionType==='maincount' || optionType==='addcount' || optionType==='radius' || optionType==='borderwidth') {
         return codeNumber(optionValue,0,100);
+    } else {
+        return null;
     }
 
     function setValue(elem,value) {
@@ -127,7 +129,7 @@ function createOption (optionType,optionValue,cbOnChange) {
 
     function setLink(elem) {
         cbOnChange(elem.value);
-        openDrop(elem.parentNode,false);
+        openDrop(elem.parentNode.parentNode,false);
     };
     
     function setGroupValue(elem,value,groupValue,name) {
@@ -143,11 +145,14 @@ function createOption (optionType,optionValue,cbOnChange) {
     };
 
     function openDrop(elem, mode) {
+        //debugger
         if (mode && !elem.classList.contains('option__drop-down--show')) {
             elem.classList.add('option__drop-down--show');
+            //console.log('open');
         }
         if (!mode) {
             elem.classList.remove('option__drop-down--show');
+            //console.log('close');
         }
         
     };
@@ -168,9 +173,11 @@ function createOption (optionType,optionValue,cbOnChange) {
 
     function codeRange(optionType,optionValue,min,max,step) {
         return <React.Fragment>
-                    <input type='button' className={'option__button option__down option__button--' + optionType} data-tooltip={true} onClick= {(evt) => {openDrop(evt.target.nextSibling,true)}} onMouseLeave={(evt) => onMouseLeave(evt,evt.currentTarget.nextSibling)}/>
+                    <input type='button' className={'option__button option__down option__button--' + optionType} data-tooltip={true} onClick= {(evt) => {openDrop(evt.target.nextSibling,true)}}/>
                     <div className='option__drop-down' onMouseLeave={(evt) => openDrop(evt.currentTarget,false)}>
-                        <input type="range" className='option__range'min={min} max={max} step={step} value={optionValue} onInput={setValueInput}/>
+                        <div className='option__drop-down-line'>
+                            <input type="range" className='option__range'min={min} max={max} step={step} value={optionValue} onInput={setValueInput}/>
+                        </div>
                     </div>
                 </React.Fragment>
     };
@@ -195,7 +202,7 @@ function createOption (optionType,optionValue,cbOnChange) {
 
     function codeLink(optionType,optionValue) {
         return <React.Fragment>
-                    <input type='button' className={'option__button option__down option__button--' + optionType} data-tooltip={true} onClick={(evt) => {openDrop(evt.target.nextSibling,true)}} onMouseLeave={(evt) => onMouseLeave(evt,evt.currentTarget.nextSibling)}/>
+                    <input type='button' className={'option__button option__down option__button--' + optionType} data-tooltip={true} onClick={(evt) => {openDrop(evt.target.nextSibling,true)}}/>
                     <div className='option__drop-down' onMouseLeave={(evt) => openDrop(evt.currentTarget,false)}>
                         <div className='option__drop-down-line'>
                             <span>Link:</span>
@@ -294,18 +301,19 @@ function createStyle (styles) {
 // get auto size for DOM-element
 function getAutoSize (element) {
     let sizes = {};
-    element.style.position = 'absolute';
-    element.style.visibility = 'hidden';
-    element.style.height = 'auto';
-    element.style.width = 'auto';
-    element.style.boxSizing = 'border-box';
-    sizes.height = element.offsetHeight + 1;
-    sizes.width = element.offsetWidth + 1;
-    element.style.position = '';
+    let clone = element.cloneNode(true);
+    clone.style.position = 'absolute';
+    clone.style.visibility = 'hidden';
+    clone.style.height = 'auto';
+    clone.style.width = 'auto';
+    clone.style.boxSizing = 'border-box';
+    sizes.height = element.scrollHeight;
+    sizes.width = element.scrollWidth;
+    /*element.style.position = '';
     element.style.visibility = '';
     element.style.width = '';
     element.style.height = '';
-    element.style.boxSizing = '';
+    element.style.boxSizing = '';*/
 
     return sizes;
 };
@@ -346,10 +354,48 @@ function readFileJSON (file,cbOnLoad) {
 };
 
 //localStorge
-function saveLocalStorage(LsName,data) {
-    localStorage.setItem(LsName,JSON.stringify(data));
+function saveLocalStorage(lsName,data) {
+    let lsData = loadFromLocalStorage(lsName);
+    let newlsData = {...lsData,...data};
+    localStorage.setItem(lsName,JSON.stringify(newlsData));
+}
+
+function loadFromLocalStorage(lsName) {
+    var ls = localStorage.getItem(lsName);
+    if (ls) {
+        return JSON.parse(ls);
+    }    
 }
    
+//image
+/*let storage = firebase.storage();
+            /*let loadImage = new Promise((resolve) => {
+                loadStorage('images/image.svg',resolve);
+            });
+            await loadImage.then((data) => {
+                loadData.image = data;
+            });*/
 
+            /*
+            
+//load from storage
+async function loadStorage(path,resolve) {
+    const storageRef = storage.ref();
+    storageRef.child(path).getDownloadURL()
+        .then((url) => {
+            // This can be downloaded directly:
+            var xhr = new XMLHttpRequest();
+            xhr.responseType = 'blob';
+            xhr.onload = (event) => {
+                var blob = xhr.response;
+            };
+            xhr.open('GET', url);
+            xhr.send();
+            
+            resolve(url);
+        })
+        .catch((error) => {
+        });
+} */
 
-export {createOption, createStyle, getAutoSize, saveFileJSON, readFileJSON, saveLocalStorage, CV_ID, OPTIONS_TEXT};
+export {createOption, createStyle, getAutoSize, saveFileJSON, readFileJSON, saveLocalStorage, loadFromLocalStorage, CV_ID, OPTIONS_TEXT};

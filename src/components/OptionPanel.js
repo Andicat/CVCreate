@@ -31,6 +31,7 @@ class OptionPanel extends React.PureComponent {
 
     BLOCK_ACTION = [
         'lock',
+        'autosize',
         'back',
         'copy',
         'link',
@@ -158,10 +159,7 @@ class OptionPanel extends React.PureComponent {
             if (this.props.activeBlockOptions.group) {
                 blockAction.push('ungroup');
             } else {
-                blockAction.push('autosize');
-            }
-            if (this.props.activeBlockOptions.list) {
-                blockAction.push('list');
+               // blockAction.push('autosize');
             }
             codeBlocksOptions = blockAction.map( (a,i) => {
                 let value = null;

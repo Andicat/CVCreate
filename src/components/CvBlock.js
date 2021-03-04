@@ -40,15 +40,15 @@ class CvBlock extends React.PureComponent {
     render () {
         //console.log('render block',this.props.transitionClass);
         let style = {top:this.props.data.positionTop + 'px', left:this.props.data.positionLeft + 'px', width:this.props.data.width + 'px', height:this.props.data.height + 'px'};
-        let className = 'cv__block' + (this.props.activeIndex>=0?' cv__block--active':'')
-                        + (this.props.activeIndex===0?' cv__block--active-first':'')
+        let className = 'cv__block' + ((this.props.activeIndex>=0)?' cv__block--active':'')
+                        + ((this.props.activeIndex===0)?' cv__block--active-first':'')
                         + (this.props.data.lock?' cv__block--lock':'');
         let elementCode = <CvElement id={'' + this.props.id} blockId={this.props.id} editable={this.props.editable} data={this.props.data} activeElementId={this.props.activeElementId}></CvElement>;
 
         return (
             <Transition in={true} unmountOnExit timeout={{ enter: 1000, exit: 1000 }}>
                 {stateName => {
-                    return <div className={className + ' ' + {stateName}} style={style} onClick={this.onClick} ref={this.blockRef}>
+                    return <div className={className + ' ' + stateName} style={style} onClick={this.onClick} ref={this.blockRef}>
                     {elementCode} 
                 </div>
             }}

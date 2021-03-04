@@ -1,16 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router';
 
 import Loader from './Loader';
 import {Transition} from "react-transition-group";
 
-
-import CvBlock from './CvBlock';
-import {createStyle} from './utils';
+import {cv_setUser} from '../redux/cvDataAC';
 import {addFirebase, loadFirebase} from './withDataLoad';
+import {saveLocalStorage} from './utils';
 
 class CvLogin extends React.PureComponent {
 
@@ -41,16 +38,14 @@ class CvLogin extends React.PureComponent {
 
     saveData = async (data) => {
         let addData = new Promise((resolve) => {
-            addFirebase('Data','users',data);
+            addFirebase('Data','users',data,resolve);
         });
-        await addData.then((data) => {
+        await addData.then(() => {
             this.setState({userNameValid:true,messageError:''});
-            
-        });
-    
-        
+            saveLocalStorage('CV',{user:data});
+            this.props.dispatch(cv_setUser(data));
+        });    
     }
-    
 
     onSubmit = (evt) => {
         evt.preventDefault();
@@ -84,8 +79,8 @@ class CvLogin extends React.PureComponent {
                 }}
             </Transition>;
         }
-        return  <form class={"cv__login "  + this.props.transitionClass + (this.state.userNameValid?'':' cv__login--error')} name="login" onSubmit={this.onSubmit}>
-                    <input type="text" name="name" maxlength="30" placeholder="Your name..." ref={(f) => this.name = f} onChange={this.onChange}/>
+        return  <form className={"cv__login "  + this.props.transitionClass + (this.state.userNameValid?'':' cv__login--error')} name="login" onSubmit={this.onSubmit}>
+                    <input type="text" name="name" maxLength="30" placeholder="Your name..." ref={(f) => this.name = f} onChange={this.onChange}/>
                     <button type='submit'/>
                     {(!this.state.userNameValid) &&    
                         <span>{this.state.messageError}</span>
@@ -94,4 +89,4 @@ class CvLogin extends React.PureComponent {
     }
 }
   
-export default withRouter(CvLogin);
+export default connect()(CvLogin);

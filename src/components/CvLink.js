@@ -23,14 +23,11 @@ class CvLink extends React.PureComponent {
     }
 
     loadLink = async (linkName) => {
-        //let loadData = {};
         let loadTemplates = new Promise((resolve) => {
             loadFirebase('Links',linkName,resolve);
         });
         await loadTemplates.then((data) => {
             this.setState({blocks:data.blocks,stylePage:data.style});
-            //loadData.templates = data.templates;
-            //setTimeout(() => this.props.history.push('/cv'),2000);
         });
     }
     

@@ -13,6 +13,7 @@ class CvView extends React.PureComponent {
     static propTypes = {
         blocks: PropTypes.array,
         stylePage: PropTypes.object,
+        user: PropTypes.string,
     };
 
     state = {
@@ -25,11 +26,11 @@ class CvView extends React.PureComponent {
     }
 
     createLink = async () => {
-        let newLinkId = 'andreeva';
+        let newLinkName = this.props.user;
         let stateToSave = {style:this.props.stylePage,blocks:this.props.blocks};
-        saveFirebase('Links',newLinkId,stateToSave);
-        //saveLocalStorage('CV',{style:this.props.stylePage,blocks:this.props.blocks, linkName:newLinkId});
-        this.setState({link:newLinkId});
+        saveFirebase('Links',newLinkName,stateToSave);
+        //saveLocalStorage('CV',{style:this.props.stylePage,blocks:this.props.blocks, linkName:newLinkName});
+        this.setState({link:newLinkName});
     }
     
     render () {
@@ -82,6 +83,7 @@ const mapStateToProps = function (state) {
     return {
         blocks: state.cvData.blocks,
         stylePage: state.cvData.stylePage,
+        user: state.cvData.user,
     };
 };
   

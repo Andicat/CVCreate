@@ -8,8 +8,8 @@ class TemplatePanel extends React.PureComponent {
 
     static propTypes = {
         transitionClass: PropTypes.string,
-        templatesArr: PropTypes.array,
-        templatesCustomArr: PropTypes.array,
+        templates: PropTypes.array,
+        templatesUser: PropTypes.array,
     };
 
     state = {
@@ -22,13 +22,13 @@ class TemplatePanel extends React.PureComponent {
 
     render () {
         //console.log('render template panel',this.props);
-        var groupsCode = this.props.templatesArr.map( (g,i) => {
+        var groupsCode = this.props.templates.map( (g,i) => {
             return <TemplateGroup key={i} id={i} data={g} active={(this.state.activeMenuId===i)?true:false} cbSelected={this.selectMenu}/>
             });
         return <ul className={'template-panel__menu ' + this.props.transitionClass}>
                     {groupsCode}
-                    {this.props.templatesCustomArr.length &&
-                        <TemplateGroup key={groupsCode.length+1} id={groupsCode.length+1} data={{name:'Your templates',elements:this.props.templatesCustomArr}} active={(this.state.activeMenuId===(groupsCode.length+1))?true:false} cbSelected={this.selectMenu}/>
+                    {this.props.templatesUser &&
+                        <TemplateGroup key={groupsCode.length+1} id={groupsCode.length+1} data={{name:'Your templates',elements:this.props.templatesUser}} active={(this.state.activeMenuId===(groupsCode.length+1))?true:false} cbSelected={this.selectMenu}/>
                     }
                     
                </ul>
@@ -37,8 +37,8 @@ class TemplatePanel extends React.PureComponent {
 
 const mapStateToProps = function (state) {
     return {
-        templatesArr: state.cvData.templatesArr,
-        templatesCustomArr: state.cvData.templatesCustomArr,
+        templates: state.cvData.templates,
+        templatesUser: state.cvData.templatesUser,
     };
 };
   

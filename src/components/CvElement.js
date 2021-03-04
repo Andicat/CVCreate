@@ -109,7 +109,7 @@ class CvElement extends React.PureComponent {
                               </div>;
                 break;
             case 'group':
-                let CvGroupElement = connect()(CvElement);
+                let CvGroupElement = connect(mapStateToProps)(CvElement);
                 elementCode = <div className={className} style={style}>
                                 {this.props.data.elements.map( (e,i) => (
                                     <CvGroupElement key={'' + (e.id?e.id:i)} id={'' + (e.id?e.id:i)} blockId={this.props.blockId} editable={this.props.editable} data={e} activeElementId={this.props.activeElementId}></CvGroupElement>

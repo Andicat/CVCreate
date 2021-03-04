@@ -24,8 +24,9 @@ const CV_BLOCKS_GROUP = 'CV_BLOCKS_GROUP';
 const CV_BLOCK_UNGROUP = 'CV_BLOCK_UNGROUP';
 const CV_BLOCK_LOCK = 'CV_BLOCK_LOCK';
 const CV_LOAD = 'CV_LOAD';
+const CV_INIT = 'CV_INIT';
+const CV_SET_USER = 'CV_SET_USER';
 const CV_BLOCK_LINK = 'CV_BLOCK_LINK';
-const TEMPLATE_LOAD = 'TEMPLATE_LOAD';
 const TEMPLATE_ADD = 'TEMPLATE_ADD';
 
 const cvBlock_add = function(block) {
@@ -179,11 +180,28 @@ const cvBlock_lock = function(blockId) {
     };
 }
 
-const cv_load = function(blocks,style,user) {
+const cv_load = function(blocks,style) {
     return { 
         type: CV_LOAD,
         blocks:blocks,
         style:style,
+    };
+}
+
+const cv_init = function(blocks,style,user,templatesData,templatesUser) {
+    return { 
+        type: CV_INIT,
+        blocks:blocks,
+        style:style,
+        user:user,
+        templatesData:templatesData,
+        templatesUser:templatesUser,
+    };
+}
+
+const cv_setUser = function(user) {
+    return { 
+        type: CV_SET_USER,
         user:user,
     };
 }
@@ -193,13 +211,6 @@ const cvBlock_setLink = function(blockId,linkValue) {
         type: CV_BLOCK_LINK,
         blockId:blockId,
         linkValue:linkValue,
-    };
-}
-
-const templates_load = function(data) {
-    return {
-        type: TEMPLATE_LOAD,
-        data: data,
     };
 }
 
@@ -231,6 +242,7 @@ export {
     cvStyle_update, CV_STYLE_UPDATE,
     cvElement_textUpdate, CV_TEXT_UPDATE,
     cv_load, CV_LOAD,
-    templates_load, TEMPLATE_LOAD,
+    cv_init, CV_INIT, 
+    cv_setUser, CV_SET_USER,
     templates_add, TEMPLATE_ADD
 }

@@ -28,7 +28,8 @@ import { CV_BLOCK_ADD,
         CV_STYLE_UPDATE,
         CV_TEXT_UPDATE,
         CV_LOAD,
-        TEMPLATE_LOAD,
+        CV_INIT,
+        CV_SET_USER,
         TEMPLATE_ADD } from './cvDataAC';
 
 const initState = {
@@ -41,8 +42,8 @@ const initState = {
     styleToEdit: {},
     showPanel: true,
     newBlock: false,
-    templatesArr: [],
-    templatesCustomArr: [],
+    templates: [],
+    templatesUser: [],
     templateImageUrl: null,
 }
 
@@ -330,7 +331,6 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
 
         //group blocks
         case CV_BLOCKS_GROUP: {
-            //debugger
             let blocksToGroup = state.blocks.filter( b => state.activeBlocksId.find(ab => b.id===ab));
             let top = Infinity;
             let bottom = 0;
@@ -369,7 +369,6 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
 
         //ungroup block
         case CV_BLOCK_UNGROUP: {
-            //debugger
             let blockToUnGroup = state.blocks.find(b => b.id===action.blockId);
             let top = blockToUnGroup.positionTop;
             let left = blockToUnGroup.positionLeft;
@@ -550,16 +549,31 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
             let newState = {...state,
                 stylePage:action.style,
                 blocks:action.blocks,
-                user:action.user,
             };
             return newState;
         }
 
-        //load templates
-        case TEMPLATE_LOAD: {
+         //initialize CV
+         case CV_INIT: {
             let newState = {...state,
-                templatesArr:action.data.templates,
-                templateImageUrl:action.data.image
+                user:action.user,
+                templates:action.templatesData.templates,
+                templateImageUrl:action.templatesData.image,
+                templatesUser:action.templatesUser
+            };
+            if (action.style) {
+                newState.stylePage = action.style;
+            };
+            if (action.blocks) {
+                newState.blocks = action.blocks;
+            };
+            return newState;
+        }
+
+        //set user name
+        case CV_SET_USER: {
+            let newState = {...state,
+                user:action.user,
             };
             return newState;
         }
@@ -567,16 +581,22 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
         //add template
         case TEMPLATE_ADD: {
             let activeBlock = state.blocks.find(b => b.id===action.blockId);
-            let newTemplateBlock = {type:activeBlock.type, style:{...activeBlock.style}};
+            let newTemplateBlock = {type:activeBlock.type, style:{...activeBlock.style,height:activeBlock.height}};
             if (activeBlock.text) {
                 newTemplateBlock.text = activeBlock.text;
             }
             if (activeBlock.elements) {
                 newTemplateBlock.elements = [...activeBlock.elements];
             }
+            if (activeBlock.direction) {
+                newTemplateBlock.direction = activeBlock.direction;
+            }
+            if (activeBlock.group) {
+                newTemplateBlock.group = activeBlock.group;
+            }
             
-            let newState = {...state, templatesCustomArr:[...state.templatesCustomArr,newTemplateBlock]};
-            saveFirebase('Templates','blocksCustom',{templatesCustom:newState.templatesCustomArr});
+            let newState = {...state, templatesUser:[...state.templatesUser,newTemplateBlock]};
+            saveFirebase('Templates',state.user,{templates:newState.templatesUser});
             return newState;
         }
 

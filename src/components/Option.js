@@ -46,8 +46,10 @@ class Option extends React.PureComponent {
     }
 
      render () {
-        // debugger
         let optionCode = createOption(this.props.optionName,this.props.optionValue,this.onChangeValue);
+        if (!optionCode) {
+            return null;
+        }
         return (
             <div className='option' onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut} onClick={this.onMouseOut}>
                 {optionCode}
