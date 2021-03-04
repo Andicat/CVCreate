@@ -84,15 +84,16 @@
     }  
 }
 
-.cv__block {
+.cv__block,
+.cv__login {
 
     &.entering {
         display: none;
     }
         
     &.entered {
-        display: block;
-        animation: fadeIn 200ms forwards;
+        
+        animation: fadeIn 300ms forwards;
     }
         
     &.exiting {

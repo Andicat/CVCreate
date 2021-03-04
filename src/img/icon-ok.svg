@@ -1,24 +1,22 @@
-<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+<svg width="405.272" height="405.272" xmlns="http://www.w3.org/2000/svg">
 
  <g>
   <title>Layer 1</title>
-  <g stroke="null" id="svg_17">
-   <polygon stroke="null" id="svg_1" fill="#0BA4E0" points="209.40625,418.0159912109375 61,277.6002502441406 112.64453125,220.0064697265625 201.6015625,304.15240478515625 376.99609375,83.98399353027344 436,133.57363891601562 "/>
-   <g stroke="null" id="svg_2"/>
-   <g stroke="null" id="svg_3"/>
-   <g stroke="null" id="svg_4"/>
-   <g stroke="null" id="svg_5"/>
-   <g stroke="null" id="svg_6"/>
-   <g stroke="null" id="svg_7"/>
-   <g stroke="null" id="svg_8"/>
-   <g stroke="null" id="svg_9"/>
-   <g stroke="null" id="svg_10"/>
-   <g stroke="null" id="svg_11"/>
-   <g stroke="null" id="svg_12"/>
-   <g stroke="null" id="svg_13"/>
-   <g stroke="null" id="svg_14"/>
-   <g stroke="null" id="svg_15"/>
-   <g stroke="null" id="svg_16"/>
-  </g>
+  <path fill="#3196b4" id="svg_2" d="m393.401,124.425l-213.798,213.783c-15.832,15.835 -41.514,15.835 -57.361,0l-110.364,-110.372c-15.838,-15.835 -15.838,-41.52 0,-57.358c15.841,-15.841 41.521,-15.841 57.355,-0.006l81.698,81.699l185.106,-185.107c15.841,-15.841 41.523,-15.829 57.358,0c15.835,15.838 15.835,41.514 0.006,57.361z"/>
+  <g id="svg_3"/>
+  <g id="svg_4"/>
+  <g id="svg_5"/>
+  <g id="svg_6"/>
+  <g id="svg_7"/>
+  <g id="svg_8"/>
+  <g id="svg_9"/>
+  <g id="svg_10"/>
+  <g id="svg_11"/>
+  <g id="svg_12"/>
+  <g id="svg_13"/>
+  <g id="svg_14"/>
+  <g id="svg_15"/>
+  <g id="svg_16"/>
+  <g id="svg_17"/>
  </g>
 </svg>

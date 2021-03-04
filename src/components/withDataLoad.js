@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {cv_load, templates_load} from '../redux/cvDataAC';
 import imageUrl from '../img/image.svg';
 
+import Loader from './Loader';
+import {Transition} from "react-transition-group";
 import firebase from '@firebase/app';
 import '@firebase/firestore';
 import '@firebase/storage';
@@ -22,7 +24,7 @@ firebase.initializeApp(firebaseConfig);
 let db = firebase.firestore();
 let storage = firebase.storage();
 
-//save data in firebase
+//save doc in firebase
 function saveFirebase(collectionName,docName,data) {
     db.collection(collectionName).doc(docName).set(data)
         .then(() => {
@@ -33,6 +35,24 @@ function saveFirebase(collectionName,docName,data) {
         });
 }
 
+//add in doc in firebase
+async function addFirebase(collectionName,docName,data) {
+    /*let field = {};
+    field[data] = true;*/
+   
+        
+    db.collection(collectionName).doc(docName).get().then((doc) => {
+        if (doc.exists) {
+            db.collection(collectionName).doc(docName).set({
+                [data]: true
+            }, { merge: true });
+        } else {
+                console.log("No such document!");
+            }
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
+}
 
 //load from firebase
 async function loadFirebase(collectionName,docName,resolve) {
@@ -47,6 +67,7 @@ async function loadFirebase(collectionName,docName,resolve) {
             console.log("Error getting document:", error);
         });
 }
+
 
 //load from storage
 async function loadStorage(path,resolve) {
@@ -193,20 +214,20 @@ let withDataLoad = (propName) => Component => {
             });
             await loadLS.then((data) => {
                 if (data) {
-                    this.props.dispatch(cv_load(data.blocks,data.style));
+                    this.props.dispatch(cv_load(data.blocks,data.style,data.user));
                 } 
             });
-            setTimeout( () => this.setState({dataReady:true,combinedProps:{...this.props,[propName]:loadedData}}), 500);
+            
+            setTimeout( () => this.setState({dataReady:true,combinedProps:{...this.props,[propName]:''}}), 500);
         }
 
         render() {
             if (!this.state.dataReady) {
-                return <div className='loader'>
-                            <span className='loader__text'>Loading</span>
-                            <i className='loader__layer loader__layer--1'></i>
-                            <i className='loader__layer loader__layer--2'></i>
-                            <i className='loader__layer loader__layer--3'></i>
-                        </div>;    
+                <Transition in={this.state.dataReady} unmountOnExit timeout={{ enter: 1000, exit: 1000 }}>
+                    {stateName => {
+                        return <Loader transitionClass={stateName} text={'Loaded'}/>
+                    }}
+                </Transition>;
             }
             return <Component {...this.state.combinedProps} /> ;
         } 
@@ -214,4 +235,4 @@ let withDataLoad = (propName) => Component => {
     return connect()(ComponentWithDataLoad);
 }
 
-export { withDataLoad, saveFirebase, loadFirebase};
+export { withDataLoad, saveFirebase, loadFirebase, addFirebase};

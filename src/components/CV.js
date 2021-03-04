@@ -20,7 +20,7 @@ class CV extends React.PureComponent {
         stylePage: PropTypes.object,  
         blocks: PropTypes.array,
         activeBlocksId: PropTypes.array,
-        login: PropTypes.string,
+        user: PropTypes.string,
     };
 
     state = {
@@ -72,10 +72,13 @@ class CV extends React.PureComponent {
     }
     
     render () {
-        //debugger
         console.log('render cv');
-        if (!this.props.login) {
-            return <CvLogin/>;    
+        if (!this.props.user) {
+            return <Transition in={!this.props.user} unmountOnExit timeout={{ enter: 1000, exit: 1000 }}>
+                        {stateName => {
+                            return <CvLogin transitionClass={stateName}/>
+                        }}
+                    </Transition>;    
         }
         let activeOneId = (this.props.activeBlocksId.length===1) && this.props.activeBlocksId[0];
         let activeBlock = null;
@@ -135,7 +138,7 @@ const mapStateToProps = function (state) {
         stylePage: state.cvData.stylePage,
         blocks: state.cvData.blocks,
         activeBlocksId: state.cvData.activeBlocksId,
-        login: state.cvData.login,
+        user: state.cvData.user,
     };
 };
   

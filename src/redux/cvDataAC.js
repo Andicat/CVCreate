@@ -179,11 +179,12 @@ const cvBlock_lock = function(blockId) {
     };
 }
 
-const cv_load = function(blocks,style) {
+const cv_load = function(blocks,style,user) {
     return { 
         type: CV_LOAD,
         blocks:blocks,
         style:style,
+        user:user,
     };
 }
 

@@ -32,7 +32,7 @@ import { CV_BLOCK_ADD,
         TEMPLATE_ADD } from './cvDataAC';
 
 const initState = {
-    login: null,
+    user: null,
     stylePage: {bgcolor:'#ffffff'},
     blocks: [],
     activeBlockDOM: null,
@@ -549,7 +549,8 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
         case CV_LOAD: {
             let newState = {...state,
                 stylePage:action.style,
-                blocks:action.blocks
+                blocks:action.blocks,
+                user:action.user,
             };
             return newState;
         }
