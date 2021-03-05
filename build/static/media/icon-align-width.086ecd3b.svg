@@ -1,0 +1,13 @@
+<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="4.86396" width="4.86396" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_1" fill="#212121" d="m3.75,4c0.41421,0 0.75,0.3078 0.75,0.6875l0,1.3125l6.75,0l0,-1.3125c0,-0.3797 0.3358,-0.6875 0.75,-0.6875c0.4142,0 0.75,0.3078 0.75,0.6875l0,1.3125l6.75,0l0,-1.3125c0,-0.3797 0.3358,-0.6875 0.75,-0.6875c0.4142,0 0.75,0.3078 0.75,0.6875l0,4.125c0,0.3797 -0.3358,0.6875 -0.75,0.6875c-0.4142,0 -0.75,-0.3078 -0.75,-0.6875l0,-1.3125l-6.75,0l0,1.3125c0,0.3797 -0.3358,0.6875 -0.75,0.6875c-0.4142,0 -0.75,-0.3078 -0.75,-0.6875l0,-1.3125l-6.75,0l0,1.3125c0,0.3797 -0.33579,0.6875 -0.75,0.6875c-0.41421,0 -0.75,-0.3078 -0.75,-0.6875l0,-4.125c0,-0.3797 0.33579,-0.6875 0.75,-0.6875z"/>
+  <rect stroke="null" id="svg_4" height="9.17186" width="8.28139" y="11.19858" x="3" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="null" stroke-width="null" fill="#212121"/>
+  <rect stroke="null" id="svg_5" height="9.17186" width="8.28139" y="11.19858" x="12.71861" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="null" stroke-width="null" fill="#212121"/>
+ </g>
+</svg>
