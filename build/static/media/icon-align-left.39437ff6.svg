@@ -1,0 +1,30 @@
+<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+
+ <g opacity="0.33">
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="62" width="62" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g opacity="0.33" id="svg_35"/>
+  <g opacity="0.33" id="svg_36"/>
+  <g opacity="0.33" id="svg_37"/>
+  <g opacity="0.33" id="svg_38"/>
+  <g opacity="0.33" id="svg_39"/>
+  <g opacity="0.33" id="svg_40"/>
+  <g opacity="0.33" id="svg_41"/>
+  <g opacity="0.33" id="svg_42"/>
+  <g opacity="0.33" id="svg_43"/>
+  <g opacity="0.33" id="svg_44"/>
+  <g opacity="0.33" id="svg_45"/>
+  <g opacity="0.33" id="svg_46"/>
+  <g opacity="0.33" id="svg_47"/>
+  <g opacity="0.33" id="svg_48"/>
+  <g opacity="0.33" id="svg_49"/>
+  <g transform="rotate(-90.0699234008789 29.78417205810547,30.50359535217285) " id="svg_11">
+   <rect stroke="null" id="svg_7" height="3.741" width="48.92076" y="8.12954" x="5.32379" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="null" stroke-width="null" fill="null"/>
+   <rect id="svg_9" height="37.26611" width="15" y="15.61154" x="10.79141" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="null" stroke-width="null" stroke="null" fill="null"/>
+   <rect stroke="null" id="svg_10" height="23.88484" width="15" y="15.61154" x="33.52517" opacity="undefined" fill-opacity="null" stroke-opacity="null" stroke-dasharray="null" stroke-width="null" fill="null"/>
+  </g>
+ </g>
+</svg>
