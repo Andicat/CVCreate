@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {cv_init} from '../redux/cvDataAC';
 import imageUrl from '../img/image.svg';
-import {loadFromLocalStorage} from './utils';
+import {loadFromLocalStorage, codeStyle, decodeStyle} from './utils';
 
 import Loader from './Loader';
 import {Transition} from "react-transition-group";
@@ -137,9 +137,9 @@ function saveTemplates() {
     
         return templatesArr;
     }
-
     let templatesArr = createTemplates();
-    saveFirebase('Data','templates',{templates:templatesArr});
+    let templatesArrConverted = templatesArr.map(t => codeStyle(t));
+    saveFirebase('Data','templates',{templates:templatesArrConverted});
 }
 
 let withDataLoad = (propName) => Component => {
@@ -158,8 +158,9 @@ let withDataLoad = (propName) => Component => {
         
         loadData = async () => {
             let user;
+            let link;
             let blocks = [];
-            let style = {};
+            let style;
             let templatesData = {};
             let templatesUser = [];
             
@@ -173,6 +174,7 @@ let withDataLoad = (propName) => Component => {
                     blocks = data.blocks;
                     style = data.style;
                     user = data.user;
+                    link = data.link;
                 } 
             });
 
@@ -182,6 +184,8 @@ let withDataLoad = (propName) => Component => {
             });
             await loadTemplates.then((data) => {
                 if (data) {
+                    //debugger
+                    //templatesData.templates = data.templates.map(t => decodeStyle(t));
                     templatesData.templates = data.templates;
                     templatesData.image = imageUrl;
                    
@@ -200,7 +204,7 @@ let withDataLoad = (propName) => Component => {
                 });
             }
             
-            this.props.dispatch(cv_init(blocks,style,user,templatesData,templatesUser));
+            this.props.dispatch(cv_init(blocks,style,user,link,templatesData,templatesUser));
             setTimeout( () => this.setState({dataReady:true,combinedProps:{...this.props,[propName]:''}}), 500);
         }
 

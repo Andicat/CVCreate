@@ -45,6 +45,7 @@ class CvElement extends React.PureComponent {
     }*/
 
     render () {
+        //debugger
         //console.log('render element', this.props.data.id + " " + this.props.data.type + " " + this.props.data.text);
         if (this.props.editable) {
             //console.log('render element', this.props.id);

@@ -38,17 +38,14 @@ class CV extends React.PureComponent {
         saveLocalStorage('CV',stateToSave);
     } 
 
-    onLoadCV = (data) => {
+    loadCV = async(evt) => {
+        let data = await readFileJSON(evt.target.files[0]);
         this.props.dispatch(cv_load(data.blocks,data.style));
         saveLocalStorage('CV',{style:data.style,blocks:data.blocks});
-    }
-
-    loadCV = (evt) => {
-        readFileJSON(evt.target.files[0],this.onLoadCV);
         evt.target.value = null;
     }
 
-    showHTML = () => {
+    /*showHTML = () => {
         let cvBlock = document.querySelector('.cv');
         let cvStyle = document.getElementsByTagName('style')[0];
         let styleTag = document.createElement('style');
@@ -65,7 +62,7 @@ class CV extends React.PureComponent {
         windowCV.document.body.innerHTML = cvBlock.outerHTML;
         windowCV.document.body.style.overflow = 'auto';
         windowCV.document.body.style.height = 'auto';
-    }
+    }*/
 
     showPanel = () => {
         this.setState({showPanel:!this.state.showPanel});
@@ -93,9 +90,6 @@ class CV extends React.PureComponent {
                             };
         }
 
-        //<button className='header__button header__button--html' onClick={this.showHTML}>Show</button>
-
-        //<OptionPanel activeBlockGroup={activeBlock?activeBlock.group:false} activeBlockLink={activeBlock?activeBlock.link:''} activeBlockId={activeBlock?activeBlock.id:false} activeBlockLock={activeBlock?activeBlock.lock:false}/>
         return (
             <React.Fragment>
                 <header className={'header ' + this.props.transitionClass}>
@@ -109,7 +103,7 @@ class CV extends React.PureComponent {
                             <label className='header__button header__button--load' htmlFor='file-cv' data-tooltip={true}>Load</label>
                         </li>
                         <li className='header__menu-item'>
-                            <NavLink to='/view' className='header__button header__button--html' onClick={this.saveLS}>Show</NavLink>    
+                            <NavLink to='/view' className='header__button header__button--show' onClick={this.saveLS}>Show</NavLink>    
                         </li>
                     </ul>
                 </header>

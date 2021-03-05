@@ -51,7 +51,7 @@ class CvLogin extends React.PureComponent {
         evt.preventDefault();
         let nameValue = this.name.value;
         if (String(nameValue).trim().length===0) {
-            this.setState({userNameValid:false,messageError:'Enter your name'});
+            this.setState({userNameValid:false,messageError:'Enter name'});
             this.name.focus();
             return;
         } else if (nameValue in this.state.userList) {
@@ -80,7 +80,7 @@ class CvLogin extends React.PureComponent {
             </Transition>;
         }
         return  <form className={"cv__login "  + this.props.transitionClass + (this.state.userNameValid?'':' cv__login--error')} name="login" onSubmit={this.onSubmit}>
-                    <input type="text" name="name" maxLength="30" placeholder="Your name..." ref={(f) => this.name = f} onChange={this.onChange}/>
+                    <input type="text" name="name" maxLength="30" placeholder="Enter name of your CV..." ref={(f) => this.name = f} onChange={this.onChange}/>
                     <button type='submit'/>
                     {(!this.state.userNameValid) &&    
                         <span>{this.state.messageError}</span>

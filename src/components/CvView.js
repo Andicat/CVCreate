@@ -4,8 +4,10 @@ import {NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 
+import {cv_setLink} from '../redux/cvDataAC';
+
 import CvBlock from './CvBlock';
-import {createStyle} from './utils';
+import {createStyle, saveLocalStorage} from './utils';
 import {saveFirebase} from './withDataLoad';
 
 class CvView extends React.PureComponent {
@@ -14,11 +16,11 @@ class CvView extends React.PureComponent {
         blocks: PropTypes.array,
         stylePage: PropTypes.object,
         user: PropTypes.string,
+        link: PropTypes.string,
     };
 
     state = {
         viewForPrint: false,
-        link: null,
     }
 
     viewForPrint = () => {
@@ -26,17 +28,39 @@ class CvView extends React.PureComponent {
     }
 
     createLink = async () => {
-        let newLinkName = this.props.user;
+        let linkName = this.props.user;
         let stateToSave = {style:this.props.stylePage,blocks:this.props.blocks};
-        saveFirebase('Links',newLinkName,stateToSave);
-        //saveLocalStorage('CV',{style:this.props.stylePage,blocks:this.props.blocks, linkName:newLinkName});
-        this.setState({link:newLinkName});
+        saveFirebase('Links',linkName,stateToSave,false);
+        saveLocalStorage('CV',{link:linkName});
+        this.props.dispatch(cv_setLink(linkName));
+    }
+
+    updateLink = async () => {
+        let linkName = this.props.user;
+        let stateToSave = {style:this.props.stylePage,blocks:this.props.blocks};
+        saveFirebase('Links',linkName,stateToSave,false);
     }
     
     render () {
-        var cvBlocksCode = this.props.blocks.map( b => {
+        let cvBlocksCode = this.props.blocks.map( b => {
             return <CvBlock key={b.id} id={b.id} data={b} editable={false}></CvBlock>
         });
+
+        let linkCode;
+        if (this.props.link) {
+            linkCode = <React.Fragment>
+                            <li className='header__menu-item'>
+                                <button className='header__button header__button--link-update' onClick={this.updateLink}>Update link</button>
+                            </li>
+                            <li className='header__menu-item'>
+                                <NavLink to={'/' + this.props.link} className='header__button header__button--show' target="_blank">Open link ({this.props.link})</NavLink>
+                            </li>
+                        </React.Fragment>
+        } else {
+            linkCode = <li className='header__menu-item'>
+                            <button className='header__button header__button--link-create' onClick={this.createLink}>Create Link</button>
+                        </li>
+        }
 
         return (
             <React.Fragment>
@@ -49,14 +73,7 @@ class CvView extends React.PureComponent {
                             <li className='header__menu-item'>
                                 <NavLink to='/' className='header__button header__button--edit'>Back to edit</NavLink>    
                             </li>
-                            <li className='header__menu-item'>
-                                {!this.state.link &&
-                                    <button className='header__button header__button--print' onClick={this.createLink}>Create Link</button>
-                                }
-                                {this.state.link &&
-                                   <NavLink to={'/' + this.state.link} className='header__button header__button--edit' target="_blank">Open your link ({this.state.link})</NavLink>
-                                }
-                            </li>
+                            {linkCode}
                         </ul>
                     </header>
                 )}
@@ -84,6 +101,7 @@ const mapStateToProps = function (state) {
         blocks: state.cvData.blocks,
         stylePage: state.cvData.stylePage,
         user: state.cvData.user,
+        link: state.cvData.link,
     };
 };
   

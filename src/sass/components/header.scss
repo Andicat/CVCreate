@@ -68,8 +68,8 @@
             background-image: url('./../../img/icon-download.svg');
         }
 
-        &--html::before {
-            background-image: url('./../../img/icon-html.svg');
+        &--show::before {
+            background-image: url('./../../img/icon-show.svg');
         }
 
         &--edit::before {
@@ -78,6 +78,14 @@
 
         &--print::before {
             background-image: url('./../../img/icon-print.svg');
+        }
+
+        &--link-update::before {
+            background-image: url('./../../img/icon-link-update.svg');
+        }
+
+        &--link-create::before {
+            background-image: url('./../../img/icon-link-create.svg');
         }
     }
 

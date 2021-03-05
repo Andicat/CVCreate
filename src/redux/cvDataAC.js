@@ -26,6 +26,7 @@ const CV_BLOCK_LOCK = 'CV_BLOCK_LOCK';
 const CV_LOAD = 'CV_LOAD';
 const CV_INIT = 'CV_INIT';
 const CV_SET_USER = 'CV_SET_USER';
+const CV_SET_LINK = 'CV_SET_LINK';
 const CV_BLOCK_LINK = 'CV_BLOCK_LINK';
 const TEMPLATE_ADD = 'TEMPLATE_ADD';
 
@@ -188,12 +189,13 @@ const cv_load = function(blocks,style) {
     };
 }
 
-const cv_init = function(blocks,style,user,templatesData,templatesUser) {
+const cv_init = function(blocks,style,user,link,templatesData,templatesUser) {
     return { 
         type: CV_INIT,
         blocks:blocks,
         style:style,
         user:user,
+        link:link,
         templatesData:templatesData,
         templatesUser:templatesUser,
     };
@@ -203,6 +205,13 @@ const cv_setUser = function(user) {
     return { 
         type: CV_SET_USER,
         user:user,
+    };
+}
+
+const cv_setLink = function(link) {
+    return { 
+        type: CV_SET_LINK,
+        link:link,
     };
 }
 
@@ -244,5 +253,6 @@ export {
     cv_load, CV_LOAD,
     cv_init, CV_INIT, 
     cv_setUser, CV_SET_USER,
+    cv_setLink, CV_SET_LINK,
     templates_add, TEMPLATE_ADD
 }

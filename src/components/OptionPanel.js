@@ -171,11 +171,14 @@ class OptionPanel extends React.PureComponent {
                 return <Option key={'block-' + i} optionName={a} optionValue={value} blockId={this.props.activeBlockOptions.id} cbOnChange={this.setAction}/>;
             });
             if (this.props.activeElementId) { //active element
-                codeElementOptions = Object.keys(this.props.styleToEdit).map( (s,i) => (
+                
+                let styles = Object.keys(this.props.styleToEdit).sort();
+                codeElementOptions = styles.map( (s,i) => (
                     <Option key={'option-' + i} optionName={s} optionValue={this.props.styleToEdit[s]} blockId={this.props.activeBlockOptions.id} cbOnChange={this.setStyle}/>));
             };
         } else if (this.props.stylePage) { //non active block, but active page
-            codePageOptions = Object.keys(this.props.stylePage).map( (s,i) => (
+            let styles = Object.keys(this.props.stylePage).sort();
+            codePageOptions = styles.map( (s,i) => (
                 <Option key={i} optionName={s} optionValue={this.props.stylePage[s]} blockId={CV_ID} cbOnChange={this.setStyle}/>));
         }
 

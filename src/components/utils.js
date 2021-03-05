@@ -1,6 +1,5 @@
 import React from 'react';
 
-import icon from './../img/icon-add.svg';
 
 const FONT_SIZE_MIN = 6;
 const FONT_SIZE_MAX = 60;
@@ -68,6 +67,8 @@ const FONTS = ['PTSans','Roboto','Helvetica','Garamond'];
 
 //create jsx-code for option
 function createOption (optionType,optionValue,cbOnChange) {
+
+    optionType = optionType.replace(/.+_/,'');
 
     if (optionType==='copy' || optionType==='back' || optionType==='autosize' || optionType==='ungroup' || optionType==='group' 
                             || optionType==='save'|| optionType.indexOf('align')>=0 || optionType.indexOf('distribute')>=0) {
@@ -229,7 +230,6 @@ function createOption (optionType,optionValue,cbOnChange) {
     };
 
     function codeGroup(optionType,optionValue,min,max) {
-        
         return <React.Fragment>
                     <input type='button' className={'option__button option__down option__button--' + optionType} data-tooltip={true} onClick={(evt) => {openDrop(evt.target.nextSibling,true)}} onMouseLeave={(evt) => onMouseLeave(evt,evt.currentTarget.nextSibling)}/>
                     <form name={optionType} className='option__drop-down' onMouseLeave={(evt) => openDrop(evt.currentTarget,false)}>
@@ -249,9 +249,10 @@ function createOption (optionType,optionValue,cbOnChange) {
 // create style for DOM-element
 function createStyle (styles) {
     let styleAttr = {};
-
+    //debugger
     for (let key in styles) {
-        switch (key) {
+        let keyDecode = key.replace(/.+_/,'');
+        switch (keyDecode) {
             case 'font': 
                 styleAttr.fontFamily = styles[key];
                 break;
@@ -292,7 +293,7 @@ function createStyle (styles) {
                 styleAttr.padding = styles[key].top + 'px ' + styles[key].right + 'px ' + styles[key].bottom + 'px ' + styles[key].left + 'px';
                 break;
             default:
-                styleAttr[key] = styles[key];
+                styleAttr[keyDecode] = styles[key];
         }
     }
     return styleAttr;
@@ -302,19 +303,15 @@ function createStyle (styles) {
 function getAutoSize (element) {
     let sizes = {};
     let clone = element.cloneNode(true);
+    document.body.appendChild(clone);
     clone.style.position = 'absolute';
     clone.style.visibility = 'hidden';
     clone.style.height = 'auto';
     clone.style.width = 'auto';
     clone.style.boxSizing = 'border-box';
-    sizes.height = element.scrollHeight;
-    sizes.width = element.scrollWidth;
-    /*element.style.position = '';
-    element.style.visibility = '';
-    element.style.width = '';
-    element.style.height = '';
-    element.style.boxSizing = '';*/
-
+    sizes.height = clone.scrollHeight;
+    sizes.width = clone.scrollWidth;
+    document.body.removeChild(clone);
     return sizes;
 };
 
@@ -337,7 +334,78 @@ function saveFileJSON (data, filename, type) {
     }
 };
 
+async function readFileJSON(file) {
+    const reader = new FileReader();
+    let dataRes = {};
+    reader.readAsText(file);
+    const readFile = new Promise((resolve, reject) => {
+        reader.onload = function(event) {
+        resolve(reader.result)
+        }
+    });
+    await readFile.then((data) => {
+        dataRes = JSON.parse(data); 
+    });
+    return dataRes;
+}
+
+function codeStyle(block) {
+    let newBlock = {...block};
+    if (block.style) {
+        let newStyle = {};
+        let styleIndex = 0;
+        for (let key in block.style) {
+            newStyle['s0' + styleIndex + '_' + key] = block.style[key];
+            styleIndex++;
+        }
+        newBlock.style = newStyle;
+    }
+    //block.style[action.styleName] = action.styleValue;
+    //block.style = {...block.style};
+    if (block.elements) {
+        let newElements = block.elements.map(e => codeStyle(e));
+        newBlock.elements = newElements;
+
+        return newBlock;
+    }
+    return newBlock;
+}
+
+function decodeStyle(block) {
+    //debugger
+    if (block.style) {
+        let newStyle = {};
+        for (let key in block.style) {
+            let newStyleName = key.replace(/.+_/,'');
+            newStyle[newStyleName] = block.style[key];
+        }
+        block.style = newStyle;
+    }
+    //block.style[action.styleName] = action.styleValue;
+    //block.style = {...block.style};
+    if (block.elements) {
+        block.elements = block.elements.map(e => decodeStyle(e));
+        return {...block};
+    }
+    return block;
+}
+/*
 function readFileJSON (file,cbOnLoad) {
+
+    var readFile= new Promise( (resolve) => {
+        var lsData = loadFromLocalStorage('CV');
+        resolve(lsData);
+    });
+    await loadLS.then((data) => {
+        if (data) {
+            blocks = data.blocks;
+            style = data.style;
+            user = data.user;
+        } 
+    });
+
+
+
     const reader = new FileReader();
 
     reader.onload = function() {
@@ -352,7 +420,7 @@ function readFileJSON (file,cbOnLoad) {
         reader.readAsText(file);
     }
 };
-
+*/
 //localStorge
 function saveLocalStorage(lsName,data) {
     let lsData = loadFromLocalStorage(lsName);
@@ -398,4 +466,4 @@ async function loadStorage(path,resolve) {
         });
 } */
 
-export {createOption, createStyle, getAutoSize, saveFileJSON, readFileJSON, saveLocalStorage, loadFromLocalStorage, CV_ID, OPTIONS_TEXT};
+export {createOption, createStyle, getAutoSize, saveFileJSON, readFileJSON, saveLocalStorage, loadFromLocalStorage, codeStyle, decodeStyle, CV_ID, OPTIONS_TEXT};

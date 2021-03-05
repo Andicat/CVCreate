@@ -1,4 +1,4 @@
-﻿import {CV_ID} from './../components/utils';
+﻿import {codeStyle, CV_ID} from './../components/utils';
 import {saveFirebase} from './../components/withDataLoad';
 
 import { CV_BLOCK_ADD,
@@ -30,10 +30,12 @@ import { CV_BLOCK_ADD,
         CV_LOAD,
         CV_INIT,
         CV_SET_USER,
+        CV_SET_LINK,
         TEMPLATE_ADD } from './cvDataAC';
 
 const initState = {
     user: null,
+    link: null,
     stylePage: {bgcolor:'#ffffff'},
     blocks: [],
     activeBlockDOM: null,
@@ -567,6 +569,9 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
             if (action.blocks) {
                 newState.blocks = action.blocks;
             };
+            if (action.link) {
+                newState.link = action.link;
+            };
             return newState;
         }
 
@@ -574,6 +579,14 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
         case CV_SET_USER: {
             let newState = {...state,
                 user:action.user,
+            };
+            return newState;
+        }
+
+        //set link
+        case CV_SET_LINK: {
+            let newState = {...state,
+                link:action.link,
             };
             return newState;
         }
@@ -596,6 +609,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
             }
             
             let newState = {...state, templatesUser:[...state.templatesUser,newTemplateBlock]};
+            //let templatesArrConverted = newState.templatesUser.map(t => codeStyle(t));
             saveFirebase('Templates',state.user,{templates:newState.templatesUser});
             return newState;
         }
