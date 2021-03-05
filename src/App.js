@@ -16,7 +16,7 @@ function App() {
 
     let PagesRouterWithData = withDataLoad()(PagesRouter);
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Provider store={store}>
                 <PagesRouterWithData/>
             </Provider>
