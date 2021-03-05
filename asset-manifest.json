@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/CVCreate-deploy/static/css/main.fee63543.chunk.css",
+    "main.js": "/CVCreate-deploy/static/js/main.f61ac252.chunk.js",
+    "main.js.map": "/CVCreate-deploy/static/js/main.f61ac252.chunk.js.map",
+    "runtime-main.js": "/CVCreate-deploy/static/js/runtime-main.4cad6adf.js",
+    "runtime-main.js.map": "/CVCreate-deploy/static/js/runtime-main.4cad6adf.js.map",
+    "static/js/2.f33549b7.chunk.js": "/CVCreate-deploy/static/js/2.f33549b7.chunk.js",
+    "static/js/2.f33549b7.chunk.js.map": "/CVCreate-deploy/static/js/2.f33549b7.chunk.js.map",
+    "static/js/3.5a7b6bee.chunk.js": "/CVCreate-deploy/static/js/3.5a7b6bee.chunk.js",
+    "static/js/3.5a7b6bee.chunk.js.map": "/CVCreate-deploy/static/js/3.5a7b6bee.chunk.js.map",
+    "index.html": "/CVCreate-deploy/index.html",
+    "static/css/main.fee63543.chunk.css.map": "/CVCreate-deploy/static/css/main.fee63543.chunk.css.map",
+    "static/js/2.f33549b7.chunk.js.LICENSE.txt": "/CVCreate-deploy/static/js/2.f33549b7.chunk.js.LICENSE.txt",
+    "static/media/style.scss": "/CVCreate-deploy/static/media/roboto.a2580627.woff2",
+    "static/media/image.51674aa9.svg": "/CVCreate-deploy/static/media/image.51674aa9.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4cad6adf.js",
+    "static/js/2.f33549b7.chunk.js",
+    "static/css/main.fee63543.chunk.css",
+    "static/js/main.f61ac252.chunk.js"
+  ]
+}
