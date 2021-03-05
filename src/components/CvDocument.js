@@ -2,10 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Transition} from "react-transition-group";
 import {connect} from 'react-redux';
-
 import CvBlock from './CvBlock';
 import Transform from './Transform';
-
 import {cvBlock_activate} from '../redux/cvDataAC';
 import {createStyle} from './utils';
 
@@ -26,7 +24,6 @@ class CvDocument extends React.PureComponent {
     }
 
     render () {
-        //console.log('render cv-doc', this.props.blocks);
         let cvBlocksCode = this.props.blocks.map( b => {
             let activeIndex = this.props.activeBlocksId.findIndex(ab => ab===b.id);
             return <CvBlock key={b.id} id={b.id} data={b} activeIndex={activeIndex} activeElementId={activeIndex>=0?this.props.activeElementId:null} editable={true}></CvBlock>

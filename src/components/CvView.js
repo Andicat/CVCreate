@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import {NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
-
+import Media from 'react-media';
 import {cv_setLink} from '../redux/cvDataAC';
-
 import CvBlock from './CvBlock';
 import {createStyle, saveLocalStorage} from './utils';
 import {saveFirebase} from './withDataLoad';
@@ -40,6 +39,10 @@ class CvView extends React.PureComponent {
         let stateToSave = {style:this.props.stylePage,blocks:this.props.blocks};
         saveFirebase('Links',linkName,stateToSave,false);
     }
+
+    openMenuMobile = () => {
+        this.menu.classList.toggle('header__menu--show');
+    }
     
     render () {
         let cvBlocksCode = this.props.blocks.map( b => {
@@ -66,15 +69,20 @@ class CvView extends React.PureComponent {
             <React.Fragment>
                 {!this.state.viewForPrint && (
                     <header className={'header ' + this.props.transitionClass}>
-                        <ul className='header__menu'>
-                            <li className='header__menu-item'>
-                                <button className='header__button header__button--print' onClick={this.viewForPrint}>View for print</button>
-                            </li>
+                        <ul className='header__menu' ref={(f) => this.menu = f}>
+                            <Media query="(min-width: 768px)">
+                                <li className='header__menu-item'>
+                                    <button className='header__button header__button--print' onClick={this.viewForPrint}>View for print</button>
+                                </li>
+                            </Media>
                             <li className='header__menu-item'>
                                 <NavLink to='/' className='header__button header__button--edit'>Back to edit</NavLink>    
                             </li>
                             {linkCode}
                         </ul>
+                        <Media query="(max-width: 767px)">
+                            <button className='header__button header__button--menu' onClick={this.openMenuMobile}/>
+                        </Media>
                     </header>
                 )}
                 <main className={'main ' + this.props.transitionClass}>

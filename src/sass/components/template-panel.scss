@@ -66,7 +66,6 @@
                 padding: 12px 6px;
                 .cv__element {
                     width: auto;
-                    //max-width: 100%;
                 }
             }
         }
@@ -181,6 +180,33 @@
             outline: none;
             transform: scale(1.2);
             cursor: pointer;
+        }
+    }
+
+    @media (max-width: $tablet - 1px) {
+        position: absolute;
+        z-index: 100;
+        width: 100%;
+        height: auto;
+        min-height: 5px;
+
+        &__menu {
+            padding: 0;
+            width: 100%;
+        }
+
+        &__group-name  {
+            padding: 8px;
+            min-height: 40px;
+            font-size: 16px;
+        }
+
+        &__button-hide {
+            width: 30px;
+            height: 35px;
+            top: 100%;
+            left: 0;
+            transform: rotate(90deg) translateX(-3px) translateY(-2px);
         }
     }
 }

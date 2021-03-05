@@ -7,6 +7,19 @@ import Page_Link from './Page_Link';
 
 class PagesRouter extends React.Component {
 
+    componentDidMount() {
+        window.addEventListener('beforeunload', this.onbeforeunload);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('beforeunload', this.onbeforeunload);
+    }
+
+    onbeforeunload = (evt) => {
+        evt.preventDefault();
+        evt.returnValue = 'Are you sure you save your data?';
+    }
+
     render() {
         
         return (

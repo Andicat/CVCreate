@@ -1,4 +1,4 @@
-﻿import {codeStyle, CV_ID} from './../components/utils';
+﻿import {CV_ID} from './../components/utils';
 import {saveFirebase} from './../components/withDataLoad';
 
 import { CV_BLOCK_ADD,
@@ -113,7 +113,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
         case CV_BLOCK_RESIZE: {
             let newBlocks = state.blocks.map(b => {
                 if (b.id===action.blockId) {
-                    b.height = Number(b.height) + action.shiftHeight;    
+                    b.height = Number(b.height) + action.shiftHeight;
                     b.width = Number(b.width) + action.shiftWidth;
                     return {...b};
                 }
@@ -127,7 +127,6 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
 
         //activate block on cv-page
         case CV_BLOCK_ACTIVATE: {
-            console.log('activate block');
             let newActiveBlocksId = [];
             if (action.blockId) {
                 newActiveBlocksId.push(action.blockId);
@@ -164,7 +163,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                 }
                 return b});
             let newState = {...state,
-                blocks:newBlocks
+                blocks:newBlocks,
             };
             return newState;
         }
@@ -180,7 +179,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                 }
                 return b});
             let newState = {...state,
-                blocks:newBlocks
+                blocks:newBlocks,
             };
             return newState;
         }
@@ -195,7 +194,9 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                     return {...b};
                 }
                 return b});
-            let newState = {...state, blocks:newBlocks};
+            let newState = {...state,
+                blocks:newBlocks,
+            };
             return newState;
         }
 
@@ -209,7 +210,9 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                     return {...b};
                 }
                 return b});
-            let newState = {...state, blocks:newBlocks};
+            let newState = {...state,
+                blocks:newBlocks,
+            };
             return newState;
         }
 
@@ -223,7 +226,9 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                     return {...b};
                 }
                 return b});
-            let newState = {...state, blocks:newBlocks};
+            let newState = {...state,
+                blocks:newBlocks,
+            };
             return newState;
         }
 
@@ -237,7 +242,9 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                     return {...b};
                 }
                 return b});
-            let newState = {...state, blocks:newBlocks};
+            let newState = {...state,
+                blocks:newBlocks,
+            };
             return newState;
         }
 
@@ -251,7 +258,9 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                     return {...b};
                 }
                 return b});
-            let newState = {...state, blocks:newBlocks};
+            let newState = {...state,
+                blocks:newBlocks,
+            };
             return newState;
         }
 
@@ -265,7 +274,9 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                     return {...b};
                 }
                 return b});
-            let newState = {...state, blocks:newBlocks};
+            let newState = {...state,
+                blocks:newBlocks
+            };
             return newState;
         }
 
@@ -285,19 +296,16 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                 minTop = b.positionTop + b.height;
                 return b;
             })
-                        
-            //console.log(totalHeight);
-            //console.log('min top',minTop);
-            //console.log('max top',maxTop);
-            //console.log('distance',distance);
-            
+
             let newBlocks = state.blocks.map(b => {
                 let newBlock = blocksToAlign.find(ab => b.id===ab.id);
                 if (newBlock) {
                     return {...newBlock};
                 }
                 return b});
-            let newState = {...state, blocks:newBlocks};
+            let newState = {...state,
+                blocks:newBlocks,
+            };
             return newState;
         }
 
@@ -317,19 +325,16 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                 minLeft = b.positionLeft + b.width;
                 return b;
             })
-                        
-            //console.log(totalHeight);
-            //console.log('min top',minTop);
-            //console.log('max top',maxTop);
-            //console.log('distance',distance);
-            
+
             let newBlocks = state.blocks.map(b => {
                 let newBlock = blocksToAlign.find(ab => b.id===ab.id);
                 if (newBlock) {
                     return {...newBlock};
                 }
                 return b});
-            let newState = {...state, blocks:newBlocks};
+            let newState = {...state,
+                blocks:newBlocks,
+            };
             return newState;
         }
 
@@ -366,7 +371,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                 blocks:[...newBlocks,newGroupBlock],
                 activeBlocksId: [newId],
                 activeBlockDOM: null,
-                activeElementId: null
+                activeElementId: null,
             };
             return newState;
         }
@@ -393,7 +398,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                 blocks: [...state.blocks.filter(b => b.id!==action.blockId),...newBlocks],
                 activeBlocksId: [],
                 activeBlockDOM: null,
-                activeElementId: null
+                activeElementId: null,
             };
             return newState;
         }
@@ -404,11 +409,11 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                 return a.id === action.blockId ? -1 : b.id === action.blockId ? 1 : 0;  
               }
             let newBlocks = [...state.blocks].sort(sortFunc);
-            let newState = {...state, 
-                blocks:newBlocks, 
+            let newState = {...state,
+                blocks:newBlocks,
                 activeBlocksId: [],
                 activeBlockDOM:null,
-                activeElementId:null
+                activeElementId:null,
             };
             return newState;
         }
@@ -418,7 +423,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
             function copyBlock(blockTemp,parentId,index = 0) {
                 let block = {...blockTemp, style:{...blockTemp.style}};
                 if (!parentId) {
-                    block.id = newId;    
+                    block.id = newId;
                 } else {
                     block.id = parentId + '-' + index;
                 }
@@ -432,12 +437,12 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
             let activeBlock = state.blocks.find(b => b.id===action.blockId);
             let newBlock = copyBlock(activeBlock);
             newBlock.positionTop = activeBlock.positionTop + 30;
-            newBlock.positionLeft = activeBlock.positionLeft + 30; 
+            newBlock.positionLeft = activeBlock.positionLeft + 30;
             let newState = {...state,
                 blocks: [...state.blocks,newBlock],
                 activeBlocksId: [newId],
                 activeBlockDOM:null,
-                activeElementId:null
+                activeElementId:null,
             };
             return newState;
         }
@@ -451,7 +456,9 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                     return {...b};
                 }
                 return b});
-            let newState = {...state, blocks:newBlocks};
+            let newState = {...state,
+                blocks:newBlocks,
+            };
             return newState;
         }
 
@@ -463,7 +470,9 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                     return {...b};
                 }
                 return b});
-            let newState = {...state, blocks:newBlocks};
+            let newState = {...state,
+                blocks:newBlocks,
+            };
             return newState;
         }
 
@@ -475,7 +484,9 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                     return {...b};
                 }
                 return b});
-            let newState = {...state, blocks:newBlocks};
+            let newState = {...state,
+                blocks:newBlocks,
+            };
             return newState;
         }
 
@@ -483,7 +494,10 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
         case CV_ELEMENT_ACTIVATE: {
             console.log('activate element');
             if (state.activeElementId !== action.elementId) {
-                let newState = {...state, activeElementId:action.elementId, styleToEdit:action.style};
+                let newState = {...state,
+                    activeElementId:action.elementId,
+                    styleToEdit:action.style,
+                };
                 return newState;
             }
             return state;
@@ -520,7 +534,8 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                 return b});
             let newState = {...state, 
                 blocks:newBlocks,
-                styleToEdit:newStyleToEdit};
+                styleToEdit:newStyleToEdit,
+            };
             return newState;
         }
         
@@ -537,7 +552,6 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                 }
                 return block;
             }
-            //action.textValue = action.textValue.split(/\n+/ig);
             let newBlocks = state.blocks.map(b => {
                 if (b.id === action.blockId) {
                     let newBlock = updateText(b);
@@ -545,7 +559,8 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                 }
                 return b});
             let newState = {...state, 
-                blocks:newBlocks};
+                blocks:newBlocks,
+            };
             return newState;
         }
 
@@ -564,7 +579,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                 user:action.user,
                 templates:action.templatesData.templates,
                 templateImageUrl:action.templatesData.image,
-                templatesUser:action.templatesUser
+                templatesUser:action.templatesUser,
             };
             if (action.style) {
                 newState.stylePage = action.style;
@@ -611,8 +626,9 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                 newTemplateBlock.group = activeBlock.group;
             }
             
-            let newState = {...state, templatesUser:[...state.templatesUser,newTemplateBlock]};
-            //let templatesArrConverted = newState.templatesUser.map(t => codeStyle(t));
+            let newState = {...state,
+                templatesUser:[...state.templatesUser,newTemplateBlock],
+            };
             saveFirebase('Templates',state.user,{templates:newState.templatesUser});
             return newState;
         }

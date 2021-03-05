@@ -1,5 +1,4 @@
 ﻿$color-bg-header: #3196b4;
-//$color-bg-options: rgba($color-bg-header,0.2);
 $color-bg: #cae6ee;
 
 $color-white: #ffffff;
@@ -22,3 +21,8 @@ $color-tooltip: #b8cdd3;
 
 $color-panel-bg: #293039;
 $color-panel-border: #5e5f61;
+
+// Adaptive
+$desktop: 1024px;
+$tablet: 768px;
+$mobile: 320px;

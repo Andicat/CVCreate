@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import CvElement from './CvElement';
-
 import {connect} from 'react-redux';
 import {cvBlock_add, templates_delete} from '../redux/cvDataAC';
 import {getAutoSize} from './utils';
@@ -27,7 +25,6 @@ class TemplateBlock extends React.PureComponent {
     }
 
     render () {
-        //console.log('render template block', this.props.id);
         let elementCode = <CvElement key={'' + this.props.id} id={'' + this.props.id} blockId={this.props.id} cv={false} data={this.props.data} active={false}></CvElement>;
         return (    
             <li className={'template-panel__block ' + this.props.transitionClass}>

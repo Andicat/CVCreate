@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import {connect} from 'react-redux';
 import {cvElement_activate, cvElement_textUpdate} from '../redux/cvDataAC';
 import {createStyle, decodeStyle} from './utils';
@@ -34,7 +33,6 @@ class CvElement extends React.PureComponent {
     }
 
     render () {
-        //console.log('render element', this.props.data.id + " " + this.props.data.type + " " + this.props.data.text);
         let isActive = (this.props.activeElementId===this.props.id);
         let style = createStyle(this.props.data.style);
         let positionTop;
@@ -54,7 +52,11 @@ class CvElement extends React.PureComponent {
         let decodedStyle;
         switch (type) {
             case 'image':
-                let src = (this.props.data.style['file']) || this.props.templateImageUrl;
+                decodedStyle = {};
+                for (let s in this.props.data.style) {
+                    decodedStyle[decodeStyle(s)] = this.props.data.style[s];
+                }
+                let src = (decodedStyle['file']) || this.props.templateImageUrl;
                 elementCode = <img className={className} src={src} style={style} alt='' data-elem={true} onClick={this.onClick}/>;
                 break;
             case 'text':
@@ -92,7 +94,7 @@ class CvElement extends React.PureComponent {
                 let mainDotsCode = Array.from({length: decodedStyle.maincount}, (v,i) => <div key={i} style={styleMainDots}></div>);
                 let styleAddDots = {...styleMainDots, backgroundColor: decodedStyle.addcolor};
                 let addDotsCode = Array.from({length: decodedStyle.addcount}, (v,i) => <div key={i} style={styleAddDots}></div>);
-                elementCode = <div className={className} style={style} data-elem={true} data-elem={true} onClick={this.onClick}>
+                elementCode = <div className={className} style={style} data-elem={true} onClick={this.onClick}>
                                 {mainDotsCode}
                                 {addDotsCode}
                               </div>;
@@ -113,7 +115,6 @@ class CvElement extends React.PureComponent {
             default:
                 elementCode = null;
         }
-
         if (this.props.data.link) {
             let styleLink = {position:position, top:positionTop, left:positionLeft, width:this.props.data.width + 'px', height:this.props.data.height + 'px'};
             return (

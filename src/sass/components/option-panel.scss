@@ -11,9 +11,18 @@
     &__group {
         display: flex;
         position: relative;
-        padding: 5px 0;
         border-radius: 5px;
         margin: 5px 15px;
         border: 1px solid $color-option-border;
+    }
+
+    @media (max-width: $tablet - 1px) {
+        width: 100%;
+        padding-top: 5px;
+        &__group {
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 5px 10px 5px 40px;
+        }
     }
 }

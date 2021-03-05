@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-
 import Loader from './Loader';
 import {Transition} from "react-transition-group";
-
 import {cv_setUser} from '../redux/cvDataAC';
 import {addFirebase, loadFirebase} from './withDataLoad';
 import {saveLocalStorage} from './utils';

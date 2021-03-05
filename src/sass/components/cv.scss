@@ -1,5 +1,5 @@
 .cv-container {
-    width: 100%;
+    width: auto;
     display: flex;
     justify-content: center;
     position: relative;
@@ -10,6 +10,10 @@
 
     &::-webkit-scrollbar {
         width: 0;
+    }
+
+    @media (max-width: $tablet - 1px) {
+        overflow-x: scroll;
     }
 }
 
@@ -51,7 +55,6 @@
         
         &:hover {
             outline: 1px solid $color-block-hover;
-            //z-index: 10;
             cursor: pointer;
         }
         
@@ -260,8 +263,6 @@
             background-image: url('./../../img/icon-ok.svg');
             outline: none;
             border: none;
-            //border-radius: 5px;
-            //border: 1px solid $color-bg-header;
             background-position: center;
             background-repeat: no-repeat;
             background-size: 100%;
@@ -280,13 +281,12 @@
             input {
                 transform: scale(1.1);
                 border-color: #df5c4a;
-                &::placeholder {
-                    //color: rgba(#df5c4a,0.3);
-                }
             }
+            
             button {
                 display: none;
             }
+
             span {
                 position: absolute;
                 top: calc(100% + 2px);

@@ -1,24 +1,15 @@
 .header,
 .main {
-    &.entering {
-        //display: none;
-        //animation: fadeIn 2000ms forwards;
-    }
-      
     &.entered {
-        //display: flex;
         animation: fadeIn 500ms forwards;
     }
       
     &.exiting {
         animation: fadeOut 500ms forwards;
-        //animation: fadeOut 200ms forwards;
     }
       
     &.exited {
         animation: fadeOut 500ms forwards;
-        //display: none;
-        //animation: fadeOut 500ms forwards;
     }  
 }
 
@@ -34,9 +25,6 @@
       
     &.exiting {
         display: none;
-    }
-      
-    &.exited {
     }  
 }
 
@@ -54,10 +42,6 @@
         display: block;
         animation: panel-close 500ms forwards;
     }
-      
-    &.exited {
-        //display: none;
-    }
 
     &.entering ~.template-panel__button-hide,
     &.entered ~.template-panel__button-hide {
@@ -65,23 +49,27 @@
         background-image: url('./../img/icon-close.svg');
         background-size: 12px;
     }
+
+    @media (max-width: $tablet - 1px) {
+        &.entering {
+            display: block;
+            animation: panel-open-height 500ms forwards;
+        }
+
+        &.exiting {
+            display: block;
+            animation: panel-close-height 500ms forwards;
+        }
+    }
 }
 
 
 .template-panel__block {
-    &.entering {
-    }
-      
-    &.entered {
+
+   &.entered {
         display: flex;
         animation: fadeInBlock 300ms forwards;
     }
-      
-    &.exiting {
-    }
-      
-    &.exited {
-    }  
 }
 
 .cv__block,
@@ -98,9 +86,6 @@
         
     &.exiting {
         animation: fadeOut 500ms forwards;
-    }
-        
-    &.exited {
     }  
 }
 
@@ -135,6 +120,19 @@
     }
 }
 
+@keyframes panel-open-height {
+    0% {
+        opacity: 0;
+        max-height: 0;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        max-height: none;
+    }
+}
+
 @keyframes panel-close {
     0% {
         opacity: 1;
@@ -147,7 +145,20 @@
         opacity: 0;
         width: 0;
     }
+}
 
+@keyframes panel-close-height {
+    0% {
+        opacity: 1;
+        max-height: none;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+        max-height: 0;
+    }
 }
 
 @keyframes fadeInBlock {

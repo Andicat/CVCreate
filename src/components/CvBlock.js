@@ -2,11 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Transition} from "react-transition-group";
 import {connect} from 'react-redux';
-
 import CvElement from './CvElement';
-
 import {cvBlock_activate, cvBlock_activateMulti} from '../redux/cvDataAC';
-
 
 class CvBlock extends React.PureComponent {
 
@@ -39,7 +36,6 @@ class CvBlock extends React.PureComponent {
     }
 
     render () {
-        //console.log('render block',this.props.transitionClass);
         let style = {top:this.props.data.positionTop + 'px', left:this.props.data.positionLeft + 'px', width:this.props.data.width + 'px', height:this.props.data.height + 'px'};
         let className = 'cv__block' + ((this.props.activeIndex>=0)?' cv__block--active':'')
                         + ((this.props.activeIndex===0)?' cv__block--active-first':'')

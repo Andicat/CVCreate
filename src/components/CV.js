@@ -3,15 +3,13 @@ import PropTypes from 'prop-types';
 import {Transition} from "react-transition-group";
 import {NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
-
+import Media from 'react-media';
 import OptionPanel from './OptionPanel';
 import TemplatePanel from './TemplatePanel';
 import CvDocument from './CvDocument';
 import CvLogin from './CvLogin';
-
 import {saveFileJSON, readFileJSON, saveLocalStorage} from './utils';
 import {cv_load} from '../redux/cvDataAC';
-
 
 class CV extends React.PureComponent {
     
@@ -24,7 +22,7 @@ class CV extends React.PureComponent {
     };
 
     state = {
-        showPanel: true,
+        showPanel: false,
     }
 
     saveCV = () => {
@@ -45,27 +43,12 @@ class CV extends React.PureComponent {
         evt.target.value = null;
     }
 
-    /*showHTML = () => {
-        let cvBlock = document.querySelector('.cv');
-        let cvStyle = document.getElementsByTagName('style')[0];
-        let styleTag = document.createElement('style');
-        styleTag.setAttribute('type','text/css');
-        if (styleTag.styleSheet){
-            styleTag.styleSheet.cssText = cvStyle.innerHTML;
-        } else {
-        styleTag.appendChild(document.createTextNode(cvStyle.innerHTML));
-        }
-        
-        var windowCV = window.open('', 'wnd');
-        let headTag = windowCV.document.head;
-        headTag.appendChild(styleTag);
-        windowCV.document.body.innerHTML = cvBlock.outerHTML;
-        windowCV.document.body.style.overflow = 'auto';
-        windowCV.document.body.style.height = 'auto';
-    }*/
-
     showPanel = () => {
         this.setState({showPanel:!this.state.showPanel});
+    }
+
+    openMenuMobile = () => {
+        this.menu.classList.toggle('header__menu--show');
     }
     
     render () {
@@ -94,7 +77,7 @@ class CV extends React.PureComponent {
             <React.Fragment>
                 <header className={'header ' + this.props.transitionClass}>
                     <span className='header__logo'>Create your CV</span>
-                    <ul className='header__menu'>
+                    <ul className='header__menu' ref={(f) => this.menu = f}>
                         <li className='header__menu-item'>
                             <button className='header__button header__button--save' onClick={this.saveCV}>Save</button>
                         </li>
@@ -106,6 +89,9 @@ class CV extends React.PureComponent {
                             <NavLink to='/view' className='header__button header__button--show' onClick={this.saveLS}>Show</NavLink>    
                         </li>
                     </ul>
+                    <Media query="(max-width: 767px)">
+                        <button className='header__button header__button--menu' onClick={this.openMenuMobile}/>
+                    </Media>
                 </header>
                 <main className={'main ' + this.props.transitionClass}>
                     <div className='template-panel'>

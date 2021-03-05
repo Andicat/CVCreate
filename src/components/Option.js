@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import {createOption, OPTIONS_TEXT} from './utils';
 
 class Option extends React.PureComponent {
@@ -24,19 +23,8 @@ class Option extends React.PureComponent {
         this.props.cbOnChange(this.props.blockId,this.props.optionName,value);
     }
 
-    //delayedCallback = debounce(function (event) {
-    //    event();
-    //});
-
-    //setTooltip = (text) => {
-        //this.setState({tooltip:text});
-        //this.delayedCallback(() => this.setState({tooltip:text}));
-    //}
-
     onMouseOver = (evt) => {
-        //console.log(evt.target.getAttribute('data-tooltip'));
         if (evt.target.getAttribute('data-tooltip')) {
-            //this.delayedCallback(() => this.setState({tooltip:OPTIONS_TEXT[this.props.optionName]}));
             this.setState({tooltip:OPTIONS_TEXT[this.props.optionName]});
         }
     }

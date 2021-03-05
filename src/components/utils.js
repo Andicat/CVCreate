@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const FONT_SIZE_MIN = 6;
 const FONT_SIZE_MAX = 60;
 const PADDING_MIN = 0;
@@ -50,20 +49,6 @@ const OPTIONS_TEXT = {
 }
 
 const FONTS = ['PTSans','Roboto','Helvetica','Garamond'];
-
-/*function debounce(cb) {
-    var DEBOUNCE_INTERVAL = 1000;
-    var lastTimeout = null;
-    return function () {
-        var parameters = arguments;
-        if (lastTimeout) {
-            window.clearTimeout(lastTimeout);
-        }
-        lastTimeout = window.setTimeout(function () {
-            cb.apply(this, parameters);
-        }, DEBOUNCE_INTERVAL);
-    };
-}*/
 
 //create jsx-code for option
 function createOption (optionType,optionValue,cbOnChange) {
@@ -145,16 +130,12 @@ function createOption (optionType,optionValue,cbOnChange) {
     };
 
     function openDrop(elem, mode) {
-        //debugger
         if (mode && !elem.classList.contains('option__drop-down--show')) {
             elem.classList.add('option__drop-down--show');
-            //console.log('open');
         }
         if (!mode) {
             elem.classList.remove('option__drop-down--show');
-            //console.log('close');
         }
-        
     };
 
     function onMouseLeave(evt,elem) {
@@ -214,7 +195,6 @@ function createOption (optionType,optionValue,cbOnChange) {
     };
 
     function codeButton(optionType,cbOnChange) {
-        
         return <input type='button' className={'option__button option__button--' + optionType} data-tooltip={true} onClick={cbOnChange}/>;
     };
 
@@ -246,14 +226,12 @@ function createOption (optionType,optionValue,cbOnChange) {
 };
 
 function decodeStyle(styleName) {
-    //debugger
     return styleName.replace(/.+_/,'');
-}
+};
 
 // create style for DOM-element
 function createStyle (styles) {
     let styleAttr = {};
-    //debugger
     for (let key in styles) {
         let keyDecode = decodeStyle(key);
         switch (keyDecode) {
@@ -351,101 +329,105 @@ async function readFileJSON(file) {
         dataRes = JSON.parse(data); 
     });
     return dataRes;
-}
-
-/*function decodeStyle(block) {
-    //debugger
-    if (block.style) {
-        let newStyle = {};
-        for (let key in block.style) {
-            let newStyleName = decodeStyle(key);
-            newStyle[newStyleName] = block.style[key];
-        }
-        block.style = newStyle;
-    }
-    //block.style[action.styleName] = action.styleValue;
-    //block.style = {...block.style};
-    if (block.elements) {
-        block.elements = block.elements.map(e => decodeStyle(e));
-        return {...block};
-    }
-    return block;
-}*/
-/*
-function readFileJSON (file,cbOnLoad) {
-
-    var readFile= new Promise( (resolve) => {
-        var lsData = loadFromLocalStorage('CV');
-        resolve(lsData);
-    });
-    await loadLS.then((data) => {
-        if (data) {
-            blocks = data.blocks;
-            style = data.style;
-            user = data.user;
-        } 
-    });
-
-
-
-    const reader = new FileReader();
-
-    reader.onload = function() {
-        cbOnLoad(JSON.parse(reader.result));
-    };
-    
-    reader.onerror = function() {
-        alert(reader.error);
-    };
-
-    if (file) {
-        reader.readAsText(file);
-    }
 };
-*/
+
 //localStorge
 function saveLocalStorage(lsName,data) {
     let lsData = loadFromLocalStorage(lsName);
     let newlsData = {...lsData,...data};
     localStorage.setItem(lsName,JSON.stringify(newlsData));
-}
+};
 
 function loadFromLocalStorage(lsName) {
     var ls = localStorage.getItem(lsName);
     if (ls) {
         return JSON.parse(ls);
     }    
-}
-   
-//image
-/*let storage = firebase.storage();
-            /*let loadImage = new Promise((resolve) => {
-                loadStorage('images/image.svg',resolve);
-            });
-            await loadImage.then((data) => {
-                loadData.image = data;
-            });*/
+};
 
-            /*
-            
-//load from storage
-async function loadStorage(path,resolve) {
-    const storageRef = storage.ref();
-    storageRef.child(path).getDownloadURL()
-        .then((url) => {
-            // This can be downloaded directly:
-            var xhr = new XMLHttpRequest();
-            xhr.responseType = 'blob';
-            xhr.onload = (event) => {
-                var blob = xhr.response;
-            };
-            xhr.open('GET', url);
-            xhr.send();
-            
-            resolve(url);
-        })
-        .catch((error) => {
-        });
-} */
+/*
+//временно!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+function saveTemplates() {
+    function createTemplates() {
+
+        let textStyleDefault = {font:'Roboto', color:'#000000', fontsize:'16',
+                                bold:false, italic:false, center:false,
+                                uppercase:false, underline:false, padding:{left:1,right:0,top:0,bottom:0}};
+    
+        let imagesArr = [
+            {type:'image', style:{file:'', opacity:1}},
+            {type:'image', style:{file:'', opacity:1, borderRadius:'50%'}},
+            {type:'image', style:{file:'', opacity:1, bordercolor: '#E05B49', borderwidth: '3', borderStyle: 'solid'}},
+            {type:'image', style:{file:'', opacity:1, borderRadius:'50%', bordercolor: '#E05B49', borderwidth: '3', borderStyle: 'solid'}},
+        ];
+    
+        let textArr = [
+            {type:'text', text:'Text simple', style:{...textStyleDefault, fontsize: '20'}},
+            {type:'text', text:'Text with background', style:{bgcolor:'#8e9fa0',...textStyleDefault, fontsize:'14'}},
+            {type:'text', text:'Big text', style:{...textStyleDefault, fontsize: '40', bold:true}},
+            {type:'group', elements:[
+                {type:'text', text:'Your header', style:{...textStyleDefault, fontsize:'20', bold:true}},
+                {type:'text', text:'your text', style:{...textStyleDefault}}
+            ]},
+        ];
+        
+        let textBlockArr = [
+            {type:'group', elements:[
+                {type:'text', text:'Your position', style:{...textStyleDefault, fontsize:'18', bold:true}},
+                {type:'text', text:'Company', style:{...textStyleDefault, fontsize:'18'}},
+                {type:'text', text:'period', style:{...textStyleDefault,italic:true}},
+                {type:'text', text:'your competencies and results', style:{...textStyleDefault}}
+            ]},
+        ];
+    
+        let figuresArr = [
+            {type:'figure', style:{bgcolor:'#E05B49', opacity:1}},
+            {type:'figure', style:{bgcolor:'#6AABB5', opacity:1, borderRadius:'50%'}},
+        ];
+        
+        let progressArr = [
+            {type:'dots-row', style:{maincolor:'#E05B49', addcolor:'#E6E6E6', radius:10, maincount:5, addcount: 3}},
+            {type:'progress', style:{maincolor:'#E05B49', addcolor:'#E6E6E6', progress:50}}
+        ];
+    
+        let templatesArr = [
+            {name: 'Image', elements:imagesArr},
+            {name: 'Text', elements:textArr},
+            {name: 'Info block', elements:textBlockArr},
+            {name: 'Figure', elements:figuresArr},
+            {name: 'Progress', elements:progressArr},
+            //{name: 'Icons', elements:iconsArr},
+        ];
+    
+        return templatesArr;
+    }
+
+    function codeStyle(block) {
+        let newBlock = {...block};
+        if (block.style) {
+            let newStyle = {};
+            let styleIndex = 0;
+            for (let key in block.style) {
+                newStyle['s0' + styleIndex + '_' + key] = block.style[key];
+                styleIndex++;
+            }
+            newBlock.style = newStyle;
+        }
+        //block.style[action.styleName] = action.styleValue;
+        //block.style = {...block.style};
+        if (block.elements) {
+            let newElements = block.elements.map(e => codeStyle(e));
+            newBlock.elements = newElements;
+    
+            return newBlock;
+        }
+        return newBlock;
+    }
+    
+    let templatesArr = createTemplates();
+    let templatesArrConverted = templatesArr.map(t => codeStyle(t));
+    saveFirebase('Data','templates',{templates:templatesArrConverted});
+}
+*/
 
 export {createOption, createStyle, getAutoSize, saveFileJSON, readFileJSON, saveLocalStorage, loadFromLocalStorage, decodeStyle, CV_ID, OPTIONS_TEXT};

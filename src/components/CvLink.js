@@ -1,9 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {NavLink} from 'react-router-dom';
-import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
-
 import CvBlock from './CvBlock';
 import {createStyle} from './utils';
 import {loadFirebase} from './withDataLoad';

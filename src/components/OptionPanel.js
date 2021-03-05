@@ -144,8 +144,6 @@ class OptionPanel extends React.PureComponent {
     }
 
     render () {
-        //debugger
-        //console.log('render option panel', this.props);
         let codeElementOptions = null;
         let codeBlockOptions = null;
         let codeBlocksOptions = null;
@@ -158,8 +156,6 @@ class OptionPanel extends React.PureComponent {
         } else if (this.props.activeBlockOptions) { //one active block
             if (this.props.activeBlockOptions.group) {
                 blockAction.push('ungroup');
-            } else {
-               // blockAction.push('autosize');
             }
             codeBlocksOptions = blockAction.map( (a,i) => {
                 let value = null;

@@ -15,6 +15,7 @@ let store = createStore(combinedReducer);
 function App() {
 
     let PagesRouterWithData = withDataLoad()(PagesRouter);
+
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Provider store={store}>

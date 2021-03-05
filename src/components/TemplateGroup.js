@@ -18,9 +18,7 @@ class TemplateGroup extends React.PureComponent {
     }
 
     render () {
-        
-        //console.log('render template grop', this.props.id);
-        return <li className={'template-panel__group' + (this.props.custom?' template-panel__group--user':'')}>
+       return <li className={'template-panel__group' + (this.props.custom?' template-panel__group--user':'')}>
                     <div className={'template-panel__group-name' +  (this.props.active?' template-panel__group-name--active':'')} onClick={this.onClick}>
                         {this.props.data.name}
                     </div>
