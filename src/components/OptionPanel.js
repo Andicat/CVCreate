@@ -39,16 +39,16 @@ class OptionPanel extends React.PureComponent {
     ];
 
     BLOCKS_ACTION = [
-        'align_top',
-        'align_bottom',
-        'align_left',
-        'align_right',
-        'align_vertical',
-        'align_horisontal',
-        'distribute_vertical',
-        'distribute_horisontal',
-        'align_width',
-        'align_height',
+        'alignTop',
+        'alignBottom',
+        'alignLeft',
+        'alignRight',
+        'alignVertical',
+        'alignHorisontal',
+        'distributeVertical',
+        'distributeHorisontal',
+        'alignWidth',
+        'alignHeight',
         'group',
     ];
 
@@ -58,43 +58,43 @@ class OptionPanel extends React.PureComponent {
 
     setAction = (blockId,optionName,value) => {
         switch (optionName) {
-            case 'align_top': {
+            case 'alignTop': {
                 this.props.dispatch(cvBlocks_align('top'));
                 break;
             }
-            case 'align_bottom': {
+            case 'alignBottom': {
                 this.props.dispatch(cvBlocks_align('bottom'));
                 break;
             }
-            case 'align_left': {
+            case 'alignLeft': {
                 this.props.dispatch(cvBlocks_align('left'));
                 break;
             }
-            case 'align_right': {
+            case 'alignRight': {
                 this.props.dispatch(cvBlocks_align('right'));
                 break;
             }
-            case 'align_vertical': {
+            case 'alignVertical': {
                 this.props.dispatch(cvBlocks_align('vertical'));
                 break;
             }
-            case 'align_horisontal': {
+            case 'alignHorisontal': {
                 this.props.dispatch(cvBlocks_align('horisontal'));
                 break;
             }
-            case 'distribute_vertical': {
+            case 'distributeVertical': {
                 this.props.dispatch(cvBlocks_distribute('vertical'));
                 break;
             }
-            case 'distribute_horisontal': {
+            case 'distributeHorisontal': {
                 this.props.dispatch(cvBlocks_distribute('horisontal'));
                 break;
             }
-            case 'align_width': {
+            case 'alignWidth': {
                 this.props.dispatch(cvBlocks_alignSize('width'));
                 break;
             }
-            case 'align_height': {
+            case 'alignHeight': {
                 this.props.dispatch(cvBlocks_alignSize('height'));
                  break;
             }
@@ -181,7 +181,6 @@ class OptionPanel extends React.PureComponent {
             codePageOptions = styles.map( (s,i) => (
                 <Option key={i} optionName={s} optionValue={this.props.stylePage[s]} blockId={CV_ID} cbOnChange={this.setStyle}/>));
         }
-
         return (
             <div className='option-panel'>
                 {((codePageOptions && !codeBlocksOptions) || codeElementOptions) && 

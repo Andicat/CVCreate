@@ -32,8 +32,9 @@ class CvBlock extends React.PureComponent {
             evt.preventDefault();
             this.props.dispatch(cvBlock_activateMulti(this.props.id));
         } else {
+            let activatedElement = evt.target.getAttribute('data-elem');
             evt.preventDefault();
-            this.props.dispatch(cvBlock_activate(this.props.id, evt.currentTarget));
+            this.props.dispatch(cvBlock_activate(this.props.id, evt.currentTarget, activatedElement));
         }
     }
 

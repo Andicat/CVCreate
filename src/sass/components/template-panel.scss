@@ -63,6 +63,7 @@
 
         &--user {
             .template-panel__block-view {
+                padding: 12px 6px;
                 .cv__element {
                     width: auto;
                     //max-width: 100%;
@@ -72,6 +73,7 @@
     }
 
     &__block {
+        position: relative;
         display: none;
         justify-content: space-between;
         align-items: center;
@@ -157,6 +159,27 @@
         &:focus,
         &:active {
             outline: none;
+            cursor: pointer;
+        }
+    }
+
+    &__button-delete {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        border: none;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-position: center;
+        top: -1.5px;
+        left: -1.5px;
+        background-image: url('./../../img/icon-delete.svg');
+
+        &:hover,
+        &:focus {
+            outline: none;
+            transform: scale(1.2);
             cursor: pointer;
         }
     }

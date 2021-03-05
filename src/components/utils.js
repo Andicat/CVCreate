@@ -31,16 +31,16 @@ const OPTIONS_TEXT = {
     autosize: 'set block size on Auto',
     lock: 'lock block position',
     ungroup: 'ungroup blocks',
-    align_top: 'align blocks on top',
-    align_bottom: 'align blocks on bottom',
-    align_left: 'align blocks on left',
-    align_right: 'align blocks on right',
-    align_vertical: 'align blocks on vertical',
-    align_horisontal: 'align blocks on horisontal',
-    distribute_vertical: 'distribute blocks on vertical',
-    distribute_horisontal: 'distribute blocks on horisontal',
-    align_width: 'set same width for blocks',
-    align_height: 'set same height for blocks',
+    alignTop: 'align blocks on top',
+    alignBottom: 'align blocks on bottom',
+    alignLeft: 'align blocks on left',
+    alignRight: 'align blocks on right',
+    alignVertical: 'align blocks on vertical',
+    alignHorisontal: 'align blocks on horisontal',
+    distributeVertical: 'distribute blocks on vertical',
+    distributeHorisontal: 'distribute blocks on horisontal',
+    alignWidth: 'set same width for blocks',
+    alignHeight: 'set same height for blocks',
     group: 'group blocks',
     progress: 'progress',
     height: 'height',
@@ -67,8 +67,7 @@ const FONTS = ['PTSans','Roboto','Helvetica','Garamond'];
 
 //create jsx-code for option
 function createOption (optionType,optionValue,cbOnChange) {
-
-    optionType = optionType.replace(/.+_/,'');
+    optionType = decodeStyle(optionType);
 
     if (optionType==='copy' || optionType==='back' || optionType==='autosize' || optionType==='ungroup' || optionType==='group' 
                             || optionType==='save'|| optionType.indexOf('align')>=0 || optionType.indexOf('distribute')>=0) {
@@ -246,12 +245,17 @@ function createOption (optionType,optionValue,cbOnChange) {
     };
 };
 
+function decodeStyle(styleName) {
+    //debugger
+    return styleName.replace(/.+_/,'');
+}
+
 // create style for DOM-element
 function createStyle (styles) {
     let styleAttr = {};
     //debugger
     for (let key in styles) {
-        let keyDecode = key.replace(/.+_/,'');
+        let keyDecode = decodeStyle(key);
         switch (keyDecode) {
             case 'font': 
                 styleAttr.fontFamily = styles[key];
@@ -349,34 +353,12 @@ async function readFileJSON(file) {
     return dataRes;
 }
 
-function codeStyle(block) {
-    let newBlock = {...block};
-    if (block.style) {
-        let newStyle = {};
-        let styleIndex = 0;
-        for (let key in block.style) {
-            newStyle['s0' + styleIndex + '_' + key] = block.style[key];
-            styleIndex++;
-        }
-        newBlock.style = newStyle;
-    }
-    //block.style[action.styleName] = action.styleValue;
-    //block.style = {...block.style};
-    if (block.elements) {
-        let newElements = block.elements.map(e => codeStyle(e));
-        newBlock.elements = newElements;
-
-        return newBlock;
-    }
-    return newBlock;
-}
-
-function decodeStyle(block) {
+/*function decodeStyle(block) {
     //debugger
     if (block.style) {
         let newStyle = {};
         for (let key in block.style) {
-            let newStyleName = key.replace(/.+_/,'');
+            let newStyleName = decodeStyle(key);
             newStyle[newStyleName] = block.style[key];
         }
         block.style = newStyle;
@@ -388,7 +370,7 @@ function decodeStyle(block) {
         return {...block};
     }
     return block;
-}
+}*/
 /*
 function readFileJSON (file,cbOnLoad) {
 
@@ -466,4 +448,4 @@ async function loadStorage(path,resolve) {
         });
 } */
 
-export {createOption, createStyle, getAutoSize, saveFileJSON, readFileJSON, saveLocalStorage, loadFromLocalStorage, codeStyle, decodeStyle, CV_ID, OPTIONS_TEXT};
+export {createOption, createStyle, getAutoSize, saveFileJSON, readFileJSON, saveLocalStorage, loadFromLocalStorage, decodeStyle, CV_ID, OPTIONS_TEXT};

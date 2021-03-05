@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {cv_init} from '../redux/cvDataAC';
 import imageUrl from '../img/image.svg';
-import {loadFromLocalStorage, codeStyle, decodeStyle} from './utils';
+import {loadFromLocalStorage, codeStyle} from './utils';
 
 import Loader from './Loader';
 import {Transition} from "react-transition-group";
@@ -28,10 +28,10 @@ let db = firebase.firestore();
 function saveFirebase(collectionName,docName,data) {
     db.collection(collectionName).doc(docName).set(data)
         .then(() => {
-            console.log("Document successfully written!");
+            //console.log("Document successfully written!");
         })
         .catch((error) => {
-            console.error("Error writing document: ", error);
+            //console.error("Error writing document: ", error);
         });
 }
 
@@ -45,10 +45,10 @@ async function addFirebase(collectionName,docName,data,resolve) {
                 resolve();
             });
         } else {
-                console.log("No such document!");
+            //console.log("No such document!");
             }
         }).catch((error) => {
-            console.log("Error getting document:", error);
+            //console.log("Error getting document:", error);
         });
 }
 
@@ -56,13 +56,13 @@ async function addFirebase(collectionName,docName,data,resolve) {
 async function loadFirebase(collectionName,docName,resolve) {
     db.collection(collectionName).doc(docName).get().then((doc) => {
         if (doc.exists) {
-            console.log("Document data:", doc.data());
+            //console.log("Document data:", doc.data());
                 resolve(doc.data());
             } else {
                 resolve(false);
             }
         }).catch((error) => {
-            console.log("Error getting document:", error);
+            //console.log("Error getting document:", error);
         });
 }
 
@@ -137,6 +137,29 @@ function saveTemplates() {
     
         return templatesArr;
     }
+
+    function codeStyle(block) {
+        let newBlock = {...block};
+        if (block.style) {
+            let newStyle = {};
+            let styleIndex = 0;
+            for (let key in block.style) {
+                newStyle['s0' + styleIndex + '_' + key] = block.style[key];
+                styleIndex++;
+            }
+            newBlock.style = newStyle;
+        }
+        //block.style[action.styleName] = action.styleValue;
+        //block.style = {...block.style};
+        if (block.elements) {
+            let newElements = block.elements.map(e => codeStyle(e));
+            newBlock.elements = newElements;
+    
+            return newBlock;
+        }
+        return newBlock;
+    }
+    
     let templatesArr = createTemplates();
     let templatesArrConverted = templatesArr.map(t => codeStyle(t));
     saveFirebase('Data','templates',{templates:templatesArrConverted});

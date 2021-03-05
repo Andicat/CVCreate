@@ -29,6 +29,7 @@ const CV_SET_USER = 'CV_SET_USER';
 const CV_SET_LINK = 'CV_SET_LINK';
 const CV_BLOCK_LINK = 'CV_BLOCK_LINK';
 const TEMPLATE_ADD = 'TEMPLATE_ADD';
+const TEMPLATE_DELETE = 'TEMPLATE_DELETE';
 
 const cvBlock_add = function(block) {
     return {
@@ -62,11 +63,12 @@ const cvBlock_resize = function(blockId,shiftHeight,shiftWidth) {
     };
 }
 
-const cvBlock_activate = function(blockId,target) {
+const cvBlock_activate = function(blockId,target,activeElem) {
     return {
         type: CV_BLOCK_ACTIVATE,
         blockId:blockId,
         target:target,
+        activeElem:activeElem,
     };
 }
 
@@ -230,6 +232,13 @@ const templates_add = function(blockId) {
     };
 }
 
+const templates_delete = function(index) {
+    return {
+        type: TEMPLATE_DELETE,
+        index: index,
+    };
+}
+
 export {
     cvBlock_add, CV_BLOCK_ADD,
     cvBlock_delete, CV_BLOCK_DELETE,
@@ -254,5 +263,6 @@ export {
     cv_init, CV_INIT, 
     cv_setUser, CV_SET_USER,
     cv_setLink, CV_SET_LINK,
-    templates_add, TEMPLATE_ADD
+    templates_add, TEMPLATE_ADD,
+    templates_delete, TEMPLATE_DELETE
 }

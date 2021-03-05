@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import CvElement from './CvElement';
 
 import {connect} from 'react-redux';
-import {cvBlock_add} from '../redux/cvDataAC';
+import {cvBlock_add, templates_delete} from '../redux/cvDataAC';
 import {getAutoSize} from './utils';
 
 class TemplateBlock extends React.PureComponent {
@@ -13,12 +13,17 @@ class TemplateBlock extends React.PureComponent {
         id: PropTypes.number.isRequired,
         data: PropTypes.object.isRequired,
         transitionClass: PropTypes.string,
+        custom: PropTypes.bool,
     };
 
-    onClick = (evt) => {
+    onClickAdd = (evt) => {
         let sizesAuto = getAutoSize(evt.target.previousSibling);
         let deepCopyBlock = JSON.parse(JSON.stringify(this.props.data));
         this.props.dispatch(cvBlock_add({...deepCopyBlock, width:sizesAuto.width, height:sizesAuto.height}));
+    }
+
+    onClickDelete = (evt) => {
+        this.props.dispatch(templates_delete(this.props.id));
     }
 
     render () {
@@ -29,7 +34,10 @@ class TemplateBlock extends React.PureComponent {
                 <div className='template-panel__block-view'>
                     {elementCode}
                 </div>
-                <button className='template-panel__block-add' onClick={this.onClick}></button>
+                <button className='template-panel__block-add' onClick={this.onClickAdd}></button>
+                {this.props.custom &&
+                    <button className='template-panel__button-delete' onClick={this.onClickDelete}></button>
+                }
             </li>
         );
     }

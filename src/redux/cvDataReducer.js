@@ -31,7 +31,8 @@ import { CV_BLOCK_ADD,
         CV_INIT,
         CV_SET_USER,
         CV_SET_LINK,
-        TEMPLATE_ADD } from './cvDataAC';
+        TEMPLATE_ADD,
+        TEMPLATE_DELETE } from './cvDataAC';
 
 const initState = {
     user: null,
@@ -126,6 +127,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
 
         //activate block on cv-page
         case CV_BLOCK_ACTIVATE: {
+            console.log('activate block');
             let newActiveBlocksId = [];
             if (action.blockId) {
                 newActiveBlocksId.push(action.blockId);
@@ -133,7 +135,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
             let newState = {...state,
                 activeBlocksId:newActiveBlocksId,
                 activeBlockDOM:action.target, 
-                activeElementId:(action.blockId?state.activeElementId:null),
+                activeElementId:(action.activeElem?state.activeElementId:null),
                 newBlock: false,
             };
             return newState;
@@ -433,7 +435,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
             newBlock.positionLeft = activeBlock.positionLeft + 30; 
             let newState = {...state,
                 blocks: [...state.blocks,newBlock],
-                activeBlocksId: [],
+                activeBlocksId: [newId],
                 activeBlockDOM:null,
                 activeElementId:null
             };
@@ -479,6 +481,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
 
         //activate element on cv-page
         case CV_ELEMENT_ACTIVATE: {
+            console.log('activate element');
             if (state.activeElementId !== action.elementId) {
                 let newState = {...state, activeElementId:action.elementId, styleToEdit:action.style};
                 return newState;
@@ -610,6 +613,15 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
             
             let newState = {...state, templatesUser:[...state.templatesUser,newTemplateBlock]};
             //let templatesArrConverted = newState.templatesUser.map(t => codeStyle(t));
+            saveFirebase('Templates',state.user,{templates:newState.templatesUser});
+            return newState;
+        }
+
+        //delete template
+        case TEMPLATE_DELETE: {
+            let newState = {...state,
+                templatesUser: state.templatesUser.filter((t,i) => i!==action.index),
+            };
             saveFirebase('Templates',state.user,{templates:newState.templatesUser});
             return newState;
         }
