@@ -1,0 +1,282 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Option action Подсказка 1`] = `
+<div
+  className="option"
+  onClick={[Function]}
+  onMouseOut={[Function]}
+  onMouseOver={[Function]}
+>
+  <input
+    className="option__color"
+    data-tooltip={true}
+    onChange={[Function]}
+    type="color"
+    value="#666"
+  />
+  <span
+    className="option__tooltip"
+  >
+    color of text
+  </span>
+</div>
+`;
+
+exports[`Option render Диапазон 1`] = `
+<div
+  className="option"
+  onClick={[Function]}
+  onMouseOut={[Function]}
+  onMouseOver={[Function]}
+>
+  <input
+    className="option__button option__down option__button--opacity"
+    data-tooltip={true}
+    onClick={[Function]}
+    type="button"
+  />
+  <div
+    className="option__drop-down"
+    onMouseLeave={[Function]}
+  >
+    <div
+      className="option__drop-down-line"
+    >
+      <input
+        className="option__range"
+        max={1}
+        min={0}
+        onInput={[Function]}
+        step={0.01}
+        type="range"
+        value={0.5}
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Option render Диапазон 2`] = `
+<div
+  className="option"
+  onClick={[Function]}
+  onMouseOut={[Function]}
+  onMouseOver={[Function]}
+>
+  <input
+    className="option__button option__down option__button--opacity"
+    data-tooltip={true}
+    onClick={[Function]}
+    type="button"
+  />
+  <div
+    className="option__drop-down"
+    onMouseLeave={[Function]}
+  >
+    <div
+      className="option__drop-down-line"
+    >
+      <input
+        className="option__range"
+        max={1}
+        min={0}
+        onInput={[Function]}
+        step={0.01}
+        type="range"
+        value={0.5}
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Option render Кнопка 1`] = `
+<div
+  className="option"
+  onClick={[Function]}
+  onMouseOut={[Function]}
+  onMouseOver={[Function]}
+>
+  <input
+    className="option__button option__button--copy"
+    data-tooltip={true}
+    onClick={[Function]}
+    type="button"
+  />
+</div>
+`;
+
+exports[`Option render Список 1`] = `
+<div
+  className="option"
+  onClick={[Function]}
+  onMouseOut={[Function]}
+  onMouseOver={[Function]}
+>
+  <select
+    className="option__select"
+    data-tooltip={true}
+    onChange={[Function]}
+    value={null}
+  >
+    <option
+      style={
+        Object {
+          "fontFamily": "PTSans",
+        }
+      }
+    >
+      PTSans
+    </option>
+    <option
+      style={
+        Object {
+          "fontFamily": "Roboto",
+        }
+      }
+    >
+      Roboto
+    </option>
+    <option
+      style={
+        Object {
+          "fontFamily": "Helvetica",
+        }
+      }
+    >
+      Helvetica
+    </option>
+    <option
+      style={
+        Object {
+          "fontFamily": "Garamond",
+        }
+      }
+    >
+      Garamond
+    </option>
+  </select>
+</div>
+`;
+
+exports[`Option render Ссылка 1`] = `
+<div
+  className="option"
+  onClick={[Function]}
+  onMouseOut={[Function]}
+  onMouseOver={[Function]}
+>
+  <input
+    accept="image/*"
+    className="option__file"
+    id="file"
+    name="file"
+    onChange={[Function]}
+    type="file"
+  />
+  <label
+    className="option__label option__label--file"
+    data-tooltip={true}
+    htmlFor="file"
+  >
+    Load Image
+  </label>
+</div>
+`;
+
+exports[`Option render Ссылка 2`] = `
+<div
+  className="option"
+  onClick={[Function]}
+  onMouseOut={[Function]}
+  onMouseOver={[Function]}
+>
+  <input
+    accept="image/*"
+    className="option__file"
+    id="file"
+    name="file"
+    onChange={[Function]}
+    type="file"
+  />
+  <label
+    className="option__label option__label--file"
+    data-tooltip={true}
+    htmlFor="file"
+  >
+    Load Image
+  </label>
+</div>
+`;
+
+exports[`Option render Цвет 1`] = `
+<div
+  className="option"
+  onClick={[Function]}
+  onMouseOut={[Function]}
+  onMouseOver={[Function]}
+>
+  <input
+    className="option__color"
+    data-tooltip={true}
+    onChange={[Function]}
+    type="color"
+    value="#666"
+  />
+</div>
+`;
+
+exports[`Option render Чекбокс 1`] = `
+<div
+  className="option"
+  onClick={[Function]}
+  onMouseOut={[Function]}
+  onMouseOver={[Function]}
+>
+  <input
+    checked={true}
+    className="option__checkbox option__checkbox--bold"
+    id="bold"
+    onChange={[Function]}
+    type="checkbox"
+  />
+  <label
+    className="option__label"
+    data-tooltip={true}
+    htmlFor="bold"
+  />
+</div>
+`;
+
+exports[`Option render Число 1`] = `
+<div
+  className="option"
+  onClick={[Function]}
+  onMouseOut={[Function]}
+  onMouseOver={[Function]}
+>
+  <input
+    className="option__button option__button--left"
+    data-tooltip={true}
+    onClick={[Function]}
+    type="button"
+    value="–"
+  />
+  <input
+    className="option__number"
+    data-tooltip={true}
+    max={60}
+    min={6}
+    readOnly={true}
+    type="text"
+    value="18"
+  />
+  <input
+    className="option__button option__button--right"
+    data-tooltip={true}
+    onClick={[Function]}
+    type="button"
+    value="+"
+  />
+</div>
+`;

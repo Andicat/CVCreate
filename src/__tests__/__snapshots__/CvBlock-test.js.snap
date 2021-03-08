@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvBlock render Рендер блока 1`] = `
+<div
+  className="cv__block cv__block--active entered"
+  onClick={[Function]}
+  style={
+    Object {
+      "height": "66px",
+      "left": "290.08598862935975px",
+      "top": "52.08598862935976px",
+      "width": "149px",
+    }
+  }
+>
+  <span
+    className="cv__element cv__element--text"
+    contentEditable={false}
+    data-elem={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    style={
+      Object {
+        "color": "#1bac38",
+        "fontFamily": "Roboto",
+        "fontSize": "40px",
+        "fontStyle": "normal",
+        "fontWeight": "bold",
+        "padding": "0px 0px 0px 1px",
+        "textAlign": "start",
+        "textDecoration": "none",
+        "textTransform": "none",
+      }
+    }
+    suppressContentEditableWarning={false}
+  >
+    Big text
+  </span>
+</div>
+`;

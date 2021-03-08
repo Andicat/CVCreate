@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {cvElement_activate, cvElement_textUpdate} from '../redux/cvDataAC';
-import {createStyle, decodeStyle} from './utils';
+import {createStyle, decodeStyle} from '../modules/utils';
+import sprite from '../img/sprite.svg';
 
 class CvElement extends React.PureComponent {
 
@@ -13,10 +14,6 @@ class CvElement extends React.PureComponent {
         data: PropTypes.object,
         activeElementId: PropTypes.string,
         templateImageUrl: PropTypes.string,
-    };
-
-    static defaultProps = {
-        style: {},
     };
 
     onClick = () => {
@@ -33,11 +30,13 @@ class CvElement extends React.PureComponent {
     }
 
     render () {
+        //console.log('render cv element',this.props.id);
         let isActive = (this.props.activeElementId===this.props.id);
         let style = createStyle(this.props.data.style);
         let positionTop;
         let positionLeft;
         let position;
+        let styleText;
         if (this.props.data.link) {
             positionTop = style.top?style.top:(this.props.data.positionTop + 'px');
             positionLeft = style.left?style.left:(this.props.data.positionLeft + 'px');
@@ -61,12 +60,24 @@ class CvElement extends React.PureComponent {
                 break;
             case 'text':
                 let text = this.props.data.text;
-                if (text instanceof Array) {
-                    text = text.map( (w,i) => <span key={i}>{w}{i<text.length-1&&<br/>}</span>);
+                styleText = {color: style.color, fontFamily: style.fontFamily,
+                    fontSize: style.fontSize, fontStyle:style.fontStyle,
+                    fontWeight: style.fontWeight, padding: style.padding,
+                    textAlign: style.textAlign, textDecoration:style.textDecoration,
+                    textTransform: style.textTransform};
+                if (this.props.data.list) {
+                    elementCode = <ul style={{fontSize:style.fontSize, paddingLeft:style.fontSize}}>
+                                    <li className={className} style={{color:style.colorlist}}>
+                                        <span style={styleText} suppressContentEditableWarning={this.props.editable} contentEditable={this.props.editable} data-elem={true} onClick={this.onClick} onBlur={this.onBlur}>
+                                            {text}
+                                        </span>
+                                    </li>
+                                </ul>;
+                } else {
+                    elementCode = <span className={className} style={style} suppressContentEditableWarning={this.props.editable} contentEditable={this.props.editable} data-elem={true} onClick={this.onClick} onBlur={this.onBlur}>
+                                    {text}
+                                </span>;
                 }
-                elementCode = <span className={className} style={style} suppressContentEditableWarning={this.props.editable} contentEditable={this.props.editable} data-elem={true} onClick={this.onClick} onBlur={this.onBlur}>
-                                {text}
-                              </span>;
                 break;
             case 'figure':
                 elementCode = <div className={className} style={style} data-elem={true} onClick={this.onClick}></div>;;
@@ -99,6 +110,31 @@ class CvElement extends React.PureComponent {
                                 {addDotsCode}
                               </div>;
                 break;
+            case 'icon':
+                    decodedStyle = {};
+                    for (let s in this.props.data.style) {
+                        decodedStyle[decodeStyle(s)] = this.props.data.style[s];
+                    }
+                    let styleElem = {position: style.position, width:style.width, height:style.height, top:style.top, left:style.left};
+                    let styleIcon = {fill: decodedStyle.fill, width:decodedStyle.size +'px', height:decodedStyle.size +'px'};
+                    styleText = {color: style.color, fontFamily: style.fontFamily,
+                                    fontSize: style.fontSize, fontStyle:style.fontStyle,
+                                    fontWeight: style.fontWeight, padding: style.padding,
+                                    textAlign: style.textAlign, textDecoration:style.textDecoration,
+                                    textTransform: style.textTransform};
+                    let textIcon = this.props.data.text;
+                    if (textIcon instanceof Array) {
+                        textIcon = textIcon.map( (w,i) => <span key={i}>{w}{i<textIcon.length-1&&<br/>}</span>);
+                    }
+                    elementCode = <div className={className} style={styleElem} data-elem={true} onClick={this.onClick}>
+                                    <svg style={styleIcon}>
+                                        <use href={sprite + '#' + this.props.data.svg}></use>
+                                    </svg>
+                                    <span style={styleText} suppressContentEditableWarning={this.props.editable} contentEditable={this.props.editable} data-elem={true} onClick={this.onClick} onBlur={this.onBlur}>
+                                        {textIcon}
+                                    </span>
+                                  </div>;
+                    break;
             case 'group':
                 let CvGroupElement = connect(mapStateToProps)(CvElement);
                 elementCode = <div className={className} style={style}>

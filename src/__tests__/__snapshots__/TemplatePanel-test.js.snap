@@ -1,0 +1,230 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TemplatePanel render Mеню шаблонов - Открытие группы 1`] = `
+<ul
+  className="template-panel__menu undefined"
+>
+  <li
+    className="template-panel__group"
+  >
+    <div
+      className="template-panel__group-name template-panel__group-name--active"
+      onClick={[Function]}
+    >
+      Image
+    </div>
+    <ul>
+      <li
+        className="template-panel__block entering"
+      >
+        <div
+          className="template-panel__block-view"
+        >
+          <img
+            alt=""
+            className="cv__element cv__element--image"
+            data-elem={true}
+            onClick={[Function]}
+            style={
+              Object {
+                "file": "",
+                "opacity": 1,
+              }
+            }
+          />
+        </div>
+        <button
+          className="template-panel__block-add"
+          onClick={[Function]}
+        />
+      </li>
+      <li
+        className="template-panel__block entering"
+      >
+        <div
+          className="template-panel__block-view"
+        >
+          <img
+            alt=""
+            className="cv__element cv__element--image"
+            data-elem={true}
+            onClick={[Function]}
+            style={
+              Object {
+                "borderRadius": "50%",
+                "file": "",
+                "opacity": 1,
+              }
+            }
+          />
+        </div>
+        <button
+          className="template-panel__block-add"
+          onClick={[Function]}
+        />
+      </li>
+      <li
+        className="template-panel__block entering"
+      >
+        <div
+          className="template-panel__block-view"
+        >
+          <img
+            alt=""
+            className="cv__element cv__element--image"
+            data-elem={true}
+            onClick={[Function]}
+            style={
+              Object {
+                "borderColor": "#E05B49",
+                "borderStyle": "solid",
+                "borderWidth": "3px",
+                "file": "",
+                "opacity": 1,
+              }
+            }
+          />
+        </div>
+        <button
+          className="template-panel__block-add"
+          onClick={[Function]}
+        />
+      </li>
+      <li
+        className="template-panel__block entering"
+      >
+        <div
+          className="template-panel__block-view"
+        >
+          <img
+            alt=""
+            className="cv__element cv__element--image"
+            data-elem={true}
+            onClick={[Function]}
+            style={
+              Object {
+                "borderColor": "#E05B49",
+                "borderRadius": "50%",
+                "borderStyle": "solid",
+                "borderWidth": "3px",
+                "file": "",
+                "opacity": 1,
+              }
+            }
+          />
+        </div>
+        <button
+          className="template-panel__block-add"
+          onClick={[Function]}
+        />
+      </li>
+    </ul>
+  </li>
+  <li
+    className="template-panel__group"
+  >
+    <div
+      className="template-panel__group-name"
+      onClick={[Function]}
+    >
+      Text
+    </div>
+    <ul />
+  </li>
+  <li
+    className="template-panel__group"
+  >
+    <div
+      className="template-panel__group-name"
+      onClick={[Function]}
+    >
+      Info block
+    </div>
+    <ul />
+  </li>
+  <li
+    className="template-panel__group"
+  >
+    <div
+      className="template-panel__group-name"
+      onClick={[Function]}
+    >
+      Figure
+    </div>
+    <ul />
+  </li>
+  <li
+    className="template-panel__group"
+  >
+    <div
+      className="template-panel__group-name"
+      onClick={[Function]}
+    >
+      Progress
+    </div>
+    <ul />
+  </li>
+</ul>
+`;
+
+exports[`TemplatePanel render Mеню шаблонов 1`] = `
+<ul
+  className="template-panel__menu undefined"
+>
+  <li
+    className="template-panel__group"
+  >
+    <div
+      className="template-panel__group-name"
+      onClick={[Function]}
+    >
+      Image
+    </div>
+    <ul />
+  </li>
+  <li
+    className="template-panel__group"
+  >
+    <div
+      className="template-panel__group-name"
+      onClick={[Function]}
+    >
+      Text
+    </div>
+    <ul />
+  </li>
+  <li
+    className="template-panel__group"
+  >
+    <div
+      className="template-panel__group-name"
+      onClick={[Function]}
+    >
+      Info block
+    </div>
+    <ul />
+  </li>
+  <li
+    className="template-panel__group"
+  >
+    <div
+      className="template-panel__group-name"
+      onClick={[Function]}
+    >
+      Figure
+    </div>
+    <ul />
+  </li>
+  <li
+    className="template-panel__group"
+  >
+    <div
+      className="template-panel__group-name"
+      onClick={[Function]}
+    >
+      Progress
+    </div>
+    <ul />
+  </li>
+</ul>
+`;

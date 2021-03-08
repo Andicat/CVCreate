@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {createOption, OPTIONS_TEXT} from './utils';
+import {createOption, createTooltipText} from '../modules/utils';
 
 class Option extends React.PureComponent {
 
@@ -25,7 +25,7 @@ class Option extends React.PureComponent {
 
     onMouseOver = (evt) => {
         if (evt.target.getAttribute('data-tooltip')) {
-            this.setState({tooltip:OPTIONS_TEXT[this.props.optionName]});
+            this.setState({tooltip:createTooltipText(this.props.optionName)});
         }
     }
 
@@ -34,7 +34,7 @@ class Option extends React.PureComponent {
     }
 
      render () {
-        
+        //console.log('render option',this.props.optionName);
         let optionCode = createOption(this.props.optionName,this.props.optionValue,this.onChangeValue);
         if (!optionCode) {
             return null;

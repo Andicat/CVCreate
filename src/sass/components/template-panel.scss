@@ -119,6 +119,10 @@
         width: 100%;
         min-height: 50px;
 
+        ul {
+            list-style: disc;
+        }
+
         .cv__element--image,
         .cv__element--figure {
             height: 50px;
@@ -137,7 +141,7 @@
     }
 
     &__button-hide {
-        transition: all 0.5s;
+        transition: background-image 0.5s;
         position: absolute;
         height: 45px;
         width: 25px;

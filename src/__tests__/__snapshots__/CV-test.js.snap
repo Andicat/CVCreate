@@ -1,0 +1,1884 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CV render Рендер без данных 1`] = `
+<form
+  className="cv__login entered"
+  name="login"
+  onSubmit={[Function]}
+>
+  <input
+    maxLength="30"
+    name="name"
+    onChange={[Function]}
+    placeholder="Enter name of your CV..."
+    type="text"
+    value=""
+  />
+  <button
+    type="submit"
+  />
+</form>
+`;
+
+exports[`CV render Рендер с данными 1`] = `
+Array [
+  <header
+    className="header undefined"
+  >
+    <span
+      className="header__logo"
+    >
+      Create your CV
+    </span>
+    <ul
+      className="header__menu"
+    >
+      <li
+        className="header__menu-item"
+      >
+        <button
+          className="header__button header__button--save"
+          onClick={[Function]}
+        >
+          Save
+        </button>
+      </li>
+      <li
+        className="header__menu-item"
+      >
+        <input
+          accept="text/*"
+          className="option__file"
+          id="file-cv"
+          name="file-cv"
+          onChange={[Function]}
+          type="file"
+        />
+        <label
+          className="header__button header__button--load"
+          data-tooltip={true}
+          htmlFor="file-cv"
+        >
+          Load
+        </label>
+      </li>
+      <li
+        className="header__menu-item"
+      >
+        <a
+          aria-current={null}
+          className="header__button header__button--show"
+          href="/view"
+          onClick={[Function]}
+        >
+          Show
+        </a>
+      </li>
+    </ul>
+    <button
+      className="header__button header__button--menu"
+      onClick={[Function]}
+    />
+  </header>,
+  <main
+    className="main undefined"
+  >
+    <div
+      className="template-panel"
+    >
+      <button
+        className="template-panel__button-hide"
+        onClick={[Function]}
+      />
+    </div>
+    <div
+      className="desk"
+    >
+      <div
+        className="option-panel"
+      >
+        <div
+          className="option-panel__group option-panel__group--style"
+        >
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <select
+              className="option__select"
+              data-tooltip={true}
+              onChange={[Function]}
+              value="Roboto"
+            >
+              <option
+                style={
+                  Object {
+                    "fontFamily": "PTSans",
+                  }
+                }
+              >
+                PTSans
+              </option>
+              <option
+                style={
+                  Object {
+                    "fontFamily": "Roboto",
+                  }
+                }
+              >
+                Roboto
+              </option>
+              <option
+                style={
+                  Object {
+                    "fontFamily": "Helvetica",
+                  }
+                }
+              >
+                Helvetica
+              </option>
+              <option
+                style={
+                  Object {
+                    "fontFamily": "Garamond",
+                  }
+                }
+              >
+                Garamond
+              </option>
+            </select>
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              className="option__color"
+              data-tooltip={true}
+              onChange={[Function]}
+              type="color"
+              value="#000000"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              className="option__button option__button--left"
+              data-tooltip={true}
+              onClick={[Function]}
+              type="button"
+              value="–"
+            />
+            <input
+              className="option__number"
+              data-tooltip={true}
+              max={60}
+              min={6}
+              readOnly={true}
+              type="text"
+              value="20"
+            />
+            <input
+              className="option__button option__button--right"
+              data-tooltip={true}
+              onClick={[Function]}
+              type="button"
+              value="+"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              checked={true}
+              className="option__checkbox option__checkbox--bold"
+              id="bold"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <label
+              className="option__label"
+              data-tooltip={true}
+              htmlFor="bold"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              checked={false}
+              className="option__checkbox option__checkbox--italic"
+              id="italic"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <label
+              className="option__label"
+              data-tooltip={true}
+              htmlFor="italic"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              checked={false}
+              className="option__checkbox option__checkbox--center"
+              id="center"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <label
+              className="option__label"
+              data-tooltip={true}
+              htmlFor="center"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              checked={false}
+              className="option__checkbox option__checkbox--uppercase"
+              id="uppercase"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <label
+              className="option__label"
+              data-tooltip={true}
+              htmlFor="uppercase"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              checked={false}
+              className="option__checkbox option__checkbox--underline"
+              id="underline"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <label
+              className="option__label"
+              data-tooltip={true}
+              htmlFor="underline"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              className="option__button option__down option__button--padding"
+              data-tooltip={true}
+              onClick={[Function]}
+              onMouseLeave={[Function]}
+              type="button"
+            />
+            <form
+              className="option__drop-down"
+              name="padding"
+              onMouseLeave={[Function]}
+            >
+              <div
+                className="option__drop-down-line"
+              >
+                <span>
+                  top
+                </span>
+                <input
+                  className="option__button option__button--left"
+                  onClick={[Function]}
+                  type="button"
+                  value="–"
+                />
+                <input
+                  className="option__number"
+                  max={100}
+                  min={0}
+                  readOnly={true}
+                  type="text"
+                  value={0}
+                />
+                <input
+                  className="option__button option__button--right"
+                  onClick={[Function]}
+                  type="button"
+                  value="+"
+                />
+              </div>
+              <div
+                className="option__drop-down-line"
+              >
+                <span>
+                  right
+                </span>
+                <input
+                  className="option__button option__button--left"
+                  onClick={[Function]}
+                  type="button"
+                  value="–"
+                />
+                <input
+                  className="option__number"
+                  max={100}
+                  min={0}
+                  readOnly={true}
+                  type="text"
+                  value={0}
+                />
+                <input
+                  className="option__button option__button--right"
+                  onClick={[Function]}
+                  type="button"
+                  value="+"
+                />
+              </div>
+              <div
+                className="option__drop-down-line"
+              >
+                <span>
+                  left
+                </span>
+                <input
+                  className="option__button option__button--left"
+                  onClick={[Function]}
+                  type="button"
+                  value="–"
+                />
+                <input
+                  className="option__number"
+                  max={100}
+                  min={0}
+                  readOnly={true}
+                  type="text"
+                  value={1}
+                />
+                <input
+                  className="option__button option__button--right"
+                  onClick={[Function]}
+                  type="button"
+                  value="+"
+                />
+              </div>
+              <div
+                className="option__drop-down-line"
+              >
+                <span>
+                  bottom
+                </span>
+                <input
+                  className="option__button option__button--left"
+                  onClick={[Function]}
+                  type="button"
+                  value="–"
+                />
+                <input
+                  className="option__number"
+                  max={100}
+                  min={0}
+                  readOnly={true}
+                  type="text"
+                  value={0}
+                />
+                <input
+                  className="option__button option__button--right"
+                  onClick={[Function]}
+                  type="button"
+                  value="+"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+        <div
+          className="option-panel__group option-panel__group--blocks"
+        >
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              checked={false}
+              className="option__checkbox option__checkbox--lock"
+              id="lock"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <label
+              className="option__label"
+              data-tooltip={true}
+              htmlFor="lock"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              className="option__button option__button--autosize"
+              data-tooltip={true}
+              onClick={[Function]}
+              type="button"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              className="option__button option__button--back"
+              data-tooltip={true}
+              onClick={[Function]}
+              type="button"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              className="option__button option__button--copy"
+              data-tooltip={true}
+              onClick={[Function]}
+              type="button"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              className="option__button option__down option__button--link"
+              data-tooltip={true}
+              onClick={[Function]}
+              type="button"
+            />
+            <div
+              className="option__drop-down"
+              onMouseLeave={[Function]}
+            >
+              <div
+                className="option__drop-down-line"
+              >
+                <span>
+                  Link:
+                </span>
+                <input
+                  className="option__text option__link"
+                  type="text"
+                />
+                <button
+                  className="option__button option__button--ok"
+                  onClick={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              className="option__button option__button--save"
+              data-tooltip={true}
+              onClick={[Function]}
+              type="button"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="cv-container"
+      >
+        <div
+          className="cv"
+          onClick={[Function]}
+          style={
+            Object {
+              "backgroundColor": "#ffffff",
+            }
+          }
+        >
+          <div
+            className="cv__block entered"
+            onClick={[Function]}
+            style={
+              Object {
+                "height": "66px",
+                "left": "290.08598862935975px",
+                "top": "52.08598862935976px",
+                "width": "149px",
+              }
+            }
+          >
+            <span
+              className="cv__element cv__element--text"
+              contentEditable={true}
+              data-elem={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              style={
+                Object {
+                  "color": "#1bac38",
+                  "fontFamily": "Roboto",
+                  "fontSize": "40px",
+                  "fontStyle": "normal",
+                  "fontWeight": "bold",
+                  "padding": "0px 0px 0px 1px",
+                  "textAlign": "start",
+                  "textDecoration": "none",
+                  "textTransform": "none",
+                }
+              }
+              suppressContentEditableWarning={true}
+            >
+              Big text
+            </span>
+          </div>
+          <div
+            className="cv__block entered"
+            onClick={[Function]}
+            style={
+              Object {
+                "height": "142px",
+                "left": "60.43650934333691px",
+                "top": "44.43650934333691px",
+                "width": "182px",
+              }
+            }
+          >
+            <img
+              alt=""
+              className="cv__element cv__element--image"
+              data-elem={true}
+              onClick={[Function]}
+              style={
+                Object {
+                  "file": "",
+                  "opacity": 1,
+                }
+              }
+            />
+          </div>
+          <div
+            className="cv__block cv__block--active cv__block--active-first entered"
+            onClick={[Function]}
+            style={
+              Object {
+                "height": "62px",
+                "left": "303.173880178947px",
+                "top": "142.173880178947px",
+                "width": "119px",
+              }
+            }
+          >
+            <div
+              className="cv__element cv__element--group"
+              style={Object {}}
+            >
+              <span
+                className="cv__element cv__element--text cv__element--active"
+                contentEditable={true}
+                data-elem={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "Roboto",
+                    "fontSize": "20px",
+                    "fontStyle": "normal",
+                    "fontWeight": "bold",
+                    "padding": "0px 0px 0px 1px",
+                    "textAlign": "start",
+                    "textDecoration": "none",
+                    "textTransform": "none",
+                  }
+                }
+                suppressContentEditableWarning={true}
+              >
+                Your header
+              </span>
+              <span
+                className="cv__element cv__element--text"
+                contentEditable={true}
+                data-elem={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "Roboto",
+                    "fontSize": "16px",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                    "padding": "0px 0px 0px 1px",
+                    "textAlign": "start",
+                    "textDecoration": "none",
+                    "textTransform": "none",
+                  }
+                }
+                suppressContentEditableWarning={true}
+              >
+                your text
+              </span>
+            </div>
+          </div>
+          <div
+            className="cv__block entered"
+            onClick={[Function]}
+            style={
+              Object {
+                "height": "50px",
+                "left": "72.88890908532193px",
+                "top": "248.88890908532193px",
+                "width": "179px",
+              }
+            }
+          >
+            <div
+              className="cv__element cv__element--dots-row"
+              data-elem={true}
+              onClick={[Function]}
+              style={
+                Object {
+                  "addcolor": "#E6E6E6",
+                  "addcount": 3,
+                  "maincolor": "#E05B49",
+                  "maincount": 5,
+                  "radius": 10,
+                }
+              }
+            >
+              <div
+                style={
+                  Object {
+                    "backgroundColor": "#E05B49",
+                    "borderRadius": "50%",
+                    "height": "10px",
+                    "margin": "0 5px",
+                    "width": "10px",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "backgroundColor": "#E05B49",
+                    "borderRadius": "50%",
+                    "height": "10px",
+                    "margin": "0 5px",
+                    "width": "10px",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "backgroundColor": "#E05B49",
+                    "borderRadius": "50%",
+                    "height": "10px",
+                    "margin": "0 5px",
+                    "width": "10px",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "backgroundColor": "#E05B49",
+                    "borderRadius": "50%",
+                    "height": "10px",
+                    "margin": "0 5px",
+                    "width": "10px",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "backgroundColor": "#E05B49",
+                    "borderRadius": "50%",
+                    "height": "10px",
+                    "margin": "0 5px",
+                    "width": "10px",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "backgroundColor": "#E6E6E6",
+                    "borderRadius": "50%",
+                    "height": "10px",
+                    "margin": "0 5px",
+                    "width": "10px",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "backgroundColor": "#E6E6E6",
+                    "borderRadius": "50%",
+                    "height": "10px",
+                    "margin": "0 5px",
+                    "width": "10px",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "backgroundColor": "#E6E6E6",
+                    "borderRadius": "50%",
+                    "height": "10px",
+                    "margin": "0 5px",
+                    "width": "10px",
+                  }
+                }
+              />
+            </div>
+          </div>
+          <div
+            className="cv__block entered"
+            onClick={[Function]}
+            style={
+              Object {
+                "height": "161px",
+                "left": "322.66776857728195px",
+                "top": "238.66776857728195px",
+                "width": "171px",
+              }
+            }
+          >
+            <div
+              className="cv__element cv__element--figure"
+              data-elem={true}
+              onClick={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#6AABB5",
+                  "borderRadius": "50%",
+                  "opacity": 1,
+                }
+              }
+            />
+          </div>
+          <div
+            className="cv__block entered"
+            onClick={[Function]}
+            style={
+              Object {
+                "height": "111px",
+                "left": "487.9319841589094px",
+                "top": "92.93198415890942px",
+                "width": "252px",
+              }
+            }
+          >
+            <div
+              className="cv__element cv__element--group"
+              style={Object {}}
+            >
+              <span
+                className="cv__element cv__element--text"
+                contentEditable={true}
+                data-elem={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "Roboto",
+                    "fontSize": "18px",
+                    "fontStyle": "normal",
+                    "fontWeight": "bold",
+                    "padding": "0px 0px 0px 1px",
+                    "textAlign": "start",
+                    "textDecoration": "none",
+                    "textTransform": "none",
+                  }
+                }
+                suppressContentEditableWarning={true}
+              >
+                Your position
+              </span>
+              <span
+                className="cv__element cv__element--text"
+                contentEditable={true}
+                data-elem={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "Roboto",
+                    "fontSize": "18px",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                    "padding": "0px 0px 0px 1px",
+                    "textAlign": "start",
+                    "textDecoration": "none",
+                    "textTransform": "none",
+                  }
+                }
+                suppressContentEditableWarning={true}
+              >
+                Company
+              </span>
+              <span
+                className="cv__element cv__element--text"
+                contentEditable={true}
+                data-elem={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "Roboto",
+                    "fontSize": "16px",
+                    "fontStyle": "italic",
+                    "fontWeight": "normal",
+                    "padding": "0px 0px 0px 1px",
+                    "textAlign": "start",
+                    "textDecoration": "none",
+                    "textTransform": "none",
+                  }
+                }
+                suppressContentEditableWarning={true}
+              >
+                period
+              </span>
+              <span
+                className="cv__element cv__element--text"
+                contentEditable={true}
+                data-elem={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "Roboto",
+                    "fontSize": "16px",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                    "padding": "0px 0px 0px 1px",
+                    "textAlign": "start",
+                    "textDecoration": "none",
+                    "textTransform": "none",
+                  }
+                }
+                suppressContentEditableWarning={true}
+              >
+                your competencies and results
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>,
+]
+`;
+
+exports[`CV render Рендер с данными 2`] = `
+Array [
+  <header
+    className="header undefined"
+  >
+    <span
+      className="header__logo"
+    >
+      Create your CV
+    </span>
+    <ul
+      className="header__menu"
+    >
+      <li
+        className="header__menu-item"
+      >
+        <button
+          className="header__button header__button--save"
+          onClick={[Function]}
+        >
+          Save
+        </button>
+      </li>
+      <li
+        className="header__menu-item"
+      >
+        <input
+          accept="text/*"
+          className="option__file"
+          id="file-cv"
+          name="file-cv"
+          onChange={[Function]}
+          type="file"
+        />
+        <label
+          className="header__button header__button--load"
+          data-tooltip={true}
+          htmlFor="file-cv"
+        >
+          Load
+        </label>
+      </li>
+      <li
+        className="header__menu-item"
+      >
+        <a
+          aria-current={null}
+          className="header__button header__button--show"
+          href="/view"
+          onClick={[Function]}
+        >
+          Show
+        </a>
+      </li>
+    </ul>
+    <button
+      className="header__button header__button--menu"
+      onClick={[Function]}
+    />
+  </header>,
+  <main
+    className="main undefined"
+  >
+    <div
+      className="template-panel"
+    >
+      <ul
+        className="template-panel__menu entering"
+      >
+        <li
+          className="template-panel__group"
+        >
+          <div
+            className="template-panel__group-name"
+            onClick={[Function]}
+          >
+            Image
+          </div>
+          <ul />
+        </li>
+        <li
+          className="template-panel__group"
+        >
+          <div
+            className="template-panel__group-name"
+            onClick={[Function]}
+          >
+            Text
+          </div>
+          <ul />
+        </li>
+        <li
+          className="template-panel__group"
+        >
+          <div
+            className="template-panel__group-name"
+            onClick={[Function]}
+          >
+            Info block
+          </div>
+          <ul />
+        </li>
+        <li
+          className="template-panel__group"
+        >
+          <div
+            className="template-panel__group-name"
+            onClick={[Function]}
+          >
+            Figure
+          </div>
+          <ul />
+        </li>
+        <li
+          className="template-panel__group"
+        >
+          <div
+            className="template-panel__group-name"
+            onClick={[Function]}
+          >
+            Progress
+          </div>
+          <ul />
+        </li>
+      </ul>
+      <button
+        className="template-panel__button-hide"
+        onClick={[Function]}
+      />
+    </div>
+    <div
+      className="desk"
+    >
+      <div
+        className="option-panel"
+      >
+        <div
+          className="option-panel__group option-panel__group--style"
+        >
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <select
+              className="option__select"
+              data-tooltip={true}
+              onChange={[Function]}
+              value="Roboto"
+            >
+              <option
+                style={
+                  Object {
+                    "fontFamily": "PTSans",
+                  }
+                }
+              >
+                PTSans
+              </option>
+              <option
+                style={
+                  Object {
+                    "fontFamily": "Roboto",
+                  }
+                }
+              >
+                Roboto
+              </option>
+              <option
+                style={
+                  Object {
+                    "fontFamily": "Helvetica",
+                  }
+                }
+              >
+                Helvetica
+              </option>
+              <option
+                style={
+                  Object {
+                    "fontFamily": "Garamond",
+                  }
+                }
+              >
+                Garamond
+              </option>
+            </select>
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              className="option__color"
+              data-tooltip={true}
+              onChange={[Function]}
+              type="color"
+              value="#000000"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              className="option__button option__button--left"
+              data-tooltip={true}
+              onClick={[Function]}
+              type="button"
+              value="–"
+            />
+            <input
+              className="option__number"
+              data-tooltip={true}
+              max={60}
+              min={6}
+              readOnly={true}
+              type="text"
+              value="20"
+            />
+            <input
+              className="option__button option__button--right"
+              data-tooltip={true}
+              onClick={[Function]}
+              type="button"
+              value="+"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              checked={true}
+              className="option__checkbox option__checkbox--bold"
+              id="bold"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <label
+              className="option__label"
+              data-tooltip={true}
+              htmlFor="bold"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              checked={false}
+              className="option__checkbox option__checkbox--italic"
+              id="italic"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <label
+              className="option__label"
+              data-tooltip={true}
+              htmlFor="italic"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              checked={false}
+              className="option__checkbox option__checkbox--center"
+              id="center"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <label
+              className="option__label"
+              data-tooltip={true}
+              htmlFor="center"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              checked={false}
+              className="option__checkbox option__checkbox--uppercase"
+              id="uppercase"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <label
+              className="option__label"
+              data-tooltip={true}
+              htmlFor="uppercase"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              checked={false}
+              className="option__checkbox option__checkbox--underline"
+              id="underline"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <label
+              className="option__label"
+              data-tooltip={true}
+              htmlFor="underline"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              className="option__button option__down option__button--padding"
+              data-tooltip={true}
+              onClick={[Function]}
+              onMouseLeave={[Function]}
+              type="button"
+            />
+            <form
+              className="option__drop-down"
+              name="padding"
+              onMouseLeave={[Function]}
+            >
+              <div
+                className="option__drop-down-line"
+              >
+                <span>
+                  top
+                </span>
+                <input
+                  className="option__button option__button--left"
+                  onClick={[Function]}
+                  type="button"
+                  value="–"
+                />
+                <input
+                  className="option__number"
+                  max={100}
+                  min={0}
+                  readOnly={true}
+                  type="text"
+                  value={0}
+                />
+                <input
+                  className="option__button option__button--right"
+                  onClick={[Function]}
+                  type="button"
+                  value="+"
+                />
+              </div>
+              <div
+                className="option__drop-down-line"
+              >
+                <span>
+                  right
+                </span>
+                <input
+                  className="option__button option__button--left"
+                  onClick={[Function]}
+                  type="button"
+                  value="–"
+                />
+                <input
+                  className="option__number"
+                  max={100}
+                  min={0}
+                  readOnly={true}
+                  type="text"
+                  value={0}
+                />
+                <input
+                  className="option__button option__button--right"
+                  onClick={[Function]}
+                  type="button"
+                  value="+"
+                />
+              </div>
+              <div
+                className="option__drop-down-line"
+              >
+                <span>
+                  left
+                </span>
+                <input
+                  className="option__button option__button--left"
+                  onClick={[Function]}
+                  type="button"
+                  value="–"
+                />
+                <input
+                  className="option__number"
+                  max={100}
+                  min={0}
+                  readOnly={true}
+                  type="text"
+                  value={1}
+                />
+                <input
+                  className="option__button option__button--right"
+                  onClick={[Function]}
+                  type="button"
+                  value="+"
+                />
+              </div>
+              <div
+                className="option__drop-down-line"
+              >
+                <span>
+                  bottom
+                </span>
+                <input
+                  className="option__button option__button--left"
+                  onClick={[Function]}
+                  type="button"
+                  value="–"
+                />
+                <input
+                  className="option__number"
+                  max={100}
+                  min={0}
+                  readOnly={true}
+                  type="text"
+                  value={0}
+                />
+                <input
+                  className="option__button option__button--right"
+                  onClick={[Function]}
+                  type="button"
+                  value="+"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+        <div
+          className="option-panel__group option-panel__group--blocks"
+        >
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              checked={false}
+              className="option__checkbox option__checkbox--lock"
+              id="lock"
+              onChange={[Function]}
+              type="checkbox"
+            />
+            <label
+              className="option__label"
+              data-tooltip={true}
+              htmlFor="lock"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              className="option__button option__button--autosize"
+              data-tooltip={true}
+              onClick={[Function]}
+              type="button"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              className="option__button option__button--back"
+              data-tooltip={true}
+              onClick={[Function]}
+              type="button"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              className="option__button option__button--copy"
+              data-tooltip={true}
+              onClick={[Function]}
+              type="button"
+            />
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              className="option__button option__down option__button--link"
+              data-tooltip={true}
+              onClick={[Function]}
+              type="button"
+            />
+            <div
+              className="option__drop-down"
+              onMouseLeave={[Function]}
+            >
+              <div
+                className="option__drop-down-line"
+              >
+                <span>
+                  Link:
+                </span>
+                <input
+                  className="option__text option__link"
+                  type="text"
+                />
+                <button
+                  className="option__button option__button--ok"
+                  onClick={[Function]}
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="option"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <input
+              className="option__button option__button--save"
+              data-tooltip={true}
+              onClick={[Function]}
+              type="button"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="cv-container"
+      >
+        <div
+          className="cv"
+          onClick={[Function]}
+          style={
+            Object {
+              "backgroundColor": "#ffffff",
+            }
+          }
+        >
+          <div
+            className="cv__block entered"
+            onClick={[Function]}
+            style={
+              Object {
+                "height": "66px",
+                "left": "290.08598862935975px",
+                "top": "52.08598862935976px",
+                "width": "149px",
+              }
+            }
+          >
+            <span
+              className="cv__element cv__element--text"
+              contentEditable={true}
+              data-elem={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              style={
+                Object {
+                  "color": "#1bac38",
+                  "fontFamily": "Roboto",
+                  "fontSize": "40px",
+                  "fontStyle": "normal",
+                  "fontWeight": "bold",
+                  "padding": "0px 0px 0px 1px",
+                  "textAlign": "start",
+                  "textDecoration": "none",
+                  "textTransform": "none",
+                }
+              }
+              suppressContentEditableWarning={true}
+            >
+              Big text
+            </span>
+          </div>
+          <div
+            className="cv__block entered"
+            onClick={[Function]}
+            style={
+              Object {
+                "height": "142px",
+                "left": "60.43650934333691px",
+                "top": "44.43650934333691px",
+                "width": "182px",
+              }
+            }
+          >
+            <img
+              alt=""
+              className="cv__element cv__element--image"
+              data-elem={true}
+              onClick={[Function]}
+              style={
+                Object {
+                  "file": "",
+                  "opacity": 1,
+                }
+              }
+            />
+          </div>
+          <div
+            className="cv__block cv__block--active cv__block--active-first entered"
+            onClick={[Function]}
+            style={
+              Object {
+                "height": "62px",
+                "left": "303.173880178947px",
+                "top": "142.173880178947px",
+                "width": "119px",
+              }
+            }
+          >
+            <div
+              className="cv__element cv__element--group"
+              style={Object {}}
+            >
+              <span
+                className="cv__element cv__element--text cv__element--active"
+                contentEditable={true}
+                data-elem={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "Roboto",
+                    "fontSize": "20px",
+                    "fontStyle": "normal",
+                    "fontWeight": "bold",
+                    "padding": "0px 0px 0px 1px",
+                    "textAlign": "start",
+                    "textDecoration": "none",
+                    "textTransform": "none",
+                  }
+                }
+                suppressContentEditableWarning={true}
+              >
+                Your header
+              </span>
+              <span
+                className="cv__element cv__element--text"
+                contentEditable={true}
+                data-elem={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "Roboto",
+                    "fontSize": "16px",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                    "padding": "0px 0px 0px 1px",
+                    "textAlign": "start",
+                    "textDecoration": "none",
+                    "textTransform": "none",
+                  }
+                }
+                suppressContentEditableWarning={true}
+              >
+                your text
+              </span>
+            </div>
+          </div>
+          <div
+            className="cv__block entered"
+            onClick={[Function]}
+            style={
+              Object {
+                "height": "50px",
+                "left": "72.88890908532193px",
+                "top": "248.88890908532193px",
+                "width": "179px",
+              }
+            }
+          >
+            <div
+              className="cv__element cv__element--dots-row"
+              data-elem={true}
+              onClick={[Function]}
+              style={
+                Object {
+                  "addcolor": "#E6E6E6",
+                  "addcount": 3,
+                  "maincolor": "#E05B49",
+                  "maincount": 5,
+                  "radius": 10,
+                }
+              }
+            >
+              <div
+                style={
+                  Object {
+                    "backgroundColor": "#E05B49",
+                    "borderRadius": "50%",
+                    "height": "10px",
+                    "margin": "0 5px",
+                    "width": "10px",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "backgroundColor": "#E05B49",
+                    "borderRadius": "50%",
+                    "height": "10px",
+                    "margin": "0 5px",
+                    "width": "10px",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "backgroundColor": "#E05B49",
+                    "borderRadius": "50%",
+                    "height": "10px",
+                    "margin": "0 5px",
+                    "width": "10px",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "backgroundColor": "#E05B49",
+                    "borderRadius": "50%",
+                    "height": "10px",
+                    "margin": "0 5px",
+                    "width": "10px",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "backgroundColor": "#E05B49",
+                    "borderRadius": "50%",
+                    "height": "10px",
+                    "margin": "0 5px",
+                    "width": "10px",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "backgroundColor": "#E6E6E6",
+                    "borderRadius": "50%",
+                    "height": "10px",
+                    "margin": "0 5px",
+                    "width": "10px",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "backgroundColor": "#E6E6E6",
+                    "borderRadius": "50%",
+                    "height": "10px",
+                    "margin": "0 5px",
+                    "width": "10px",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "backgroundColor": "#E6E6E6",
+                    "borderRadius": "50%",
+                    "height": "10px",
+                    "margin": "0 5px",
+                    "width": "10px",
+                  }
+                }
+              />
+            </div>
+          </div>
+          <div
+            className="cv__block entered"
+            onClick={[Function]}
+            style={
+              Object {
+                "height": "161px",
+                "left": "322.66776857728195px",
+                "top": "238.66776857728195px",
+                "width": "171px",
+              }
+            }
+          >
+            <div
+              className="cv__element cv__element--figure"
+              data-elem={true}
+              onClick={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#6AABB5",
+                  "borderRadius": "50%",
+                  "opacity": 1,
+                }
+              }
+            />
+          </div>
+          <div
+            className="cv__block entered"
+            onClick={[Function]}
+            style={
+              Object {
+                "height": "111px",
+                "left": "487.9319841589094px",
+                "top": "92.93198415890942px",
+                "width": "252px",
+              }
+            }
+          >
+            <div
+              className="cv__element cv__element--group"
+              style={Object {}}
+            >
+              <span
+                className="cv__element cv__element--text"
+                contentEditable={true}
+                data-elem={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "Roboto",
+                    "fontSize": "18px",
+                    "fontStyle": "normal",
+                    "fontWeight": "bold",
+                    "padding": "0px 0px 0px 1px",
+                    "textAlign": "start",
+                    "textDecoration": "none",
+                    "textTransform": "none",
+                  }
+                }
+                suppressContentEditableWarning={true}
+              >
+                Your position
+              </span>
+              <span
+                className="cv__element cv__element--text"
+                contentEditable={true}
+                data-elem={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "Roboto",
+                    "fontSize": "18px",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                    "padding": "0px 0px 0px 1px",
+                    "textAlign": "start",
+                    "textDecoration": "none",
+                    "textTransform": "none",
+                  }
+                }
+                suppressContentEditableWarning={true}
+              >
+                Company
+              </span>
+              <span
+                className="cv__element cv__element--text"
+                contentEditable={true}
+                data-elem={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "Roboto",
+                    "fontSize": "16px",
+                    "fontStyle": "italic",
+                    "fontWeight": "normal",
+                    "padding": "0px 0px 0px 1px",
+                    "textAlign": "start",
+                    "textDecoration": "none",
+                    "textTransform": "none",
+                  }
+                }
+                suppressContentEditableWarning={true}
+              >
+                period
+              </span>
+              <span
+                className="cv__element cv__element--text"
+                contentEditable={true}
+                data-elem={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "Roboto",
+                    "fontSize": "16px",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                    "padding": "0px 0px 0px 1px",
+                    "textAlign": "start",
+                    "textDecoration": "none",
+                    "textTransform": "none",
+                  }
+                }
+                suppressContentEditableWarning={true}
+              >
+                your competencies and results
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>,
+]
+`;

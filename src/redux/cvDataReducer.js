@@ -1,4 +1,4 @@
-﻿import {CV_ID} from './../components/utils';
+﻿import {CV_ID} from './../modules/utils';
 import {saveFirebase} from './../components/withDataLoad';
 
 import { CV_BLOCK_ADD,
@@ -70,6 +70,10 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
             let newId = state.blocks.reduce(function (r, v) { return ( r < v.id ? v.id : r);},0) + 1;
             let randomPosition = 50 + Math.random()*100;
             let newBlock = {...action.block, positionTop:randomPosition,positionLeft:randomPosition};
+            if (newBlock.style) {
+                delete newBlock.style.height;
+                delete newBlock.style.width;
+            }
             setId(newBlock);
             let newState = {...state,
                 blocks: [...state.blocks,newBlock],
@@ -492,7 +496,6 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
 
         //activate element on cv-page
         case CV_ELEMENT_ACTIVATE: {
-            console.log('activate element');
             if (state.activeElementId !== action.elementId) {
                 let newState = {...state,
                     activeElementId:action.elementId,
@@ -612,7 +615,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
         //add template
         case TEMPLATE_ADD: {
             let activeBlock = state.blocks.find(b => b.id===action.blockId);
-            let newTemplateBlock = {type:activeBlock.type, style:{...activeBlock.style,height:activeBlock.height}};
+            let newTemplateBlock = {type:activeBlock.type, style:{...activeBlock.style,height:activeBlock.height,width:activeBlock.width}};
             if (activeBlock.text) {
                 newTemplateBlock.text = activeBlock.text;
             }

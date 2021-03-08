@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Option from './Option';
-import {CV_ID} from './utils';
+import {CV_ID, BLOCK_ACTION, BLOCKS_ACTION, getAutoSize} from '../modules/utils';
 
 import {connect} from 'react-redux';
 import {cvStyle_update,
@@ -16,7 +16,6 @@ import {cvStyle_update,
     cvBlock_lock,
     cvBlock_setLink,
     templates_add } from '../redux/cvDataAC';
-import {getAutoSize} from './utils';
 
 class OptionPanel extends React.PureComponent {
 
@@ -28,29 +27,6 @@ class OptionPanel extends React.PureComponent {
         activeBlockDOM: PropTypes.object, 
         stylePage: PropTypes.object,   
     };
-
-    BLOCK_ACTION = [
-        'lock',
-        'autosize',
-        'back',
-        'copy',
-        'link',
-        'save',
-    ];
-
-    BLOCKS_ACTION = [
-        'alignTop',
-        'alignBottom',
-        'alignLeft',
-        'alignRight',
-        'alignVertical',
-        'alignHorisontal',
-        'distributeVertical',
-        'distributeHorisontal',
-        'alignWidth',
-        'alignHeight',
-        'group',
-    ];
 
     setStyle = (blockId,optionName,value) => {
         this.props.dispatch(cvStyle_update(blockId,optionName,value));
@@ -144,14 +120,15 @@ class OptionPanel extends React.PureComponent {
     }
 
     render () {
+        //console.log('render option panel',this.props.activeBlocksId);
         let codeElementOptions = null;
         let codeBlockOptions = null;
         let codeBlocksOptions = null;
         let codePageOptions = null;
-        let blockAction = [...this.BLOCK_ACTION];
+        let blockAction = [...BLOCK_ACTION];
         
         if (this.props.activeBlocksId.length > 1) { //few active blocks
-            codeBlocksOptions = this.BLOCKS_ACTION.map( (a,i) => (
+            codeBlocksOptions = BLOCKS_ACTION.map( (a,i) => (
                 <Option key={i} optionName={a} cbOnChange={this.setAction}/>));
         } else if (this.props.activeBlockOptions) { //one active block
             if (this.props.activeBlockOptions.group) {
@@ -167,7 +144,6 @@ class OptionPanel extends React.PureComponent {
                 return <Option key={'block-' + i} optionName={a} optionValue={value} blockId={this.props.activeBlockOptions.id} cbOnChange={this.setAction}/>;
             });
             if (this.props.activeElementId) { //active element
-                
                 let styles = Object.keys(this.props.styleToEdit).sort();
                 codeElementOptions = styles.map( (s,i) => (
                     <Option key={'option-' + i} optionName={s} optionValue={this.props.styleToEdit[s]} blockId={this.props.activeBlockOptions.id} cbOnChange={this.setStyle}/>));

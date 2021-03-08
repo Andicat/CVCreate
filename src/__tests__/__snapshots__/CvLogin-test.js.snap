@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvLogin actions onChange 1`] = `
+<form
+  className="cv__login undefined"
+  name="login"
+  onSubmit={[Function]}
+>
+  <input
+    maxLength="30"
+    name="name"
+    onChange={[Function]}
+    placeholder="Enter name of your CV..."
+    type="text"
+    value="test"
+  />
+  <button
+    type="submit"
+  />
+</form>
+`;
+
+exports[`CvLogin render Рендер без данных 1`] = `
+<form
+  className="cv__login undefined"
+  name="login"
+  onSubmit={[Function]}
+>
+  <input
+    maxLength="30"
+    name="name"
+    onChange={[Function]}
+    placeholder="Enter name of your CV..."
+    type="text"
+    value=""
+  />
+  <button
+    type="submit"
+  />
+</form>
+`;

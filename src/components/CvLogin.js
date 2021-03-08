@@ -5,7 +5,7 @@ import Loader from './Loader';
 import {Transition} from "react-transition-group";
 import {cv_setUser} from '../redux/cvDataAC';
 import {addFirebase, loadFirebase} from './withDataLoad';
-import {saveLocalStorage} from './utils';
+import {saveLocalStorage} from '../modules/utils';
 
 class CvLogin extends React.PureComponent {
 
@@ -14,7 +14,7 @@ class CvLogin extends React.PureComponent {
     };
 
     state = {
-        userName: null,
+        userName: '',
         userList: {},
         dataloaded: false,
         userNameValid: true,
@@ -34,41 +34,36 @@ class CvLogin extends React.PureComponent {
         });
     }
 
-    saveData = async (data) => {
-        let addData = new Promise((resolve) => {
-            addFirebase('Data','users',data,resolve);
-        });
-        await addData.then(() => {
-            this.setState({userNameValid:true,messageError:''});
-            saveLocalStorage('CV',{user:data});
-            this.props.dispatch(cv_setUser(data));
-        });    
-    }
-
-    onSubmit = (evt) => {
-        evt.preventDefault();
-        let nameValue = this.name.value;
+    checkValidName = () => {
+        let nameValue = this.state.userName;
         if (String(nameValue).trim().length===0) {
             this.setState({userNameValid:false,messageError:'Enter name'});
-            this.name.focus();
-            return;
+            return false;
         } else if (nameValue in this.state.userList) {
             this.setState({userNameValid:false,messageError:'This name is not available'});
-            this.name.focus();
-        } else {
-            this.saveData(this.name.value);
+            return false;
+        }
+        return true;
+    }
+
+    onSubmit = async (evt) => {
+        evt.preventDefault();
+        let isNameValid = this.checkValidName();
+        if (isNameValid) {
+            addFirebase('Data','users',this.state.userName);
+            saveLocalStorage('CV',{user:this.state.userName});
+            this.props.dispatch(cv_setUser(this.state.userName));
         }
     }
 
     onChange = (evt) => {
-        let nameValue = this.name.value;
-        if (String(nameValue).trim().length>0) {
-            this.setState({userNameValid:true,messageError:''});
-            evt.preventDefault();
-            return;
-        }
+        this.setState({userName:evt.target.value},() => {
+            if (String(this.state.userName).trim().length>0) {
+                this.setState({userNameValid:true,messageError:''});
+            }
+        });
     }
-    
+
     render () {
         if (!this.state.dataloaded) {
             <Transition in={this.state.dataReady} unmountOnExit timeout={{ enter: 1000, exit: 1000 }}>
@@ -78,7 +73,7 @@ class CvLogin extends React.PureComponent {
             </Transition>;
         }
         return  <form className={"cv__login "  + this.props.transitionClass + (this.state.userNameValid?'':' cv__login--error')} name="login" onSubmit={this.onSubmit}>
-                    <input type="text" name="name" maxLength="30" placeholder="Enter name of your CV..." ref={(f) => this.name = f} onChange={this.onChange}/>
+                    <input type="text" name="name" maxLength="30" placeholder="Enter name of your CV..." value={this.state.userName} onChange={this.onChange}/>
                     <button type='submit'/>
                     {(!this.state.userNameValid) &&    
                         <span>{this.state.messageError}</span>

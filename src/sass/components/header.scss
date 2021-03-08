@@ -5,7 +5,8 @@
     box-sizing: border-box;
     color: $color-white;
     font-size: 24px;
-    padding: 5px 10px;
+    padding: 5px 0 5px 10px;
+    z-index: 1;
     background-color: $color-bg-header;
 
     &__logo {
@@ -21,13 +22,16 @@
 
     &__menu {
         display: flex;
+        align-items: center;
     }
 
     &__menu-item {
+        position: relative;
         margin-right: 10px;
     }
 
     &__button {
+        transition: all 0.2s;
         position: relative;
         display: flex;
         align-items: center;
@@ -43,7 +47,7 @@
         box-shadow: 1px 2px 5px #666;
 
         &:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
             cursor: pointer;
         }
 
@@ -87,6 +91,13 @@
 
         &--link-create::before {
             background-image: url('./../../img/icon-link-create.svg');
+        }
+
+        &--settings {
+            padding: 0 18px;
+            &::before {
+                background-image: url('./../../img/icon-setting1.svg');
+            }
         }
     }
 
@@ -138,13 +149,13 @@
         }
 
         &__menu-item {
-            background-color: rgba($color-white,0.5);
+            width: 100%;
+            background-color: rgba($color-white,0.9);
             border-bottom: 1px solid #666;
             transition: all 1s;
             display: flex;
             margin: 0;
             padding: 3px;
-            width: auto;
         }
 
         &__button {

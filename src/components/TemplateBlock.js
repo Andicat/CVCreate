@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import CvElement from './CvElement';
 import {connect} from 'react-redux';
 import {cvBlock_add, templates_delete} from '../redux/cvDataAC';
-import {getAutoSize} from './utils';
+import {getAutoSize} from '../modules/utils';
 
 class TemplateBlock extends React.PureComponent {
 
@@ -20,7 +20,7 @@ class TemplateBlock extends React.PureComponent {
         this.props.dispatch(cvBlock_add({...deepCopyBlock, width:sizesAuto.width, height:sizesAuto.height}));
     }
 
-    onClickDelete = (evt) => {
+    onClickDelete = () => {
         this.props.dispatch(templates_delete(this.props.id));
     }
 

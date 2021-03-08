@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router';
 import Media from 'react-media';
 import {cv_setLink} from '../redux/cvDataAC';
 import CvBlock from './CvBlock';
-import {createStyle, saveLocalStorage} from './utils';
+import {createStyle, saveLocalStorage} from '../modules/utils';
 import {saveFirebase} from './withDataLoad';
 
 class CvView extends React.PureComponent {
@@ -20,6 +19,7 @@ class CvView extends React.PureComponent {
 
     state = {
         viewForPrint: false,
+        linkIsUpdated: false,
     }
 
     viewForPrint = () => {
@@ -34,9 +34,15 @@ class CvView extends React.PureComponent {
         this.props.dispatch(cv_setLink(linkName));
     }
 
-    updateLink = async () => {
+    updateLink = async (evt) => {
         let linkName = this.props.user;
         let stateToSave = {style:this.props.stylePage,blocks:this.props.blocks};
+        evt.target.parentNode.classList.add('exiting');
+        let timer = setTimeout(()=>{
+                            this.setState({linkIsUpdated:true});
+                            clearTimeout(timer);
+                            return;}
+                    ,500);
         saveFirebase('Links',linkName,stateToSave,false);
     }
 
@@ -52,9 +58,11 @@ class CvView extends React.PureComponent {
         let linkCode;
         if (this.props.link) {
             linkCode = <React.Fragment>
-                            <li className='header__menu-item'>
-                                <button className='header__button header__button--link-update' onClick={this.updateLink}>Update link</button>
-                            </li>
+                            {!this.state.linkIsUpdated &&
+                                <li className='header__menu-item'>
+                                    <button className='header__button header__button--link-update' onClick={this.updateLink}>Update link</button>
+                                </li>
+                            }
                             <li className='header__menu-item'>
                                 <NavLink to={'/' + this.props.link} className='header__button header__button--show' target="_blank">Open link ({this.props.link})</NavLink>
                             </li>
@@ -112,5 +120,5 @@ const mapStateToProps = function (state) {
         link: state.cvData.link,
     };
 };
-  
-export default withRouter((connect(mapStateToProps)(CvView)));
+
+export default connect(mapStateToProps)(CvView);

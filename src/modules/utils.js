@@ -7,48 +7,78 @@ const PADDING_MAX = 100;
 
 const CV_ID = 1.1;
 
-const OPTIONS_TEXT = {
-    font: 'font',
-    fontsize: 'font Size',
-    bold: 'font Bold',
-    italic: 'font Italic',
-    underline: 'font Underline',
-    uppercase: 'font Uppercase',
-    center: 'align text to Center',
-    color: 'color of text',
-    bgcolor: 'background color',
-    file: 'load image',
-    maincount: 'count of first dots',
-    addcount: 'count of second dots',
-    radius: 'radius of dots',
-    borderwidth: 'width of border',
-    bordercolor: 'color of border',
-    padding: 'padding',
-    opacity: 'opacity',
-    copy: 'copy block',
-    back: 'send block on back',
-    autosize: 'set block size on Auto',
-    lock: 'lock block position',
-    ungroup: 'ungroup blocks',
-    alignTop: 'align blocks on top',
-    alignBottom: 'align blocks on bottom',
-    alignLeft: 'align blocks on left',
-    alignRight: 'align blocks on right',
-    alignVertical: 'align blocks on vertical',
-    alignHorisontal: 'align blocks on horisontal',
-    distributeVertical: 'distribute blocks on vertical',
-    distributeHorisontal: 'distribute blocks on horisontal',
-    alignWidth: 'set same width for blocks',
-    alignHeight: 'set same height for blocks',
-    group: 'group blocks',
-    progress: 'progress',
-    height: 'height',
-    width: 'width',
-    link: 'set link for block',
-    save: 'save this block to panel',
-}
-
 const FONTS = ['PTSans','Roboto','Helvetica','Garamond'];
+
+const BLOCK_ACTION = [
+    'lock',
+    'autosize',
+    'back',
+    'copy',
+    'link',
+    'save',
+];
+
+const BLOCKS_ACTION = [
+    'alignTop',
+    'alignBottom',
+    'alignLeft',
+    'alignRight',
+    'alignVertical',
+    'alignHorisontal',
+    'distributeVertical',
+    'distributeHorisontal',
+    'alignWidth',
+    'alignHeight',
+    'group',
+];
+
+function createTooltipText(optionName) {
+
+    const OPTIONS_TEXT = {
+        font: 'font',
+        fontsize: 'font Size',
+        bold: 'font Bold',
+        italic: 'font Italic',
+        underline: 'font Underline',
+        uppercase: 'font Uppercase',
+        center: 'align text to Center',
+        color: 'color of text',
+        bgcolor: 'background color',
+        file: 'load image',
+        maincount: 'count of first dots',
+        addcount: 'count of second dots',
+        radius: 'radius of dots',
+        borderwidth: 'width of border',
+        bordercolor: 'color of border',
+        padding: 'padding',
+        opacity: 'opacity',
+        copy: 'copy block',
+        back: 'send block on back',
+        autosize: 'set block size on Auto',
+        lock: 'lock block position',
+        ungroup: 'ungroup blocks',
+        alignTop: 'align blocks on top',
+        alignBottom: 'align blocks on bottom',
+        alignLeft: 'align blocks on left',
+        alignRight: 'align blocks on right',
+        alignVertical: 'align blocks on vertical',
+        alignHorisontal: 'align blocks on horisontal',
+        distributeVertical: 'distribute blocks on vertical',
+        distributeHorisontal: 'distribute blocks on horisontal',
+        alignWidth: 'set same width for blocks',
+        alignHeight: 'set same height for blocks',
+        group: 'group blocks',
+        progress: 'progress',
+        height: 'height',
+        width: 'width',
+        link: 'set link for block',
+        save: 'save this block to panel',
+        fill: 'color of icon',
+        size: 'size of icon',
+        colorlist: 'color of list style',
+    };
+    return OPTIONS_TEXT[decodeStyle(optionName)];
+};
 
 //create jsx-code for option
 function createOption (optionType,optionValue,cbOnChange) {
@@ -59,7 +89,7 @@ function createOption (optionType,optionValue,cbOnChange) {
         return codeButton(optionType,cbOnChange);
     } else if (optionType==='bold' || optionType==='italic' || optionType==='uppercase' || optionType==='underline' || optionType==='center' || optionType==='lock') {
         return codeCheckbox(optionType,optionValue);
-    } else if (optionType.indexOf('color')>=0) {
+    } else if (optionType==='fill' || optionType.indexOf('color')>=0) {
         return codeColor(optionValue);
     } else if (optionType==='font') {
         return codeList(optionValue,FONTS);
@@ -75,7 +105,7 @@ function createOption (optionType,optionValue,cbOnChange) {
         return codeRange(optionType,optionValue,0,1,0.01);
     } else if (optionType==='link') {
         return codeLink(optionType,optionValue);
-    } else if (optionType==='maincount' || optionType==='addcount' || optionType==='radius' || optionType==='borderwidth') {
+    } else if (optionType==='maincount' || optionType==='addcount' || optionType==='radius' || optionType==='borderwidth' || optionType==='size') {
         return codeNumber(optionValue,0,100);
     } else {
         return null;
@@ -345,89 +375,7 @@ function loadFromLocalStorage(lsName) {
     }    
 };
 
-/*
-//временно!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-function saveTemplates() {
-    function createTemplates() {
-
-        let textStyleDefault = {font:'Roboto', color:'#000000', fontsize:'16',
-                                bold:false, italic:false, center:false,
-                                uppercase:false, underline:false, padding:{left:1,right:0,top:0,bottom:0}};
-    
-        let imagesArr = [
-            {type:'image', style:{file:'', opacity:1}},
-            {type:'image', style:{file:'', opacity:1, borderRadius:'50%'}},
-            {type:'image', style:{file:'', opacity:1, bordercolor: '#E05B49', borderwidth: '3', borderStyle: 'solid'}},
-            {type:'image', style:{file:'', opacity:1, borderRadius:'50%', bordercolor: '#E05B49', borderwidth: '3', borderStyle: 'solid'}},
-        ];
-    
-        let textArr = [
-            {type:'text', text:'Text simple', style:{...textStyleDefault, fontsize: '20'}},
-            {type:'text', text:'Text with background', style:{bgcolor:'#8e9fa0',...textStyleDefault, fontsize:'14'}},
-            {type:'text', text:'Big text', style:{...textStyleDefault, fontsize: '40', bold:true}},
-            {type:'group', elements:[
-                {type:'text', text:'Your header', style:{...textStyleDefault, fontsize:'20', bold:true}},
-                {type:'text', text:'your text', style:{...textStyleDefault}}
-            ]},
-        ];
-        
-        let textBlockArr = [
-            {type:'group', elements:[
-                {type:'text', text:'Your position', style:{...textStyleDefault, fontsize:'18', bold:true}},
-                {type:'text', text:'Company', style:{...textStyleDefault, fontsize:'18'}},
-                {type:'text', text:'period', style:{...textStyleDefault,italic:true}},
-                {type:'text', text:'your competencies and results', style:{...textStyleDefault}}
-            ]},
-        ];
-    
-        let figuresArr = [
-            {type:'figure', style:{bgcolor:'#E05B49', opacity:1}},
-            {type:'figure', style:{bgcolor:'#6AABB5', opacity:1, borderRadius:'50%'}},
-        ];
-        
-        let progressArr = [
-            {type:'dots-row', style:{maincolor:'#E05B49', addcolor:'#E6E6E6', radius:10, maincount:5, addcount: 3}},
-            {type:'progress', style:{maincolor:'#E05B49', addcolor:'#E6E6E6', progress:50}}
-        ];
-    
-        let templatesArr = [
-            {name: 'Image', elements:imagesArr},
-            {name: 'Text', elements:textArr},
-            {name: 'Info block', elements:textBlockArr},
-            {name: 'Figure', elements:figuresArr},
-            {name: 'Progress', elements:progressArr},
-            //{name: 'Icons', elements:iconsArr},
-        ];
-    
-        return templatesArr;
-    }
-
-    function codeStyle(block) {
-        let newBlock = {...block};
-        if (block.style) {
-            let newStyle = {};
-            let styleIndex = 0;
-            for (let key in block.style) {
-                newStyle['s0' + styleIndex + '_' + key] = block.style[key];
-                styleIndex++;
-            }
-            newBlock.style = newStyle;
-        }
-        //block.style[action.styleName] = action.styleValue;
-        //block.style = {...block.style};
-        if (block.elements) {
-            let newElements = block.elements.map(e => codeStyle(e));
-            newBlock.elements = newElements;
-    
-            return newBlock;
-        }
-        return newBlock;
-    }
-    
-    let templatesArr = createTemplates();
-    let templatesArrConverted = templatesArr.map(t => codeStyle(t));
-    saveFirebase('Data','templates',{templates:templatesArrConverted});
-}
-*/
-
-export {createOption, createStyle, getAutoSize, saveFileJSON, readFileJSON, saveLocalStorage, loadFromLocalStorage, decodeStyle, CV_ID, OPTIONS_TEXT};
+export {createTooltipText, createOption, createStyle, 
+        getAutoSize, saveFileJSON, readFileJSON, saveLocalStorage,
+        loadFromLocalStorage, decodeStyle,
+        CV_ID, BLOCK_ACTION, BLOCKS_ACTION};

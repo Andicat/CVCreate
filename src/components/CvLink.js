@@ -1,7 +1,7 @@
 import React from 'react';
 import {withRouter} from 'react-router';
 import CvBlock from './CvBlock';
-import {createStyle} from './utils';
+import {createStyle} from '../modules/utils';
 import {loadFirebase} from './withDataLoad';
 
 class CvLink extends React.PureComponent {

@@ -8,8 +8,8 @@ import OptionPanel from './OptionPanel';
 import TemplatePanel from './TemplatePanel';
 import CvDocument from './CvDocument';
 import CvLogin from './CvLogin';
-import {saveFileJSON, readFileJSON, saveLocalStorage} from './utils';
-import {cv_load} from '../redux/cvDataAC';
+import {saveFileJSON, readFileJSON, saveLocalStorage} from '../modules/utils';
+import {cv_load,cvBlock_activate} from '../redux/cvDataAC';
 
 class CV extends React.PureComponent {
     
@@ -32,6 +32,9 @@ class CV extends React.PureComponent {
     }
 
     saveLS = () => {
+        if (this.props.activeBlocksId.length>0) {
+            this.props.dispatch(cvBlock_activate(null,null));
+        }
         let stateToSave = {style:this.props.stylePage,blocks:this.props.blocks};
         saveLocalStorage('CV',stateToSave);
     } 
@@ -52,7 +55,7 @@ class CV extends React.PureComponent {
     }
     
     render () {
-        console.log('render cv');
+        //console.log('render cv');
         if (!this.props.user) {
             return <Transition in={!this.props.user} unmountOnExit timeout={{ enter: 1000, exit: 1000 }}>
                         {stateName => {
@@ -68,7 +71,6 @@ class CV extends React.PureComponent {
             activeBlockOptions = {id:activeBlock.id,
                                 lock: activeBlock.lock,
                                 link:activeBlock.link,
-                                list:activeBlock.list,
                                 group:activeBlock.group,
                             };
         }
@@ -87,6 +89,9 @@ class CV extends React.PureComponent {
                         </li>
                         <li className='header__menu-item'>
                             <NavLink to='/view' className='header__button header__button--show' onClick={this.saveLS}>Show</NavLink>    
+                        </li>
+                        <li className='header__menu-item'>
+                            <NavLink to='/settings' className='header__button header__button--settings' onClick={this.showSettings}></NavLink>    
                         </li>
                     </ul>
                     <Media query="(max-width: 767px)">

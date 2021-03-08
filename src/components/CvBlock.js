@@ -26,16 +26,15 @@ class CvBlock extends React.PureComponent {
 
     onClick = (evt) => {
         if (evt.ctrlKey || evt.shiftKey) {
-            evt.preventDefault();
             this.props.dispatch(cvBlock_activateMulti(this.props.id));
         } else {
             let activatedElement = evt.target.getAttribute('data-elem');
-            evt.preventDefault();
             this.props.dispatch(cvBlock_activate(this.props.id, evt.currentTarget, activatedElement));
         }
     }
 
     render () {
+        //console.log('render cv block',this.props.id);
         let style = {top:this.props.data.positionTop + 'px', left:this.props.data.positionLeft + 'px', width:this.props.data.width + 'px', height:this.props.data.height + 'px'};
         let className = 'cv__block' + ((this.props.activeIndex>=0)?' cv__block--active':'')
                         + ((this.props.activeIndex===0)?' cv__block--active-first':'')

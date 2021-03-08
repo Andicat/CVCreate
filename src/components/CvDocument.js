@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import CvBlock from './CvBlock';
 import Transform from './Transform';
 import {cvBlock_activate} from '../redux/cvDataAC';
-import {createStyle} from './utils';
+import {createStyle} from '../modules/utils';
 
 class CvDocument extends React.PureComponent {
 
@@ -20,10 +20,11 @@ class CvDocument extends React.PureComponent {
     onClick = (evt) => {
         if (evt.target === evt.currentTarget) {
             this.props.dispatch(cvBlock_activate(null,null));
-        };
+        }
     }
 
     render () {
+        //console.log('render cv document');
         let cvBlocksCode = this.props.blocks.map( b => {
             let activeIndex = this.props.activeBlocksId.findIndex(ab => ab===b.id);
             return <CvBlock key={b.id} id={b.id} data={b} activeIndex={activeIndex} activeElementId={activeIndex>=0?this.props.activeElementId:null} editable={true}></CvBlock>

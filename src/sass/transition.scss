@@ -63,7 +63,6 @@
     }
 }
 
-
 .template-panel__block {
 
    &.entered {
@@ -87,6 +86,20 @@
     &.exiting {
         animation: fadeOut 500ms forwards;
     }  
+}
+
+.header__menu-item.exiting {
+    transition: all 1s;
+    margin: 0;
+    & button {
+        animation: menu-item-hide 500ms forwards;
+        &::before{
+            animation: scale 500ms forwards;
+        }
+        &:hover {
+            transform: none;
+        }
+    }
 }
 
 @keyframes fadeIn {
@@ -169,5 +182,39 @@
     50% {
         transform: scale(1);
         opacity: 1;
+    }
+}
+
+@keyframes menu-item-hide {
+    from {
+        opacity: 1;
+        width:auto;
+        height: 36px;
+        font-size: 14px;
+        padding-right: 10px;
+        padding-left: 40px;
+    }
+
+    to {
+        opacity: 0;
+        width:0;
+        height: 0;
+        font-size: 0;
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+@keyframes scale {
+    from {
+        width: 30px;
+        height: 30px;
+        right: 10px;
+    }
+
+    to {
+        width: 0;
+        height: 0;
+        right: 20px;
     }
 }

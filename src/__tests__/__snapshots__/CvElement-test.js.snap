@@ -1,0 +1,357 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvElement render Рендер активного элемента 1`] = `
+<span
+  className="cv__element cv__element--text cv__element--active"
+  contentEditable={false}
+  data-elem={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  style={
+    Object {
+      "backgroundColor": "#8e9fa0",
+      "color": "#000000",
+      "fontFamily": "Roboto",
+      "fontSize": "14px",
+      "fontStyle": "normal",
+      "fontWeight": "normal",
+      "padding": "0px 0px 0px 1px",
+      "textAlign": "start",
+      "textDecoration": "none",
+      "textTransform": "none",
+    }
+  }
+  suppressContentEditableWarning={false}
+>
+  Text with background
+</span>
+`;
+
+exports[`CvElement render Рендер без данных 1`] = `null`;
+
+exports[`CvElement render Рендер блока прогресса 1`] = `
+<div
+  className="cv__element cv__element--progress"
+  data-elem={true}
+  onClick={[Function]}
+  style={
+    Object {
+      "addcolor": "#E6E6E6",
+      "maincolor": "#E05B49",
+      "progress": 50,
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "backgroundColor": "#E05B49",
+        "width": "50%",
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "backgroundColor": "#E6E6E6",
+        "width": "50%",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`CvElement render Рендер блока с кружочками 1`] = `
+<div
+  className="cv__element cv__element--dots-row"
+  data-elem={true}
+  onClick={[Function]}
+  style={
+    Object {
+      "addcolor": "#E6E6E6",
+      "addcount": 3,
+      "maincolor": "#E05B49",
+      "maincount": 5,
+      "radius": 10,
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "backgroundColor": "#E05B49",
+        "borderRadius": "50%",
+        "height": "10px",
+        "margin": "0 5px",
+        "width": "10px",
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "backgroundColor": "#E05B49",
+        "borderRadius": "50%",
+        "height": "10px",
+        "margin": "0 5px",
+        "width": "10px",
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "backgroundColor": "#E05B49",
+        "borderRadius": "50%",
+        "height": "10px",
+        "margin": "0 5px",
+        "width": "10px",
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "backgroundColor": "#E05B49",
+        "borderRadius": "50%",
+        "height": "10px",
+        "margin": "0 5px",
+        "width": "10px",
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "backgroundColor": "#E05B49",
+        "borderRadius": "50%",
+        "height": "10px",
+        "margin": "0 5px",
+        "width": "10px",
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "backgroundColor": "#E6E6E6",
+        "borderRadius": "50%",
+        "height": "10px",
+        "margin": "0 5px",
+        "width": "10px",
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "backgroundColor": "#E6E6E6",
+        "borderRadius": "50%",
+        "height": "10px",
+        "margin": "0 5px",
+        "width": "10px",
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "backgroundColor": "#E6E6E6",
+        "borderRadius": "50%",
+        "height": "10px",
+        "margin": "0 5px",
+        "width": "10px",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`CvElement render Рендер картинки 1`] = `
+<img
+  alt=""
+  className="cv__element cv__element--image"
+  data-elem={true}
+  onClick={[Function]}
+  src={null}
+  style={
+    Object {
+      "borderColor": "#E05B49",
+      "borderRadius": "50%",
+      "borderStyle": "solid",
+      "borderWidth": "3px",
+      "file": "",
+      "opacity": 1,
+    }
+  }
+/>
+`;
+
+exports[`CvElement render Рендер текст 1`] = `
+<span
+  className="cv__element cv__element--text"
+  contentEditable={false}
+  data-elem={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  style={
+    Object {
+      "backgroundColor": "#8e9fa0",
+      "color": "#000000",
+      "fontFamily": "Roboto",
+      "fontSize": "14px",
+      "fontStyle": "normal",
+      "fontWeight": "normal",
+      "padding": "0px 0px 0px 1px",
+      "textAlign": "start",
+      "textDecoration": "none",
+      "textTransform": "none",
+    }
+  }
+  suppressContentEditableWarning={false}
+>
+  Text with background
+</span>
+`;
+
+exports[`CvElement render Рендер текста с возможностью правки 1`] = `
+<span
+  className="cv__element cv__element--text"
+  contentEditable={true}
+  data-elem={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  style={
+    Object {
+      "backgroundColor": "#8e9fa0",
+      "color": "#000000",
+      "fontFamily": "Roboto",
+      "fontSize": "14px",
+      "fontStyle": "normal",
+      "fontWeight": "normal",
+      "padding": "0px 0px 0px 1px",
+      "textAlign": "start",
+      "textDecoration": "none",
+      "textTransform": "none",
+    }
+  }
+  suppressContentEditableWarning={true}
+>
+  Text with background
+</span>
+`;
+
+exports[`CvElement render Рендер текстового блока 1`] = `
+<div
+  className="cv__element cv__element--group"
+  style={Object {}}
+>
+  <span
+    className="cv__element cv__element--text"
+    contentEditable={false}
+    data-elem={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    style={
+      Object {
+        "color": "#000000",
+        "fontFamily": "Roboto",
+        "fontSize": "18px",
+        "fontStyle": "normal",
+        "fontWeight": "bold",
+        "padding": "0px 0px 0px 1px",
+        "textAlign": "start",
+        "textDecoration": "none",
+        "textTransform": "none",
+      }
+    }
+    suppressContentEditableWarning={false}
+  >
+    Your position
+  </span>
+  <span
+    className="cv__element cv__element--text"
+    contentEditable={false}
+    data-elem={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    style={
+      Object {
+        "color": "#000000",
+        "fontFamily": "Roboto",
+        "fontSize": "18px",
+        "fontStyle": "normal",
+        "fontWeight": "normal",
+        "padding": "0px 0px 0px 1px",
+        "textAlign": "start",
+        "textDecoration": "none",
+        "textTransform": "none",
+      }
+    }
+    suppressContentEditableWarning={false}
+  >
+    Company
+  </span>
+  <span
+    className="cv__element cv__element--text"
+    contentEditable={false}
+    data-elem={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    style={
+      Object {
+        "color": "#000000",
+        "fontFamily": "Roboto",
+        "fontSize": "16px",
+        "fontStyle": "italic",
+        "fontWeight": "normal",
+        "padding": "0px 0px 0px 1px",
+        "textAlign": "start",
+        "textDecoration": "none",
+        "textTransform": "none",
+      }
+    }
+    suppressContentEditableWarning={false}
+  >
+    period
+  </span>
+  <span
+    className="cv__element cv__element--text"
+    contentEditable={false}
+    data-elem={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    style={
+      Object {
+        "color": "#000000",
+        "fontFamily": "Roboto",
+        "fontSize": "16px",
+        "fontStyle": "normal",
+        "fontWeight": "normal",
+        "padding": "0px 0px 0px 1px",
+        "textAlign": "start",
+        "textDecoration": "none",
+        "textTransform": "none",
+      }
+    }
+    suppressContentEditableWarning={false}
+  >
+    your competencies and results
+  </span>
+</div>
+`;
+
+exports[`CvElement render Рендер цветного блока 1`] = `
+<div
+  className="cv__element cv__element--figure"
+  data-elem={true}
+  onClick={[Function]}
+  style={
+    Object {
+      "backgroundColor": "#6AABB5",
+      "borderRadius": "50%",
+      "opacity": 1,
+    }
+  }
+/>
+`;

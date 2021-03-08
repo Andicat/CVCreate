@@ -1,0 +1,1040 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CvView render Рендер без данных 1`] = `
+Array [
+  <header
+    className="header undefined"
+  >
+    <ul
+      className="header__menu"
+    >
+      <li
+        className="header__menu-item"
+      >
+        <button
+          className="header__button header__button--print"
+          onClick={[Function]}
+        >
+          View for print
+        </button>
+      </li>
+      <li
+        className="header__menu-item"
+      >
+        <a
+          aria-current="page"
+          className="header__button header__button--edit active"
+          href="/"
+          onClick={[Function]}
+          style={Object {}}
+        >
+          Back to edit
+        </a>
+      </li>
+      <li
+        className="header__menu-item"
+      >
+        <button
+          className="header__button header__button--link-create"
+          onClick={[Function]}
+        >
+          Create Link
+        </button>
+      </li>
+    </ul>
+    <button
+      className="header__button header__button--menu"
+      onClick={[Function]}
+    />
+  </header>,
+  <main
+    className="main undefined"
+  >
+    <div
+      className="cv-view"
+    >
+      <div
+        className="cv"
+        style={
+          Object {
+            "backgroundColor": "#ffffff",
+          }
+        }
+      />
+    </div>
+  </main>,
+]
+`;
+
+exports[`CvView render Рендер для печати 1`] = `
+<main
+  className="main undefined"
+>
+  <div
+    className="header__print no-print"
+  >
+    <span>
+      You can save this page to PDF-file. Open a webpage in Chrome, press Ctrl+P to open the Print dialog and change the destination printer to “Save as PDF”. Hit the “Print” button and the webpage will download as a PDF document
+    </span>
+    <a
+      aria-current="page"
+      className="header__button header__button--edit active"
+      href="/"
+      onClick={[Function]}
+      style={Object {}}
+    >
+      Back to edit
+    </a>
+  </div>
+  <div
+    className="cv-view"
+  >
+    <div
+      className="cv"
+      style={
+        Object {
+          "backgroundColor": "#ffffff",
+        }
+      }
+    >
+      <div
+        className="cv__block entered"
+        onClick={[Function]}
+        style={
+          Object {
+            "height": "66px",
+            "left": "290.08598862935975px",
+            "top": "52.08598862935976px",
+            "width": "149px",
+          }
+        }
+      >
+        <span
+          className="cv__element cv__element--text"
+          contentEditable={false}
+          data-elem={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "#1bac38",
+              "fontFamily": "Roboto",
+              "fontSize": "40px",
+              "fontStyle": "normal",
+              "fontWeight": "bold",
+              "padding": "0px 0px 0px 1px",
+              "textAlign": "start",
+              "textDecoration": "none",
+              "textTransform": "none",
+            }
+          }
+          suppressContentEditableWarning={false}
+        >
+          Big text
+        </span>
+      </div>
+      <div
+        className="cv__block entered"
+        onClick={[Function]}
+        style={
+          Object {
+            "height": "142px",
+            "left": "60.43650934333691px",
+            "top": "44.43650934333691px",
+            "width": "182px",
+          }
+        }
+      >
+        <img
+          alt=""
+          className="cv__element cv__element--image"
+          data-elem={true}
+          onClick={[Function]}
+          style={
+            Object {
+              "file": "",
+              "opacity": 1,
+            }
+          }
+        />
+      </div>
+      <div
+        className="cv__block entered"
+        onClick={[Function]}
+        style={
+          Object {
+            "height": "62px",
+            "left": "303.173880178947px",
+            "top": "142.173880178947px",
+            "width": "119px",
+          }
+        }
+      >
+        <div
+          className="cv__element cv__element--group"
+          style={Object {}}
+        >
+          <span
+            className="cv__element cv__element--text"
+            contentEditable={false}
+            data-elem={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "#000000",
+                "fontFamily": "Roboto",
+                "fontSize": "20px",
+                "fontStyle": "normal",
+                "fontWeight": "bold",
+                "padding": "0px 0px 0px 1px",
+                "textAlign": "start",
+                "textDecoration": "none",
+                "textTransform": "none",
+              }
+            }
+            suppressContentEditableWarning={false}
+          >
+            Your header
+          </span>
+          <span
+            className="cv__element cv__element--text"
+            contentEditable={false}
+            data-elem={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "#000000",
+                "fontFamily": "Roboto",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+                "padding": "0px 0px 0px 1px",
+                "textAlign": "start",
+                "textDecoration": "none",
+                "textTransform": "none",
+              }
+            }
+            suppressContentEditableWarning={false}
+          >
+            your text
+          </span>
+        </div>
+      </div>
+      <div
+        className="cv__block entered"
+        onClick={[Function]}
+        style={
+          Object {
+            "height": "50px",
+            "left": "72.88890908532193px",
+            "top": "248.88890908532193px",
+            "width": "179px",
+          }
+        }
+      >
+        <div
+          className="cv__element cv__element--dots-row"
+          data-elem={true}
+          onClick={[Function]}
+          style={
+            Object {
+              "addcolor": "#E6E6E6",
+              "addcount": 3,
+              "maincolor": "#E05B49",
+              "maincount": 5,
+              "radius": 10,
+            }
+          }
+        >
+          <div
+            style={
+              Object {
+                "backgroundColor": "#E05B49",
+                "borderRadius": "50%",
+                "height": "10px",
+                "margin": "0 5px",
+                "width": "10px",
+              }
+            }
+          />
+          <div
+            style={
+              Object {
+                "backgroundColor": "#E05B49",
+                "borderRadius": "50%",
+                "height": "10px",
+                "margin": "0 5px",
+                "width": "10px",
+              }
+            }
+          />
+          <div
+            style={
+              Object {
+                "backgroundColor": "#E05B49",
+                "borderRadius": "50%",
+                "height": "10px",
+                "margin": "0 5px",
+                "width": "10px",
+              }
+            }
+          />
+          <div
+            style={
+              Object {
+                "backgroundColor": "#E05B49",
+                "borderRadius": "50%",
+                "height": "10px",
+                "margin": "0 5px",
+                "width": "10px",
+              }
+            }
+          />
+          <div
+            style={
+              Object {
+                "backgroundColor": "#E05B49",
+                "borderRadius": "50%",
+                "height": "10px",
+                "margin": "0 5px",
+                "width": "10px",
+              }
+            }
+          />
+          <div
+            style={
+              Object {
+                "backgroundColor": "#E6E6E6",
+                "borderRadius": "50%",
+                "height": "10px",
+                "margin": "0 5px",
+                "width": "10px",
+              }
+            }
+          />
+          <div
+            style={
+              Object {
+                "backgroundColor": "#E6E6E6",
+                "borderRadius": "50%",
+                "height": "10px",
+                "margin": "0 5px",
+                "width": "10px",
+              }
+            }
+          />
+          <div
+            style={
+              Object {
+                "backgroundColor": "#E6E6E6",
+                "borderRadius": "50%",
+                "height": "10px",
+                "margin": "0 5px",
+                "width": "10px",
+              }
+            }
+          />
+        </div>
+      </div>
+      <div
+        className="cv__block entered"
+        onClick={[Function]}
+        style={
+          Object {
+            "height": "161px",
+            "left": "322.66776857728195px",
+            "top": "238.66776857728195px",
+            "width": "171px",
+          }
+        }
+      >
+        <div
+          className="cv__element cv__element--figure"
+          data-elem={true}
+          onClick={[Function]}
+          style={
+            Object {
+              "backgroundColor": "#6AABB5",
+              "borderRadius": "50%",
+              "opacity": 1,
+            }
+          }
+        />
+      </div>
+      <div
+        className="cv__block entered"
+        onClick={[Function]}
+        style={
+          Object {
+            "height": "111px",
+            "left": "487.9319841589094px",
+            "top": "92.93198415890942px",
+            "width": "252px",
+          }
+        }
+      >
+        <div
+          className="cv__element cv__element--group"
+          style={Object {}}
+        >
+          <span
+            className="cv__element cv__element--text"
+            contentEditable={false}
+            data-elem={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "#000000",
+                "fontFamily": "Roboto",
+                "fontSize": "18px",
+                "fontStyle": "normal",
+                "fontWeight": "bold",
+                "padding": "0px 0px 0px 1px",
+                "textAlign": "start",
+                "textDecoration": "none",
+                "textTransform": "none",
+              }
+            }
+            suppressContentEditableWarning={false}
+          >
+            Your position
+          </span>
+          <span
+            className="cv__element cv__element--text"
+            contentEditable={false}
+            data-elem={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "#000000",
+                "fontFamily": "Roboto",
+                "fontSize": "18px",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+                "padding": "0px 0px 0px 1px",
+                "textAlign": "start",
+                "textDecoration": "none",
+                "textTransform": "none",
+              }
+            }
+            suppressContentEditableWarning={false}
+          >
+            Company
+          </span>
+          <span
+            className="cv__element cv__element--text"
+            contentEditable={false}
+            data-elem={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "#000000",
+                "fontFamily": "Roboto",
+                "fontSize": "16px",
+                "fontStyle": "italic",
+                "fontWeight": "normal",
+                "padding": "0px 0px 0px 1px",
+                "textAlign": "start",
+                "textDecoration": "none",
+                "textTransform": "none",
+              }
+            }
+            suppressContentEditableWarning={false}
+          >
+            period
+          </span>
+          <span
+            className="cv__element cv__element--text"
+            contentEditable={false}
+            data-elem={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "#000000",
+                "fontFamily": "Roboto",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+                "padding": "0px 0px 0px 1px",
+                "textAlign": "start",
+                "textDecoration": "none",
+                "textTransform": "none",
+              }
+            }
+            suppressContentEditableWarning={false}
+          >
+            your competencies and results
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+`;
+
+exports[`CvView render Рендер с данными 1`] = `
+Array [
+  <header
+    className="header undefined"
+  >
+    <ul
+      className="header__menu"
+    >
+      <li
+        className="header__menu-item"
+      >
+        <button
+          className="header__button header__button--print"
+          onClick={[Function]}
+        >
+          View for print
+        </button>
+      </li>
+      <li
+        className="header__menu-item"
+      >
+        <a
+          aria-current="page"
+          className="header__button header__button--edit active"
+          href="/"
+          onClick={[Function]}
+          style={Object {}}
+        >
+          Back to edit
+        </a>
+      </li>
+      <li
+        className="header__menu-item"
+      >
+        <button
+          className="header__button header__button--link-create"
+          onClick={[Function]}
+        >
+          Create Link
+        </button>
+      </li>
+    </ul>
+    <button
+      className="header__button header__button--menu"
+      onClick={[Function]}
+    />
+  </header>,
+  <main
+    className="main undefined"
+  >
+    <div
+      className="cv-view"
+    >
+      <div
+        className="cv"
+        style={
+          Object {
+            "backgroundColor": "#ffffff",
+          }
+        }
+      >
+        <div
+          className="cv__block entered"
+          onClick={[Function]}
+          style={
+            Object {
+              "height": "66px",
+              "left": "290.08598862935975px",
+              "top": "52.08598862935976px",
+              "width": "149px",
+            }
+          }
+        >
+          <span
+            className="cv__element cv__element--text"
+            contentEditable={false}
+            data-elem={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "#1bac38",
+                "fontFamily": "Roboto",
+                "fontSize": "40px",
+                "fontStyle": "normal",
+                "fontWeight": "bold",
+                "padding": "0px 0px 0px 1px",
+                "textAlign": "start",
+                "textDecoration": "none",
+                "textTransform": "none",
+              }
+            }
+            suppressContentEditableWarning={false}
+          >
+            Big text
+          </span>
+        </div>
+        <div
+          className="cv__block entered"
+          onClick={[Function]}
+          style={
+            Object {
+              "height": "142px",
+              "left": "60.43650934333691px",
+              "top": "44.43650934333691px",
+              "width": "182px",
+            }
+          }
+        >
+          <img
+            alt=""
+            className="cv__element cv__element--image"
+            data-elem={true}
+            onClick={[Function]}
+            style={
+              Object {
+                "file": "",
+                "opacity": 1,
+              }
+            }
+          />
+        </div>
+        <div
+          className="cv__block entered"
+          onClick={[Function]}
+          style={
+            Object {
+              "height": "62px",
+              "left": "303.173880178947px",
+              "top": "142.173880178947px",
+              "width": "119px",
+            }
+          }
+        >
+          <div
+            className="cv__element cv__element--group"
+            style={Object {}}
+          >
+            <span
+              className="cv__element cv__element--text"
+              contentEditable={false}
+              data-elem={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              style={
+                Object {
+                  "color": "#000000",
+                  "fontFamily": "Roboto",
+                  "fontSize": "20px",
+                  "fontStyle": "normal",
+                  "fontWeight": "bold",
+                  "padding": "0px 0px 0px 1px",
+                  "textAlign": "start",
+                  "textDecoration": "none",
+                  "textTransform": "none",
+                }
+              }
+              suppressContentEditableWarning={false}
+            >
+              Your header
+            </span>
+            <span
+              className="cv__element cv__element--text"
+              contentEditable={false}
+              data-elem={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              style={
+                Object {
+                  "color": "#000000",
+                  "fontFamily": "Roboto",
+                  "fontSize": "16px",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                  "padding": "0px 0px 0px 1px",
+                  "textAlign": "start",
+                  "textDecoration": "none",
+                  "textTransform": "none",
+                }
+              }
+              suppressContentEditableWarning={false}
+            >
+              your text
+            </span>
+          </div>
+        </div>
+        <div
+          className="cv__block entered"
+          onClick={[Function]}
+          style={
+            Object {
+              "height": "50px",
+              "left": "72.88890908532193px",
+              "top": "248.88890908532193px",
+              "width": "179px",
+            }
+          }
+        >
+          <div
+            className="cv__element cv__element--dots-row"
+            data-elem={true}
+            onClick={[Function]}
+            style={
+              Object {
+                "addcolor": "#E6E6E6",
+                "addcount": 3,
+                "maincolor": "#E05B49",
+                "maincount": 5,
+                "radius": 10,
+              }
+            }
+          >
+            <div
+              style={
+                Object {
+                  "backgroundColor": "#E05B49",
+                  "borderRadius": "50%",
+                  "height": "10px",
+                  "margin": "0 5px",
+                  "width": "10px",
+                }
+              }
+            />
+            <div
+              style={
+                Object {
+                  "backgroundColor": "#E05B49",
+                  "borderRadius": "50%",
+                  "height": "10px",
+                  "margin": "0 5px",
+                  "width": "10px",
+                }
+              }
+            />
+            <div
+              style={
+                Object {
+                  "backgroundColor": "#E05B49",
+                  "borderRadius": "50%",
+                  "height": "10px",
+                  "margin": "0 5px",
+                  "width": "10px",
+                }
+              }
+            />
+            <div
+              style={
+                Object {
+                  "backgroundColor": "#E05B49",
+                  "borderRadius": "50%",
+                  "height": "10px",
+                  "margin": "0 5px",
+                  "width": "10px",
+                }
+              }
+            />
+            <div
+              style={
+                Object {
+                  "backgroundColor": "#E05B49",
+                  "borderRadius": "50%",
+                  "height": "10px",
+                  "margin": "0 5px",
+                  "width": "10px",
+                }
+              }
+            />
+            <div
+              style={
+                Object {
+                  "backgroundColor": "#E6E6E6",
+                  "borderRadius": "50%",
+                  "height": "10px",
+                  "margin": "0 5px",
+                  "width": "10px",
+                }
+              }
+            />
+            <div
+              style={
+                Object {
+                  "backgroundColor": "#E6E6E6",
+                  "borderRadius": "50%",
+                  "height": "10px",
+                  "margin": "0 5px",
+                  "width": "10px",
+                }
+              }
+            />
+            <div
+              style={
+                Object {
+                  "backgroundColor": "#E6E6E6",
+                  "borderRadius": "50%",
+                  "height": "10px",
+                  "margin": "0 5px",
+                  "width": "10px",
+                }
+              }
+            />
+          </div>
+        </div>
+        <div
+          className="cv__block entered"
+          onClick={[Function]}
+          style={
+            Object {
+              "height": "161px",
+              "left": "322.66776857728195px",
+              "top": "238.66776857728195px",
+              "width": "171px",
+            }
+          }
+        >
+          <div
+            className="cv__element cv__element--figure"
+            data-elem={true}
+            onClick={[Function]}
+            style={
+              Object {
+                "backgroundColor": "#6AABB5",
+                "borderRadius": "50%",
+                "opacity": 1,
+              }
+            }
+          />
+        </div>
+        <div
+          className="cv__block entered"
+          onClick={[Function]}
+          style={
+            Object {
+              "height": "111px",
+              "left": "487.9319841589094px",
+              "top": "92.93198415890942px",
+              "width": "252px",
+            }
+          }
+        >
+          <div
+            className="cv__element cv__element--group"
+            style={Object {}}
+          >
+            <span
+              className="cv__element cv__element--text"
+              contentEditable={false}
+              data-elem={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              style={
+                Object {
+                  "color": "#000000",
+                  "fontFamily": "Roboto",
+                  "fontSize": "18px",
+                  "fontStyle": "normal",
+                  "fontWeight": "bold",
+                  "padding": "0px 0px 0px 1px",
+                  "textAlign": "start",
+                  "textDecoration": "none",
+                  "textTransform": "none",
+                }
+              }
+              suppressContentEditableWarning={false}
+            >
+              Your position
+            </span>
+            <span
+              className="cv__element cv__element--text"
+              contentEditable={false}
+              data-elem={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              style={
+                Object {
+                  "color": "#000000",
+                  "fontFamily": "Roboto",
+                  "fontSize": "18px",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                  "padding": "0px 0px 0px 1px",
+                  "textAlign": "start",
+                  "textDecoration": "none",
+                  "textTransform": "none",
+                }
+              }
+              suppressContentEditableWarning={false}
+            >
+              Company
+            </span>
+            <span
+              className="cv__element cv__element--text"
+              contentEditable={false}
+              data-elem={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              style={
+                Object {
+                  "color": "#000000",
+                  "fontFamily": "Roboto",
+                  "fontSize": "16px",
+                  "fontStyle": "italic",
+                  "fontWeight": "normal",
+                  "padding": "0px 0px 0px 1px",
+                  "textAlign": "start",
+                  "textDecoration": "none",
+                  "textTransform": "none",
+                }
+              }
+              suppressContentEditableWarning={false}
+            >
+              period
+            </span>
+            <span
+              className="cv__element cv__element--text"
+              contentEditable={false}
+              data-elem={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              style={
+                Object {
+                  "color": "#000000",
+                  "fontFamily": "Roboto",
+                  "fontSize": "16px",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                  "padding": "0px 0px 0px 1px",
+                  "textAlign": "start",
+                  "textDecoration": "none",
+                  "textTransform": "none",
+                }
+              }
+              suppressContentEditableWarning={false}
+            >
+              your competencies and results
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>,
+]
+`;
+
+exports[`CvView render Рендер с уже существующей ссылкой 1`] = `
+Array [
+  <header
+    className="header undefined"
+  >
+    <ul
+      className="header__menu"
+    >
+      <li
+        className="header__menu-item"
+      >
+        <button
+          className="header__button header__button--print"
+          onClick={[Function]}
+        >
+          View for print
+        </button>
+      </li>
+      <li
+        className="header__menu-item"
+      >
+        <a
+          aria-current="page"
+          className="header__button header__button--edit active"
+          href="/"
+          onClick={[Function]}
+          style={Object {}}
+        >
+          Back to edit
+        </a>
+      </li>
+      <li
+        className="header__menu-item"
+      >
+        <button
+          className="header__button header__button--link-update"
+          onClick={[Function]}
+        >
+          Update link
+        </button>
+      </li>
+      <li
+        className="header__menu-item"
+      >
+        <a
+          aria-current={null}
+          className="header__button header__button--show"
+          href="/test"
+          onClick={[Function]}
+          target="_blank"
+        >
+          Open link (
+          test
+          )
+        </a>
+      </li>
+    </ul>
+    <button
+      className="header__button header__button--menu"
+      onClick={[Function]}
+    />
+  </header>,
+  <main
+    className="main undefined"
+  >
+    <div
+      className="cv-view"
+    >
+      <div
+        className="cv"
+        style={
+          Object {
+            "backgroundColor": "#ffffff",
+          }
+        }
+      >
+        <div
+          className="cv__block entered"
+          onClick={[Function]}
+          style={
+            Object {
+              "height": "66px",
+              "left": "290.08598862935975px",
+              "top": "52.08598862935976px",
+              "width": "149px",
+            }
+          }
+        >
+          <span
+            className="cv__element cv__element--text"
+            contentEditable={false}
+            data-elem={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "#1bac38",
+                "fontFamily": "Roboto",
+                "fontSize": "40px",
+                "fontStyle": "normal",
+                "fontWeight": "bold",
+                "padding": "0px 0px 0px 1px",
+                "textAlign": "start",
+                "textDecoration": "none",
+                "textTransform": "none",
+              }
+            }
+            suppressContentEditableWarning={false}
+          >
+            Big text
+          </span>
+        </div>
+      </div>
+    </div>
+  </main>,
+]
+`;
