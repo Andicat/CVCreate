@@ -115,7 +115,7 @@ let withDataLoad = (propName) => Component => {
             if (!this.state.dataReady) {
                 return <Transition in={true} unmountOnExit timeout={{ enter: 1000, exit: 1000 }}>
                     {stateName => {
-                        return <Loader transitionClass={stateName} text={'Loaded'}/>
+                        return <Loader transitionClass={stateName} text={'Loading'}/>
                     }}
                 </Transition>;
             }
