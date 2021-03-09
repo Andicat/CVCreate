@@ -309,7 +309,6 @@ Array [
               className="option__button option__down option__button--padding"
               data-tooltip={true}
               onClick={[Function]}
-              onMouseLeave={[Function]}
               type="button"
             />
             <form
@@ -321,7 +320,7 @@ Array [
                 className="option__drop-down-line"
               >
                 <span>
-                  top
+                  padding top
                 </span>
                 <input
                   className="option__button option__button--left"
@@ -348,7 +347,7 @@ Array [
                 className="option__drop-down-line"
               >
                 <span>
-                  right
+                  padding right
                 </span>
                 <input
                   className="option__button option__button--left"
@@ -375,7 +374,7 @@ Array [
                 className="option__drop-down-line"
               >
                 <span>
-                  left
+                  padding left
                 </span>
                 <input
                   className="option__button option__button--left"
@@ -402,7 +401,7 @@ Array [
                 className="option__drop-down-line"
               >
                 <span>
-                  bottom
+                  padding bottom
                 </span>
                 <input
                   className="option__button option__button--left"
@@ -503,7 +502,6 @@ Array [
             />
             <div
               className="option__drop-down"
-              onMouseLeave={[Function]}
             >
               <div
                 className="option__drop-down-line"
@@ -517,6 +515,10 @@ Array [
                 />
                 <button
                   className="option__button option__button--ok"
+                  onClick={[Function]}
+                />
+                <button
+                  className="option__button option__button--del"
                   onClick={[Function]}
                 />
               </div>
@@ -1280,7 +1282,6 @@ Array [
               className="option__button option__down option__button--padding"
               data-tooltip={true}
               onClick={[Function]}
-              onMouseLeave={[Function]}
               type="button"
             />
             <form
@@ -1292,7 +1293,7 @@ Array [
                 className="option__drop-down-line"
               >
                 <span>
-                  top
+                  padding top
                 </span>
                 <input
                   className="option__button option__button--left"
@@ -1319,7 +1320,7 @@ Array [
                 className="option__drop-down-line"
               >
                 <span>
-                  right
+                  padding right
                 </span>
                 <input
                   className="option__button option__button--left"
@@ -1346,7 +1347,7 @@ Array [
                 className="option__drop-down-line"
               >
                 <span>
-                  left
+                  padding left
                 </span>
                 <input
                   className="option__button option__button--left"
@@ -1373,7 +1374,7 @@ Array [
                 className="option__drop-down-line"
               >
                 <span>
-                  bottom
+                  padding bottom
                 </span>
                 <input
                   className="option__button option__button--left"
@@ -1474,7 +1475,6 @@ Array [
             />
             <div
               className="option__drop-down"
-              onMouseLeave={[Function]}
             >
               <div
                 className="option__drop-down-line"
@@ -1488,6 +1488,10 @@ Array [
                 />
                 <button
                   className="option__button option__button--ok"
+                  onClick={[Function]}
+                />
+                <button
+                  className="option__button option__button--del"
                   onClick={[Function]}
                 />
               </div>

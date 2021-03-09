@@ -92,7 +92,8 @@ describe('CvElement actions', () => {
         component = renderComponentWithStore(CvElement,storeEmpty,props);
         let elem = component.root.find( el => el.type=='span');
         //клик по текстовому элементу
-        elem.props.onClick();
+        const evt = new Event("click");
+        elem.props.onClick(evt);
         const expectedActions = [
             cvElement_activate(propDataText.data.style,propId.id),
         ];

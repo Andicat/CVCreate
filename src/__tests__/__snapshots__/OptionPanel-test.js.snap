@@ -206,7 +206,6 @@ exports[`OptionPanel render&actions Блокирование расположе�
         className="option__button option__down option__button--padding"
         data-tooltip={true}
         onClick={[Function]}
-        onMouseLeave={[Function]}
         type="button"
       />
       <form
@@ -218,7 +217,7 @@ exports[`OptionPanel render&actions Блокирование расположе�
           className="option__drop-down-line"
         >
           <span>
-            top
+            padding top
           </span>
           <input
             className="option__button option__button--left"
@@ -245,7 +244,7 @@ exports[`OptionPanel render&actions Блокирование расположе�
           className="option__drop-down-line"
         >
           <span>
-            right
+            padding right
           </span>
           <input
             className="option__button option__button--left"
@@ -272,7 +271,7 @@ exports[`OptionPanel render&actions Блокирование расположе�
           className="option__drop-down-line"
         >
           <span>
-            left
+            padding left
           </span>
           <input
             className="option__button option__button--left"
@@ -299,7 +298,7 @@ exports[`OptionPanel render&actions Блокирование расположе�
           className="option__drop-down-line"
         >
           <span>
-            bottom
+            padding bottom
           </span>
           <input
             className="option__button option__button--left"
@@ -400,7 +399,6 @@ exports[`OptionPanel render&actions Блокирование расположе�
       />
       <div
         className="option__drop-down"
-        onMouseLeave={[Function]}
       >
         <div
           className="option__drop-down-line"
@@ -415,6 +413,10 @@ exports[`OptionPanel render&actions Блокирование расположе�
           />
           <button
             className="option__button option__button--ok"
+            onClick={[Function]}
+          />
+          <button
+            className="option__button option__button--del"
             onClick={[Function]}
           />
         </div>
@@ -643,7 +645,6 @@ exports[`OptionPanel render&actions Изменение цвета текста 1
         className="option__button option__down option__button--padding"
         data-tooltip={true}
         onClick={[Function]}
-        onMouseLeave={[Function]}
         type="button"
       />
       <form
@@ -655,7 +656,7 @@ exports[`OptionPanel render&actions Изменение цвета текста 1
           className="option__drop-down-line"
         >
           <span>
-            top
+            padding top
           </span>
           <input
             className="option__button option__button--left"
@@ -682,7 +683,7 @@ exports[`OptionPanel render&actions Изменение цвета текста 1
           className="option__drop-down-line"
         >
           <span>
-            right
+            padding right
           </span>
           <input
             className="option__button option__button--left"
@@ -709,7 +710,7 @@ exports[`OptionPanel render&actions Изменение цвета текста 1
           className="option__drop-down-line"
         >
           <span>
-            left
+            padding left
           </span>
           <input
             className="option__button option__button--left"
@@ -736,7 +737,7 @@ exports[`OptionPanel render&actions Изменение цвета текста 1
           className="option__drop-down-line"
         >
           <span>
-            bottom
+            padding bottom
           </span>
           <input
             className="option__button option__button--left"
@@ -837,7 +838,6 @@ exports[`OptionPanel render&actions Изменение цвета текста 1
       />
       <div
         className="option__drop-down"
-        onMouseLeave={[Function]}
       >
         <div
           className="option__drop-down-line"
@@ -852,6 +852,10 @@ exports[`OptionPanel render&actions Изменение цвета текста 1
           />
           <button
             className="option__button option__button--ok"
+            onClick={[Function]}
+          />
+          <button
+            className="option__button option__button--del"
             onClick={[Function]}
           />
         </div>
