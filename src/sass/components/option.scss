@@ -137,8 +137,10 @@
         padding: 10px;
         top: 0%;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translateX(-10%);
         z-index: 100;
+        white-space: nowrap;
+        font-size: 14px;
 
         &--show {
             display: flex;

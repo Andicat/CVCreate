@@ -309,8 +309,54 @@
 }
 
 .cv-settings {
-    padding: 20px;
-    margin-top: 40px;
     display: flex;
     flex-direction: column;
+    padding: 20px;
+    padding-bottom: 70px;
+    height: auto;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+
+    h2 {
+        margin-bottom: 0;
+        padding-left: 15px;
+        color: $color-block-active;
+    }
+
+    p {
+        font-size: 16px;
+        font-weight: bold;
+        margin: 10px 0;
+        padding-left: 8px;
+    }
+
+    span {
+        font-size: 16px;
+        margin: 10px 0;
+        padding-left: 8px;
+    }
+
+    .option {
+        margin: 0;
+        margin-right: 10px;
+    }
+
+    .option__tooltip {
+        display: none;
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+        min-height: 40px;
+        margin-bottom: 5px;
+        padding-left: 8px;
+        span {
+            margin: 0;
+            padding-left: 5px;
+        }
+    }
 }

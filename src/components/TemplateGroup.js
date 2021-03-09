@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import TemplateBlock from './TemplateBlock';
 import {Transition} from "react-transition-group";
 
+//группа шаблонов
 class TemplateGroup extends React.PureComponent {
 
     static propTypes = {
@@ -13,6 +14,7 @@ class TemplateGroup extends React.PureComponent {
         custom: PropTypes.bool,
     };
 
+    //открываем группу
     onClick = () => {
         this.props.cbSelected(this.props.id);
     }

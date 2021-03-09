@@ -17,6 +17,7 @@ import {cvStyle_update,
     cvBlock_setLink,
     templates_add } from '../redux/cvDataAC';
 
+//панель возможных опций для блока/блоков
 class OptionPanel extends React.PureComponent {
 
     static propTypes = {
@@ -28,10 +29,12 @@ class OptionPanel extends React.PureComponent {
         stylePage: PropTypes.object,   
     };
 
+    //меняем стиль блока
     setStyle = (blockId,optionName,value) => {
         this.props.dispatch(cvStyle_update(blockId,optionName,value));
     }
 
+    //действия с блоком/блоками
     setAction = (blockId,optionName,value) => {
         switch (optionName) {
             case 'alignTop': {
@@ -120,7 +123,6 @@ class OptionPanel extends React.PureComponent {
     }
 
     render () {
-        //console.log('render option panel',this.props.activeBlocksId);
         let codeElementOptions = null;
         let codeBlockOptions = null;
         let codeBlocksOptions = null;

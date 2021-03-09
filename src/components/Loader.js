@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+//загрузчик данных
 class Loader extends React.PureComponent {
 
     static propTypes = {

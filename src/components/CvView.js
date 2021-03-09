@@ -8,6 +8,7 @@ import CvBlock from './CvBlock';
 import {createStyle, saveLocalStorage} from '../modules/utils';
 import {saveFirebase} from './withDataLoad';
 
+//просмотр документа
 class CvView extends React.PureComponent {
 
     static propTypes = {
@@ -22,10 +23,12 @@ class CvView extends React.PureComponent {
         linkIsUpdated: false,
     }
 
+    //просмотр для печати
     viewForPrint = () => {
         this.setState({viewForPrint:!this.state.viewForPrint});
     }
 
+    //создаем ссылку в базе приложения
     createLink = async () => {
         let linkName = this.props.user;
         let stateToSave = {style:this.props.stylePage,blocks:this.props.blocks};
@@ -34,6 +37,7 @@ class CvView extends React.PureComponent {
         this.props.dispatch(cv_setLink(linkName));
     }
 
+    //обновляем ссылку в базе приложения
     updateLink = async (evt) => {
         let linkName = this.props.user;
         let stateToSave = {style:this.props.stylePage,blocks:this.props.blocks};
@@ -46,6 +50,7 @@ class CvView extends React.PureComponent {
         saveFirebase('Links',linkName,stateToSave,false);
     }
 
+    //открыть меню (мобил.версия)
     openMenuMobile = () => {
         this.menu.classList.toggle('header__menu--show');
     }

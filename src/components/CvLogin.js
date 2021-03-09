@@ -7,6 +7,7 @@ import {cv_setUser} from '../redux/cvDataAC';
 import {addFirebase, loadFirebase} from './withDataLoad';
 import {saveLocalStorage} from '../modules/utils';
 
+//форма ввода логина/наименования документа
 class CvLogin extends React.PureComponent {
 
     static propTypes = {
@@ -21,6 +22,7 @@ class CvLogin extends React.PureComponent {
         messageError: '',
     }
 
+    //загрузим список уже существующих логинов
     componentDidMount() {
         this.loadData();
     }
@@ -34,6 +36,7 @@ class CvLogin extends React.PureComponent {
         });
     }
 
+    //валидация логина/наименования
     checkValidName = () => {
         let nameValue = this.state.userName;
         if (String(nameValue).trim().length===0) {
@@ -46,6 +49,7 @@ class CvLogin extends React.PureComponent {
         return true;
     }
 
+    //сохранение логина в localStorage и в firebase
     onSubmit = async (evt) => {
         evt.preventDefault();
         let isNameValid = this.checkValidName();

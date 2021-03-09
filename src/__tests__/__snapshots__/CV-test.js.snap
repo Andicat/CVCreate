@@ -74,6 +74,16 @@ Array [
           Show
         </a>
       </li>
+      <li
+        className="header__menu-item"
+      >
+        <a
+          aria-current={null}
+          className="header__button header__button--settings"
+          href="/settings"
+          onClick={[Function]}
+        />
+      </li>
     </ul>
     <button
       className="header__button header__button--menu"
@@ -975,6 +985,16 @@ Array [
         >
           Show
         </a>
+      </li>
+      <li
+        className="header__menu-item"
+      >
+        <a
+          aria-current={null}
+          className="header__button header__button--settings"
+          href="/settings"
+          onClick={[Function]}
+        />
       </li>
     </ul>
     <button

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import TemplateGroup from './TemplateGroup';
 import {connect} from 'react-redux';
 
+//панель шаблонов
 class TemplatePanel extends React.PureComponent {
 
     static propTypes = {
@@ -15,6 +16,7 @@ class TemplatePanel extends React.PureComponent {
         activeMenuId: null,
     }
 
+    //открываем группу шаблонов
     selectMenu = (id) => {
         this.setState( {activeMenuId:(id===this.state.activeMenuId)?null:id} );
     }

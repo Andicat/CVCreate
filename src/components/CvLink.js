@@ -4,6 +4,7 @@ import CvBlock from './CvBlock';
 import {createStyle} from '../modules/utils';
 import {loadFirebase} from './withDataLoad';
 
+//отображение документ по ссылке
 class CvLink extends React.PureComponent {
 
     state = {
@@ -11,6 +12,7 @@ class CvLink extends React.PureComponent {
         stylePage: null,
     }
 
+    //загрузим данные по ссылке из базы при монтировании
     componentDidMount() {
         let linkName = this.props.match.params.linkname;
         if (linkName) {
@@ -18,11 +20,12 @@ class CvLink extends React.PureComponent {
         }
     }
 
+    //загрузка из firebase
     loadLink = async (linkName) => {
-        let loadTemplates = new Promise((resolve) => {
+        let loadLinkData = new Promise((resolve) => {
             loadFirebase('Links',linkName,resolve);
         });
-        await loadTemplates.then((data) => {
+        await loadLinkData.then((data) => {
             this.setState({blocks:data.blocks,stylePage:data.style});
         });
     }

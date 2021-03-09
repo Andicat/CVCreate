@@ -11,6 +11,7 @@ import CvLogin from './CvLogin';
 import {saveFileJSON, readFileJSON, saveLocalStorage} from '../modules/utils';
 import {cv_load,cvBlock_activate} from '../redux/cvDataAC';
 
+//Компонент работы с документом
 class CV extends React.PureComponent {
     
     static propTypes = {
@@ -25,12 +26,14 @@ class CV extends React.PureComponent {
         showPanel: false,
     }
 
+    //сохранение в формате json на локальном компьютере
     saveCV = () => {
         let stateToSave = {style:this.props.stylePage,blocks:this.props.blocks};
         saveFileJSON(stateToSave,'CV','.json');
         saveLocalStorage('CV',stateToSave);
     }
 
+    //сохранение в local Storage
     saveLS = () => {
         if (this.props.activeBlocksId.length>0) {
             this.props.dispatch(cvBlock_activate(null,null));
@@ -39,6 +42,7 @@ class CV extends React.PureComponent {
         saveLocalStorage('CV',stateToSave);
     } 
 
+    //загрузка из файла json на локальном компьютере
     loadCV = async(evt) => {
         let data = await readFileJSON(evt.target.files[0]);
         this.props.dispatch(cv_load(data.blocks,data.style));
@@ -46,16 +50,17 @@ class CV extends React.PureComponent {
         evt.target.value = null;
     }
 
+    //открыть/закрыть панель шаблонов
     showPanel = () => {
         this.setState({showPanel:!this.state.showPanel});
     }
 
+    //открыть меню (мобил.версия)
     openMenuMobile = () => {
         this.menu.classList.toggle('header__menu--show');
     }
     
     render () {
-        //console.log('render cv');
         if (!this.props.user) {
             return <Transition in={!this.props.user} unmountOnExit timeout={{ enter: 1000, exit: 1000 }}>
                         {stateName => {

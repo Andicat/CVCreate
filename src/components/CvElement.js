@@ -5,6 +5,7 @@ import {cvElement_activate, cvElement_textUpdate} from '../redux/cvDataAC';
 import {createStyle, decodeStyle} from '../modules/utils';
 import sprite from '../img/sprite.svg';
 
+//элемент блока
 class CvElement extends React.PureComponent {
 
     static propTypes = {
@@ -16,12 +17,15 @@ class CvElement extends React.PureComponent {
         templateImageUrl: PropTypes.string,
     };
 
-    onClick = () => {
+    //активируем элемент
+    onClick = (evt) => {
         if (this.props.editable) {
+            evt.preventDefault();
             this.props.dispatch(cvElement_activate(this.props.data.style,this.props.id));
         }
     }
 
+    //меняет текст при уходе с элемента
     onBlur = (evt) => {
         let textCurr = evt.target.innerText;
         if (this.props.data.text!==textCurr) {
@@ -30,7 +34,6 @@ class CvElement extends React.PureComponent {
     }
 
     render () {
-        //console.log('render cv element',this.props.id);
         let isActive = (this.props.activeElementId===this.props.id);
         let style = createStyle(this.props.data.style);
         let positionTop;

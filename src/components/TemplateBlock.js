@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {cvBlock_add, templates_delete} from '../redux/cvDataAC';
 import {getAutoSize} from '../modules/utils';
 
+//шаблон
 class TemplateBlock extends React.PureComponent {
 
     static propTypes = {
@@ -14,12 +15,14 @@ class TemplateBlock extends React.PureComponent {
         custom: PropTypes.bool,
     };
 
+    //добавлем блок в документ
     onClickAdd = (evt) => {
         let sizesAuto = getAutoSize(evt.target.previousSibling);
         let deepCopyBlock = JSON.parse(JSON.stringify(this.props.data));
         this.props.dispatch(cvBlock_add({...deepCopyBlock, width:sizesAuto.width, height:sizesAuto.height}));
     }
 
+    //удаляем шаблон из списка
     onClickDelete = () => {
         this.props.dispatch(templates_delete(this.props.id));
     }

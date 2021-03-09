@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import CvElement from './CvElement';
 import {cvBlock_activate, cvBlock_activateMulti} from '../redux/cvDataAC';
 
+//блок документа
 class CvBlock extends React.PureComponent {
 
     static propTypes = {
@@ -18,12 +19,14 @@ class CvBlock extends React.PureComponent {
 
     blockRef = React.createRef();
 
+    //активируем блок после монтирования
     componentDidMount() {
         if (this.props.newBlock) {
             this.props.dispatch(cvBlock_activate(this.props.id, this.blockRef.current));
         }
     }
 
+    //активируем блок на странице
     onClick = (evt) => {
         if (evt.ctrlKey || evt.shiftKey) {
             this.props.dispatch(cvBlock_activateMulti(this.props.id));
@@ -34,7 +37,6 @@ class CvBlock extends React.PureComponent {
     }
 
     render () {
-        //console.log('render cv block',this.props.id);
         let style = {top:this.props.data.positionTop + 'px', left:this.props.data.positionLeft + 'px', width:this.props.data.width + 'px', height:this.props.data.height + 'px'};
         let className = 'cv__block' + ((this.props.activeIndex>=0)?' cv__block--active':'')
                         + ((this.props.activeIndex===0)?' cv__block--active-first':'')

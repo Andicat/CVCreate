@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {cvBlock_move, cvBlock_resize, cvBlock_delete, cvElement_activate} from '../redux/cvDataAC';
+import {cvBlock_move, cvBlock_resize, cvBlock_delete} from '../redux/cvDataAC';
 
+//Трансформационная рамка для блока. 
+//Отвечает за перемещение, удаление,...
 class Transform extends React.PureComponent {
 
     static propTypes = {
@@ -40,10 +42,12 @@ class Transform extends React.PureComponent {
         this.setPosition();
     }
 
+    //обновляем положение рамки
     setPosition = () => {
         this.setState({shiftTop: this.props.cv.offsetTop, shiftLeft: this.props.cv.offsetLeft});
     }
 
+    //передвигаем блок
     startMove = (evt) => {
         if (evt.target!==this.moveBtn && evt.target!==this.resizeBtn) {
             return;
@@ -57,6 +61,7 @@ class Transform extends React.PureComponent {
             x: evt.clientX,
             y: evt.clientY
         };
+        
         document.addEventListener('mousemove', this.move);
         document.addEventListener('mouseup', this.moveEnd);
         window.addEventListener('touchmove', this.move,{ passive: false });
@@ -84,6 +89,9 @@ class Transform extends React.PureComponent {
     }
 
     moveKey = (evt) => {
+        if (this.props.block.lock) {
+            return;
+        }
         if (!evt.ctrlKey) {
             return;
         }
@@ -113,6 +121,7 @@ class Transform extends React.PureComponent {
         window.removeEventListener('touchend', this.moveEnd);
     }
 
+    //удаляем блок
     onClickDelete = () => {
         this.props.dispatch(cvBlock_delete(this.props.block.id));
     }
