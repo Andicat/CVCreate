@@ -49,7 +49,6 @@ async function loadFirebase(collectionName,docName,resolve) {
     });
 }
 
-
 let withDataLoad = (propName) => Component => {
 
     class ComponentWithDataLoad extends React.PureComponent {

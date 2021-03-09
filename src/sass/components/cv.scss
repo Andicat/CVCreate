@@ -90,8 +90,6 @@
         box-sizing: border-box;
         border: 1px solid transparent;
 
-       
-
         &--text {
             height: auto;
             white-space: pre;
@@ -342,10 +340,7 @@
     .option {
         margin: 0;
         margin-right: 10px;
-    }
-
-    .option__tooltip {
-        display: none;
+        pointer-events: none;
     }
 
     li {

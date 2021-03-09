@@ -119,6 +119,12 @@
             background-size: 80%;
         }
 
+        &--del {
+            margin-left: 5px;
+            background-image: url('./../../img/icon-del.svg');
+            background-size: 60%;
+        }
+
         &--padding {
             background-image: url('./../../img/icon-padding.svg'); 
         }
@@ -137,7 +143,7 @@
         padding: 10px;
         top: 0%;
         left: 50%;
-        transform: translateX(-10%);
+        transform: translateX(-50%);
         z-index: 100;
         white-space: nowrap;
         font-size: 14px;

@@ -16,7 +16,7 @@ class CvSettings extends React.PureComponent {
                 <header className={'header ' + this.props.transitionClass}>
                     <ul className='header__menu' ref={(f) => this.menu = f}>
                         <li className='header__menu-item'>
-                            <NavLink to='/' className='header__button header__button--edit'>Back to create</NavLink>    
+                            <NavLink to='/' className='header__button header__button--edit'>Back to edit</NavLink>    
                         </li>
                     </ul>
                     <Media query="(max-width: 767px)">
@@ -26,7 +26,7 @@ class CvSettings extends React.PureComponent {
                 <main className={'main ' + this.props.transitionClass}>
                     <div className='cv-view'>
                         <div className='cv cv-settings'>
-                            <h2>О приложении.</h2>
+                            <h2>О CVCreate.</h2>
                             <span>В "CVCreate" можно создать свою страничку резюме (формата А4) с помощью различных блоков. Эту страничку можно сохранить в виде ссылки, в виде PDF-файла.
                                 Можно также сохранять свои документы на локальном компьютере, создавать свои шаблоны блоков.</span>
                             <h2>Добавление. Перемещение. Изменение размера. Удаление.</h2>
@@ -70,7 +70,7 @@ class CvSettings extends React.PureComponent {
                                 </li>
                             </ul>
                             <h2>Действия с несколькими блоками.</h2>
-                            <p>С помощью мышки и зажатой клавиши Ctrl(или Shift) можно выделить несколько блоков. Первый выделенный блок будет выделен <span style={{color:'#a14141'}}>отдельным цветом</span> от остальных. Варианты действий с несколькими блоками:</p>
+                            <p>С помощью мышки и зажатой клавиши Ctrl(или Shift) можно выделить несколько блоков. Первый выделенный блок будет выделен<span style={{color:'#a14141'}}>отдельным цветом</span> от остальных. Варианты действий с несколькими блоками:</p>
                             <ul>
                                 <li>
                                     <Option key={0} optionName={'alignTop'} cbOnChange={() => {return true}}/>

@@ -143,9 +143,10 @@ function createOption (optionType,optionValue,cbOnChange) {
         }
     };
 
-    function setLink(elem) {
-        cbOnChange(elem.value);
-        openDrop(elem.parentNode.parentNode,false);
+    function setLink(value, elem) {
+        cbOnChange(value);
+        openDrop(elem.parentNode,false);
+        elem.querySelector('input').value = value;
     };
     
     function setGroupValue(elem,value,groupValue,name) {
@@ -209,11 +210,12 @@ function createOption (optionType,optionValue,cbOnChange) {
     function codeLink(optionType,optionValue) {
         return <React.Fragment>
                     <input type='button' className={'option__button option__down option__button--' + optionType} data-tooltip={true} onClick={(evt) => {openDrop(evt.target.nextSibling,true)}}/>
-                    <div className='option__drop-down' onMouseLeave={(evt) => openDrop(evt.currentTarget,false)}>
+                    <div className='option__drop-down'>
                         <div className='option__drop-down-line'>
                             <span>Link:</span>
                             <input type="text" className='option__text option__link' defaultValue={optionValue}/>
-                            <button className='option__button option__button--ok' onClick={(evt) => {setLink(evt.target.previousSibling)}}/>
+                            <button className='option__button option__button--ok' onClick={(evt) => {setLink(evt.target.previousSibling.value,evt.target.parentNode)}}/>
+                            <button className='option__button option__button--del' onClick={(evt) => {setLink('',evt.target.parentNode)}}/>
                         </div>
                     </div>
                 </React.Fragment>   
@@ -233,10 +235,7 @@ function createOption (optionType,optionValue,cbOnChange) {
                 </select>);
     };
 
-    //onMouseLeave={(evt) => onMouseLeave(evt,evt.currentTarget.nextSibling)}
-
     function codeGroup(optionType,optionValue,min,max) {
-        //debugger
         return <React.Fragment>
                     <input type='button' className={'option__button option__down option__button--' + optionType} data-tooltip={true} onClick={(evt) => {openDrop(evt.target.nextSibling,true)}}/>
                     <form name={optionType} className='option__drop-down' onMouseLeave={(evt) => openDrop(evt.currentTarget,false)}>
@@ -375,12 +374,13 @@ function loadFromLocalStorage(lsName) {
     }    
 };
 
-function onMouseLeave(evt,elem) {
-        if (evt.relatedTarget!==elem) {
-            openDrop(elem,false);
-        }
-}
+export {createTooltipText, createOption, createStyle, 
+        getAutoSize, saveFileJSON, readFileJSON, saveLocalStorage,
+        loadFromLocalStorage, decodeStyle,
+        CV_ID, BLOCK_ACTION, BLOCKS_ACTION};
 
+
+/*
 //Templates (для создания новых шаблонов)
 function saveTemplates() {
     function createTemplates() {
@@ -427,12 +427,12 @@ function saveTemplates() {
         ];
 
         let contactBlockArr = [
-            {type:'icon', svg:'phone', text:'Your phone', style:{fill:'#666666',size:25,...textStyleDefault, fontsize:'18'}},
-            {type:'icon', svg:'address', text:'Your address', style:{fill:'#666666',size:25,...textStyleDefault, fontsize:'18'}},
-            {type:'icon', svg:'email', text:'Your email', style:{fill:'#666666',size:25,...textStyleDefault, fontsize:'18'}},
-            {type:'icon', svg:'telegram', text:'Your telegram', style:{fill:'#666666',size:25,...textStyleDefault, fontsize:'18'}},
-            {type:'icon', svg:'skype', text:'Your skype', style:{fill:'#666666',size:25,...textStyleDefault, fontsize:'18'}},
-            {type:'icon', svg:'linkedin', text:'Your Linkedin', style:{fill:'#666666',size:25,...textStyleDefault, fontsize:'18'}},
+            {type:'icon', svg:'phone', text:'Your phone', style:{fill:'#666666',size:25,...textStyleDefault, fontsize:'18',padding:{left:5,right:0,top:0,bottom:0}}},
+            {type:'icon', svg:'address', text:'Your address', style:{fill:'#666666',size:25,...textStyleDefault, fontsize:'18',padding:{left:5,right:0,top:0,bottom:0}}},
+            {type:'icon', svg:'email', text:'Your email', style:{fill:'#666666',size:25,...textStyleDefault, fontsize:'18', padding:{left:5,right:0,top:0,bottom:0}}},
+            {type:'icon', svg:'telegram', text:'Your telegram', style:{fill:'#666666',size:25,...textStyleDefault, fontsize:'18', padding:{left:5,right:0,top:0,bottom:0}}},
+            {type:'icon', svg:'skype', text:'Your skype', style:{fill:'#666666',size:25,...textStyleDefault, fontsize:'18', padding:{left:5,right:0,top:0,bottom:0}}},
+            {type:'icon', svg:'linkedin', text:'Your Linkedin', style:{fill:'#666666',size:25,...textStyleDefault, fontsize:'18', padding:{left:5,right:0,top:0,bottom:0}}},
         ];
     
         let templatesArr = [
@@ -472,9 +472,4 @@ function saveTemplates() {
     let templatesArrConverted = templatesArr.map(t => codeStyle(t));
     saveFirebase('Data','templates',{templates:templatesArrConverted});
 }
-
-
-export {createTooltipText, createOption, createStyle, 
-        getAutoSize, saveFileJSON, readFileJSON, saveLocalStorage,
-        loadFromLocalStorage, decodeStyle,
-        CV_ID, BLOCK_ACTION, BLOCKS_ACTION};
+*/
