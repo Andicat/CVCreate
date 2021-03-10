@@ -91,9 +91,9 @@ class CvElement extends React.PureComponent {
                     decodedStyle[decodeStyle(s)] = this.props.data.style[s];
                 }
                 let styleProgressBar = {backgroundColor: decodedStyle.maincolor, width:decodedStyle.progress+'%'};
-                let progressBarCode = <div style={styleProgressBar}></div>;
+                let progressBarCode = <div style={styleProgressBar} data-elem={true}></div>;
                 let styleProgressBg = {backgroundColor: decodedStyle.addcolor, width:(100-decodedStyle.progress)+'%'};
-                let progressBgCode = <div style={styleProgressBg}></div>;
+                let progressBgCode = <div style={styleProgressBg} data-elem={true}></div>;
                 elementCode = <div className={className} style={style} data-elem={true} onClick={this.onClick}>
                                 {progressBarCode}
                                 {progressBgCode}
