@@ -69,7 +69,7 @@ class CvElement extends React.PureComponent {
                     textAlign: style.textAlign, textDecoration:style.textDecoration,
                     textTransform: style.textTransform};
                 if (this.props.data.list) {
-                    elementCode = <ul style={{fontSize:style.fontSize, paddingLeft:style.fontSize}}>
+                    elementCode = <ul style={{fontSize:style.fontSize, paddingLeft:style.fontSize, position:style.position, left:style.left, top:style.top}}>
                                     <li className={className} style={{color:style.colorlist}}>
                                         <span style={styleText} suppressContentEditableWarning={this.props.editable} contentEditable={this.props.editable} data-elem={true} onClick={this.onClick} onBlur={this.onBlur}>
                                             {text}
@@ -118,7 +118,7 @@ class CvElement extends React.PureComponent {
                     for (let s in this.props.data.style) {
                         decodedStyle[decodeStyle(s)] = this.props.data.style[s];
                     }
-                    let styleElem = {position: style.position, width:style.width, height:style.height, top:style.top, left:style.left};
+                    let styleElem = {position:style.position, width:style.width, height:style.height, top:style.top, left:style.left};
                     let styleIcon = {fill: decodedStyle.fill, width:decodedStyle.size +'px', height:decodedStyle.size +'px'};
                     styleText = {color: style.color, fontFamily: style.fontFamily,
                                     fontSize: style.fontSize, fontStyle:style.fontStyle,
