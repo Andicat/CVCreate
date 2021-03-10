@@ -180,13 +180,13 @@ Array [
             onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
-            <input
+            <button
               className="option__button option__button--left"
               data-tooltip={true}
               onClick={[Function]}
-              type="button"
-              value="–"
-            />
+            >
+              –
+            </button>
             <input
               className="option__number"
               data-tooltip={true}
@@ -196,13 +196,13 @@ Array [
               type="text"
               value="20"
             />
-            <input
+            <button
               className="option__button option__button--right"
               data-tooltip={true}
               onClick={[Function]}
-              type="button"
-              value="+"
-            />
+            >
+              +
+            </button>
           </div>
           <div
             className="option"
@@ -305,11 +305,10 @@ Array [
             onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
-            <input
+            <button
               className="option__button option__down option__button--padding"
               data-tooltip={true}
               onClick={[Function]}
-              type="button"
             />
             <form
               className="option__drop-down"
@@ -322,12 +321,12 @@ Array [
                 <span>
                   padding top
                 </span>
-                <input
+                <button
                   className="option__button option__button--left"
                   onClick={[Function]}
-                  type="button"
-                  value="–"
-                />
+                >
+                  –
+                </button>
                 <input
                   className="option__number"
                   max={100}
@@ -336,12 +335,12 @@ Array [
                   type="text"
                   value={0}
                 />
-                <input
+                <button
                   className="option__button option__button--right"
                   onClick={[Function]}
-                  type="button"
-                  value="+"
-                />
+                >
+                  +
+                </button>
               </div>
               <div
                 className="option__drop-down-line"
@@ -349,12 +348,12 @@ Array [
                 <span>
                   padding right
                 </span>
-                <input
+                <button
                   className="option__button option__button--left"
                   onClick={[Function]}
-                  type="button"
-                  value="–"
-                />
+                >
+                  –
+                </button>
                 <input
                   className="option__number"
                   max={100}
@@ -363,12 +362,12 @@ Array [
                   type="text"
                   value={0}
                 />
-                <input
+                <button
                   className="option__button option__button--right"
                   onClick={[Function]}
-                  type="button"
-                  value="+"
-                />
+                >
+                  +
+                </button>
               </div>
               <div
                 className="option__drop-down-line"
@@ -376,12 +375,12 @@ Array [
                 <span>
                   padding left
                 </span>
-                <input
+                <button
                   className="option__button option__button--left"
                   onClick={[Function]}
-                  type="button"
-                  value="–"
-                />
+                >
+                  –
+                </button>
                 <input
                   className="option__number"
                   max={100}
@@ -390,12 +389,12 @@ Array [
                   type="text"
                   value={1}
                 />
-                <input
+                <button
                   className="option__button option__button--right"
                   onClick={[Function]}
-                  type="button"
-                  value="+"
-                />
+                >
+                  +
+                </button>
               </div>
               <div
                 className="option__drop-down-line"
@@ -403,12 +402,12 @@ Array [
                 <span>
                   padding bottom
                 </span>
-                <input
+                <button
                   className="option__button option__button--left"
                   onClick={[Function]}
-                  type="button"
-                  value="–"
-                />
+                >
+                  –
+                </button>
                 <input
                   className="option__number"
                   max={100}
@@ -417,12 +416,12 @@ Array [
                   type="text"
                   value={0}
                 />
-                <input
+                <button
                   className="option__button option__button--right"
                   onClick={[Function]}
-                  type="button"
-                  value="+"
-                />
+                >
+                  +
+                </button>
               </div>
             </form>
           </div>
@@ -455,11 +454,10 @@ Array [
             onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
-            <input
+            <button
               className="option__button option__button--autosize"
               data-tooltip={true}
               onClick={[Function]}
-              type="button"
             />
           </div>
           <div
@@ -468,11 +466,10 @@ Array [
             onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
-            <input
+            <button
               className="option__button option__button--back"
               data-tooltip={true}
               onClick={[Function]}
-              type="button"
             />
           </div>
           <div
@@ -481,11 +478,10 @@ Array [
             onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
-            <input
+            <button
               className="option__button option__button--copy"
               data-tooltip={true}
               onClick={[Function]}
-              type="button"
             />
           </div>
           <div
@@ -494,11 +490,10 @@ Array [
             onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
-            <input
+            <button
               className="option__button option__down option__button--link"
               data-tooltip={true}
               onClick={[Function]}
-              type="button"
             />
             <div
               className="option__drop-down"
@@ -530,17 +525,17 @@ Array [
             onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
-            <input
+            <button
               className="option__button option__button--save"
               data-tooltip={true}
               onClick={[Function]}
-              type="button"
             />
           </div>
         </div>
       </div>
       <div
         className="cv-container"
+        onClick={[Function]}
       >
         <div
           className="cv"
@@ -1153,13 +1148,13 @@ Array [
             onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
-            <input
+            <button
               className="option__button option__button--left"
               data-tooltip={true}
               onClick={[Function]}
-              type="button"
-              value="–"
-            />
+            >
+              –
+            </button>
             <input
               className="option__number"
               data-tooltip={true}
@@ -1169,13 +1164,13 @@ Array [
               type="text"
               value="20"
             />
-            <input
+            <button
               className="option__button option__button--right"
               data-tooltip={true}
               onClick={[Function]}
-              type="button"
-              value="+"
-            />
+            >
+              +
+            </button>
           </div>
           <div
             className="option"
@@ -1278,11 +1273,10 @@ Array [
             onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
-            <input
+            <button
               className="option__button option__down option__button--padding"
               data-tooltip={true}
               onClick={[Function]}
-              type="button"
             />
             <form
               className="option__drop-down"
@@ -1295,12 +1289,12 @@ Array [
                 <span>
                   padding top
                 </span>
-                <input
+                <button
                   className="option__button option__button--left"
                   onClick={[Function]}
-                  type="button"
-                  value="–"
-                />
+                >
+                  –
+                </button>
                 <input
                   className="option__number"
                   max={100}
@@ -1309,12 +1303,12 @@ Array [
                   type="text"
                   value={0}
                 />
-                <input
+                <button
                   className="option__button option__button--right"
                   onClick={[Function]}
-                  type="button"
-                  value="+"
-                />
+                >
+                  +
+                </button>
               </div>
               <div
                 className="option__drop-down-line"
@@ -1322,12 +1316,12 @@ Array [
                 <span>
                   padding right
                 </span>
-                <input
+                <button
                   className="option__button option__button--left"
                   onClick={[Function]}
-                  type="button"
-                  value="–"
-                />
+                >
+                  –
+                </button>
                 <input
                   className="option__number"
                   max={100}
@@ -1336,12 +1330,12 @@ Array [
                   type="text"
                   value={0}
                 />
-                <input
+                <button
                   className="option__button option__button--right"
                   onClick={[Function]}
-                  type="button"
-                  value="+"
-                />
+                >
+                  +
+                </button>
               </div>
               <div
                 className="option__drop-down-line"
@@ -1349,12 +1343,12 @@ Array [
                 <span>
                   padding left
                 </span>
-                <input
+                <button
                   className="option__button option__button--left"
                   onClick={[Function]}
-                  type="button"
-                  value="–"
-                />
+                >
+                  –
+                </button>
                 <input
                   className="option__number"
                   max={100}
@@ -1363,12 +1357,12 @@ Array [
                   type="text"
                   value={1}
                 />
-                <input
+                <button
                   className="option__button option__button--right"
                   onClick={[Function]}
-                  type="button"
-                  value="+"
-                />
+                >
+                  +
+                </button>
               </div>
               <div
                 className="option__drop-down-line"
@@ -1376,12 +1370,12 @@ Array [
                 <span>
                   padding bottom
                 </span>
-                <input
+                <button
                   className="option__button option__button--left"
                   onClick={[Function]}
-                  type="button"
-                  value="–"
-                />
+                >
+                  –
+                </button>
                 <input
                   className="option__number"
                   max={100}
@@ -1390,12 +1384,12 @@ Array [
                   type="text"
                   value={0}
                 />
-                <input
+                <button
                   className="option__button option__button--right"
                   onClick={[Function]}
-                  type="button"
-                  value="+"
-                />
+                >
+                  +
+                </button>
               </div>
             </form>
           </div>
@@ -1428,11 +1422,10 @@ Array [
             onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
-            <input
+            <button
               className="option__button option__button--autosize"
               data-tooltip={true}
               onClick={[Function]}
-              type="button"
             />
           </div>
           <div
@@ -1441,11 +1434,10 @@ Array [
             onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
-            <input
+            <button
               className="option__button option__button--back"
               data-tooltip={true}
               onClick={[Function]}
-              type="button"
             />
           </div>
           <div
@@ -1454,11 +1446,10 @@ Array [
             onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
-            <input
+            <button
               className="option__button option__button--copy"
               data-tooltip={true}
               onClick={[Function]}
-              type="button"
             />
           </div>
           <div
@@ -1467,11 +1458,10 @@ Array [
             onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
-            <input
+            <button
               className="option__button option__down option__button--link"
               data-tooltip={true}
               onClick={[Function]}
-              type="button"
             />
             <div
               className="option__drop-down"
@@ -1503,17 +1493,17 @@ Array [
             onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
-            <input
+            <button
               className="option__button option__button--save"
               data-tooltip={true}
               onClick={[Function]}
-              type="button"
             />
           </div>
         </div>
       </div>
       <div
         className="cv-container"
+        onClick={[Function]}
       >
         <div
           className="cv"

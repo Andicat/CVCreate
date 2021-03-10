@@ -87,7 +87,7 @@ exports[`CvView render Рендер для печати 1`] = `
     </a>
   </div>
   <div
-    className="cv-view"
+    className="cv-view cv-view-print"
   >
     <div
       className="cv"

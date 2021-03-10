@@ -41,7 +41,7 @@ class CvLink extends React.PureComponent {
         return (
             <React.Fragment>
                 <main className='main'>
-                    <div className='cv-view'>
+                    <div className='cv-view cv-view-print'>
                         <div className='cv cv--link' style={createStyle(this.state.stylePage)}>
                             {cvBlocksCode}
                         </div>

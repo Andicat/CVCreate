@@ -3,6 +3,7 @@
 exports[`CvDocument render Рендер без данных 1`] = `
 <div
   className="cv-container"
+  onClick={[Function]}
 >
   <div
     className="cv"
@@ -15,6 +16,7 @@ exports[`CvDocument render Рендер без данных 1`] = `
 exports[`CvDocument render Рендер с активным блоком 1`] = `
 <div
   className="cv-container"
+  onClick={[Function]}
 >
   <div
     className="cv"
@@ -404,6 +406,7 @@ exports[`CvDocument render Рендер с активным блоком 1`] = `
 exports[`CvDocument render Рендер с данными 1`] = `
 <div
   className="cv-container"
+  onClick={[Function]}
 >
   <div
     className="cv"

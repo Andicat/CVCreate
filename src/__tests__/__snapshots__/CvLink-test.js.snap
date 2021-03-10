@@ -5,7 +5,7 @@ exports[`CvLink render Рендер 1`] = `
   className="main"
 >
   <div
-    className="cv-view"
+    className="cv-view cv-view-print"
   >
     <div
       className="cv cv--link"

@@ -496,6 +496,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
 
         //activate element on cv-page
         case CV_ELEMENT_ACTIVATE: {
+            console.log('activate element')
             if (state.activeElementId !== action.elementId) {
                 let newState = {...state,
                     activeElementId:action.elementId,

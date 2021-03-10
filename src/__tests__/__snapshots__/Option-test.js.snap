@@ -29,11 +29,10 @@ exports[`Option render Диапазон 1`] = `
   onMouseOut={[Function]}
   onMouseOver={[Function]}
 >
-  <input
+  <button
     className="option__button option__down option__button--opacity"
     data-tooltip={true}
     onClick={[Function]}
-    type="button"
   />
   <div
     className="option__drop-down"
@@ -63,11 +62,10 @@ exports[`Option render Диапазон 2`] = `
   onMouseOut={[Function]}
   onMouseOver={[Function]}
 >
-  <input
+  <button
     className="option__button option__down option__button--opacity"
     data-tooltip={true}
     onClick={[Function]}
-    type="button"
   />
   <div
     className="option__drop-down"
@@ -97,11 +95,10 @@ exports[`Option render Кнопка 1`] = `
   onMouseOut={[Function]}
   onMouseOver={[Function]}
 >
-  <input
+  <button
     className="option__button option__button--copy"
     data-tooltip={true}
     onClick={[Function]}
-    type="button"
   />
 </div>
 `;
@@ -255,13 +252,13 @@ exports[`Option render Число 1`] = `
   onMouseOut={[Function]}
   onMouseOver={[Function]}
 >
-  <input
+  <button
     className="option__button option__button--left"
     data-tooltip={true}
     onClick={[Function]}
-    type="button"
-    value="–"
-  />
+  >
+    –
+  </button>
   <input
     className="option__number"
     data-tooltip={true}
@@ -271,12 +268,12 @@ exports[`Option render Число 1`] = `
     type="text"
     value="18"
   />
-  <input
+  <button
     className="option__button option__button--right"
     data-tooltip={true}
     onClick={[Function]}
-    type="button"
-    value="+"
-  />
+  >
+    +
+  </button>
 </div>
 `;

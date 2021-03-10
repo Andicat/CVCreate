@@ -106,7 +106,7 @@ class CvView extends React.PureComponent {
                             <NavLink to='/' className='header__button header__button--edit'>Back to edit</NavLink>
                         </div>
                     )}
-                    <div className='cv-view'>
+                    <div className={'cv-view' + (this.state.viewForPrint?' cv-view-print':'')}>
                         <div className='cv' style={createStyle(this.props.stylePage)}>
                             {cvBlocksCode}
                         </div>

@@ -32,7 +32,7 @@ class CvDocument extends React.PureComponent {
         });
         
         return (
-            <div className='cv-container'>
+            <div className='cv-container' onClick={this.onClick}>
                 {(this.props.activeBlock && this.cv) && (
                     <Transition in={this.props.showPanel} timeout={{ enter: 1000, exit: 1000 }}>
                         {stateName => {

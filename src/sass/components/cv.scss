@@ -17,26 +17,6 @@
     }
 }
 
-.cv-view {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    overflow-y: scroll; 
-    height: 100vh;
-    background-color: $color-white;
-    padding: 0;
-
-    &::-webkit-scrollbar {
-        width: 0;
-    }
-
-    .cv__block:hover {
-        outline: none;
-        cursor: default;
-    }
-}
-
 .cv {
     width: 210mm;
     height: 297mm;
@@ -146,76 +126,6 @@
                 width: 100%;
                 height: 100%;
             }
-        }
-    }
-
-    &__transform {
-        position: absolute;
-        outline: 3px solid $color-transform;
-        z-index: 5;
-
-        & ~ .cv > .cv__block--active {
-            outline: none;
-            border: none;
-            &:hover {
-                outline: none;
-                border: none;
-            }
-        }
-
-        &--locked::before {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            border: none;
-            background-repeat: no-repeat;
-            background-size: 100%;
-            background-position: center;
-            top: 0;
-            left: 0;
-            transform: translate(-50%, -50%);
-            background-image: url('./../../img/icon-locked.svg');
-
-        }
-    }
-
-    &__transform-button {
-        position: absolute;
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        border: none;
-        background-repeat: no-repeat;
-        background-size: 100%;
-        background-position: center;
-        
-        &--delete {
-            top: 0;
-            right: 0;
-            transform: translate(50%, -50%);
-            background-image: url('./../../img/icon-delete.svg');
-        }
-
-        &--move {
-            top: 0;
-            left: 0;
-            transform: translate(-50%, -50%);
-            background-image: url('./../../img/icon-move.svg');
-        }
-
-        &--resize {
-            bottom: 0;
-            right: 0;
-            transform: translate(50%, 50%) rotate(-45deg);
-            background-image: url('./../../img/icon-resize.svg');
-        }
-
-        &:hover {
-           width: 22px;
-           height: 22px;
-           cursor: pointer;
         }
     }
 
@@ -354,4 +264,28 @@
             padding-left: 5px;
         }
     }
+}
+
+.cv-view {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow-y: scroll; 
+    height: calc(100vh - 40px);
+    background-color: $color-white;
+    padding: 0;
+
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+
+    .cv__block:hover {
+        outline: none;
+        cursor: default;
+    }
+}
+
+.cv-view-print {
+    height: 100vh;
 }

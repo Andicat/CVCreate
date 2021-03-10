@@ -172,15 +172,15 @@ function createOption (optionType,optionValue,cbOnChange) {
 
     function codeNumber(optionValue,min,max) {
         return <React.Fragment>
-                    <input type='button' className='option__button option__button--left' data-tooltip={true} value='&ndash;' onClick= {(evt) => {setValue(evt.target.nextSibling,Number(optionValue)-1)}}/>
+                    <button className='option__button option__button--left' data-tooltip={true} onClick= {(evt) => {evt.preventDefault(); setValue(evt.target.nextSibling,Number(optionValue)-1)}}>&ndash;</button>
                     <input type='text' className='option__number' data-tooltip={true} min={min} max={max} value={optionValue} readOnly></input>
-                    <input type='button' className='option__button option__button--right' data-tooltip={true} value='+' onClick= {(evt) => {setValue(evt.target.previousSibling,Number(optionValue)+1)}}/>
+                    <button className='option__button option__button--right' data-tooltip={true} onClick= {(evt) => {evt.preventDefault(); setValue(evt.target.previousSibling,Number(optionValue)+1)}}>+</button>
                 </React.Fragment>
     };
 
     function codeRange(optionType,optionValue,min,max,step) {
         return <React.Fragment>
-                    <input type='button' className={'option__button option__down option__button--' + optionType} data-tooltip={true} onClick= {(evt) => {openDrop(evt.target.nextSibling,true)}}/>
+                    <button className={'option__button option__down option__button--' + optionType} data-tooltip={true} onClick= {(evt) => {evt.preventDefault(); openDrop(evt.target.nextSibling,true)}}/>
                     <div className='option__drop-down' onMouseLeave={(evt) => openDrop(evt.currentTarget,false)}>
                         <div className='option__drop-down-line'>
                             <input type="range" className='option__range'min={min} max={max} step={step} value={optionValue} onInput={setValueInput}/>
@@ -209,20 +209,20 @@ function createOption (optionType,optionValue,cbOnChange) {
 
     function codeLink(optionType,optionValue) {
         return <React.Fragment>
-                    <input type='button' className={'option__button option__down option__button--' + optionType} data-tooltip={true} onClick={(evt) => {openDrop(evt.target.nextSibling,true)}}/>
+                    <button className={'option__button option__down option__button--' + optionType} data-tooltip={true} onClick={(evt) => {evt.preventDefault(); openDrop(evt.target.nextSibling,true)}}/>
                     <div className='option__drop-down'>
                         <div className='option__drop-down-line'>
                             <span>Link:</span>
                             <input type="text" className='option__text option__link' defaultValue={optionValue}/>
-                            <button className='option__button option__button--ok' onClick={(evt) => {setLink(evt.target.previousSibling.value,evt.target.parentNode)}}/>
-                            <button className='option__button option__button--del' onClick={(evt) => {setLink('',evt.target.parentNode)}}/>
+                            <button className='option__button option__button--ok' onClick={(evt) => {evt.preventDefault(); setLink(evt.target.previousSibling.value,evt.target.parentNode)}}/>
+                            <button className='option__button option__button--del' onClick={(evt) => {evt.preventDefault(); setLink('',evt.target.parentNode)}}/>
                         </div>
                     </div>
                 </React.Fragment>   
     };
 
     function codeButton(optionType,cbOnChange) {
-        return <input type='button' className={'option__button option__button--' + optionType} data-tooltip={true} onClick={cbOnChange}/>;
+        return <button className={'option__button option__button--' + optionType} data-tooltip={true} onClick={cbOnChange}/>;
     };
 
     function codeList(optionValue,list) {
@@ -237,14 +237,14 @@ function createOption (optionType,optionValue,cbOnChange) {
 
     function codeGroup(optionType,optionValue,min,max) {
         return <React.Fragment>
-                    <input type='button' className={'option__button option__down option__button--' + optionType} data-tooltip={true} onClick={(evt) => {openDrop(evt.target.nextSibling,true)}}/>
+                    <button className={'option__button option__down option__button--' + optionType} data-tooltip={true} onClick={(evt) => {evt.preventDefault(); openDrop(evt.target.nextSibling,true)}}/>
                     <form name={optionType} className='option__drop-down' onMouseLeave={(evt) => openDrop(evt.currentTarget,false)}>
                         {Object.keys(optionValue).map((o,i) => {
                             return <div key={i} className='option__drop-down-line'>
                                         <span>{optionType + ' ' + o}</span>
-                                        <input type='button' className='option__button option__button--left' value='&ndash;' onClick= {(evt) => {setGroupValue(evt.target.nextSibling,Number(optionValue[o])-1,optionValue,o)}}/>
+                                        <button className='option__button option__button--left' onClick= {(evt) => {evt.preventDefault(); setGroupValue(evt.target.nextSibling,Number(optionValue[o])-1,optionValue,o)}}>&ndash;</button>
                                         <input type='text' className='option__number' min={min} max={max} value={optionValue[o]} readOnly></input>
-                                        <input type='button' className='option__button option__button--right' value='+' onClick= {(evt) => {setGroupValue(evt.target.previousSibling,Number(optionValue[o])+1,optionValue,o)}}/>
+                                        <button className='option__button option__button--right' onClick= {(evt) => {evt.preventDefault(); setGroupValue(evt.target.previousSibling,Number(optionValue[o])+1,optionValue,o)}}>+</button>
                                     </div>
                         })}
                     </form>
