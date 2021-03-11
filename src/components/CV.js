@@ -9,7 +9,7 @@ import TemplatePanel from './TemplatePanel';
 import CvDocument from './CvDocument';
 import CvLogin from './CvLogin';
 import {saveFileJSON, readFileJSON, saveLocalStorage} from '../modules/utils';
-import {cv_load,cvBlock_activate} from '../redux/cvDataAC';
+import {cv_load,cvBlock_activate,templates_open_panel} from '../redux/cvDataAC';
 
 //Компонент работы с документом
 class CV extends React.PureComponent {
@@ -20,11 +20,8 @@ class CV extends React.PureComponent {
         blocks: PropTypes.array,
         activeBlocksId: PropTypes.array,
         user: PropTypes.string,
+        showPanel: PropTypes.bool,
     };
-
-    state = {
-        showPanel: false,
-    }
 
     //сохранение в формате json на локальном компьютере
     saveCV = () => {
@@ -50,14 +47,13 @@ class CV extends React.PureComponent {
         evt.target.value = null;
     }
 
-    //открыть/закрыть панель шаблонов
-    showPanel = () => {
-        this.setState({showPanel:!this.state.showPanel});
-    }
-
     //открыть меню (мобил.версия)
     openMenuMobile = () => {
         this.menu.classList.toggle('header__menu--show');
+    }
+
+    onClickBtnPanel = () => {
+        this.props.dispatch(templates_open_panel());
     }
     
     render () {
@@ -105,17 +101,17 @@ class CV extends React.PureComponent {
                 </header>
                 <main className={'main ' + this.props.transitionClass}>
                     <div className='template-panel'>
-                        <Transition in={this.state.showPanel} unmountOnExit timeout={{ enter: 500, exit: 500 }}>
+                        <Transition in={this.props.showPanel} unmountOnExit timeout={{ enter: 500, exit: 500 }}>
                             {stateName => {
                                 return <TemplatePanel transitionClass={stateName}/>
                             }}
                         </Transition>
-                        {this.state.showPanel && null}
-                        <button className='template-panel__button-hide' onClick={this.showPanel}/>
+                        {this.props.showPanel && null}
+                        <button className='template-panel__button-hide' onClick={this.onClickBtnPanel}/>
                     </div>
                     <div className='desk'>
                         <OptionPanel activeBlockOptions={activeBlockOptions}/>
-                        <CvDocument activeBlock={activeBlock} stylePage={this.props.stylePage} showPanel={this.state.showPanel}/>
+                        <CvDocument activeBlock={activeBlock} stylePage={this.props.stylePage}/>
                     </div>
                 </main>
             </React.Fragment>
@@ -129,6 +125,7 @@ const mapStateToProps = function (state) {
         blocks: state.cvData.blocks,
         activeBlocksId: state.cvData.activeBlocksId,
         user: state.cvData.user,
+        showPanel: state.cvData.showPanel,
     };
 };
   

@@ -30,6 +30,7 @@ const CV_SET_LINK = 'CV_SET_LINK';
 const CV_BLOCK_LINK = 'CV_BLOCK_LINK';
 const TEMPLATE_ADD = 'TEMPLATE_ADD';
 const TEMPLATE_DELETE = 'TEMPLATE_DELETE';
+const TEMPLATE_OPEN_PANEL = 'TEMPLATE_OPEN_PANEL';
 
 const cvBlock_add = function(block) {
     return {
@@ -239,6 +240,12 @@ const templates_delete = function(index) {
     };
 }
 
+const templates_open_panel = function() {
+    return {
+        type: TEMPLATE_OPEN_PANEL
+    };
+}
+
 export {
     cvBlock_add, CV_BLOCK_ADD,
     cvBlock_delete, CV_BLOCK_DELETE,
@@ -264,5 +271,6 @@ export {
     cv_setUser, CV_SET_USER,
     cv_setLink, CV_SET_LINK,
     templates_add, TEMPLATE_ADD,
-    templates_delete, TEMPLATE_DELETE
+    templates_delete, TEMPLATE_DELETE,
+    templates_open_panel, TEMPLATE_OPEN_PANEL,
 }

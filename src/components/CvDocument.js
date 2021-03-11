@@ -34,7 +34,7 @@ class CvDocument extends React.PureComponent {
         return (
             <div className='cv-container' onClick={this.onClick}>
                 {(this.props.activeBlock && this.cv) && (
-                    <Transition in={this.props.showPanel} timeout={{ enter: 1000, exit: 1000 }}>
+                    <Transition in={this.props.showPanel} timeout={{ enter: 1500, exit: 1000 }}>
                         {stateName => {
                             return <Transform block={this.props.activeBlock} cv={this.cv} transitionClass={stateName}/>
                         }}
@@ -52,7 +52,8 @@ const mapStateToProps = function (state) {
     return {
         blocks: state.cvData.blocks,
         activeBlocksId: state.cvData.activeBlocksId,
-        activeElementId: state.cvData.activeElementId
+        activeElementId: state.cvData.activeElementId,
+        showPanel: state.cvData.showPanel,
     };
 };
   

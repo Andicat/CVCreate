@@ -32,7 +32,8 @@ import { CV_BLOCK_ADD,
         CV_SET_USER,
         CV_SET_LINK,
         TEMPLATE_ADD,
-        TEMPLATE_DELETE } from './cvDataAC';
+        TEMPLATE_DELETE,
+        TEMPLATE_OPEN_PANEL } from './cvDataAC';
 
 const initState = {
     user: null,
@@ -43,7 +44,7 @@ const initState = {
     activeBlocksId: [],
     activeElementId: null,
     styleToEdit: {},
-    showPanel: true,
+    showPanel: false,
     newBlock: false,
     templates: [],
     templatesUser: [],
@@ -642,6 +643,14 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
                 templatesUser: state.templatesUser.filter((t,i) => i!==action.index),
             };
             saveFirebase('Templates',state.user,{templates:newState.templatesUser});
+            return newState;
+        }
+
+        //open-close templates panel
+        case TEMPLATE_OPEN_PANEL: {
+            let newState = {...state,
+                showPanel:!state.showPanel,
+            };
             return newState;
         }
 

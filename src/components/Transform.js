@@ -11,6 +11,7 @@ class Transform extends React.PureComponent {
         block: PropTypes.object,
         cv: PropTypes.object,
         transitionClass: PropTypes.string,
+        showPanel: PropTypes.bool,
     };
 
     mouseStart;
@@ -148,4 +149,10 @@ class Transform extends React.PureComponent {
     }
 }
 
-export default connect()(Transform);
+const mapStateToProps = function (state) {
+    return {
+        showPanel: state.cvData.showPanel,
+    };
+};
+
+export default connect(mapStateToProps)(Transform);

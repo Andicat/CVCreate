@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CvElement from './CvElement';
 import {connect} from 'react-redux';
-import {cvBlock_add, templates_delete} from '../redux/cvDataAC';
+import {cvBlock_add, templates_delete, templates_open_panel} from '../redux/cvDataAC';
 import {getAutoSize} from '../modules/utils';
 
 //шаблон
@@ -20,6 +20,7 @@ class TemplateBlock extends React.PureComponent {
         let sizesAuto = getAutoSize(evt.target.previousSibling);
         let deepCopyBlock = JSON.parse(JSON.stringify(this.props.data));
         this.props.dispatch(cvBlock_add({...deepCopyBlock, width:sizesAuto.width, height:sizesAuto.height}));
+        setTimeout(() => this.props.dispatch(templates_open_panel()),0);
     }
 
     //удаляем шаблон из списка

@@ -76,7 +76,7 @@ class CvLogin extends React.PureComponent {
                 }}
             </Transition>;
         }
-        return  <form className={"cv__login "  + this.props.transitionClass + (this.state.userNameValid?'':' cv__login--error')} name="login" onSubmit={this.onSubmit}>
+        return  <form className={"cv-login "  + this.props.transitionClass + (this.state.userNameValid?'':' cv-login--error')} name="login" onSubmit={this.onSubmit}>
                     <input type="text" name="name" maxLength="30" placeholder="Enter name of your CV..." value={this.state.userName} onChange={this.onChange}/>
                     <button type='submit'/>
                     {(!this.state.userNameValid) &&    

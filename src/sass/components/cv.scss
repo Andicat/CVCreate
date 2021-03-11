@@ -1,3 +1,97 @@
+
+.cv-login {
+    position: relative;
+    box-sizing: border-box;
+    margin: 40vh auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    input {
+        transition: all 0.2s;
+        display: block;
+        box-sizing: border-box;
+        height: 40px;
+        padding: 5px 10px;
+        background-color: rgba($color: white, $alpha: 0.2);
+        border: 1px solid $color-bg-header;
+        color: $color-bg-header;
+        border-radius: 5px;
+        font-size: 24px;
+        margin-right: 10px;
+
+        &::placeholder {
+            color: rgba($color-bg-header,0.3);
+        }
+
+        &:focus {
+            transform: scale(1);
+            outline: none;
+            border-color: $color-bg-header;
+            border-width: 2px;
+            &::placeholder {
+                color: transparent;
+            }   
+        }
+    }
+
+    button {
+        box-sizing: border-box;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        background-color: transparent;
+        background-image: url('./../../img/icon-ok.svg');
+        outline: none;
+        border: none;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 100%;
+
+        &:hover {
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+
+        &:active {
+            transform: scale(1.2);
+        }
+    }
+
+    &--error {
+        input {
+            transform: scale(1.1);
+            border-color: #df5c4a;
+        }
+        
+        button {
+            display: none;
+        }
+
+        span {
+            position: absolute;
+            top: calc(100% + 3px);
+            font-size: 14px;
+            color: #df5c4a;
+        }
+    }
+
+    @media (max-width: $tablet - 1px) {
+        flex-direction: column;
+        justify-content: center;
+        
+        input {
+            max-width: 90vw;
+            font-size: 16px;
+            margin: 0;
+        }
+
+        button {
+            margin: 10px;
+        }
+    }
+}
+
 .cv-container {
     width: auto;
     display: flex;
@@ -14,6 +108,30 @@
 
     @media (max-width: $tablet - 1px) {
         overflow-x: scroll;
+    }
+}
+
+.cv-view {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow-y: scroll; 
+    height: calc(100vh - 40px);
+    background-color: $color-white;
+    padding: 0;
+
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+
+    .cv__block:hover {
+        outline: none;
+        cursor: default;
+    }
+
+    &--print {
+        height: 100vh;
     }
 }
 
@@ -133,159 +251,53 @@
         margin: 20px auto;
     }
 
-    &__login {
-        position: absolute;
-        top: 30%; 
-        left: 50%;
-        transform: translate(-50%, -50%);
-        box-sizing: border-box;
-        margin: auto;
+    &--settings {
         display: flex;
-        align-items: center;
-        justify-content: center;
-
-        input {
-            transition: all 0.2s;
-            display: block;
-            box-sizing: border-box;
-            height: 40px;
-            padding: 5px 10px;
-            background-color: rgba($color: white, $alpha: 0.2);
-            border: 1px solid $color-bg-header;
-            color: $color-bg-header;
-            border-radius: 5px;
-            font-size: 24px;
-            margin-right: 10px;
-
-            &::placeholder {
-                color: rgba($color-bg-header,0.3);
-            }
-
-            &:focus {
-                transform: scale(1);
-                outline: none;
-                border-color: $color-bg-header;
-                border-width: 2px;
-                &::placeholder {
-                    color: transparent;
-                }   
-            }
+        flex-direction: column;
+        padding: 20px;
+        padding-bottom: 70px;
+        height: auto;
+        overflow: auto;
+    
+        &::-webkit-scrollbar {
+            width: 0;
         }
-
-        button {
-            box-sizing: border-box;
-            width: 40px;
-            height: 40px;
-            padding: 0;
-            background-color: transparent;
-            background-image: url('./../../img/icon-ok.svg');
-            outline: none;
-            border: none;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: 100%;
-
-            &:hover {
-                transform: scale(1.2);
-                cursor: pointer;
-            }
-
-            &:active {
-                transform: scale(1.2);
-            }
+    
+        h2 {
+            margin-bottom: 0;
+            padding-left: 15px;
+            color: $color-block-active;
         }
-
-        &--error {
-            input {
-                transform: scale(1.1);
-                border-color: #df5c4a;
-            }
-            
-            button {
-                display: none;
-            }
-
-            span {
-                position: absolute;
-                top: calc(100% + 2px);
-                left: 2px;
-                font-size: 14px;
-                color: #df5c4a;
-            }
+    
+        p {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 0;
+            padding-left: 8px;
         }
-    }
-}
-
-.cv-settings {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    padding-bottom: 70px;
-    height: auto;
-    overflow: auto;
-
-    &::-webkit-scrollbar {
-        width: 0;
-    }
-
-    h2 {
-        margin-bottom: 0;
-        padding-left: 15px;
-        color: $color-block-active;
-    }
-
-    p {
-        font-size: 16px;
-        font-weight: bold;
-        margin: 10px 0;
-        padding-left: 8px;
-    }
-
-    span {
-        font-size: 16px;
-        margin: 10px 0;
-        padding-left: 8px;
-    }
-
-    .option {
-        margin: 0;
-        margin-right: 10px;
-        pointer-events: none;
-    }
-
-    li {
-        display: flex;
-        align-items: center;
-        min-height: 40px;
-        margin-bottom: 5px;
-        padding-left: 8px;
+    
         span {
+            font-size: 16px;
+            margin: 10px 0;
+            padding-left: 8px;
+        }
+    
+        .option {
             margin: 0;
-            padding-left: 5px;
+            margin-right: 10px;
+            pointer-events: none;
+        }
+    
+        li {
+            display: flex;
+            align-items: center;
+            min-height: 40px;
+            margin-bottom: 5px;
+            padding-left: 8px;
+            span {
+                margin: 0;
+                padding-left: 5px;
+            }
         }
     }
-}
-
-.cv-view {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    overflow-y: scroll; 
-    height: calc(100vh - 40px);
-    background-color: $color-white;
-    padding: 0;
-
-    &::-webkit-scrollbar {
-        width: 0;
-    }
-
-    .cv__block:hover {
-        outline: none;
-        cursor: default;
-    }
-}
-
-.cv-view-print {
-    height: 100vh;
 }

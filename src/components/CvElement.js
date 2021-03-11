@@ -85,6 +85,9 @@ class CvElement extends React.PureComponent {
             case 'figure':
                 elementCode = <div className={className} style={style} data-elem={true} onClick={this.onClick}></div>;;
                 break;
+            case 'line':
+                    elementCode = <div className={className} style={style} data-elem={true} onClick={this.onClick}></div>;;
+                    break;
             case 'progress':
                 decodedStyle = {};
                 for (let s in this.props.data.style) {
