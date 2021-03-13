@@ -48,7 +48,7 @@ class Transform extends React.PureComponent {
         this.setState({shiftTop: this.props.cv.offsetTop, shiftLeft: this.props.cv.offsetLeft});
     }
 
-    //передвигаем блок
+    //передвигаем блок, меняем размер
     startMove = (evt) => {
         if (evt.target!==this.moveBtn && evt.target!==this.resizeBtn) {
             return;
@@ -128,10 +128,12 @@ class Transform extends React.PureComponent {
     }
 
     render () {
+        //console.log('render transform',this.props.block.width);
         if (!this.props.block) {
             return null;
         }
         let style = {top:(this.props.block.positionTop + this.state.shiftTop - this.state.shiftBorder) + 'px', left:(this.props.block.positionLeft + this.state.shiftLeft - this.state.shiftBorder) + 'px', width:(this.props.block.width + this.state.shiftBorder*2) + 'px', height:(this.props.block.height + this.state.shiftBorder*2) + 'px'};
+        //console.log('width',style.width);
         let className = 'transform '  + this.props.transitionClass + (this.props.block.lock?' transform--locked':'') + (this.props.block.link?' transform--linked':'');
         return (
             <div className={className} style={style} ref={(f) => this.frame = f}>

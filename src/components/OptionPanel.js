@@ -116,6 +116,14 @@ class OptionPanel extends React.PureComponent {
                 this.props.dispatch(templates_add(blockId));
                 break;
             }
+            case 'width': {
+                this.props.dispatch(cvBlock_setSize(blockId,false,value));
+                break;
+            }
+            case 'height': {
+                this.props.dispatch(cvBlock_setSize(blockId,value,false));
+                break;
+            }
             default:
                 //console.log('action', optionName, value);
                 return;
@@ -136,19 +144,32 @@ class OptionPanel extends React.PureComponent {
             if (this.props.activeBlockOptions.group) {
                 blockAction.push('ungroup');
             }
+            if (this.props.activeBlockOptions.width) {
+                blockAction.push('width');
+            }
+            if (this.props.activeBlockOptions.height) {
+                blockAction.push('height');
+            }
+            if (!this.props.activeBlockOptions.width && !this.props.activeBlockOptions.height && !this.props.activeBlockOptions.group) {
+                blockAction.push('autosize');
+            }
             codeBlocksOptions = blockAction.map( (a,i) => {
                 let value = null;
                 if (a==='lock') {
                     value = !!this.props.activeBlockOptions.lock;
                 } else if (a==='link') {
                     value = this.props.activeBlockOptions.link;
+                } else if (a==='width') {
+                    value = this.props.activeBlockOptions.width;
+                } else if (a==='height') {
+                    value = this.props.activeBlockOptions.height;
                 }
                 return <Option key={'block-' + i} optionName={a} optionValue={value} blockId={this.props.activeBlockOptions.id} cbOnChange={this.setAction}/>;
             });
             if (this.props.activeElementId) { //active element
                 let styles = Object.keys(this.props.styleToEdit).sort();
                 codeElementOptions = styles.map( (s,i) => (
-                    <Option key={'option-' + i} optionName={s} optionValue={this.props.styleToEdit[s]} blockId={this.props.activeBlockOptions.id} cbOnChange={this.setStyle}/>));
+                    <Option key={'option-' + i} optionName={s} optionValue={this.props.styleToEdit[s]} blockId={this.props.activeBlockOptions.id} cbOnChange={this.setStyle}/>)); 
             };
         } else if (this.props.stylePage) { //non active block, but active page
             let styles = Object.keys(this.props.stylePage).sort();

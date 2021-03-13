@@ -85,17 +85,14 @@ function saveTemplates() {
         ];
     
         let figuresArr = [
-            {type:'figure', style:{bgcolor:'#E05B49', opacity:1}},
-            {type:'figure', style:{bgcolor:'#6AABB5', opacity:1, borderRadius:'50%'}},
+            {type:'figure', size:true, width:80, height:80, style:{bgcolor:'#E05B49', opacity:1}},
+            {type:'figure', size:true, width:80, height:80, style:{bgcolor:'#6AABB5', opacity:1, borderRadius:'50%'}},
+            {type:'figure', size:true, width:150, height:5, style:{bgcolor:'#E05B49', opacity:1}},
         ];
 
-        let linesArr = [
-            {type:'line', style:{bgcolor:'#E05B49', opacity:1, height:5}},
-        ];
-        
         let progressArr = [
             {type:'dots-row', style:{maincolor:'#E05B49', addcolor:'#E6E6E6', radius:10, maincount:5, addcount: 3}},
-            {type:'progress', style:{maincolor:'#E05B49', addcolor:'#E6E6E6', progress:50}}
+            {type:'progress', size:true, width:170, height:10, style:{maincolor:'#E05B49', addcolor:'#E6E6E6', progress:50}}
         ];
 
         let contactBlockArr = [
@@ -112,7 +109,6 @@ function saveTemplates() {
             {name: 'Text', elements:textArr},
             {name: 'Info block', elements:textBlockArr},
             {name: 'Color block', elements:figuresArr},
-            {name: 'Color line', elements:linesArr},
             {name: 'Progress', elements:progressArr},
             {name: 'Contacts', elements:contactBlockArr},
         ];

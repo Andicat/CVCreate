@@ -1,4 +1,4 @@
-﻿import {CV_ID} from './../modules/utils';
+﻿import {CV_ID,decodeStyle} from './../modules/utils';
 import {saveFirebase} from './../components/withDataLoad';
 
 import { CV_BLOCK_ADD,
@@ -118,6 +118,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
         case CV_BLOCK_RESIZE: {
             let newBlocks = state.blocks.map(b => {
                 if (b.id===action.blockId) {
+                    //debugger
                     b.height = Number(b.height) + action.shiftHeight;
                     b.width = Number(b.width) + action.shiftWidth;
                     return {...b};
@@ -359,13 +360,13 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
             });
 
             let newElements = blocksToGroup.map( b => {
-                let elemWidth = b.width;
-                let elemHeight = b.height;
+                //let elemWidth = b.width;
+                //let elemHeight = b.height;
                 let elemTop = b.positionTop - top;
                 let elemLeft = b.positionLeft - left;
                 delete b.positionTop;
                 delete b.positionLeft;
-                return {...b, style:{...b.style, position:'absolute', width: elemWidth, height: elemHeight, top: elemTop, left: elemLeft}};
+                return {...b, style:{...b.style, position:'absolute', top: elemTop, left: elemLeft}};
             });
 
             let newId = state.blocks.reduce(function (r, v) { return ( r < v.id ? v.id : r);},0) + 1;
@@ -452,12 +453,16 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
             return newState;
         }
 
-        //set width and height to 'auto' to block
+        //set width, height for block
         case CV_BLOCK_SET_SIZE: {
             let newBlocks = state.blocks.map(b => {
                 if (b.id===action.blockId) {
-                    b.height = Number(action.height);
-                    b.width = Number(action.width);
+                    if (action.width) {
+                        b.width = Number(action.width);
+                    }
+                    if (action.height) {
+                        b.height = Number(action.height);
+                    }
                     return {...b};
                 }
                 return b});

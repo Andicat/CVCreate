@@ -19,7 +19,7 @@ class TemplateBlock extends React.PureComponent {
     onClickAdd = (evt) => {
         let sizesAuto = getAutoSize(evt.target.previousSibling);
         let deepCopyBlock = JSON.parse(JSON.stringify(this.props.data));
-        this.props.dispatch(cvBlock_add({...deepCopyBlock, width:sizesAuto.width, height:sizesAuto.height}));
+        this.props.dispatch(cvBlock_add({...deepCopyBlock, width:(this.props.data.width?this.props.data.width:sizesAuto.width), height:(this.props.data.height?this.props.data.height:sizesAuto.height)}));
         setTimeout(() => this.props.dispatch(templates_open_panel()),0);
     }
 
@@ -29,7 +29,7 @@ class TemplateBlock extends React.PureComponent {
     }
 
     render () {
-        let elementCode = <CvElement key={'' + this.props.id} id={'' + this.props.id} blockId={this.props.id} cv={false} data={this.props.data} active={false}></CvElement>;
+        let elementCode = <CvElement key={'' + this.props.id} id={'' + this.props.id} blockId={this.props.id} cv={false} data={this.props.data} active={false} width={this.props.data.width} height={this.props.data.height}></CvElement>;
         return (    
             <li className={'template-panel__block ' + this.props.transitionClass}>
                 <div className='template-panel__block-view'>

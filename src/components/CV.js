@@ -73,6 +73,8 @@ class CV extends React.PureComponent {
                                 lock: activeBlock.lock,
                                 link:activeBlock.link,
                                 group:activeBlock.group,
+                                width:(activeBlock.group || !activeBlock.size)?false:activeBlock.width,
+                                height:(activeBlock.group || !activeBlock.size)?false:activeBlock.height,
                             };
         }
 

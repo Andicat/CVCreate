@@ -188,9 +188,14 @@
         box-sizing: border-box;
         border: 1px solid transparent;
 
+        &:focus,
+        span:focus {
+            outline: none;
+        }
+
         &--text {
             height: auto;
-            white-space: pre;
+            //white-space: pre;
         }
 
         &--active {

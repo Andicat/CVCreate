@@ -11,7 +11,6 @@ const FONTS = ['PTSans','Roboto','Helvetica','Garamond'];
 
 const BLOCK_ACTION = [
     'lock',
-    'autosize',
     'back',
     'copy',
     'link',
@@ -31,6 +30,8 @@ const BLOCKS_ACTION = [
     'alignHeight',
     'group',
 ];
+
+let timer;
 
 //text for tooltips
 function createTooltipText(optionName) {
@@ -109,7 +110,7 @@ function createOption (optionType,optionValue,cbOnChange) {
     } else if (optionType==='maincount' || optionType==='addcount' || optionType==='radius' || optionType==='borderwidth' || optionType==='size') {
         return codeNumber(optionValue,0,100);
     } else if (optionType==='width' || optionType==='height') {
-        return codeNumber(optionValue,0,Infinity);
+        return codeNumber(optionValue,1,Infinity);
     } else {
         return null;
     }
@@ -163,6 +164,26 @@ function createOption (optionType,optionValue,cbOnChange) {
         }
     };
 
+    function startChangeValue(value,limit,step) { 
+        let speedChange = 100;
+        function changeByStep () {
+            if (value==limit) {
+                clearTimeout(timer);
+                return;
+            } else {
+                value = Number(value) + step;
+                cbOnChange(value);
+                timer = setTimeout(changeByStep,speedChange);
+                speedChange -= 5;
+            }
+        }
+        changeByStep();
+    }
+
+    function stopChangeValue() {
+        clearTimeout(timer);
+    }
+
     function openDrop(elem, mode) {
         if (mode && !elem.classList.contains('option__drop-down--show')) {
             elem.classList.add('option__drop-down--show');
@@ -172,11 +193,12 @@ function createOption (optionType,optionValue,cbOnChange) {
         }
     };
 
+    //{(evt) => {evt.preventDefault(); setValue(evt.target.nextSibling,Number(optionValue)-1)}}
     function codeNumber(optionValue,min,max) {
         return <React.Fragment>
-                    <button className='option__button option__button--left' data-tooltip={true} onClick= {(evt) => {evt.preventDefault(); setValue(evt.target.nextSibling,Number(optionValue)-1)}}>&ndash;</button>
+                    <button className='option__button option__button--left' data-tooltip={true} onMouseDown={() => startChangeValue(optionValue,min,-1)} onMouseUp={stopChangeValue}>&ndash;</button>
                     <input type='text' className='option__number' data-tooltip={true} min={min} max={max} value={optionValue} readOnly></input>
-                    <button className='option__button option__button--right' data-tooltip={true} onClick= {(evt) => {evt.preventDefault(); setValue(evt.target.previousSibling,Number(optionValue)+1)}}>+</button>
+                    <button className='option__button option__button--right' data-tooltip={true} onMouseDown={() => startChangeValue(optionValue,max,1)} onMouseUp={stopChangeValue}>+</button>
                 </React.Fragment>
     };
 
@@ -301,6 +323,12 @@ function createStyle (styles) {
             case 'borderwidth': 
                 styleAttr.borderWidth = styles[key] + 'px';
                 break;
+            /*case 'width':
+                styleAttr.width = styles[key] + 'px';
+                break;
+            case 'height':
+                styleAttr.height = styles[key] + 'px';
+                break;*/
             case 'padding':
                 styleAttr.padding = styles[key].top + 'px ' + styles[key].right + 'px ' + styles[key].bottom + 'px ' + styles[key].left + 'px';
                 break;
@@ -320,9 +348,11 @@ function getAutoSize (element) {
     clone.style.visibility = 'hidden';
     clone.style.height = 'auto';
     clone.style.width = 'auto';
+    clone.style.minHeight = 0;
+    clone.style.padding = 0;
     clone.style.boxSizing = 'border-box';
-    sizes.height = clone.scrollHeight;
-    sizes.width = clone.scrollWidth;
+    sizes.height = clone.scrollHeight + 1;
+    sizes.width = clone.scrollWidth + 1;
     document.body.removeChild(clone);
     return sizes;
 };

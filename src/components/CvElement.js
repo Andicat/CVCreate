@@ -13,6 +13,8 @@ class CvElement extends React.PureComponent {
         id: PropTypes.string.isRequired,
         blockId: PropTypes.number.isRequired,
         data: PropTypes.object,
+        height: PropTypes.number,
+        width: PropTypes.number,
         activeElementId: PropTypes.string,
         templateImageUrl: PropTypes.string,
     };
@@ -36,6 +38,12 @@ class CvElement extends React.PureComponent {
     render () {
         let isActive = (this.props.activeElementId===this.props.id);
         let style = createStyle(this.props.data.style);
+        if (this.props.width) {
+            style.width = this.props.width + 'px';
+        }
+        if (this.props.height) {
+            style.height = this.props.height + 'px';
+        }
         let positionTop;
         let positionLeft;
         let position;
@@ -83,11 +91,8 @@ class CvElement extends React.PureComponent {
                 }
                 break;
             case 'figure':
-                elementCode = <div className={className} style={style} data-elem={true} onClick={this.onClick}></div>;;
+                elementCode = <div className={className} style={style} data-elem={true} onClick={this.onClick}></div>;
                 break;
-            case 'line':
-                    elementCode = <div className={className} style={style} data-elem={true} onClick={this.onClick}></div>;;
-                    break;
             case 'progress':
                 decodedStyle = {};
                 for (let s in this.props.data.style) {
@@ -145,7 +150,7 @@ class CvElement extends React.PureComponent {
                 let CvGroupElement = connect(mapStateToProps)(CvElement);
                 elementCode = <div className={className} style={style}>
                                 {this.props.data.elements.map( (e,i) => (
-                                    <CvGroupElement key={'' + (e.id?e.id:i)} id={'' + (e.id?e.id:i)} blockId={this.props.blockId} editable={this.props.editable} data={e} activeElementId={this.props.activeElementId}></CvGroupElement>
+                                    <CvGroupElement key={'' + (e.id?e.id:i)} id={'' + (e.id?e.id:i)} blockId={this.props.blockId} editable={this.props.editable} data={e} activeElementId={this.props.activeElementId} width={e.width} height={e.height}></CvGroupElement>
                                 ))}
                               </div>;
                 break;
