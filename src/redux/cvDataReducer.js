@@ -148,9 +148,14 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
         return newState;
     }
 
-    //activate miltiple blocks on cv-page
+    //activate/disactivate blocks on cv-page
     case CV_BLOCK_ACTIVATE_MULTI: {
-        let newActiveBlocksId = [...state.activeBlocksId,action.blockId];
+        let newActiveBlocksId;
+        if (state.activeBlocksId.find(b => b===action.blockId)) {
+            newActiveBlocksId = state.activeBlocksId.filter( b => b!==action.blockId);
+        } else {
+            newActiveBlocksId = [...state.activeBlocksId,action.blockId];
+        }
         let newState = {...state,
             activeBlocksId: newActiveBlocksId,
             activeBlockDOM: null,

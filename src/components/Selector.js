@@ -94,10 +94,12 @@ class Selector extends React.PureComponent {
 
     selectBlock = () => {
         this.props.blocks.forEach(block => {
-            if (this.props.activeBlocksId.findIndex(ab => ab===block.id)>-1) {
-                return;
-            }
+            let blockSelected = this.props.activeBlocksId.findIndex(ab => ab===block.id)>-1;
             if (block.positionTop>=this.state.top && block.positionLeft>=this.state.left && (block.positionLeft-this.state.left+block.width)<=this.state.width && (block.positionTop-this.state.top+block.height)<=this.state.height) {
+                if (!blockSelected) {
+                    this.props.dispatch(cvBlock_activateMulti(block.id));
+                }
+            } else if (blockSelected) {
                 this.props.dispatch(cvBlock_activateMulti(block.id));
             }
         });
