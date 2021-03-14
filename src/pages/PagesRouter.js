@@ -22,17 +22,16 @@ class PagesRouter extends React.Component {
     }
 
     render() {
-        
+
         return (
             <React.Fragment>
                 <Route path='/' exact component={Page_CV}/>
                 <Route path='/view' component={Page_View}/>
-                <Route path="/:linkname" component={Page_Link}/>
-                <Route path="/settings" component={Page_Settings}/>
+                <Route path='/:linkname' component={Page_Link}/>
+                <Route path='/settings' component={Page_Settings}/>
             </React.Fragment>
         );
     }
 }
-    
+
 export default PagesRouter;
-    

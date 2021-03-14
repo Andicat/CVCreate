@@ -25,28 +25,28 @@ class CvView extends React.PureComponent {
 
     //просмотр для печати
     viewForPrint = () => {
-        this.setState({viewForPrint:!this.state.viewForPrint});
+        this.setState({viewForPrint: !this.state.viewForPrint});
     }
 
     //создаем ссылку в базе приложения
     createLink = async () => {
         let linkName = this.props.user;
-        let stateToSave = {style:this.props.stylePage,blocks:this.props.blocks};
+        let stateToSave = {style: this.props.stylePage,blocks: this.props.blocks};
         saveFirebase('Links',linkName,stateToSave,false);
-        saveLocalStorage('CV',{link:linkName});
+        saveLocalStorage('CV',{link: linkName});
         this.props.dispatch(cv_setLink(linkName));
     }
 
     //обновляем ссылку в базе приложения
     updateLink = async (evt) => {
         let linkName = this.props.user;
-        let stateToSave = {style:this.props.stylePage,blocks:this.props.blocks};
+        let stateToSave = {style: this.props.stylePage,blocks: this.props.blocks};
         evt.target.parentNode.classList.add('exiting');
-        let timer = setTimeout(()=>{
-                            this.setState({linkIsUpdated:true});
-                            clearTimeout(timer);
-                            return;}
-                    ,500);
+        let timer = setTimeout(() => {
+            this.setState({linkIsUpdated: true});
+            clearTimeout(timer);
+            return;}
+        ,500);
         saveFirebase('Links',linkName,stateToSave,false);
     }
 
@@ -54,28 +54,32 @@ class CvView extends React.PureComponent {
     openMenuMobile = () => {
         this.menu.classList.toggle('header__menu--show');
     }
-    
+
     render () {
         let cvBlocksCode = this.props.blocks.map( b => {
-            return <CvBlock key={b.id} id={b.id} data={b} editable={false}></CvBlock>
+            return <CvBlock key={b.id} id={b.id} data={b} editable={false}></CvBlock>;
         });
 
         let linkCode;
         if (this.props.link) {
-            linkCode = <React.Fragment>
-                            {!this.state.linkIsUpdated &&
-                                <li className='header__menu-item'>
-                                    <button className='header__button header__button--link-update' onClick={this.updateLink}>Update link</button>
-                                </li>
-                            }
-                            <li className='header__menu-item'>
-                                <NavLink to={'/' + this.props.link} className='header__button header__button--show' target="_blank">Open link ({this.props.link})</NavLink>
-                            </li>
-                        </React.Fragment>
-        } else {
-            linkCode = <li className='header__menu-item'>
-                            <button className='header__button header__button--link-create' onClick={this.createLink}>Create Link</button>
+            linkCode = (
+                <React.Fragment>
+                    {!this.state.linkIsUpdated &&
+                        <li className='header__menu-item'>
+                            <button className='header__button header__button--link-update' onClick={this.updateLink}>Update link</button>
                         </li>
+                    }
+                    <li className='header__menu-item'>
+                        <NavLink to={'/' + this.props.link} className='header__button header__button--show' target='_blank'>Open link ({this.props.link})</NavLink>
+                    </li>
+                </React.Fragment>
+            );
+        } else {
+            linkCode = (
+                <li className='header__menu-item'>
+                    <button className='header__button header__button--link-create' onClick={this.createLink}>Create Link</button>
+                </li>
+            );
         }
 
         return (
@@ -83,17 +87,17 @@ class CvView extends React.PureComponent {
                 {!this.state.viewForPrint && (
                     <header className={'header ' + this.props.transitionClass}>
                         <ul className='header__menu' ref={(f) => this.menu = f}>
-                            <Media query="(min-width: 768px)">
+                            <Media query='(min-width: 768px)'>
                                 <li className='header__menu-item'>
                                     <button className='header__button header__button--print' onClick={this.viewForPrint}>View for print</button>
                                 </li>
                             </Media>
                             <li className='header__menu-item'>
-                                <NavLink to='/' className='header__button header__button--edit'>Back to edit</NavLink>    
+                                <NavLink to='/' className='header__button header__button--edit'>Back to edit</NavLink>
                             </li>
                             {linkCode}
                         </ul>
-                        <Media query="(max-width: 767px)">
+                        <Media query='(max-width: 767px)'>
                             <button className='header__button header__button--menu' onClick={this.openMenuMobile}/>
                         </Media>
                     </header>

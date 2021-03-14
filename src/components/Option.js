@@ -28,16 +28,16 @@ class Option extends React.PureComponent {
     //показ подсказки при наведении мыши
     onMouseOver = (evt) => {
         if (evt.target.getAttribute('data-tooltip')) {
-            this.setState({tooltip:createTooltipText(this.props.optionName)});
+            this.setState({tooltip: createTooltipText(this.props.optionName)});
         }
     }
 
     //убираем подсказку
     onMouseOut = () => {
-        this.setState({tooltip:null});
+        this.setState({tooltip: null});
     }
 
-     render () {
+    render () {
         let optionCode = createOption(this.props.optionName,this.props.optionValue,this.onChangeValue);
         if (!optionCode) {
             return null;
@@ -45,11 +45,11 @@ class Option extends React.PureComponent {
         return (
             <div className='option' onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut} onClick={this.onMouseOut}>
                 {optionCode}
-                {this.state.tooltip && 
+                {this.state.tooltip &&
                     <span className='option__tooltip'>{this.state.tooltip}</span>
                 }
             </div>
-            
+
         );
     }
 }

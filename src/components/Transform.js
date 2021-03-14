@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {cvBlock_move, cvBlock_resize, cvBlock_delete} from '../redux/cvDataAC';
 
-//Трансформационная рамка для блока. 
+//Трансформационная рамка для блока.
 //Отвечает за перемещение, удаление,...
 class Transform extends React.PureComponent {
 
@@ -18,24 +18,24 @@ class Transform extends React.PureComponent {
     mouseShift;
     elem;
     resize;
-    
+
     state = {
-        shiftTop: this.props.cv.offsetTop,
-        shiftLeft: this.props.cv.offsetLeft,
-        shiftBorder : 4,
+        shiftTop: this.props.cv.current.offsetTop,
+        shiftLeft: this.props.cv.current.offsetLeft,
+        shiftBorder: 4,
     };
 
     componentDidMount() {
-        window.addEventListener("resize", this.setPosition);
+        window.addEventListener('resize', this.setPosition);
         window.addEventListener('touchstart', this.startMove,{passive: false});
-        window.addEventListener("mousedown", this.startMove);
+        window.addEventListener('mousedown', this.startMove);
         window.addEventListener('keydown', this.moveKey);
     }
 
     componentWillUnmount() {
-        window.removeEventListener("resize", this.setPosition);
+        window.removeEventListener('resize', this.setPosition);
         window.removeEventListener('touchstart', this.startMove,{passive: false});
-        window.removeEventListener("mousedown", this.startMove);
+        window.removeEventListener('mousedown', this.startMove);
         window.removeEventListener('keydown', this.moveKey);
     }
 
@@ -45,7 +45,7 @@ class Transform extends React.PureComponent {
 
     //обновляем положение рамки
     setPosition = () => {
-        this.setState({shiftTop: this.props.cv.offsetTop, shiftLeft: this.props.cv.offsetLeft});
+        this.setState({shiftTop: this.props.cv.current.offsetTop, shiftLeft: this.props.cv.current.offsetLeft});
     }
 
     //передвигаем блок, меняем размер
@@ -62,7 +62,7 @@ class Transform extends React.PureComponent {
             x: evt.clientX,
             y: evt.clientY
         };
-        
+
         document.addEventListener('mousemove', this.move);
         document.addEventListener('mouseup', this.moveEnd);
         window.addEventListener('touchmove', this.move,{ passive: false });
@@ -76,7 +76,7 @@ class Transform extends React.PureComponent {
         }
         this.mouseShift = {
             x: moveEvt.clientX - this.mouseStart.x,
-            y: moveEvt.clientY - this.mouseStart.y 
+            y: moveEvt.clientY - this.mouseStart.y
         };
         this.mouseStart = {
             x: moveEvt.clientX,
@@ -132,9 +132,9 @@ class Transform extends React.PureComponent {
         if (!this.props.block) {
             return null;
         }
-        let style = {top:(this.props.block.positionTop + this.state.shiftTop - this.state.shiftBorder) + 'px', left:(this.props.block.positionLeft + this.state.shiftLeft - this.state.shiftBorder) + 'px', width:(this.props.block.width + this.state.shiftBorder*2) + 'px', height:(this.props.block.height + this.state.shiftBorder*2) + 'px'};
+        let style = {top: (this.props.block.positionTop + this.state.shiftTop - this.state.shiftBorder) + 'px', left: (this.props.block.positionLeft + this.state.shiftLeft - this.state.shiftBorder) + 'px', width: (this.props.block.width + this.state.shiftBorder*2) + 'px', height: (this.props.block.height + this.state.shiftBorder*2) + 'px'};
         //console.log('width',style.width);
-        let className = 'transform '  + this.props.transitionClass + (this.props.block.lock?' transform--locked':'') + (this.props.block.link?' transform--linked':'');
+        let className = 'transform ' + this.props.transitionClass + (this.props.block.lock?' transform--locked':'') + (this.props.block.link?' transform--linked':'');
         return (
             <div className={className} style={style} ref={(f) => this.frame = f}>
                 {!this.props.block.lock && (

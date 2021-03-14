@@ -79,33 +79,31 @@
         border-radius: 5px;
         margin: 5px;
         background-color: $color-white;
+        padding-right: 30px;
         border-bottom: 1px solid $color-panel-border;
         
         &:hover,
         &:focus,
         &:active {
             outline: none;
-            cursor: default;
-        }
-    }
-
-    &__block-add {
-        transition: all 0.3s;
-        width: 25px;
-        height: 25px;
-        margin-right: 5px;
-        padding: 0;
-        outline: none;
-        border: none;
-        background-color: transparent;
-        background-image: url('./../../img/icon-add.svg');
-        background-repeat: no-repeat;
-        background-size: 100%;
-        background-position: center;
-
-        &:hover {
-            animation: arrow-add 1s linear infinite;
             cursor: pointer;
+
+            &::before {
+                animation: arrow-add 1s linear infinite;
+            }
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            transition: all 0.3s;
+            width: 25px;
+            height: 25px;
+            right: 5px;
+            background-image: url('./../../img/icon-add.svg');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: center;
         }
     }
 

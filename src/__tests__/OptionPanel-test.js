@@ -1,4 +1,4 @@
-﻿"use strict";
+
 
 import {renderComponentWithStore, storeWithData} from './utils-test';
 import {cvStyle_update,cvBlock_lock} from '../redux/cvDataAC';
@@ -7,7 +7,7 @@ import OptionPanel from '../components/OptionPanel';
 
 let component;
 
-let props = {activeBlockOptions:{id:4, lock: false, link:'', group:false,}};
+let props = {activeBlockOptions: {id: 4, lock: false, link: '', group: false,}};
 
 describe('OptionPanel render&actions', () => {
 
@@ -15,11 +15,11 @@ describe('OptionPanel render&actions', () => {
         storeWithData.clearActions();
         component = renderComponentWithStore(OptionPanel,storeWithData,props);
         expect(component.toJSON()).toMatchSnapshot();
-        let optionColor = component.root.find( el => el.props.className=='option__color');
-        const evt = {"target":{"value":'#666'}};
+        let optionColor = component.root.find( el => el.props.className==='option__color');
+        const evt = {'target': {'value': '#666'}};
         optionColor.props.onChange(evt);
         const expectedActions = [
-            cvStyle_update(props.activeBlockOptions.id,"s01_color",'#666'),
+            cvStyle_update(props.activeBlockOptions.id,'s01_color','#666'),
         ];
         expect(storeWithData.getActions()).toEqual(expectedActions);
     });
@@ -28,8 +28,8 @@ describe('OptionPanel render&actions', () => {
         storeWithData.clearActions();
         component = renderComponentWithStore(OptionPanel,storeWithData,props);
         expect(component.toJSON()).toMatchSnapshot();
-        let optionLock = component.root.find( el => el.props.className=='option__checkbox option__checkbox--lock');
-        const evt = {"target":{"checked":true}};
+        let optionLock = component.root.find( el => el.props.className==='option__checkbox option__checkbox--lock');
+        const evt = {'target': {'checked': true}};
         optionLock.props.onChange(evt);
         const expectedActions = [
             cvBlock_lock(props.activeBlockOptions.id),

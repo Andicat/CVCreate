@@ -1,19 +1,18 @@
 import React from 'react';
-import {Transition} from "react-transition-group";
+import {Transition} from 'react-transition-group';
 import CvView from './../components/CvView';
 
 class Page_View extends React.PureComponent {
-      
+
     render() {
         return (
             <Transition in={true} unmountOnExit timeout={{ enter: 500, exit: 500 }}>
                 {stateName => {
-                    return <CvView transitionClass={stateName}/>
+                    return <CvView transitionClass={stateName}/>;
                 }}
             </Transition>
         );
     }
 }
-    
+
 export default Page_View;
-    

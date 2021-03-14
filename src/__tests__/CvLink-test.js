@@ -1,4 +1,4 @@
-﻿"use strict";
+
 
 import {renderComponentWithStore, storeWithData} from './utils-test';
 
@@ -6,7 +6,7 @@ import CvLink from '../components/CvLink';
 
 let component;
 
-let props = {match:{params:{linkname:'111'}}};
+let props = {match: {params: {linkname: '111'}}};
 
 describe('CvLink render', () => {
 

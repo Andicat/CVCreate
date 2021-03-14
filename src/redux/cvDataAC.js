@@ -1,4 +1,4 @@
-﻿const CV_BLOCK_ADD = 'CV_BLOCK_ADD';
+const CV_BLOCK_ADD = 'CV_BLOCK_ADD';
 const CV_BLOCK_DELETE = 'CV_BLOCK_DELETE';
 const CV_BLOCK_MOVE = 'CV_BLOCK_MOVE';
 const CV_BLOCK_RESIZE = 'CV_BLOCK_RESIZE';
@@ -32,54 +32,56 @@ const TEMPLATE_ADD = 'TEMPLATE_ADD';
 const TEMPLATE_DELETE = 'TEMPLATE_DELETE';
 const TEMPLATE_OPEN_PANEL = 'TEMPLATE_OPEN_PANEL';
 
-const cvBlock_add = function(block) {
+const cvBlock_add = function(block,scrollTop,scrollLeft) {
     return {
         type: CV_BLOCK_ADD,
-        block:block,
+        block: block,
+        scrollTop: scrollTop,
+        scrollLeft: scrollLeft,
     };
-}
+};
 
 const cvBlock_delete = function(blockId) {
     return {
         type: CV_BLOCK_DELETE,
-        blockId:blockId,
+        blockId: blockId,
     };
-}
+};
 
 const cvBlock_move = function(blockId,shiftTop,shiftLeft) {
     return {
         type: CV_BLOCK_MOVE,
-        blockId:blockId,
+        blockId: blockId,
         shiftTop: shiftTop,
         shiftLeft: shiftLeft,
     };
-}
+};
 
 const cvBlock_resize = function(blockId,shiftHeight,shiftWidth) {
     return {
         type: CV_BLOCK_RESIZE,
-        blockId:blockId,
+        blockId: blockId,
         shiftHeight: shiftHeight,
         shiftWidth: shiftWidth,
     };
-}
+};
 
 const cvBlock_activate = function(blockId,target,activeElem) {
     return {
         type: CV_BLOCK_ACTIVATE,
-        blockId:blockId,
-        target:target,
-        activeElem:activeElem,
+        blockId: blockId,
+        target: target,
+        activeElem: activeElem,
     };
-}
+};
 
 const cvElement_activate = function(style,elementId) {
     return {
         type: CV_ELEMENT_ACTIVATE,
-        elementId:elementId,
-        style:style,
+        elementId: elementId,
+        style: style,
     };
-}
+};
 
 const cvStyle_update = function(blockId,styleName,styleValue) {
     return {
@@ -88,7 +90,7 @@ const cvStyle_update = function(blockId,styleName,styleValue) {
         styleName: styleName,
         styleValue: styleValue,
     };
-}
+};
 
 const cvElement_textUpdate = function(blockId,textValue) {
     return {
@@ -96,155 +98,155 @@ const cvElement_textUpdate = function(blockId,textValue) {
         blockId: blockId,
         textValue: textValue,
     };
-}
+};
 
 const cvBlock_sendBack = function(blockId) {
     return {
         type: CV_BLOCK_SEND_BACK,
         blockId: blockId,
     };
-}
+};
 
 const cvBlock_copy = function(blockId) {
     return {
         type: CV_BLOCK_COPY,
         blockId: blockId,
     };
-}
+};
 
 const cvBlock_setSize = function(blockId,height,width) {
     return {
         type: CV_BLOCK_SET_SIZE,
         blockId: blockId,
-        width:width,
-        height:height,
+        width: width,
+        height: height,
     };
-}
+};
 
 const cvBlock_activateMulti = function(blockId) {
     return {
         type: CV_BLOCK_ACTIVATE_MULTI,
         blockId: blockId,
     };
-}
+};
 
 const cvBlocks_align = function(mode) {
     switch (mode) {
-        case 'top':
-            return { type: CV_BLOCKS_ALIGN_TOP };
-        case 'bottom':
-            return { type: CV_BLOCKS_ALIGN_BOTTOM };
-        case 'left':
-            return { type: CV_BLOCKS_ALIGN_LEFT };
-        case 'right':
-            return { type: CV_BLOCKS_ALIGN_RIGHT };
-        case 'vertical':
-            return { type: CV_BLOCKS_ALIGN_VERTICAL };
-        case 'horisontal':
-            return { type: CV_BLOCKS_ALIGN_HORISONTAL };
-        default:
+    case 'top':
+        return { type: CV_BLOCKS_ALIGN_TOP };
+    case 'bottom':
+        return { type: CV_BLOCKS_ALIGN_BOTTOM };
+    case 'left':
+        return { type: CV_BLOCKS_ALIGN_LEFT };
+    case 'right':
+        return { type: CV_BLOCKS_ALIGN_RIGHT };
+    case 'vertical':
+        return { type: CV_BLOCKS_ALIGN_VERTICAL };
+    case 'horisontal':
+        return { type: CV_BLOCKS_ALIGN_HORISONTAL };
+    default:
     }
-}
+};
 
 const cvBlocks_distribute = function(mode) {
     switch (mode) {
-        case 'vertical':
-            return { type: CV_BLOCKS_DISTRIBUTE_VERTICAL };
-        case 'horisontal':
-            return { type: CV_BLOCKS_DISTRIBUTE_HORISONTAL };
-        default:
+    case 'vertical':
+        return { type: CV_BLOCKS_DISTRIBUTE_VERTICAL };
+    case 'horisontal':
+        return { type: CV_BLOCKS_DISTRIBUTE_HORISONTAL };
+    default:
     }
-}
+};
 
 const cvBlocks_alignSize = function(mode) {
     switch (mode) {
-        case 'width':
-            return { type: CV_BLOCKS_ALIGN_WIDTH };
-        case 'height':
-            return { type: CV_BLOCKS_ALIGN_HEIGHT };
-        default:
+    case 'width':
+        return { type: CV_BLOCKS_ALIGN_WIDTH };
+    case 'height':
+        return { type: CV_BLOCKS_ALIGN_HEIGHT };
+    default:
     }
-}
+};
 
 const cvBlocks_group = function() {
     return { type: CV_BLOCKS_GROUP };
-}
+};
 
 const cvBlock_ungroup = function(blockId) {
-    return { 
+    return {
         type: CV_BLOCK_UNGROUP,
         blockId: blockId,
     };
-}
+};
 
 const cvBlock_lock = function(blockId) {
-    return { 
+    return {
         type: CV_BLOCK_LOCK,
         blockId: blockId,
     };
-}
+};
 
 const cv_load = function(blocks,style) {
-    return { 
+    return {
         type: CV_LOAD,
-        blocks:blocks,
-        style:style,
+        blocks: blocks,
+        style: style,
     };
-}
+};
 
 const cv_init = function(blocks,style,user,link,templatesData,templatesUser) {
-    return { 
+    return {
         type: CV_INIT,
-        blocks:blocks,
-        style:style,
-        user:user,
-        link:link,
-        templatesData:templatesData,
-        templatesUser:templatesUser,
+        blocks: blocks,
+        style: style,
+        user: user,
+        link: link,
+        templatesData: templatesData,
+        templatesUser: templatesUser,
     };
-}
+};
 
 const cv_setUser = function(user) {
-    return { 
+    return {
         type: CV_SET_USER,
-        user:user,
+        user: user,
     };
-}
+};
 
 const cv_setLink = function(link) {
-    return { 
+    return {
         type: CV_SET_LINK,
-        link:link,
+        link: link,
     };
-}
+};
 
 const cvBlock_setLink = function(blockId,linkValue) {
-    return { 
+    return {
         type: CV_BLOCK_LINK,
-        blockId:blockId,
-        linkValue:linkValue,
+        blockId: blockId,
+        linkValue: linkValue,
     };
-}
+};
 
 const templates_add = function(blockId) {
     return {
         type: TEMPLATE_ADD,
         blockId: blockId,
     };
-}
+};
 
 const templates_delete = function(index) {
     return {
         type: TEMPLATE_DELETE,
         index: index,
     };
-}
+};
 
 const templates_open_panel = function() {
     return {
         type: TEMPLATE_OPEN_PANEL
     };
-}
+};
 
 export {
     cvBlock_add, CV_BLOCK_ADD,
@@ -261,16 +263,16 @@ export {
     cvBlocks_align, CV_BLOCKS_ALIGN_TOP, CV_BLOCKS_ALIGN_BOTTOM, CV_BLOCKS_ALIGN_LEFT, CV_BLOCKS_ALIGN_RIGHT, CV_BLOCKS_ALIGN_VERTICAL, CV_BLOCKS_ALIGN_HORISONTAL,
     cvBlocks_distribute, CV_BLOCKS_DISTRIBUTE_VERTICAL, CV_BLOCKS_DISTRIBUTE_HORISONTAL,
     cvBlocks_alignSize, CV_BLOCKS_ALIGN_WIDTH, CV_BLOCKS_ALIGN_HEIGHT,
-    cvBlocks_group, CV_BLOCKS_GROUP, 
+    cvBlocks_group, CV_BLOCKS_GROUP,
     cvBlock_ungroup, CV_BLOCK_UNGROUP,
     cvElement_activate, CV_ELEMENT_ACTIVATE,
     cvStyle_update, CV_STYLE_UPDATE,
     cvElement_textUpdate, CV_TEXT_UPDATE,
     cv_load, CV_LOAD,
-    cv_init, CV_INIT, 
+    cv_init, CV_INIT,
     cv_setUser, CV_SET_USER,
     cv_setLink, CV_SET_LINK,
     templates_add, TEMPLATE_ADD,
     templates_delete, TEMPLATE_DELETE,
     templates_open_panel, TEMPLATE_OPEN_PANEL,
-}
+};

@@ -26,16 +26,16 @@ class CvLink extends React.PureComponent {
             loadFirebase('Links',linkName,resolve);
         });
         await loadLinkData.then((data) => {
-            this.setState({blocks:data.blocks,stylePage:data.style});
+            this.setState({blocks: data.blocks,stylePage: data.style});
         });
     }
-    
+
     render () {
         if (!this.state.blocks) {
             return null;
         }
         var cvBlocksCode = this.state.blocks.map( b => {
-            return <CvBlock key={b.id} id={b.id} data={b} editable={false}></CvBlock>
+            return <CvBlock key={b.id} id={b.id} data={b} editable={false}></CvBlock>;
         });
 
         return (
@@ -51,5 +51,5 @@ class CvLink extends React.PureComponent {
         );
     }
 }
-  
+
 export default withRouter(CvLink);

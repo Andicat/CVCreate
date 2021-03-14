@@ -1,4 +1,4 @@
-﻿"use strict";
+
 
 import {renderComponentWithStore, storeEmpty, storeWithData} from './utils-test';
 
@@ -17,7 +17,7 @@ describe('CV render', () => {
         component = renderComponentWithStore(CV,storeWithData);
         expect(component.toJSON()).toMatchSnapshot();
         //Открытие панели шаблонов
-        const panelButton = component.root.find(el => el.props.className=='template-panel__button-hide');
+        const panelButton = component.root.find(el => el.props.className==='template-panel__button-hide');
         panelButton.props.onClick();
         expect(component.toJSON()).toMatchSnapshot();
     });

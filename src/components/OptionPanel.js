@@ -12,7 +12,7 @@ import {cvStyle_update,
     cvBlocks_alignSize,
     cvBlocks_distribute,
     cvBlocks_group,
-    cvBlock_ungroup, 
+    cvBlock_ungroup,
     cvBlock_lock,
     cvBlock_setLink,
     templates_add } from '../redux/cvDataAC';
@@ -24,109 +24,115 @@ class OptionPanel extends React.PureComponent {
         styleToEdit: PropTypes.object,
         activeElementId: PropTypes.string,
         activeBlockOptions: PropTypes.object,
-        activeBlocksId: PropTypes.array,    
-        activeBlockDOM: PropTypes.object, 
-        stylePage: PropTypes.object,   
+        activeBlocksId: PropTypes.array,
+        activeBlockDOM: PropTypes.object,
+        stylePage: PropTypes.object,
     };
 
     //меняем стиль блока
     setStyle = (blockId,optionName,value) => {
         this.props.dispatch(cvStyle_update(blockId,optionName,value));
+        if (optionName.indexOf('radius')>=0 || optionName.indexOf('count')>=0) {
+            setTimeout(() => {
+                let sizesAuto = getAutoSize(this.props.activeBlockDOM);
+                this.props.dispatch(cvBlock_setSize(blockId,sizesAuto.height,sizesAuto.width));
+            },0);
+        }
     }
 
     //действия с блоком/блоками
     setAction = (blockId,optionName,value) => {
         switch (optionName) {
-            case 'alignTop': {
-                this.props.dispatch(cvBlocks_align('top'));
-                break;
+        case 'alignTop': {
+            this.props.dispatch(cvBlocks_align('top'));
+            break;
+        }
+        case 'alignBottom': {
+            this.props.dispatch(cvBlocks_align('bottom'));
+            break;
+        }
+        case 'alignLeft': {
+            this.props.dispatch(cvBlocks_align('left'));
+            break;
+        }
+        case 'alignRight': {
+            this.props.dispatch(cvBlocks_align('right'));
+            break;
+        }
+        case 'alignVertical': {
+            this.props.dispatch(cvBlocks_align('vertical'));
+            break;
+        }
+        case 'alignHorisontal': {
+            this.props.dispatch(cvBlocks_align('horisontal'));
+            break;
+        }
+        case 'distributeVertical': {
+            this.props.dispatch(cvBlocks_distribute('vertical'));
+            break;
+        }
+        case 'distributeHorisontal': {
+            this.props.dispatch(cvBlocks_distribute('horisontal'));
+            break;
+        }
+        case 'alignWidth': {
+            this.props.dispatch(cvBlocks_alignSize('width'));
+            break;
+        }
+        case 'alignHeight': {
+            this.props.dispatch(cvBlocks_alignSize('height'));
+            break;
+        }
+        case 'group': {
+            this.props.dispatch(cvBlocks_group());
+            this.setState({tooltip: null});
+            break;
+        }
+        case 'lock': {
+            this.props.dispatch(cvBlock_lock(blockId));
+            break;
+        }
+        case 'autosize': {
+            if (this.props.activeBlockDOM) {
+                let sizesAuto = getAutoSize(this.props.activeBlockDOM);
+                this.props.dispatch(cvBlock_setSize(blockId,sizesAuto.height,sizesAuto.width));
             }
-            case 'alignBottom': {
-                this.props.dispatch(cvBlocks_align('bottom'));
-                break;
-            }
-            case 'alignLeft': {
-                this.props.dispatch(cvBlocks_align('left'));
-                break;
-            }
-            case 'alignRight': {
-                this.props.dispatch(cvBlocks_align('right'));
-                break;
-            }
-            case 'alignVertical': {
-                this.props.dispatch(cvBlocks_align('vertical'));
-                break;
-            }
-            case 'alignHorisontal': {
-                this.props.dispatch(cvBlocks_align('horisontal'));
-                break;
-            }
-            case 'distributeVertical': {
-                this.props.dispatch(cvBlocks_distribute('vertical'));
-                break;
-            }
-            case 'distributeHorisontal': {
-                this.props.dispatch(cvBlocks_distribute('horisontal'));
-                break;
-            }
-            case 'alignWidth': {
-                this.props.dispatch(cvBlocks_alignSize('width'));
-                break;
-            }
-            case 'alignHeight': {
-                this.props.dispatch(cvBlocks_alignSize('height'));
-                 break;
-            }
-            case 'group': {
-                this.props.dispatch(cvBlocks_group());
-                this.setState({tooltip:null});
-                break;
-            }
-            case 'lock': {
-                this.props.dispatch(cvBlock_lock(blockId));
-                break;
-            }
-            case 'autosize': {
-                if (this.props.activeBlockDOM) {
-                    let sizesAuto = getAutoSize(this.props.activeBlockDOM);
-                    this.props.dispatch(cvBlock_setSize(blockId,sizesAuto.height,sizesAuto.width));            
-                }
-                break;
-            }
-            case 'back': {
-                this.props.dispatch(cvBlock_sendBack(blockId));
-                this.setState({tooltip:null});
-                break;
-            }
-            case 'copy': {
-                this.props.dispatch(cvBlock_copy(blockId));
-                this.setState({tooltip:null});
-                break;
-            }
-            case 'ungroup': {
-                this.props.dispatch(cvBlock_ungroup(blockId));
-                this.setState({tooltip:null});
-                break;
-            }
-            case 'link': {
-                this.props.dispatch(cvBlock_setLink(blockId,value));
-                break;
-            }
-            case 'save': {
-                this.props.dispatch(templates_add(blockId));
-                break;
-            }
-            case 'width': {
-                this.props.dispatch(cvBlock_setSize(blockId,false,value));
-                break;
-            }
-            case 'height': {
-                this.props.dispatch(cvBlock_setSize(blockId,value,false));
-                break;
-            }
-            default:
-                //console.log('action', optionName, value);
-                return;
+            break;
+        }
+        case 'back': {
+            this.props.dispatch(cvBlock_sendBack(blockId));
+            this.setState({tooltip: null});
+            break;
+        }
+        case 'copy': {
+            this.props.dispatch(cvBlock_copy(blockId));
+            this.setState({tooltip: null});
+            break;
+        }
+        case 'ungroup': {
+            this.props.dispatch(cvBlock_ungroup(blockId));
+            this.setState({tooltip: null});
+            break;
+        }
+        case 'link': {
+            this.props.dispatch(cvBlock_setLink(blockId,value));
+            break;
+        }
+        case 'save': {
+            this.props.dispatch(templates_add(blockId));
+            break;
+        }
+        case 'width': {
+            this.props.dispatch(cvBlock_setSize(blockId,false,value));
+            break;
+        }
+        case 'height': {
+            this.props.dispatch(cvBlock_setSize(blockId,value,false));
+            break;
+        }
+        default:
+            //console.log('action', optionName, value);
+            return;
         }
     }
 
@@ -136,7 +142,7 @@ class OptionPanel extends React.PureComponent {
         let codeBlocksOptions = null;
         let codePageOptions = null;
         let blockAction = [...BLOCK_ACTION];
-        
+
         if (this.props.activeBlocksId.length > 1) { //few active blocks
             codeBlocksOptions = BLOCKS_ACTION.map( (a,i) => (
                 <Option key={i} optionName={a} cbOnChange={this.setAction}/>));
@@ -169,7 +175,7 @@ class OptionPanel extends React.PureComponent {
             if (this.props.activeElementId) { //active element
                 let styles = Object.keys(this.props.styleToEdit).sort();
                 codeElementOptions = styles.map( (s,i) => (
-                    <Option key={'option-' + i} optionName={s} optionValue={this.props.styleToEdit[s]} blockId={this.props.activeBlockOptions.id} cbOnChange={this.setStyle}/>)); 
+                    <Option key={'option-' + i} optionName={s} optionValue={this.props.styleToEdit[s]} blockId={this.props.activeBlockOptions.id} cbOnChange={this.setStyle}/>));
             };
         } else if (this.props.stylePage) { //non active block, but active page
             let styles = Object.keys(this.props.stylePage).sort();
@@ -178,18 +184,18 @@ class OptionPanel extends React.PureComponent {
         }
         return (
             <div className='option-panel'>
-                {((codePageOptions && !codeBlocksOptions) || codeElementOptions) && 
+                {((codePageOptions && !codeBlocksOptions) || codeElementOptions) &&
                     <div className='option-panel__group option-panel__group--style'>
                         {codePageOptions}
                         {codeElementOptions}
                     </div>
                 }
-                {codeBlocksOptions && 
+                {codeBlocksOptions &&
                     <div className='option-panel__group option-panel__group--blocks'>
                         {codeBlocksOptions}
                     </div>
                 }
-                {codeBlockOptions && 
+                {codeBlockOptions &&
                     <div className='option-panel__group option-panel__group--block'>
                         {codeBlockOptions}
                     </div>

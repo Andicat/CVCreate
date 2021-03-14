@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Transition} from "react-transition-group";
+import {Transition} from 'react-transition-group';
 import {connect} from 'react-redux';
 import CvElement from './CvElement';
 import {cvBlock_activate, cvBlock_activateMulti} from '../redux/cvDataAC';
@@ -11,7 +11,7 @@ class CvBlock extends React.PureComponent {
     static propTypes = {
         id: PropTypes.number.isRequired,
         data: PropTypes.object.isRequired,
-        activeIndex: PropTypes.number,        
+        activeIndex: PropTypes.number,
         activeElementId: PropTypes.string,
         editable: PropTypes.bool,
         newBlock: PropTypes.bool,
@@ -28,7 +28,8 @@ class CvBlock extends React.PureComponent {
 
     //активируем блок на странице
     onClick = (evt) => {
-        if (evt.ctrlKey || evt.shiftKey) {
+        evt.stopPropagation();
+        if (evt.ctrlKey) {
             this.props.dispatch(cvBlock_activateMulti(this.props.id));
         } else {
             let activatedElement = evt.target.getAttribute('data-elem');
@@ -37,21 +38,21 @@ class CvBlock extends React.PureComponent {
     }
 
     render () {
-        let style = {top:this.props.data.positionTop + 'px', left:this.props.data.positionLeft + 'px', width:this.props.data.width + 'px', height:this.props.data.height + 'px'};
+        let style = {top: this.props.data.positionTop + 'px', left: this.props.data.positionLeft + 'px', width: this.props.data.width + 'px', height: this.props.data.height + 'px'};
         let className = 'cv__block' + ((this.props.activeIndex>=0)?' cv__block--active':'')
                         + ((this.props.activeIndex===0)?' cv__block--active-first':'')
                         + (this.props.data.lock?' cv__block--lock':'');
         let elementCode = <CvElement id={'' + this.props.id} blockId={this.props.id} editable={this.props.editable} data={this.props.data} activeElementId={this.props.activeElementId}></CvElement>;
-
         return (
             <Transition in={true} unmountOnExit timeout={{ enter: 1000, exit: 1000 }}>
                 {stateName => {
-                    return <div className={className + ' ' + stateName} style={style} onClick={this.onClick} ref={this.blockRef}>
-                    {elementCode} 
-                </div>
-            }}
-        </Transition>
-            
+                    return (
+                        <div className={className + ' ' + stateName} style={style} onClick={this.onClick} ref={this.blockRef}>
+                            {elementCode}
+                        </div>
+                    );
+                }}
+            </Transition>
         );
     }
 }

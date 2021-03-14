@@ -1,4 +1,4 @@
-﻿"use strict";
+
 
 import {renderComponentWithStore, storeEmpty} from './utils-test';
 import {cv_setUser} from '../redux/cvDataAC';
@@ -19,9 +19,9 @@ describe('CvLogin actions', () => {
 
     it('onChange', () => {
         component = renderComponentWithStore(CvLogin,storeEmpty);
-        let input = component.root.find( el => el.type=='input');
+        let input = component.root.find( el => el.type==='input');
         //изменение текста в элементе
-        const evt = {"target":{"value":'test'}};
+        const evt = {'target': {'value': 'test'}};
         input.props.onChange(evt);
         expect(component.toJSON()).toMatchSnapshot();
     });
@@ -29,14 +29,14 @@ describe('CvLogin actions', () => {
     it('onSubmit', () => {
         storeEmpty.clearActions();
         component = renderComponentWithStore(CvLogin,storeEmpty);
-        let input = component.root.find( el => el.type=='input');
+        let input = component.root.find( el => el.type==='input');
         //изменение текста
-        const evtInput = {"target":{"value":'test'}};
+        const evtInput = {'target': {'value': 'test'}};
         input.props.onChange(evtInput);
-        
-        let form = component.root.find( el => el.type=='form');
+
+        let form = component.root.find( el => el.type==='form');
         //отправка формы
-        const evtForm = new Event("submit");
+        const evtForm = new Event('submit');
         form.props.onSubmit(evtForm);
         const expectedActions = [
             cv_setUser('test'),

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Transition} from "react-transition-group";
+import {Transition} from 'react-transition-group';
 import {NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Media from 'react-media';
@@ -13,10 +13,10 @@ import {cv_load,cvBlock_activate,templates_open_panel} from '../redux/cvDataAC';
 
 //Компонент работы с документом
 class CV extends React.PureComponent {
-    
+
     static propTypes = {
         transitionClass: PropTypes.string,
-        stylePage: PropTypes.object,  
+        stylePage: PropTypes.object,
         blocks: PropTypes.array,
         activeBlocksId: PropTypes.array,
         user: PropTypes.string,
@@ -25,7 +25,7 @@ class CV extends React.PureComponent {
 
     //сохранение в формате json на локальном компьютере
     saveCV = () => {
-        let stateToSave = {style:this.props.stylePage,blocks:this.props.blocks};
+        let stateToSave = {style: this.props.stylePage,blocks: this.props.blocks};
         saveFileJSON(stateToSave,'CV','.json');
         saveLocalStorage('CV',stateToSave);
     }
@@ -35,15 +35,15 @@ class CV extends React.PureComponent {
         if (this.props.activeBlocksId.length>0) {
             this.props.dispatch(cvBlock_activate(null,null));
         }
-        let stateToSave = {style:this.props.stylePage,blocks:this.props.blocks};
+        let stateToSave = {style: this.props.stylePage,blocks: this.props.blocks};
         saveLocalStorage('CV',stateToSave);
-    } 
+    }
 
     //загрузка из файла json на локальном компьютере
     loadCV = async(evt) => {
         let data = await readFileJSON(evt.target.files[0]);
         this.props.dispatch(cv_load(data.blocks,data.style));
-        saveLocalStorage('CV',{style:data.style,blocks:data.blocks});
+        saveLocalStorage('CV',{style: data.style,blocks: data.blocks});
         evt.target.value = null;
     }
 
@@ -55,27 +55,29 @@ class CV extends React.PureComponent {
     onClickBtnPanel = () => {
         this.props.dispatch(templates_open_panel());
     }
-    
+
     render () {
         if (!this.props.user) {
-            return <Transition in={!this.props.user} unmountOnExit timeout={{ enter: 1000, exit: 1000 }}>
-                        {stateName => {
-                            return <CvLogin transitionClass={stateName}/>
-                        }}
-                    </Transition>;    
+            return (
+                <Transition in={!this.props.user} unmountOnExit timeout={{ enter: 1000, exit: 1000 }}>
+                    {stateName => {
+                        return <CvLogin transitionClass={stateName}/>;
+                    }}
+                </Transition>
+            );
         }
         let activeOneId = (this.props.activeBlocksId.length===1) && this.props.activeBlocksId[0];
         let activeBlock = null;
         let activeBlockOptions;
         if (activeOneId) {
             activeBlock = this.props.blocks.find(b => b.id === activeOneId);
-            activeBlockOptions = {id:activeBlock.id,
-                                lock: activeBlock.lock,
-                                link:activeBlock.link,
-                                group:activeBlock.group,
-                                width:(activeBlock.group || !activeBlock.size)?false:activeBlock.width,
-                                height:(activeBlock.group || !activeBlock.size)?false:activeBlock.height,
-                            };
+            activeBlockOptions = {id: activeBlock.id,
+                lock: activeBlock.lock,
+                link: activeBlock.link,
+                group: activeBlock.group,
+                width: (activeBlock.group || !activeBlock.size)?false:activeBlock.width,
+                height: (activeBlock.group || !activeBlock.size)?false:activeBlock.height,
+            };
         }
 
         return (
@@ -91,13 +93,13 @@ class CV extends React.PureComponent {
                             <label className='header__button header__button--load' htmlFor='file-cv' data-tooltip={true}>Load</label>
                         </li>
                         <li className='header__menu-item'>
-                            <NavLink to='/view' className='header__button header__button--show' onClick={this.saveLS}>Show</NavLink>    
+                            <NavLink to='/view' className='header__button header__button--show' onClick={this.saveLS}>Show</NavLink>
                         </li>
                         <li className='header__menu-item'>
-                            <NavLink to='/settings' className='header__button header__button--settings' onClick={this.showSettings}></NavLink>    
+                            <NavLink to='/settings' className='header__button header__button--settings' onClick={this.showSettings}></NavLink>
                         </li>
                     </ul>
-                    <Media query="(max-width: 767px)">
+                    <Media query='(max-width: 767px)'>
                         <button className='header__button header__button--menu' onClick={this.openMenuMobile}/>
                     </Media>
                 </header>
@@ -105,7 +107,7 @@ class CV extends React.PureComponent {
                     <div className='template-panel'>
                         <Transition in={this.props.showPanel} unmountOnExit timeout={{ enter: 500, exit: 500 }}>
                             {stateName => {
-                                return <TemplatePanel transitionClass={stateName}/>
+                                return <TemplatePanel transitionClass={stateName}/>;
                             }}
                         </Transition>
                         {this.props.showPanel && null}
@@ -130,5 +132,5 @@ const mapStateToProps = function (state) {
         showPanel: state.cvData.showPanel,
     };
 };
-  
+
 export default connect(mapStateToProps)(CV);

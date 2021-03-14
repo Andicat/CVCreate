@@ -18,20 +18,21 @@ class TemplatePanel extends React.PureComponent {
 
     //открываем группу шаблонов
     selectMenu = (id) => {
-        this.setState( {activeMenuId:(id===this.state.activeMenuId)?null:id} );
+        this.setState( {activeMenuId: (id===this.state.activeMenuId)?null:id} );
     }
 
     render () {
         let isTemplatesUser = this.props.templatesUser?this.props.templatesUser.length>0:false;
         let groupsCode = this.props.templates.map( (g,i) => {
-            return <TemplateGroup key={i} id={i} data={g} active={(this.state.activeMenuId===i)?true:false} cbSelected={this.selectMenu}/>
-            });
-        return <ul className={'template-panel__menu ' + this.props.transitionClass}>
-                    {groupsCode}
-                    {isTemplatesUser &&
-                        <TemplateGroup key={groupsCode.length+1} id={groupsCode.length+1} data={{name:'Your templates',elements:this.props.templatesUser}} custom={true} active={(this.state.activeMenuId===(groupsCode.length+1))?true:false} cbSelected={this.selectMenu}/>
-                    }
-               </ul>
+            return <TemplateGroup key={i} id={i} data={g} active={(this.state.activeMenuId===i)?true:false} cbSelected={this.selectMenu}/>;
+        });
+        return (
+            <ul className={'template-panel__menu ' + this.props.transitionClass}>
+                {groupsCode}
+                {isTemplatesUser &&
+                    <TemplateGroup key={groupsCode.length+1} id={groupsCode.length+1} data={{name: 'Your templates',elements: this.props.templatesUser}} custom={true} active={(this.state.activeMenuId===(groupsCode.length+1))?true:false} cbSelected={this.selectMenu}/>
+                }
+            </ul>);
     }
 }
 
@@ -41,5 +42,5 @@ const mapStateToProps = function (state) {
         templatesUser: state.cvData.templatesUser,
     };
 };
-  
+
 export default connect(mapStateToProps)(TemplatePanel);

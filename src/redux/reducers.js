@@ -1,6 +1,6 @@
-﻿import { combineReducers } from 'redux';
+import { combineReducers } from 'redux';
 
-import cvDataReducer from "./cvDataReducer";
+import cvDataReducer from './cvDataReducer';
 
 let combinedReducer=combineReducers({
     cvData: cvDataReducer,
