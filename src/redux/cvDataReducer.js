@@ -45,7 +45,7 @@ const initState = {
     activeBlocksId: [],
     activeElementId: null,
     styleToEdit: {},
-    showPanel: false,
+    showPanel: true,
     newBlock: false,
     templates: [],
     templatesUser: [],
