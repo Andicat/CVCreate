@@ -7,7 +7,7 @@ import Media from 'react-media';
 import OptionPanel from './OptionPanel';
 import TemplatePanel from './TemplatePanel';
 import CvDocument from './CvDocument';
-import CvLogin from './CvLogin';
+import Auth from './Auth';
 import {saveFileJSON, readFileJSON, saveLocalStorage} from '../modules/utils';
 import {cv_load,cvBlock_activate,templates_open_panel} from '../redux/cvDataAC';
 
@@ -61,7 +61,7 @@ class CV extends React.PureComponent {
             return (
                 <Transition in={!this.props.user} unmountOnExit timeout={{ enter: 1000, exit: 1000 }}>
                     {stateName => {
-                        return <CvLogin transitionClass={stateName}/>;
+                        return <Auth transitionClass={stateName}/>;
                     }}
                 </Transition>
             );
