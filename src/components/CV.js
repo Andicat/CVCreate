@@ -97,7 +97,7 @@ class CV extends React.PureComponent {
                             <NavLink to='/view' className='header__button header__button--show' onClick={this.saveLS}>Show</NavLink>
                         </li>
                         <li className='header__menu-item'>
-                            <NavLink to='/settings' className='header__button header__button--settings' onClick={this.showSettings}></NavLink>
+                            <NavLink to='/settings' className='header__button header__button--settings' onClick={this.showSettings}/>
                         </li>
                         <li className='header__menu-item'>
                             <button className='header__button header__button--logout' onClick={this.singOut}/>
