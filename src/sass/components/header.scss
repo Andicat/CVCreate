@@ -99,6 +99,14 @@
                 background-image: url('./../../img/icon-setting.svg');
             }
         }
+
+        &--logout {
+            padding: 0 18px;
+            &::before {
+                background-image: url('./../../img/icon-logout.svg');
+            }
+        }
+
     }
 
     &__print {

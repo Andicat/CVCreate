@@ -31,7 +31,7 @@ class CvElement extends React.PureComponent {
     onBlur = (evt) => {
         let textCurr = evt.target.innerText;
         if (this.props.data.text!==textCurr) {
-            this.props.dispatch(cvElement_textUpdate(this.props.blockId,textCurr));
+            this.props.dispatch(cvElement_textUpdate(this.props.blockId,this.props.id,textCurr));
         }
     }
 
@@ -78,7 +78,7 @@ class CvElement extends React.PureComponent {
                 textTransform: style.textTransform};
             if (this.props.data.list) {
                 elementCode = (
-                    <ul style={{fontSize: style.fontSize, paddingLeft: style.fontSize, position: style.position, left: style.left, top: style.top}} data-elem={true} onClick={this.onClick}>
+                    <ul style={{fontSize: style.fontSize, paddingLeft: decodedStyle.fontsize*1.2 + 'px', position: style.position, left: style.left, top: style.top}} data-elem={true} onClick={this.onClick}>
                         <li className={className} style={{color: style.colorlist}} data-elem={true}>
                             <span style={styleText} suppressContentEditableWarning={this.props.editable} contentEditable={this.props.editable} data-elem={true} onBlur={this.onBlur}>
                                 {text}

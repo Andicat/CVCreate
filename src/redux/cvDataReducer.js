@@ -558,7 +558,7 @@ function cvDataReducer(state = initState, action, cvId = CV_ID) {
     //update elements text
     case CV_TEXT_UPDATE: {
         function updateText(block) {
-            if (block.id == state.activeElementId) {
+            if (block.id == action.elementId) {
                 block.text = action.textValue;
                 return {...block};
             }

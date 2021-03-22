@@ -1,7 +1,9 @@
 .auth {
     display: flex;
     position: absolute;
-    top: 50%;
+    width: 350px;
+    max-width: 95vw;
+    top: 30%;
     left: 50%;
     transform: translate(-50%,-50%);
     box-sizing: border-box;
@@ -10,7 +12,7 @@
     flex-direction: column;
     padding: 20px;
     border-radius: 10px;
-    background-color: rgba($color: white, $alpha: 0.4);
+    background-color: rgba($color-white, 0.3);
 
     &__row {
         position: relative;
@@ -32,12 +34,13 @@
             display: block;
             box-sizing: border-box;
             height: 40px;
+            width: 100%;
             padding: 5px 10px;
-            background-color: rgba($color: white, $alpha: 0.2);
+            background-color: rgba($color-white, 0.2);
             border: 1px solid $color-bg-header;
-            color: $color-bg-header;
+            color: $color-gray;
             border-radius: 5px;
-            font-size: 24px;
+            font-size: 20px;
             margin-bottom: 15px;
 
             &::placeholder {
@@ -91,6 +94,7 @@
 
         &:hover {
             transform: scale(1.01);
+            box-shadow: 1px 2px 5px #666;
             cursor: pointer;
         }
 
@@ -100,17 +104,10 @@
     }
 
     @media (max-width: $tablet - 1px) {
-        flex-direction: column;
-        justify-content: center;
+        top: 50%;
         
         input {
-            max-width: 90vw;
             font-size: 16px;
-            margin: 0;
-        }
-
-        button {
-            margin: 10px;
         }
     }
 }

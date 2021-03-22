@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Transition} from 'react-transition-group';
-import {NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {NavLink} from 'react-router-dom';
+import {Transition} from 'react-transition-group';
 import Media from 'react-media';
 import OptionPanel from './OptionPanel';
 import TemplatePanel from './TemplatePanel';
 import CvDocument from './CvDocument';
-import Auth from './Auth';
+import firebase from '@firebase/app';
+import 'firebase/auth';
+
 import {saveFileJSON, readFileJSON, saveLocalStorage} from '../modules/utils';
-import {cv_load,cvBlock_activate,templates_open_panel} from '../redux/cvDataAC';
+import {cv_load,cvBlock_activate,templates_open_panel, cv_setUser} from '../redux/cvDataAC';
 
 //Компонент работы с документом
 class CV extends React.PureComponent {
@@ -19,7 +21,6 @@ class CV extends React.PureComponent {
         stylePage: PropTypes.object,
         blocks: PropTypes.array,
         activeBlocksId: PropTypes.array,
-        user: PropTypes.string,
         showPanel: PropTypes.bool,
     };
 
@@ -47,6 +48,15 @@ class CV extends React.PureComponent {
         evt.target.value = null;
     }
 
+    singOut = (evt) => {
+        evt.preventDefault();
+        firebase.auth().signOut()
+            .then(() => {
+                localStorage.removeItem('CV-user');
+                this.props.dispatch(cv_setUser(null));
+            });
+    }
+
     //открыть меню (мобил.версия)
     openMenuMobile = () => {
         this.menu.classList.toggle('header__menu--show');
@@ -57,15 +67,6 @@ class CV extends React.PureComponent {
     }
 
     render () {
-        if (!this.props.user) {
-            return (
-                <Transition in={!this.props.user} unmountOnExit timeout={{ enter: 1000, exit: 1000 }}>
-                    {stateName => {
-                        return <Auth transitionClass={stateName}/>;
-                    }}
-                </Transition>
-            );
-        }
         let activeOneId = (this.props.activeBlocksId.length===1) && this.props.activeBlocksId[0];
         let activeBlock = null;
         let activeBlockOptions;
@@ -98,6 +99,9 @@ class CV extends React.PureComponent {
                         <li className='header__menu-item'>
                             <NavLink to='/settings' className='header__button header__button--settings' onClick={this.showSettings}></NavLink>
                         </li>
+                        <li className='header__menu-item'>
+                            <button className='header__button header__button--logout' onClick={this.singOut}/>
+                        </li>
                     </ul>
                     <Media query='(max-width: 767px)'>
                         <button className='header__button header__button--menu' onClick={this.openMenuMobile}/>
@@ -128,7 +132,6 @@ const mapStateToProps = function (state) {
         stylePage: state.cvData.stylePage,
         blocks: state.cvData.blocks,
         activeBlocksId: state.cvData.activeBlocksId,
-        user: state.cvData.user,
         showPanel: state.cvData.showPanel,
     };
 };

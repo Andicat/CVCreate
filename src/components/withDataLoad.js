@@ -165,16 +165,26 @@ let withDataLoad = (propName) => Component => {
             let templatesUser = [];
 
             //local storage
-            var loadLS= new Promise( (resolve) => {
+            var loadLSData= new Promise( (resolve) => {
                 var lsData = loadFromLocalStorage('CV');
                 resolve(lsData);
             });
-            await loadLS.then((data) => {
+
+            await loadLSData.then((data) => {
                 if (data) {
                     blocks = data.blocks;
                     style = data.style;
-                    user = data.user;
                     link = data.link;
+                }
+            });
+
+            var loadLSUser = new Promise( (resolve) => {
+                var lsData = loadFromLocalStorage('CV-user');
+                resolve(lsData);
+            });
+            await loadLSUser.then((data) => {
+                if (data) {
+                    user = data.user.uid;
                 }
             });
 

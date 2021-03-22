@@ -92,10 +92,11 @@ const cvStyle_update = function(blockId,styleName,styleValue) {
     };
 };
 
-const cvElement_textUpdate = function(blockId,textValue) {
+const cvElement_textUpdate = function(blockId,elementId,textValue) {
     return {
         type: CV_TEXT_UPDATE,
         blockId: blockId,
+        elementId: elementId,
         textValue: textValue,
     };
 };

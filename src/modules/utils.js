@@ -155,7 +155,7 @@ function createOption (optionType,optionValue,cbOnChange) {
     };
 
     function startChangeValue(value,limit,step) {
-        let speedChange = 100;
+        let speedChange = 300;
         function changeByStep () {
             if (Number(value)===limit) {
                 clearTimeout(timer);
